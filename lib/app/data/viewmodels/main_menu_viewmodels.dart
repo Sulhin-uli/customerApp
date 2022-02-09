@@ -45,6 +45,18 @@ class MainMenuViewModel {
         title: "Menu 7",
         color: Colors.pinkAccent,
       ),
+      MainMenuModel(
+        image:
+            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        title: "Menu 8",
+        color: Colors.pinkAccent,
+      ),
+      MainMenuModel(
+        image:
+            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        title: "Menu 9",
+        color: Colors.pinkAccent,
+      ),
     ];
   }
 }

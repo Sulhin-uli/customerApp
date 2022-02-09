@@ -9,7 +9,7 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 220,
-      margin: EdgeInsets.only(top: 18),
+      margin: EdgeInsets.only(top: 35),
       child: GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: 12),
         scrollDirection: Axis.horizontal,
@@ -37,7 +37,7 @@ class MainMenu extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 4,
+                height: 11,
               ),
               Text(
                 menu.title!,

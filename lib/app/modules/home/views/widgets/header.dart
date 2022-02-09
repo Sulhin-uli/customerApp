@@ -1,5 +1,7 @@
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Header extends StatefulWidget {
   final TrackingScrollController scrollController;
@@ -43,7 +45,7 @@ class _HeaderState extends State<Header> {
             children: [
               _buildInputSearch(),
               _buildIconButton(
-                onPressed: () => print("Click"),
+                onPressed: () => Get.toNamed(Routes.LOGIN),
                 icon: Icons.shopping_cart,
                 notification: 20,
               ),
