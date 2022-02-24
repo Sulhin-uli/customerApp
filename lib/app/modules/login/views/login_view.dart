@@ -63,7 +63,7 @@ class LoginView extends GetView<LoginController> {
                       onPressed: () => Get.toNamed(
                           Routes.HOME), //since this is only a UI app
                       child: Text(
-                        'SIGN IN',
+                        'LOG IN',
                         style: TextStyle(
                           fontSize: 15,
                           fontFamily: 'SFUIDisplay',
@@ -83,7 +83,8 @@ class LoginView extends GetView<LoginController> {
                     padding: EdgeInsets.only(top: 20),
                     child: Center(
                       child: Text(
-                        'Forgot your password?',
+                        // 'Forgot your password?',
+                        'Lupa password?',
                         style: TextStyle(
                             fontFamily: 'SFUIDisplay',
                             fontSize: 15,
@@ -97,14 +98,16 @@ class LoginView extends GetView<LoginController> {
                       child: RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                              text: "Don't have an account?",
+                              text: "Tidak punya akun? ",
+                              // text: "Don't have an account?",
                               style: TextStyle(
                                 fontFamily: 'SFUIDisplay',
                                 color: Colors.black,
                                 fontSize: 15,
                               )),
                           TextSpan(
-                              text: "sign up",
+                              text: "Registrasi",
+                              // text: "sign up",
                               style: TextStyle(
                                 fontFamily: 'SFUIDisplay',
                                 color: Color(0xffff2d55),
