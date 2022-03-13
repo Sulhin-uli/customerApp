@@ -1,141 +1,156 @@
 import 'package:customer_app/app/modules/home/views/widgets/banner_slider.dart';
 import 'package:customer_app/app/modules/home/views/widgets/header.dart';
-import 'package:customer_app/app/modules/home/views/widgets/main_menu.dart';
-import 'package:customer_app/app/modules/home/views/widgets/product_slider.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  final _scrollController = TrackingScrollController();
-  final TextStyle unselectedLabelStyle = TextStyle(
-    color: Colors.white.withOpacity(0.5),
-    fontWeight: FontWeight.w500,
-    fontSize: 12,
-  );
-  final TextStyle selectedLabelStyle =
-      TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
-
-  buildBottomNavigationMenu(context, landingPageController) {
-    return Obx(() => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-        child: SizedBox(
-          height: 54,
-          child: BottomNavigationBar(
-            showUnselectedLabels: true,
-            showSelectedLabels: true,
-            onTap: landingPageController.changeTabIndex,
-            currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-            unselectedItemColor: Colors.grey,
-            selectedItemColor: Color(0xff16A085),
-            unselectedLabelStyle: unselectedLabelStyle,
-            selectedLabelStyle: selectedLabelStyle,
-            items: [
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.home,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Home',
-                backgroundColor: Colors.white,
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.search,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Home',
-                backgroundColor: Colors.white,
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.location_history,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Home',
-                backgroundColor: Colors.white,
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.settings,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Home',
-                backgroundColor: Colors.white,
-              ),
-            ],
-          ),
-        )));
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Part Carousell
+    int _currentIndex = 0;
+    List<String> imgCarousellList = [
+      // "assets/images/banner_1.jpg",
+      "assets/images/banner_2.jpg",
+      // "assets/images/banner_3.jpg",
+      "assets/images/banner_4.jpg",
+      // "assets/images/banner_5.jpg",
+      // "assets/images/banner_6.jpg",
+      // "assets/images/banner_7.jpg",
+    ];
+
+    // Part Scrroll
+    final _scrollController = TrackingScrollController();
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: buildBottomNavigationMenu(context, controller),
-      // body: Stack(
-      //   children: [
-      //     SingleChildScrollView(
-      //       controller: _scrollController,
-      //       child: Column(
-      //         children: [
-      //           BannerSilder(),
-      //           MainMenu(),
-      //           Container(
-      //             margin: EdgeInsets.only(bottom: 20),
-      //             height: 10,
-      //             color: Colors.grey[100],
-      //           ),
-      //           ProductSlider(),
-      //         ],
-      //       ),
-      //     ),
-      //     Header(_scrollController),
-      //   ],
-      // ));
-      body: Obx(
-        () => IndexedStack(
-          index: controller.tabIndex.value,
-          children: [
-            Stack(
-              children: [
-                SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Column(
-                    children: [
-                      BannerSilder(),
-                      MainMenu(),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 20),
-                        height: 10,
-                        color: Colors.grey[100],
-                      ),
-                      ProductSlider(),
-                    ],
+      body: Stack(
+        children: [
+          Container(
+            height: 150.0,
+            decoration: new BoxDecoration(
+              color: Color(0xff16A085),
+              borderRadius: new BorderRadius.vertical(
+                bottom: new Radius.elliptical(
+                    MediaQuery.of(context).size.width, 100.0),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(8),
+            child: SafeArea(
+              child: Row(
+                children: [
+                  _buildInputSearch(),
+                  _buildIconButton(
+                    onPressed: () => Get.toNamed(Routes.LOGIN),
+                    icon: Icons.mail,
+                    notification: 9,
                   ),
+                  _buildIconButton(
+                    onPressed: () {},
+                    icon: Icons.shopping_cart,
+                    notification: 20,
+                  ),
+                  _buildIconButton(
+                    onPressed: () {},
+                    icon: Icons.notifications,
+                    notification: 3,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 120,
                 ),
-                Header(_scrollController),
+                Container(
+                  child: Text("data"),
+                ),
               ],
             ),
-            // PlacesPage(),
-            // SettingsPage(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+
+  // fuction widget
+  // Input
+  _buildInputSearch() {
+    final sizeIcon = BoxConstraints(minWidth: 35, minHeight: 35);
+    final border = OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: Colors.transparent,
+        width: 0,
+      ),
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(4.0),
+      ),
+    );
+    return Expanded(
+      child: TextField(
+        cursorColor: Colors.black,
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(4),
+            isDense: true,
+            enabledBorder: border,
+            focusedBorder: border,
+            hintText: "Cari di TaniKula",
+            hintStyle: TextStyle(fontSize: 14, color: Color(0xff919A92)),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Color(0xff919A92),
+            ),
+            prefixIconConstraints: sizeIcon,
+            suffixIconConstraints: sizeIcon,
+            filled: true,
+            fillColor: Colors.white),
+      ),
+    );
+  }
+
+  // Icon
+  _buildIconButton({
+    VoidCallback? onPressed,
+    IconData? icon,
+    int notification = 0,
+  }) =>
+      Stack(
+        children: [
+          IconButton(
+            onPressed: onPressed,
+            icon: Icon(icon),
+            color: Colors.white,
+            iconSize: 24,
+          ),
+          notification == 0
+              ? SizedBox()
+              : Positioned(
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      color: Color(0xff16A085),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white),
+                    ),
+                    constraints: BoxConstraints(minWidth: 22, minHeight: 22),
+                    child: Text(
+                      "$notification",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
+        ],
+      );
 }

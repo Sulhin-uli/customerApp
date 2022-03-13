@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/daftar/bindings/daftar_binding.dart';
+import '../modules/daftar/views/daftar_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.DAFTAR,
+      page: () => DaftarView(),
+      binding: DaftarBinding(),
     ),
   ];
 }

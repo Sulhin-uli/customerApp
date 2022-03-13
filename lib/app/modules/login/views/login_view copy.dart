@@ -101,7 +101,9 @@ class LoginView extends GetView<LoginController> {
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xff16A085), // background
                     ),
-                    onPressed: () => Get.toNamed(Routes.HOME),
+                    onPressed: () {
+                      // Respond to button press
+                    },
                     child: Text('Masuk'),
                   ),
                 ),

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/daftar_controller.dart';
 
-class LoginView extends GetView<LoginController> {
+class DaftarView extends GetView<DaftarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,14 +13,14 @@ class LoginView extends GetView<LoginController> {
         backgroundColor: Colors.white,
         leading: BackButton(color: Colors.black),
         title: Text(
-          'Masuk',
+          'Daftar',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
         actions: [
           TextButton(
-              onPressed: () => Get.toNamed(Routes.DAFTAR),
+              onPressed: () => Navigator.of(context).pop(),
               child: Text(
-                "Daftar",
+                "Masuk",
                 style: TextStyle(color: Color(0xff16A085), fontSize: 16),
               ))
         ],
@@ -58,41 +58,6 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text(
-                "Kata Sandi",
-                style: TextStyle(
-                  color: Color(0xff919A92),
-                ),
-              ),
-              TextFormField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff919A92),
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff16A085),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              Container(
-                margin: EdgeInsets.only(bottom: 15),
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Lupa Kata Sandi?",
-                    style: TextStyle(
-                      color: Color(0xff16A085),
-                    ),
-                  ),
-                ),
-              ),
               Center(
                 child: SizedBox(
                   height: 46, //height of button
@@ -102,7 +67,7 @@ class LoginView extends GetView<LoginController> {
                       primary: Color(0xff16A085), // background
                     ),
                     onPressed: () => Get.toNamed(Routes.HOME),
-                    child: Text('Masuk'),
+                    child: Text('Daftar'),
                   ),
                 ),
               )
