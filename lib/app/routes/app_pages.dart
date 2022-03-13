@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/daftar/bindings/daftar_binding.dart';
 import '../modules/daftar/views/daftar_view.dart';
+import '../modules/detail_produk/bindings/detail_produk_binding.dart';
+import '../modules/detail_produk/views/detail_produk_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.DAFTAR,
       page: () => DaftarView(),
       binding: DaftarBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_PRODUK,
+      page: () => DetailProdukView(),
+      binding: DetailProdukBinding(),
     ),
   ];
 }
