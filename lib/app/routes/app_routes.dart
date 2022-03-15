@@ -7,6 +7,12 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const DAFTAR = _Paths.DAFTAR;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
+  static const KERANJANG = _Paths.KERANJANG;
+  static const SAYA = _Paths.SAYA;
+  static const PRODUK = _Paths.PRODUK;
+  static const NOTIFIKASI = _Paths.NOTIFIKASI;
+  static const ALAMAT = _Paths.ALAMAT;
+  static const CHAT = _Paths.CHAT;
 }
 
 abstract class _Paths {
@@ -15,4 +21,10 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const DAFTAR = '/daftar';
   static const DETAIL_PRODUK = '/detail-produk';
+  static const KERANJANG = '/keranjang';
+  static const SAYA = '/saya';
+  static const PRODUK = '/produk';
+  static const NOTIFIKASI = '/notifikasi';
+  static const ALAMAT = '/alamat';
+  static const CHAT = '/chat';
 }
