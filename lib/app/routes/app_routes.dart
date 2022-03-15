@@ -13,6 +13,10 @@ abstract class Routes {
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const ALAMAT = _Paths.ALAMAT;
   static const CHAT = _Paths.CHAT;
+  static const DETAIL_CHAT = _Paths.DETAIL_CHAT;
+  static const TOKO = _Paths.TOKO;
+  static const PENGIRIMAN = _Paths.PENGIRIMAN;
+  static const WISHLIST = _Paths.WISHLIST;
 }
 
 abstract class _Paths {
@@ -27,4 +31,8 @@ abstract class _Paths {
   static const NOTIFIKASI = '/notifikasi';
   static const ALAMAT = '/alamat';
   static const CHAT = '/chat';
+  static const DETAIL_CHAT = '/detail-chat';
+  static const TOKO = '/toko';
+  static const PENGIRIMAN = '/pengiriman';
+  static const WISHLIST = '/wishlist';
 }

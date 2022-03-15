@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -32,42 +33,87 @@ class ChatView extends GetView<ChatController> {
           child: Container(
             child: Column(
               children: [
-                ListTile(
-                  leading: Icon(
-                    Icons.account_circle_rounded,
-                    size: 50,
-                  ),
-                  title: Text(
-                    'Gapoktan',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  subtitle: Text(
-                    'Isi chat',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.6),
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.DETAIL_CHAT),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.account_circle_rounded,
+                      size: 50,
+                    ),
+                    title: Text(
+                      'Gapoktan',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      'Isi chat',
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    ),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "<1 m",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black.withOpacity(0.5)),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.green,
+                          ),
+                          child: new Text(
+                            "5",
+                            style: new TextStyle(
+                                color: Colors.white, fontSize: 10.0),
+                          ),
+                        ), //............
+                      ],
                     ),
                   ),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "<1 m",
-                        style: TextStyle(
-                            fontSize: 12, color: Colors.black.withOpacity(0.5)),
+                ),
+                GestureDetector(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.account_circle_rounded,
+                      size: 50,
+                    ),
+                    title: Text(
+                      'Gapoktan',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      'Isi chat',
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.6),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.green,
+                    ),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "<1 m",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black.withOpacity(0.5)),
                         ),
-                        child: new Text(
-                          "5",
-                          style: new TextStyle(
-                              color: Colors.white, fontSize: 10.0),
-                        ),
-                      ), //............
-                    ],
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.green,
+                          ),
+                          child: new Text(
+                            "5",
+                            style: new TextStyle(
+                                color: Colors.white, fontSize: 10.0),
+                          ),
+                        ), //............
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -233,9 +233,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ),
                         ),
                         OutlinedButton(
-                          onPressed: () {
-                            // Respond to button press
-                          },
+                          onPressed: () => Get.toNamed(Routes.PENGIRIMAN),
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(
                                 width: 2.0, color: Color(0xff16A085)),

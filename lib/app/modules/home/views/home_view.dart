@@ -2,6 +2,7 @@ import 'package:customer_app/app/modules/home/views/widgets/banner_slider.dart';
 import 'package:customer_app/app/modules/home/views/widgets/header.dart';
 import 'package:customer_app/app/modules/produk/views/produk_view.dart';
 import 'package:customer_app/app/modules/saya/views/saya_view.dart';
+import 'package:customer_app/app/modules/wishlist/views/wishlist_view.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -246,7 +247,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
             ProdukView(),
-            Text("Favorite"),
+            WishlistView(),
             SayaView()
           ],
         ),
@@ -383,7 +384,7 @@ class HomeView extends GetView<HomeController> {
                     size: 20.0,
                   ),
                 ),
-                label: 'Favorit',
+                label: 'Wishlist',
                 backgroundColor: Colors.white,
               ),
               BottomNavigationBarItem(
