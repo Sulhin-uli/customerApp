@@ -339,7 +339,8 @@ class HomeView extends GetView<HomeController> {
       TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
 
   buildBottomNavigationMenu(context, landingPageController) {
-    return Obx(() => MediaQuery(
+    return Obx(
+      () => MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: SizedBox(
           height: 54,
@@ -400,6 +401,8 @@ class HomeView extends GetView<HomeController> {
               ),
             ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

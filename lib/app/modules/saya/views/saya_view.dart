@@ -99,6 +99,13 @@ class SayaView extends GetView<SayaController> {
                 leading: Icon(Icons.vpn_key),
                 title: const Text('Ubah Password'),
               ),
+              GestureDetector(
+                onTap: () => Get.toNamed(Routes.LOGIN),
+                child: ListTile(
+                  leading: Icon(Icons.vpn_key),
+                  title: const Text('Logout'),
+                ),
+              ),
             ],
           ),
         ),
