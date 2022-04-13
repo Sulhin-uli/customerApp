@@ -1,20 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  late TextEditingController email;
+  late TextEditingController password;
+  var hiddenTextPassword = true.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    email = TextEditingController();
+    password = TextEditingController();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

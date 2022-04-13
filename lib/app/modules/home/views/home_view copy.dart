@@ -1,7 +1,7 @@
-import 'package:customer_app/app/modules/home/views/widgets/banner_slider.dart';
-import 'package:customer_app/app/modules/home/views/widgets/header.dart';
-import 'package:customer_app/app/modules/home/views/widgets/main_menu.dart';
-import 'package:customer_app/app/modules/home/views/widgets/product_slider.dart';
+import 'package:customer_app/app/modules/home/views/widgets_old/banner_slider.dart';
+import 'package:customer_app/app/modules/home/views/widgets_old/header.dart';
+import 'package:customer_app/app/modules/home/views/widgets_old/main_menu.dart';
+import 'package:customer_app/app/modules/home/views/widgets_old/product_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

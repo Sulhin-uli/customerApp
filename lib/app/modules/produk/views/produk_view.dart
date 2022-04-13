@@ -112,7 +112,7 @@ class ProdukView extends GetView<ProdukController> {
               isDense: true,
               enabledBorder: border,
               focusedBorder: border,
-              hintText: "Cari di TaniKula",
+              hintText: "Cari di TaniApp",
               hintStyle: TextStyle(fontSize: 14, color: Color(0xff919A92)),
               prefixIcon: Icon(
                 Icons.search,

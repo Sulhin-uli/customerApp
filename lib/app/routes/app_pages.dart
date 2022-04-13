@@ -1,11 +1,11 @@
+import 'package:customer_app/app/modules/register/bindings/register_binding.dart';
+import 'package:customer_app/app/modules/register/views/register_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
 import '../modules/alamat/views/alamat_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
-import '../modules/daftar/bindings/daftar_binding.dart';
-import '../modules/daftar/views/daftar_view.dart';
 import '../modules/detail_chat/bindings/detail_chat_binding.dart';
 import '../modules/detail_chat/views/detail_chat_view.dart';
 import '../modules/detail_produk/bindings/detail_produk_binding.dart';
@@ -37,6 +37,13 @@ class AppPages {
   static const INITIAL = Routes.HOME;
 
   static final routes = [
+    // Register
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => RegisterView(),
+      binding: RegisterBinding(),
+    ),
+
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
@@ -46,11 +53,6 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
-    ),
-    GetPage(
-      name: _Paths.DAFTAR,
-      page: () => DaftarView(),
-      binding: DaftarBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_PRODUK,

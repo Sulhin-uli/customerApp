@@ -18,7 +18,7 @@ class LoginView extends GetView<LoginController> {
         ),
         actions: [
           TextButton(
-              onPressed: () => Get.toNamed(Routes.DAFTAR),
+              onPressed: () => Get.toNamed(Routes.REGISTER),
               child: Text(
                 "Daftar",
                 style: TextStyle(color: Color(0xff16A085), fontSize: 16),

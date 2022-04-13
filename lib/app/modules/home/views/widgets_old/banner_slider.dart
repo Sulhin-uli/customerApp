@@ -47,7 +47,7 @@ class _BannerSectionState extends State<BannerSection> {
 
   Container _buildBanner() {
     return Container(
-      margin: EdgeInsets.only(bottom: 55),
+      padding: EdgeInsets.only(bottom: 55),
       width: double.infinity,
       child: CarouselSlider(
         options: CarouselOptions(

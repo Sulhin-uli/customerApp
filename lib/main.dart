@@ -10,6 +10,9 @@ void main() {
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: AppPages.INITIAL,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
       getPages: AppPages.routes,
     ),
   );

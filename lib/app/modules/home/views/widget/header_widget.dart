@@ -1,6 +1,6 @@
 import 'package:customer_app/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Header extends StatefulWidget {
@@ -8,7 +8,7 @@ class Header extends StatefulWidget {
   const Header(this.scrollController);
 
   @override
-  _HeaderState createState() => _HeaderState();
+  State<Header> createState() => _HeaderState();
 }
 
 class _HeaderState extends State<Header> {
@@ -17,7 +17,6 @@ class _HeaderState extends State<Header> {
   Color? _colorIcon;
   double? _opacity;
   double? _offset;
-
   final _opacityMax = 0.01;
 
   @override
@@ -35,34 +34,39 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     return Container(
       color: _backgroundColor,
+      padding: EdgeInsets.all(8),
       child: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              _buildInputSearch(),
-              _buildIconButton(
-                onPressed: () => Get.toNamed(Routes.LOGIN),
-                icon: Icons.shopping_cart,
-                notification: 20,
-              ),
-              _buildIconButton(
-                onPressed: () => print("Click"),
-                icon: Icons.chat,
-                notification: 9,
-              ),
-            ],
-          ),
+        child: Row(
+          children: [
+            _buildInputSearch(),
+            _buildIconButton(
+              onPressed: () => Get.toNamed(Routes.CHAT),
+              icon: Icons.mail,
+              notification: 9,
+            ),
+            _buildIconButton(
+              onPressed: () => Get.toNamed(Routes.KERANJANG),
+              icon: Icons.shopping_cart,
+              notification: 20,
+            ),
+            _buildIconButton(
+              onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
+              icon: Icons.notifications,
+              notification: 3,
+            ),
+          ],
         ),
       ),
     );
   }
 
+  // fuction widget
   _buildInputSearch() {
-    final sizeIcon = BoxConstraints(minWidth: 40, minHeight: 40);
+    final sizeIcon = BoxConstraints(minWidth: 35, minHeight: 35);
     final border = OutlineInputBorder(
       borderSide: const BorderSide(
         color: Colors.transparent,
@@ -72,26 +76,30 @@ class _HeaderState extends State<Header> {
         const Radius.circular(4.0),
       ),
     );
-
     return Expanded(
       child: TextField(
+        cursorColor: Colors.black,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(4),
-            isDense: true,
-            enabledBorder: border,
-            focusedBorder: border,
-            hintText: "Gapoktan",
-            hintStyle: TextStyle(fontSize: 18, color: Color(0xff16A085)),
-            prefixIcon: Icon(Icons.search),
-            prefixIconConstraints: sizeIcon,
-            suffixIcon: Icon(Icons.camera),
-            suffixIconConstraints: sizeIcon,
-            filled: true,
-            fillColor: _backgroundColorSearch),
+          contentPadding: EdgeInsets.all(4),
+          isDense: true,
+          enabledBorder: border,
+          focusedBorder: border,
+          hintText: "Cari di TaniApp",
+          hintStyle: TextStyle(fontSize: 14, color: Color(0xff919A92)),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Color(0xff919A92),
+          ),
+          prefixIconConstraints: sizeIcon,
+          suffixIconConstraints: sizeIcon,
+          filled: true,
+          fillColor: _backgroundColorSearch,
+        ),
       ),
     );
   }
 
+  // Icon
   _buildIconButton({
     VoidCallback? onPressed,
     IconData? icon,
@@ -103,28 +111,30 @@ class _HeaderState extends State<Header> {
             onPressed: onPressed,
             icon: Icon(icon),
             color: _colorIcon,
-            iconSize: 28,
+            iconSize: 21,
           ),
           notification == 0
               ? SizedBox()
               : Positioned(
                   right: 0,
                   child: Container(
-                    padding: EdgeInsets.all(3),
+                    padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                        color: Color(0xff16A085),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.white)),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.red),
+                    ),
                     constraints: BoxConstraints(minWidth: 22, minHeight: 22),
                     child: Text(
                       "$notification",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
+                        fontSize: 11,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                  ))
+                  ),
+                )
         ],
       );
 
@@ -142,18 +152,23 @@ class _HeaderState extends State<Header> {
       }
     }
 
-    setState(() {
-      if (scrollOffset <= 0) {
-        _backgroundColorSearch = Colors.white;
-        _colorIcon = Colors.white;
-        _offset = 0.0;
-        _opacity = 0.0;
-      } else {
-        _backgroundColorSearch = Colors.grey[200];
-        _colorIcon = Color(0xff16A085);
-      }
+    setState(
+      () {
+        if (scrollOffset <= 0) {
+          _backgroundColorSearch = Colors.white;
+          _colorIcon = Colors.white;
+          _offset = 0.0;
+          _opacity = 0.0;
+          // getWindow().setStatusBarColor(0x00000000);
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+        } else {
+          _backgroundColorSearch = Colors.grey[200];
+          _colorIcon = Colors.grey;
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+        }
 
-      _backgroundColor = Colors.white.withOpacity(_opacity!);
-    });
+        _backgroundColor = Colors.white.withOpacity(_opacity!);
+      },
+    );
   }
 }

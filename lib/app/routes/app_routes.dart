@@ -3,9 +3,11 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  // Register
+  static const REGISTER = _Paths.REGISTER;
+
   static const HOME = _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
-  static const DAFTAR = _Paths.DAFTAR;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
   static const KERANJANG = _Paths.KERANJANG;
   static const SAYA = _Paths.SAYA;
@@ -21,9 +23,10 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  static const REGISTER = '/register';
+
   static const HOME = '/home';
   static const LOGIN = '/login';
-  static const DAFTAR = '/daftar';
   static const DETAIL_PRODUK = '/detail-produk';
   static const KERANJANG = '/keranjang';
   static const SAYA = '/saya';
