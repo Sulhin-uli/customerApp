@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/produk_controller.dart';
@@ -7,6 +8,9 @@ class ProdukBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<ProdukController>(
       () => ProdukController(),
+    );
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
     );
   }
 }

@@ -1,8 +1,12 @@
-import 'package:customer_app/app/modules/home/views/widget/header_widget.dart';
-import 'package:customer_app/app/modules/home/views/widget/menu_widget.dart';
-import 'package:customer_app/app/modules/home/views/widget/product_widget.dart';
-import 'package:customer_app/app/modules/home/views/widget/rounded_widget.dart';
-import 'package:customer_app/app/modules/home/views/widget/time_widget.dart';
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/home/views/widgets/header_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/menu_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/rounded_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/time_widget.dart';
+import 'package:customer_app/app/modules/produk/views/produk_view.dart';
+import 'package:customer_app/app/modules/saya/views/saya_view.dart';
+import 'package:customer_app/app/modules/wishlist/views/wishlist_view.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +15,11 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  final _scrollController = TrackingScrollController();
+  // final _scrollController = TrackingScrollController();
 
   @override
   Widget build(BuildContext context) {
+    // print(controller.getData());
     // Part Scrroll
     final _scrollController = TrackingScrollController();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
@@ -43,7 +48,7 @@ class HomeView extends GetView<HomeController> {
                         Container(
                           padding: EdgeInsets.only(left: 15),
                           child: Text(
-                            "Selamat Datang, Consumer ",
+                            "Selamat Datang, Sulhin ",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -58,7 +63,7 @@ class HomeView extends GetView<HomeController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Title",
+                                "Produk Terbaru",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextButton(
@@ -77,12 +82,13 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  Header(_scrollController),
+                  Header(_scrollController,
+                      Get.find<CartController>().cart.length),
                 ],
               ),
-              // ProdukView(),
-              // WishlistView(),
-              // SayaView()
+              ProdukView(),
+              WishlistView(),
+              SayaView()
             ],
           ),
         ),

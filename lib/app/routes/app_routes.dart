@@ -9,7 +9,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
-  static const KERANJANG = _Paths.KERANJANG;
+  static const CART = _Paths.CART;
   static const SAYA = _Paths.SAYA;
   static const PRODUK = _Paths.PRODUK;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
@@ -19,6 +19,7 @@ abstract class Routes {
   static const TOKO = _Paths.TOKO;
   static const PENGIRIMAN = _Paths.PENGIRIMAN;
   static const WISHLIST = _Paths.WISHLIST;
+  static const ERROR = _Paths.ERROR;
 }
 
 abstract class _Paths {
@@ -28,7 +29,7 @@ abstract class _Paths {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const DETAIL_PRODUK = '/detail-produk';
-  static const KERANJANG = '/keranjang';
+  static const CART = '/cart';
   static const SAYA = '/saya';
   static const PRODUK = '/produk';
   static const NOTIFIKASI = '/notifikasi';
@@ -38,4 +39,5 @@ abstract class _Paths {
   static const TOKO = '/toko';
   static const PENGIRIMAN = '/pengiriman';
   static const WISHLIST = '/wishlist';
+  static const ERROR = '/error';
 }

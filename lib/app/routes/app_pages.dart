@@ -1,5 +1,3 @@
-import 'package:customer_app/app/modules/register/bindings/register_binding.dart';
-import 'package:customer_app/app/modules/register/views/register_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -10,10 +8,12 @@ import '../modules/detail_chat/bindings/detail_chat_binding.dart';
 import '../modules/detail_chat/views/detail_chat_view.dart';
 import '../modules/detail_produk/bindings/detail_produk_binding.dart';
 import '../modules/detail_produk/views/detail_produk_view.dart';
+import '../modules/error/bindings/error_binding.dart';
+import '../modules/error/views/error_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/keranjang/bindings/keranjang_binding.dart';
-import '../modules/keranjang/views/keranjang_view.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/views/cart_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
@@ -22,6 +22,8 @@ import '../modules/pengiriman/bindings/pengiriman_binding.dart';
 import '../modules/pengiriman/views/pengiriman_view.dart';
 import '../modules/produk/bindings/produk_binding.dart';
 import '../modules/produk/views/produk_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
 import '../modules/saya/bindings/saya_binding.dart';
 import '../modules/saya/views/saya_view.dart';
 import '../modules/toko/bindings/toko_binding.dart';
@@ -60,9 +62,9 @@ class AppPages {
       binding: DetailProdukBinding(),
     ),
     GetPage(
-      name: _Paths.KERANJANG,
-      page: () => KeranjangView(),
-      binding: KeranjangBinding(),
+      name: _Paths.CART,
+      page: () => CartView(),
+      binding: CartBinding(),
     ),
     GetPage(
       name: _Paths.SAYA,
@@ -108,6 +110,11 @@ class AppPages {
       name: _Paths.WISHLIST,
       page: () => WishlistView(),
       binding: WishlistBinding(),
+    ),
+    GetPage(
+      name: _Paths.ERROR,
+      page: () => ErrorView(),
+      binding: ErrorBinding(),
     ),
   ];
 }

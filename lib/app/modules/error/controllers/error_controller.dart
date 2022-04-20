@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class KeranjangController extends GetxController {
-  //TODO: Implement KeranjangController
+class ErrorController extends GetxController {
+  //TODO: Implement ErrorController
 
   final count = 0.obs;
   @override

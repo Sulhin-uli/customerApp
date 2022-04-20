@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,7 +6,8 @@ import 'package:get/get.dart';
 
 class Header extends StatefulWidget {
   final TrackingScrollController scrollController;
-  const Header(this.scrollController);
+  const Header(this.scrollController, this.data);
+  final data;
 
   @override
   State<Header> createState() => _HeaderState();
@@ -49,9 +51,9 @@ class _HeaderState extends State<Header> {
               notification: 9,
             ),
             _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.KERANJANG),
+              onPressed: () => Get.toNamed(Routes.CART),
               icon: Icons.shopping_cart,
-              notification: 20,
+              notification: widget.data,
             ),
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
@@ -84,7 +86,7 @@ class _HeaderState extends State<Header> {
           isDense: true,
           enabledBorder: border,
           focusedBorder: border,
-          hintText: "Cari di TaniApp",
+          hintText: "Cari di TaniKula",
           hintStyle: TextStyle(fontSize: 14, color: Color(0xff919A92)),
           prefixIcon: Icon(
             Icons.search,

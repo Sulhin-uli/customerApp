@@ -8,7 +8,6 @@ class RegisterProvider extends GetConnect {
 
   Future<dynamic> register(
       String name, String email, String password, String cPassword) async {
-    // Printing is nice, but we want these messages in the UI
     try {
       final response = await post(
         '$url',

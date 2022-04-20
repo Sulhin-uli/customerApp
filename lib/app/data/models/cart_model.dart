@@ -1,4 +1,67 @@
-class ProductModel {
+class CartModel {
+  int? id;
+  UserId? userId;
+  ProductId? productId;
+  int? quantity;
+  String? createdAt;
+  String? updatedAt;
+
+  CartModel(
+      {this.id,
+      this.userId,
+      this.productId,
+      this.quantity,
+      this.createdAt,
+      this.updatedAt});
+
+  CartModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId =
+        json['user_id'] != null ? new UserId.fromJson(json['user_id']) : null;
+    productId = json['product_id'] != null
+        ? new ProductId.fromJson(json['product_id'])
+        : null;
+    quantity = json['quantity'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.userId != null) {
+      data['user_id'] = this.userId!.toJson();
+    }
+    if (this.productId != null) {
+      data['product_id'] = this.productId!.toJson();
+    }
+    data['quantity'] = this.quantity;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class UserId {
+  int? id;
+  String? name;
+
+  UserId({this.id, this.name});
+
+  UserId.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class ProductId {
   int? id;
   String? name;
   String? slug;
@@ -13,7 +76,7 @@ class ProductModel {
   String? createdAt;
   String? updatedAt;
 
-  ProductModel(
+  ProductId(
       {this.id,
       this.name,
       this.slug,
@@ -28,7 +91,7 @@ class ProductModel {
       this.createdAt,
       this.updatedAt});
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  ProductId.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     slug = json['slug'];
@@ -95,25 +158,6 @@ class CategoryProductId {
     data['slug'] = this.slug;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    return data;
-  }
-}
-
-class UserId {
-  int? id;
-  String? name;
-
-  UserId({this.id, this.name});
-
-  UserId.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
     return data;
   }
 }

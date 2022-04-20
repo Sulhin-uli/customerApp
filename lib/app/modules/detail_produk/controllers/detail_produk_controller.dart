@@ -1,20 +1,33 @@
+import 'package:customer_app/app/data/models/product_model.dart';
+import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
 class DetailProdukController extends GetxController {
-  //TODO: Implement DetailProdukController
+  var isLoading = false.obs;
+  var isWishlist = false.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void changeWishlist() {
+    if (isWishlist.value == false) {
+      isWishlist.value = true;
+    } else if (isWishlist.value == true) {
+      isWishlist.value = false;
+    }
   }
+  // var product = List<ProductModel>.empty().obs;
+  // final _homeController = HomeController();
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  // @override
+  // void onInit() {
+  //   _homeController.getData();
+  //   // print(_homeController.product
+  //   //     .firstWhere((element) => element.slug == "beras-organik")
+  //   //     .name);
+  //   // TODO: implement onInit
+  //   super.onInit();
+  // }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  // ProductModel findBySlug(String slug) {
+  //   return _homeController.product
+  //       .firstWhere((element) => element.slug == slug);
+  // }
 }

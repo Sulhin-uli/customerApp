@@ -1,12 +1,12 @@
-import 'package:customer_app/app/data/models/wishlist_model.dart';
-import 'package:customer_app/app/data/providers/wishlist_provider.dart';
+import 'package:customer_app/app/data/models/cart_model.dart';
+import 'package:customer_app/app/data/providers/cart_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class WishlistController extends GetxController {
+class CartController extends GetxController {
   var isLoading = true.obs;
-  var wishlist = List<WishlistModel>.empty().obs;
+  var cart = List<CartModel>.empty().obs;
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(
@@ -25,13 +25,13 @@ class WishlistController extends GetxController {
   }
 
   void getData() async {
-    WishlistProvider().getData(1).then((response) {
+    CartProvider().getData(1).then((response) {
       try {
         // print(response["data"][0]["product_id"]["id"]);
         // print(response["data"][0]["product_id"]["category_product_id"]["id"]);
         // print(response["data"][0]["product_id"]["user_id"]["id"]);
         response["data"].map((e) {
-          final data = WishlistModel(
+          final data = CartModel(
             id: e["id"],
             userId: UserId(
               id: e["user_id"]["id"],
@@ -58,8 +58,9 @@ class WishlistController extends GetxController {
               ),
               isActive: e["isActive"],
             ),
+            quantity: e["quantity"],
           );
-          wishlist.add(data);
+          cart.add(data);
         }).toList();
       } catch (e) {
         Get.toNamed(Routes.ERROR, arguments: e.toString());
@@ -69,24 +70,20 @@ class WishlistController extends GetxController {
     });
   }
 
-  void postData(int? userId, int? productId) {
+  void postData(int? userId, int? productId, int? quantity) {
     // if (name != '') {
-    WishlistProvider()
-        .postData(
-      userId,
-      productId,
-    )
-        .then((response) {
-      final data = WishlistModel(
+    CartProvider().postData(userId, productId, quantity).then((response) {
+      final data = CartModel(
         id: response["id"],
         userId: response["user_id"],
         productId: response["product_id"],
+        quantity: response["quantity"],
       );
-      wishlist.add(data);
-      wishlist.clear();
+      cart.add(data);
+      cart.clear();
       getData();
-      // print(wishlist[0].productId!.name);
-      // dialogSuccess("Berhasil ditambahkan ke-keranjang");
+      // print(cart[0].productId!.name);
+      dialogSuccess("Berhasil ditambahkan ke-keranjang");
 
       // Get.back();
     });
