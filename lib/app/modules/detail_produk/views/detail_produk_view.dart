@@ -19,6 +19,9 @@ class DetailProdukView extends GetView<DetailProdukController> {
     final cartC = Get.find<CartController>();
     final wishlistC = Get.find<WishlistController>();
     final data = homeC.findBySlug(Get.arguments);
+    // find
+    wishlistC.foundWishlist(data.id!);
+
     return Scaffold(
       body: Column(
         children: [
@@ -66,11 +69,11 @@ class DetailProdukView extends GetView<DetailProdukController> {
                             //   size: 30,
                             // )
                             Obx(
-                              () => controller.isWishlist.isFalse
+                              () => wishlistC.isWishlist.isFalse
                                   ? InkWell(
                                       onTap: () {
                                         wishlistC.postData(1, data.id);
-                                        controller.changeWishlist();
+                                        wishlistC.isWishlist.value = true;
                                       },
                                       child: Icon(
                                         Icons.favorite_border,
@@ -79,7 +82,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                     )
                                   : InkWell(
                                       onTap: () {
-                                        controller.changeWishlist();
+                                        wishlistC.deleteData(data.id!);
+                                        wishlistC.isWishlist.value = false;
                                       },
                                       child: Icon(
                                         Icons.favorite,

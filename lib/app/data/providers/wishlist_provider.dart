@@ -32,4 +32,6 @@ class WishlistProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<void> deleteData(int id) async => await delete('$url/$id');
 }

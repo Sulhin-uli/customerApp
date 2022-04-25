@@ -3,7 +3,7 @@ import 'package:customer_app/app/modules/home/views/widgets/header_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/menu_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/rounded_widget.dart';
-import 'package:customer_app/app/modules/home/views/widgets/time_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/banner_widget.dart';
 import 'package:customer_app/app/modules/produk/views/produk_view.dart';
 import 'package:customer_app/app/modules/saya/views/saya_view.dart';
 import 'package:customer_app/app/modules/wishlist/views/wishlist_view.dart';
@@ -36,21 +36,28 @@ class HomeView extends GetView<HomeController> {
             children: [
               Stack(
                 children: [
-                  Rounded(),
                   SingleChildScrollView(
                     controller: _scrollController,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 15),
-                          child: Text(
-                            "Selamat Datang, Sulhin ",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        Stack(
+                          children: [
+                            Rounded(),
+                            // const SizedBox(
+                            //   height: 100,
+                            // ),
+                            Positioned(
+                              top: 100,
+                              child: Container(
+                                padding: EdgeInsets.only(left: 15),
+                                child: Text(
+                                  "Selamat Datang, Sulhin ",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         BannerSlider(),
                         const SizedBox(

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class WishlistController extends GetxController {
   var isLoading = true.obs;
   var wishlist = List<WishlistModel>.empty().obs;
+  var isWishlist = false.obs;
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(
@@ -93,5 +94,18 @@ class WishlistController extends GetxController {
     // } else {
     // dialogError("Semua Input Harus Diisi");
     // }
+  }
+
+  void deleteData(int id) {
+    WishlistProvider()
+        .deleteData(id)
+        .then((_) => wishlist.removeWhere((element) => element.id == id));
+  }
+
+  void foundWishlist(int id) {
+    final found = wishlist.where((e) => e.id == id);
+    if (found.isNotEmpty) {
+      isWishlist.value = true;
+    }
   }
 }
