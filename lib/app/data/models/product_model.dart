@@ -1,14 +1,17 @@
+import 'package:customer_app/app/data/models/category_product_model.dart';
+import 'package:customer_app/app/data/models/user_model.dart';
+
 class ProductModel {
   int? id;
   String? name;
   String? slug;
   String? image;
-  CategoryProductId? categoryProductId;
+  CategoryProductModel? categoryProductId;
   String? code;
   int? stoke;
   int? price;
   String? desc;
-  UserId? userId;
+  UserModel? userId;
   int? isActive;
   String? createdAt;
   String? updatedAt;
@@ -34,14 +37,15 @@ class ProductModel {
     slug = json['slug'];
     image = json['image'];
     categoryProductId = json['category_product_id'] != null
-        ? new CategoryProductId.fromJson(json['category_product_id'])
+        ? new CategoryProductModel.fromJson(json['category_product_id'])
         : null;
     code = json['code'];
     stoke = json['stoke'];
     price = json['price'];
     desc = json['desc'];
-    userId =
-        json['user_id'] != null ? new UserId.fromJson(json['user_id']) : null;
+    userId = json['user_id'] != null
+        ? new UserModel.fromJson(json['user_id'])
+        : null;
     isActive = json['is_active'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -66,54 +70,6 @@ class ProductModel {
     data['is_active'] = this.isActive;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    return data;
-  }
-}
-
-class CategoryProductId {
-  int? id;
-  String? name;
-  String? slug;
-  String? createdAt;
-  String? updatedAt;
-
-  CategoryProductId(
-      {this.id, this.name, this.slug, this.createdAt, this.updatedAt});
-
-  CategoryProductId.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    slug = json['slug'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
-}
-
-class UserId {
-  int? id;
-  String? name;
-
-  UserId({this.id, this.name});
-
-  UserId.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
     return data;
   }
 }

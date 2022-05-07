@@ -1,14 +1,14 @@
-class CategoryProduct {
+class CategoryProductModel {
   int? id;
   String? name;
   String? slug;
   String? createdAt;
   String? updatedAt;
 
-  CategoryProduct(
+  CategoryProductModel(
       {this.id, this.name, this.slug, this.createdAt, this.updatedAt});
 
-  CategoryProduct.fromJson(Map<String, dynamic> json) {
+  CategoryProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     slug = json['slug'];

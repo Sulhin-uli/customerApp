@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/wishlist/views/widgets/header_wishlist_widget.dart';
 import 'package:customer_app/app/modules/wishlist/views/widgets/item_wishlist_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../controllers/wishlist_controller.dart';
 
 class WishlistView extends GetView<WishlistController> {
   final wishlistC = Get.find<WishlistController>();
+  final authC = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:customer_app/app/modules/login/controllers/authcontroller_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  final authC = Get.put(AuthcontrollerController());
+  final authC = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {

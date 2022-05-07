@@ -9,24 +9,26 @@ class CartProvider extends GetConnect {
   @override
   String url = baseUrl + "cart";
 
-  Future<dynamic> getData(int userId) async {
-    try {
-      final response = await get('$url/user_id/$userId');
-      return response.body;
-    } on SocketException {
-      print('No Internet connection');
-    } on HttpException {
-      print("Couldn't find the post");
-    } on FormatException {
-      print("Bad response format");
-    }
+  Future<dynamic> getData(int userId, String token) async {
+    final response = await get('$url/user_id/$userId', headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
   }
 
-  Future<dynamic> postData(int? userId, int? productId, int? quantity) async {
+  Future<dynamic> postData(int? userId, int? productId, int? productQty,
+      int? sessionId, String? token) async {
     final response = await post('$url', {
       "user_id": userId,
       "product_id": productId,
-      "quantity": quantity,
+      "product_qty": productQty,
+      "session_id": sessionId,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
     });
     return response.body;
   }

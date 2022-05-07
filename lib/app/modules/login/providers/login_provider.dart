@@ -2,11 +2,10 @@ import 'package:customer_app/app/utils/base_url.dart';
 import 'package:get/get.dart';
 
 class LoginProvider extends GetConnect {
-  String url = baseUrl + "register-customer";
+  String url = baseUrl + "login-customer";
 
   Future<dynamic> login(String email, String password) async {
-    final response =
-        await post('$url' + 'login', {"email": email, "password": password});
+    final response = await post('$url', {"email": email, "password": password});
     return response.body;
   }
 

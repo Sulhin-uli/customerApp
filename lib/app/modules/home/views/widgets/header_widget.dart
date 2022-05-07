@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Header extends StatefulWidget {
+  Header(this.scrollController, this.countCart, this.auth);
   final TrackingScrollController scrollController;
-  const Header(this.scrollController, this.data);
-  final data;
+  final countCart, auth;
 
   @override
   State<Header> createState() => _HeaderState();
@@ -48,17 +48,25 @@ class _HeaderState extends State<Header> {
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.CHAT),
               icon: Icons.mail,
-              notification: 9,
+              notification: 0,
             ),
             _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.CART),
+              onPressed: () => {
+                setState(() {
+                  if (widget.auth == true) {
+                    Get.toNamed(Routes.CART);
+                  } else {
+                    Get.toNamed(Routes.LOGIN);
+                  }
+                })
+              },
               icon: Icons.shopping_cart,
-              notification: widget.data,
+              notification: (widget.auth == true) ? widget.countCart : 0,
             ),
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
               icon: Icons.notifications,
-              notification: 3,
+              notification: 0,
             ),
           ],
         ),
@@ -162,7 +170,8 @@ class _HeaderState extends State<Header> {
           _offset = 0.0;
           _opacity = 0.0;
           // getWindow().setStatusBarColor(0x00000000);
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+          // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
         } else {
           _backgroundColorSearch = Colors.grey[200];
           _colorIcon = Colors.grey;

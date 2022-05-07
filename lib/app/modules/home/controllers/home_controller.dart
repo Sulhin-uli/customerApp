@@ -1,12 +1,16 @@
 import 'package:customer_app/app/data/models/banner_main_menu_model.dart';
+import 'package:customer_app/app/data/models/category_product_model.dart';
 import 'package:customer_app/app/data/models/main_menu_model.dart';
 import 'package:customer_app/app/data/models/product_model.dart';
+import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/product_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
+  final box = GetStorage();
   var product = List<ProductModel>.empty().obs;
   var menu = List<MainMenuModel>.empty().obs;
   var banner = List<BannerMainMenuModel>.empty().obs;
@@ -21,7 +25,15 @@ class HomeController extends GetxController {
   }
 
   void changeTabIndex(int index) {
-    tabIndex.value = index;
+    if (box.read('isAuth') == true) {
+      tabIndex.value = index;
+    } else if (box.read('isAuth') == false) {
+      if (index != 2 && index != 3) {
+        tabIndex.value = index;
+      } else {
+        Get.toNamed(Routes.LOGIN);
+      }
+    }
   }
 
   void getData() async {
@@ -32,7 +44,7 @@ class HomeController extends GetxController {
             id: e["id"],
             name: e["name"],
             slug: e["slug"],
-            categoryProductId: CategoryProductId(
+            categoryProductId: CategoryProductModel(
               id: e["category_product_id"]["id"],
               name: e["category_product_id"]["name"],
               slug: e["category_product_id"]["slug"],
@@ -43,7 +55,7 @@ class HomeController extends GetxController {
             stoke: e["stoke"],
             price: e["price"],
             desc: e["desc"],
-            userId: UserId(
+            userId: UserModel(
               id: e["category_product_id"]["id"],
               name: e["category_product_id"]["name"],
             ),
@@ -52,7 +64,8 @@ class HomeController extends GetxController {
           product.add(data);
         }).toList();
       } catch (e) {
-        Get.toNamed(Routes.ERROR, arguments: e.toString());
+        // Get.toNamed(Routes.ERROR, arguments: e.toString());
+        print(e);
       }
 
       // print(product[0].categoryProductId!.id);
@@ -91,10 +104,11 @@ class HomeController extends GetxController {
         color: Colors.red,
       ),
       MainMenuModel(
-          image:
-              "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
-          title: "Buah",
-          color: Colors.yellow),
+        image:
+            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        title: "Buah",
+        color: Colors.yellow,
+      ),
       MainMenuModel(
         image:
             "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",

@@ -5,19 +5,23 @@ import 'package:customer_app/app/modules/wishlist/controllers/wishlist_controlle
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../controllers/detail_produk_controller.dart';
 
 class DetailProdukView extends GetView<DetailProdukController> {
+  final box = GetStorage();
+  final _scrollController = TrackingScrollController();
+  final homeC = Get.find<HomeController>();
+  final cartC = Get.find<CartController>();
+  final wishlistC = Get.find<WishlistController>();
+
   // Part Scrroll
   @override
   Widget build(BuildContext context) {
-    final _scrollController = TrackingScrollController();
-    final homeC = Get.find<HomeController>();
-    final cartC = Get.find<CartController>();
-    final wishlistC = Get.find<WishlistController>();
     final data = homeC.findBySlug(Get.arguments);
     // find
     wishlistC.foundWishlist(data.id!);
@@ -25,7 +29,13 @@ class DetailProdukView extends GetView<DetailProdukController> {
     return Scaffold(
       body: Column(
         children: [
-          Obx(() => HeaderDetailProduk(_scrollController, cartC.cart.length)),
+          Obx(
+            () => HeaderDetailProduk(
+              _scrollController,
+              cartC.cart.length,
+              box.read('isAuth'),
+            ),
+          ),
           Expanded(
             child: Stack(
               children: [
@@ -42,15 +52,6 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ),
                         ),
                       ),
-                      // Container(
-                      //   width: double.infinity,
-                      //   height: 400,
-                      //   color: Colors.grey,
-                      //   child: Icon(
-                      //     Icons.image,
-                      //     size: 200,
-                      //   ),
-                      // ),
                       const SizedBox(
                         width: 10,
                       ),
@@ -60,54 +61,203 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Rp ${formatCurrency.format(data.price!)}',
+                              'Rp${formatCurrency.format(data.price!)}',
                               style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
-                            // Icon(
-                            //   Icons.favorite_border,
-                            //   size: 30,
-                            // )
-                            Obx(
-                              () => wishlistC.isWishlist.isFalse
-                                  ? InkWell(
-                                      onTap: () {
-                                        wishlistC.postData(1, data.id);
-                                        wishlistC.isWishlist.value = true;
-                                      },
-                                      child: Icon(
-                                        Icons.favorite_border,
-                                        size: 30,
-                                      ),
-                                    )
-                                  : InkWell(
-                                      onTap: () {
-                                        wishlistC.deleteData(data.id!);
-                                        wishlistC.isWishlist.value = false;
-                                      },
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Colors.red,
-                                        size: 30,
-                                      ),
+                            (box.read('isAuth') == true)
+                                ? Obx(
+                                    () => wishlistC.isWishlist.isFalse
+                                        ? InkWell(
+                                            onTap: () {
+                                              wishlistC.postData(data.id);
+                                              wishlistC.isWishlist.value = true;
+                                            },
+                                            child: Icon(
+                                              Icons.favorite_border,
+                                              size: 23,
+                                            ),
+                                          )
+                                        : InkWell(
+                                            onTap: () {
+                                              wishlistC.deleteData(data.id!);
+                                              wishlistC.isWishlist.value =
+                                                  false;
+                                            },
+                                            child: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                              size: 23,
+                                            ),
+                                          ),
+                                  )
+                                : InkWell(
+                                    onTap: () {
+                                      Get.toNamed(Routes.LOGIN);
+                                    },
+                                    child: Icon(
+                                      Icons.favorite_border,
+                                      size: 23,
                                     ),
-                            )
+                                  ),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(16, 10, 16, 20),
+                        margin: EdgeInsets.fromLTRB(16, 0, 16, 20),
                         child: Text(
                           data.name!,
                           style: TextStyle(
-                              color: Color(0xff919A92),
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(16, 0, 16, 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Text(
+                                "Terjual 0",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                padding: EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  // color: Colors.green,
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(7.0),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Icon(
+                                        Icons.star_rounded,
+                                        color: Colors.amber,
+                                      ),
+                                      Text(
+                                        "0.0",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text("(0)")
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(flex: 5, child: Container())
+                          ],
                         ),
                       ),
                       Container(
                         width: double.infinity,
-                        height: 12,
+                        height: 9,
+                        color: Color(0xffD1D1D1),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: Icon(
+                                Icons.account_circle_rounded,
+                                size: 60,
+                                color: Colors.black,
+                              ),
+                              title: const Text(
+                                "Gapoktan",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                "Indramayu ",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black.withOpacity(0.5)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                          size: 16,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "4.2",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "Rating dan Ulasan",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black.withOpacity(0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 60,
+                                  child: VerticalDivider(
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    // Respond to button press
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(
+                                        width: 2.0, color: Color(0xff16A085)),
+                                  ),
+                                  child: Text(
+                                    '     Lihat Toko    ',
+                                    style: TextStyle(
+                                      color: Color(0xff16A085),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 9,
                         color: Color(0xffD1D1D1),
                       ),
                       Container(
@@ -196,8 +346,16 @@ class DetailProdukView extends GetView<DetailProdukController> {
                             Divider(
                               color: Color(0xff919A92),
                             ),
-                            Container(
-                              height: 200,
+                            Text(
+                              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                              style: TextStyle(
+                                color: Color(0xff919A92),
+                                fontSize: 14,
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                            SizedBox(
+                              height: 70,
                             )
                           ],
                         ),
@@ -231,7 +389,13 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                       side: BorderSide(color: Colors.black12)),
                                   padding: EdgeInsets.all(8),
                                   color: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (box.read('isAuth') == true) {
+                                      Get.toNamed(Routes.CHAT);
+                                    } else {
+                                      Get.toNamed(Routes.LOGIN);
+                                    }
+                                  },
                                   child: Icon(
                                     Icons.message,
                                     color: Colors.grey,
@@ -239,7 +403,13 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                 ),
                               ),
                               OutlinedButton(
-                                onPressed: () => Get.toNamed(Routes.PENGIRIMAN),
+                                onPressed: () {
+                                  if (box.read('isAuth') == true) {
+                                    Get.toNamed(Routes.PENGIRIMAN);
+                                  } else {
+                                    Get.toNamed(Routes.LOGIN);
+                                  }
+                                },
                                 style: OutlinedButton.styleFrom(
                                   side: BorderSide(
                                       width: 2.0, color: Color(0xff16A085)),
@@ -253,12 +423,16 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  cartC.postData(1, data.id, 1);
+                                  if (box.read('isAuth') == true) {
+                                    cartC.postData(data.id, 1);
+                                  } else {
+                                    Get.toNamed(Routes.LOGIN);
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xff16A085), // background
                                 ),
-                                child: Text('Keranjang'),
+                                child: Text('+ Keranjang'),
                               ),
                             ],
                           ),

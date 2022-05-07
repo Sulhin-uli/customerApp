@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/error/views/print_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -114,6 +115,11 @@ class AppPages {
     GetPage(
       name: _Paths.ERROR,
       page: () => ErrorView(),
+      binding: ErrorBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRINT,
+      page: () => PrintView(),
       binding: ErrorBinding(),
     ),
   ];

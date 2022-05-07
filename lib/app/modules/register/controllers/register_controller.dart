@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/register/providers/register_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class RegisterController extends GetxController {
   late TextEditingController password;
   late TextEditingController cPassword;
   var hiddenTextPassword = true.obs;
+  AuthController authController = Get.put(AuthController());
 
   @override
   void onInit() {
@@ -34,9 +36,9 @@ class RegisterController extends GetxController {
       RegisterProvider()
           .register(name, email, password, cPassword)
           .then((response) {
-        Get.back();
         dialog("Peringatan", "Daftar Berhasil!");
       });
+      authController.login(email, password);
     } else {
       dialog("Peringatan", "Daftar Gagal!");
     }

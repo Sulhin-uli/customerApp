@@ -4,6 +4,7 @@ import 'package:customer_app/app/modules/home/views/widgets/menu_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/rounded_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/banner_widget.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/produk/views/produk_view.dart';
 import 'package:customer_app/app/modules/saya/views/saya_view.dart';
 import 'package:customer_app/app/modules/wishlist/views/wishlist_view.dart';
@@ -11,16 +12,16 @@ import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  // final _scrollController = TrackingScrollController();
+  final box = GetStorage();
+  final authC = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
-    // print(controller.getData());
-    // Part Scrroll
     final _scrollController = TrackingScrollController();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -89,8 +90,12 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  Header(_scrollController,
-                      Get.find<CartController>().cart.length),
+                  Header(
+                    _scrollController,
+                    Get.find<CartController>().cart.length,
+                    // authC.isAuth.value,
+                    box.read('isAuth'),
+                  )
                 ],
               ),
               ProdukView(),
@@ -131,7 +136,9 @@ class HomeView extends GetView<HomeController> {
             items: [
               BottomNavigationBarItem(
                 icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
+                  margin: EdgeInsets.only(
+                    bottom: 7,
+                  ),
                   child: Icon(
                     Icons.home,
                     size: 20.0,

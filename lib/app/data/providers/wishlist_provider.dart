@@ -26,10 +26,13 @@ class WishlistProvider extends GetConnect {
     int? userId,
     int? productId,
   ) async {
-    final response = await post('$url', {
-      "user_id": userId,
-      "product_id": productId,
-    });
+    final response = await post(
+      '$url',
+      {
+        "user_id": userId,
+        "product_id": productId,
+      },
+    );
     return response.body;
   }
 

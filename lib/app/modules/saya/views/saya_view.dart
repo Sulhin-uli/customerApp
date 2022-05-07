@@ -1,11 +1,18 @@
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../controllers/saya_controller.dart';
 
 class SayaView extends GetView<SayaController> {
+  final box = GetStorage();
+  final homeC = Get.put(HomeController());
+  final cartC = Get.put(CartController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +107,16 @@ class SayaView extends GetView<SayaController> {
                 title: const Text('Ubah Password'),
               ),
               GestureDetector(
-                onTap: () => Get.toNamed(Routes.LOGIN),
+                onTap: () {
+                  box.erase();
+                  box.write('isAuth', false);
+                  // Get.toNamed(Routes.LOGIN);
+                  print("Success");
+                  homeC.changeTabIndex(0);
+                  // HomeController _homeController = HomeController();
+                  // _homeController.changeTabIndex(0);
+                  cartC.cart.clear();
+                },
                 child: ListTile(
                   leading: Icon(Icons.vpn_key),
                   title: const Text('Logout'),

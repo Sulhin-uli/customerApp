@@ -1,4 +1,6 @@
+import 'package:customer_app/app/data/models/category_product_model.dart';
 import 'package:customer_app/app/data/models/product_model.dart';
+import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/product_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,7 @@ class ProdukController extends GetxController {
             id: e["id"],
             name: e["name"],
             slug: e["slug"],
-            categoryProductId: CategoryProductId(
+            categoryProductId: CategoryProductModel(
               id: e["category_product_id"]["id"],
               name: e["category_product_id"]["name"],
               slug: e["category_product_id"]["slug"],
@@ -25,7 +27,7 @@ class ProdukController extends GetxController {
             stoke: e["stoke"],
             price: e["price"],
             desc: e["desc"],
-            userId: UserId(
+            userId: UserModel(
               id: e["category_product_id"]["id"],
               name: e["category_product_id"]["name"],
             ),

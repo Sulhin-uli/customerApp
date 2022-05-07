@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class HeaderDetailProduk extends StatefulWidget {
+  HeaderDetailProduk(this.scrollController, this.countCart, this.auth);
   final TrackingScrollController scrollController;
-  final data;
-  const HeaderDetailProduk(this.scrollController, this.data);
+  final countCart, auth;
 
   @override
   State<HeaderDetailProduk> createState() => _HeaderDetailProdukState();
@@ -35,8 +35,6 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-
     return Container(
       color: _backgroundColor,
       padding: EdgeInsets.all(8),
@@ -49,14 +47,22 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
             ),
             _buildInputSearch(),
             _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.CART),
+              onPressed: () => {
+                setState(() {
+                  if (widget.auth == true) {
+                    Get.toNamed(Routes.CART);
+                  } else {
+                    Get.toNamed(Routes.LOGIN);
+                  }
+                })
+              },
               icon: Icons.shopping_cart,
-              notification: widget.data,
+              notification: (widget.auth == true) ? widget.countCart : 0,
             ),
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
               icon: Icons.notifications,
-              notification: 3,
+              notification: 0,
             ),
           ],
         ),
@@ -166,7 +172,6 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
           _colorIcon = Colors.grey;
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
         }
-
         _backgroundColor = Colors.white.withOpacity(_opacity!);
       },
     );
