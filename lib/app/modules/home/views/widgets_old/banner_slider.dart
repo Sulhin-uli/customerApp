@@ -7,7 +7,7 @@ class BannerSilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
+      // overflow: Overflow.visible,
       alignment: Alignment.bottomCenter,
       children: [BannerSection(), const CashInfo()],
     );

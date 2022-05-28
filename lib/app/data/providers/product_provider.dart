@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../models/product_model.dart';
 
 class ProductProvider extends GetConnect {
-  String url = baseUrl + "product";
+  String url = baseUrl + "product-customer";
   String errorText = "";
 
   Future<dynamic> getData() async {
