@@ -21,6 +21,7 @@ abstract class Routes {
   static const WISHLIST = _Paths.WISHLIST;
   static const ERROR = _Paths.ERROR;
   static const PRINT = _Paths.PRINT;
+  static const INTRODUCTION = _Paths.INTRODUCTION;
 }
 
 abstract class _Paths {
@@ -42,4 +43,5 @@ abstract class _Paths {
   static const WISHLIST = '/wishlist';
   static const ERROR = '/error';
   static const PRINT = '/print';
+  static const INTRODUCTION = '/introduction';
 }

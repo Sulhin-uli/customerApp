@@ -1,8 +1,9 @@
-import 'package:customer_app/app/modules/error/views/print_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
 import '../modules/alamat/views/alamat_view.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/views/cart_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/detail_chat/bindings/detail_chat_binding.dart';
@@ -11,10 +12,11 @@ import '../modules/detail_produk/bindings/detail_produk_binding.dart';
 import '../modules/detail_produk/views/detail_produk_view.dart';
 import '../modules/error/bindings/error_binding.dart';
 import '../modules/error/views/error_view.dart';
+import '../modules/error/views/print_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/cart/bindings/cart_binding.dart';
-import '../modules/cart/views/cart_view.dart';
+import '../modules/introduction/bindings/introduction_binding.dart';
+import '../modules/introduction/views/introduction_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
@@ -36,8 +38,6 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-
-  static const INITIAL = Routes.HOME;
 
   static final routes = [
     // Register
@@ -121,6 +121,11 @@ class AppPages {
       name: _Paths.PRINT,
       page: () => PrintView(),
       binding: ErrorBinding(),
+    ),
+    GetPage(
+      name: _Paths.INTRODUCTION,
+      page: () => IntroductionView(),
+      binding: IntroductionBinding(),
     ),
   ];
 }

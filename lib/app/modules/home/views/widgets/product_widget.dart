@@ -1,15 +1,14 @@
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class Product extends GetView<HomeController> {
-  const Product({
-    Key? key,
-  }) : super(key: key);
-
+  ProdukController produkController = Get.put(ProdukController());
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,10 +31,14 @@ class Product extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       final data = controller.product[index];
                       return GestureDetector(
-                        onTap: () => Get.toNamed(
-                          Routes.DETAIL_PRODUK,
-                          arguments: data.slug!,
-                        ),
+                        onTap: () {
+                          controller.photoProductByProductId.clear();
+                          controller.getPhotoProductById(data.id!);
+                          Get.toNamed(
+                            Routes.DETAIL_PRODUK,
+                            arguments: data.slug!,
+                          );
+                        },
                         child: Container(
                           margin: EdgeInsets.fromLTRB(15, 16, 5, 5),
                           decoration: BoxDecoration(
@@ -49,9 +52,15 @@ class Product extends GetView<HomeController> {
                                   height: 200,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
+                                        // image: NetworkImage(
+                                        //   "https://tokoterserah.com/storage/produk/thumb/604045a76c15eBERAS%20FORTUNE%205%20KG.png",
+                                        // ),
                                         image: NetworkImage(
-                                          "https://tokoterserah.com/storage/produk/thumb/604045a76c15eBERAS%20FORTUNE%205%20KG.png",
+                                          baseUrlFile +
+                                              "storage/produk/" +
+                                              data.image!,
                                         ),
+                                        // fit: BoxFit.fitHeight,
                                       ),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.only(

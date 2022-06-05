@@ -5,6 +5,7 @@ import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart'
 import 'package:customer_app/app/modules/home/views/widgets/rounded_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/banner_widget.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/produk/views/produk_view.dart';
 import 'package:customer_app/app/modules/saya/views/saya_view.dart';
 import 'package:customer_app/app/modules/wishlist/views/wishlist_view.dart';
@@ -75,14 +76,15 @@ class HomeView extends GetView<HomeController> {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextButton(
-                                  onPressed: () => Get.toNamed(Routes.PRODUK),
-                                  child: Text(
-                                    "Lihat Semua",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff16A085),
-                                    ),
-                                  ))
+                                onPressed: () => Get.toNamed(Routes.PRODUK),
+                                child: Text(
+                                  "Lihat Semua",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff16A085),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),

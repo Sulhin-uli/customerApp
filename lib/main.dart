@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/utils/error_screen.dart';
 import 'package:customer_app/app/utils/loading_screen.dart';
 import 'package:customer_app/app/utils/splash_screen.dart';
@@ -18,6 +19,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
+  final authC = Get.put(AuthController(), permanent: true);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -35,7 +38,11 @@ class MyApp extends StatelessWidget {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: "TaniKula",
-                  initialRoute: AppPages.INITIAL,
+                  initialRoute: authC.isSkipIntro.isTrue
+                      ? authC.isAuth.isTrue
+                          ? Routes.HOME
+                          : Routes.LOGIN
+                      : Routes.INTRODUCTION,
                   theme: ThemeData(
                     primarySwatch: Colors.green,
                   ),

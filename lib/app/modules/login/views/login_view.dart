@@ -14,7 +14,7 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        // leading: BackButton(color: Colors.black),
         title: Text(
           'Masuk',
           style: TextStyle(color: Colors.black, fontSize: 16),

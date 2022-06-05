@@ -8,6 +8,8 @@ import 'package:get_storage/get_storage.dart';
 
 class AuthController extends GetxController {
   final box = GetStorage();
+  var isSkipIntro = false.obs;
+  var isAuth = false.obs;
 
   HomeController _homeController = HomeController();
   CartController cartController = Get.put(CartController());
@@ -41,6 +43,8 @@ class AuthController extends GetxController {
               "password": password
             });
             box.write('isAuth', true);
+            isAuth.value = true;
+            isSkipIntro.value = true;
             Get.toNamed(Routes.HOME);
             _homeController.changeTabIndex(0);
             cartController.getData();
