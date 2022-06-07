@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/login_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/base_url.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,9 +17,14 @@ class SayaView extends GetView<SayaController> {
   final box = GetStorage();
   final homeC = Get.put(HomeController());
   final cartC = Get.put(CartController());
+  final authC = Get.put(AuthController());
+  final sayaC = Get.put(SayaController());
 
   @override
   Widget build(BuildContext context) {
+    final user = box.read("userData") as Map<String, dynamic>;
+    authC.getDataCustomer();
+    final data = authC.findCustomer(user["id"]);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -31,16 +41,75 @@ class SayaView extends GetView<SayaController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                leading: Icon(
-                  Icons.account_circle_rounded,
-                  size: 60,
-                  color: Colors.blue,
-                ),
-                title: const Text(
-                  "Name Account",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+              Row(
+                children: [
+                  Stack(
+                    children: <Widget>[
+                      Obx(
+                        () => Container(
+                          margin: EdgeInsets.all(15),
+                          width: 70,
+                          height: 70,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(200),
+                            child: sayaC.selectedImagePath.value.isImageFileName
+                                ? Image.file(
+                                    File(sayaC.selectedImagePath.value),
+                                    height: 150,
+                                    width: 150,
+                                    fit: BoxFit.cover,
+                                  )
+                                : data.image == null
+                                    ? Image.asset(
+                                        'assets/logo/noimage.png',
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.network(
+                                        baseUrlFile +
+                                            "storage/profile/" +
+                                            data.image!,
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 1,
+                        right: 1,
+                        child: InkWell(
+                          onTap: () => sayaC.getImage(),
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            child: Icon(
+                              Icons.add_a_photo,
+                              color: Colors.white,
+                              size: 10,
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: Text(
+                      data.userId!.name!,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 30,
@@ -54,6 +123,9 @@ class SayaView extends GetView<SayaController> {
                     ListTile(
                       leading: Icon(Icons.home),
                       title: const Text('Kembali Ke Home'),
+                      onTap: () {
+                        homeC.changeTabIndex(0);
+                      },
                     ),
                     Divider(
                       color: Color(0xff919A92),
@@ -76,11 +148,17 @@ class SayaView extends GetView<SayaController> {
               ),
               ListTile(
                 leading: Icon(Icons.favorite),
-                title: const Text('Favorit'),
+                title: const Text('Wishlist'),
+                onTap: () {
+                  homeC.changeTabIndex(2);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.shopping_cart),
                 title: const Text('Keranjang'),
+                onTap: () {
+                  Get.toNamed(Routes.CART);
+                },
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -101,21 +179,16 @@ class SayaView extends GetView<SayaController> {
               ListTile(
                 leading: Icon(Icons.person),
                 title: const Text('Ubah Akun'),
+                onTap: () => Get.toNamed(Routes.EDIT_PROFILE),
               ),
               ListTile(
                 leading: Icon(Icons.vpn_key),
                 title: const Text('Ubah Password'),
+                onTap: () => Get.toNamed(Routes.EDIT_PASSWORD),
               ),
               GestureDetector(
                 onTap: () {
-                  box.erase();
-                  box.write('isAuth', false);
-                  // Get.toNamed(Routes.LOGIN);
-                  print("Success");
-                  homeC.changeTabIndex(0);
-                  // HomeController _homeController = HomeController();
-                  // _homeController.changeTabIndex(0);
-                  cartC.cart.clear();
+                  sayaC.dialogQuestion(context);
                 },
                 child: ListTile(
                   leading: Icon(Icons.vpn_key),

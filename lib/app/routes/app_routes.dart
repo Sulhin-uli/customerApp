@@ -10,7 +10,6 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
   static const CART = _Paths.CART;
-  static const SAYA = _Paths.SAYA;
   static const PRODUK = _Paths.PRODUK;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const ALAMAT = _Paths.ALAMAT;
@@ -22,6 +21,11 @@ abstract class Routes {
   static const ERROR = _Paths.ERROR;
   static const PRINT = _Paths.PRINT;
   static const INTRODUCTION = _Paths.INTRODUCTION;
+
+  // Saya
+  static const SAYA = _Paths.SAYA;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const EDIT_PASSWORD = _Paths.EDIT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -44,4 +48,8 @@ abstract class _Paths {
   static const ERROR = '/error';
   static const PRINT = '/print';
   static const INTRODUCTION = '/introduction';
+
+  // Saya
+  static const EDIT_PROFILE = '/edit-profile';
+  static const EDIT_PASSWORD = '/edit-password';
 }

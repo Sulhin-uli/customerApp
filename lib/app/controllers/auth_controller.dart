@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
-class AuthController extends GetxController {
-  var isSkipIntro = false.obs;
-  var isAuth = false.obs;
-}
+// class AuthController extends GetxController {
+//   var isSkipIntro = false.obs;
+//   var isAuth = false.obs;
+// }

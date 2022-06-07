@@ -1,3 +1,5 @@
+import 'package:customer_app/app/modules/saya/views/edit_password_view.dart';
+import 'package:customer_app/app/modules/saya/views/edit_profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -67,11 +69,7 @@ class AppPages {
       page: () => CartView(),
       binding: CartBinding(),
     ),
-    GetPage(
-      name: _Paths.SAYA,
-      page: () => SayaView(),
-      binding: SayaBinding(),
-    ),
+
     GetPage(
       name: _Paths.PRODUK,
       page: () => ProdukView(),
@@ -126,6 +124,22 @@ class AppPages {
       name: _Paths.INTRODUCTION,
       page: () => IntroductionView(),
       binding: IntroductionBinding(),
+    ),
+    // Saya
+    GetPage(
+      name: _Paths.SAYA,
+      page: () => SayaView(),
+      binding: SayaBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => EditProfileView(),
+      binding: SayaBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PASSWORD,
+      page: () => EditPasswordView(),
+      binding: SayaBinding(),
     ),
   ];
 }

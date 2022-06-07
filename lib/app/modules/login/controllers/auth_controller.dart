@@ -1,3 +1,6 @@
+import 'package:customer_app/app/data/models/customer_model.dart';
+import 'package:customer_app/app/data/models/user_model.dart';
+import 'package:customer_app/app/data/providers/customer_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/providers/login_provider.dart';
@@ -10,6 +13,7 @@ class AuthController extends GetxController {
   final box = GetStorage();
   var isSkipIntro = false.obs;
   var isAuth = false.obs;
+  var customer = List<CustomerModel>.empty().obs;
 
   HomeController _homeController = HomeController();
   CartController cartController = Get.put(CartController());
@@ -45,7 +49,8 @@ class AuthController extends GetxController {
             box.write('isAuth', true);
             isAuth.value = true;
             isSkipIntro.value = true;
-            Get.toNamed(Routes.HOME);
+            getDataCustomer();
+            Get.offAllNamed(Routes.HOME);
             _homeController.changeTabIndex(0);
             cartController.getData();
           } else {
@@ -78,4 +83,41 @@ class AuthController extends GetxController {
   //     }
   //   });
   // }
+
+  void getDataCustomer() async {
+    final data = box.read("userData") as Map<String, dynamic>;
+    CustomerProvider().getData(data["token"]).then((response) {
+      try {
+        response["data"].map((e) {
+          final data = CustomerModel(
+            id: e["id"],
+            userId: UserModel(
+              id: e["user_id"]["id"],
+              name: e["user_id"]["name"],
+            ),
+            addressId: e["address_id"],
+            gender: e["gender"],
+            birth: e["birth"],
+            telp: e["telp"],
+            image: e["image"],
+          );
+          customer.add(data);
+        }).toList();
+        final data = box.read("userData") as Map<String, dynamic>;
+        box.write('userData', {
+          "id": data['id'],
+          "token": data["token"],
+          "email": data["email"],
+          "password": data["password"],
+          "customer_id": findCustomer((data["id"])).id,
+        });
+      } catch (e) {
+        print("Error is : " + e.toString());
+      }
+    });
+  }
+
+  CustomerModel findCustomer(int id) {
+    return customer.firstWhere((e) => e.userId!.id! == id);
+  }
 }
