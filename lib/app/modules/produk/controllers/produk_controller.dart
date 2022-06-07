@@ -17,6 +17,8 @@ class ProdukController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getDataPhoto();
+    getData();
   }
 
   void getDataPhoto() async {

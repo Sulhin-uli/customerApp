@@ -9,32 +9,34 @@ class WishlistProvider extends GetConnect {
   @override
   String url = baseUrl + "wishlist";
 
-  Future<dynamic> getData(int userId) async {
-    try {
-      final response = await get('$url/user_id/$userId');
-      return response.body;
-    } on SocketException {
-      print('No Internet connection');
-    } on HttpException {
-      print("Couldn't find the post");
-    } on FormatException {
-      print("Bad response format");
-    }
-  }
-
-  Future<dynamic> postData(
-    int? userId,
-    int? productId,
-  ) async {
-    final response = await post(
-      '$url',
-      {
-        "user_id": userId,
-        "product_id": productId,
-      },
-    );
+  Future<dynamic> getData(int userId, String token) async {
+    final response = await get('$url/user_id/$userId', headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
     return response.body;
   }
 
-  Future<void> deleteData(int id) async => await delete('$url/$id');
+  Future<dynamic> postData(int? userId, int? productId, String token) async {
+    final response = await post('$url', {
+      "user_id": userId,
+      "product_id": productId,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
+
+  Future<void> deleteData(
+    int? id,
+    String token,
+  ) async =>
+      await delete(url + '/$id', headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
 }

@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,26 +23,28 @@ class ItemCart extends GetView<CartController> {
               children: [
                 ListTile(
                   leading: Icon(Icons.crop_square_rounded),
-                  title: Text('Gapoktan'),
-                  subtitle: Text(
-                    'Kabupaten Indramayu',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
+                  title: Text(data.productId.userId.name),
+                  // subtitle: Text(
+                  //   data.productId.userId.name,
+                  //   style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  // ),
                 ),
                 ListTile(
                   leading: Icon(Icons.crop_square_rounded),
                   title: Row(
                     children: [
-                      // Icon(
-                      //   Icons.image,
-                      //   size: 100,
-                      // ),
                       Container(
                         height: 100,
                         width: 100,
                         child: Image.network(
-                            "https://tokoterserah.com/storage/produk/thumb/604045a76c15eBERAS%20FORTUNE%205%20KG.png",
-                            fit: BoxFit.cover),
+                          baseUrlFile +
+                              "storage/produk/" +
+                              data.productId!.image!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +68,13 @@ class ItemCart extends GetView<CartController> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
-                          )
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          IconButton(
+                              onPressed: () => controller.deleteData(data.id!),
+                              icon: Icon(Icons.delete))
                         ],
                       ),
                     ],

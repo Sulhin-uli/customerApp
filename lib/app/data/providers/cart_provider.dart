@@ -18,6 +18,17 @@ class CartProvider extends GetConnect {
     return response.body;
   }
 
+  // Future<dynamic> getData(
+  //   String token,
+  // ) async {
+  //   final response = await get(url, headers: {
+  //     'Content-Type': 'application/json',
+  //     'Accept': 'application/json',
+  //     'Authorization': 'Bearer $token',
+  //   });
+  //   return response.body;
+  // }
+
   Future<dynamic> postData(int? userId, int? productId, int? productQty,
       int? sessionId, String? token) async {
     final response = await post('$url', {
@@ -32,4 +43,14 @@ class CartProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<void> deleteData(
+    int? id,
+    String token,
+  ) async =>
+      await delete(url + '/$id', headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
 }

@@ -1,12 +1,14 @@
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/wishlist/controllers/wishlist_controller.dart';
+import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemWishlist extends GetView<WishlistController> {
   ItemWishlist(this.data);
   final data;
+  CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,16 @@ class ItemWishlist extends GetView<WishlistController> {
               Row(
                 children: [
                   Container(
+                    padding: EdgeInsets.all(4),
                     height: 100,
                     width: 100,
                     child: Image.network(
-                        "https://tokoterserah.com/storage/produk/thumb/604045a76c15eBERAS%20FORTUNE%205%20KG.png",
-                        fit: BoxFit.cover),
+                      baseUrlFile + "storage/produk/" + data.productId!.image!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 6,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +46,7 @@ class ItemWishlist extends GetView<WishlistController> {
                             fontWeight: FontWeight.w400),
                       ),
                       Text(
-                        "5 Kg",
+                        data.productId.stoke.toString(),
                         style: TextStyle(
                             color: Color(0xff919A92),
                             fontSize: 12,
@@ -78,12 +85,14 @@ class ItemWishlist extends GetView<WishlistController> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      cartController.postData(data.productId.id, 1);
+                    },
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(width: 2.0, color: Color(0xff16A085)),
                     ),
                     child: Text(
-                      '        Beli Langsung      ',
+                      '      + Keranjang      ',
                       style: TextStyle(
                         color: Color(0xff16A085),
                       ),

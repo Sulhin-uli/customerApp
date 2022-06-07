@@ -32,14 +32,17 @@ class WishlistView extends GetView<WishlistController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "1 Barang Wishlist",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Obx(
+                        () => Text(
+                          controller.wishlist.length.toString() +
+                              " Barang Wishlist",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Atur",
+                          "",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xff16A085),
@@ -70,25 +73,6 @@ class WishlistView extends GetView<WishlistController> {
               ],
             ),
           ),
-
-          // Obx(
-          //   () => wishlistC.wishlist.isEmpty
-          //       ? Center(
-          //           child: CircularProgressIndicator(),
-          //         )
-          //       : ListView.builder(
-          //           physics: NeverScrollableScrollPhysics(),
-          //           shrinkWrap: true,
-          //           itemCount: 2,
-          //           itemBuilder: (context, i) {
-          //             // int length = wishlistC.wishlist.length;
-          //             // final data = wishlistC.wishlist[i];
-          //             // return ItemWishlist(data);
-          //             return ItemWishlist();
-          //           },
-          //         ),
-          // )
-
           HeaderWishlist(
               _scrollController, Get.find<CartController>().cart.length),
         ],

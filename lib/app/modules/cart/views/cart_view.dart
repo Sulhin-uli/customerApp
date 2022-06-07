@@ -16,16 +16,16 @@ class CartView extends GetView<CartController> {
           'Keranjang',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.favorite_border,
-              size: 24,
-              color: Colors.black,
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: Icon(
+        //       Icons.favorite_border,
+        //       size: 24,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        // ],
         elevation: 0.5,
       ),
       body: Obx(

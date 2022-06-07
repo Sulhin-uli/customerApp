@@ -48,7 +48,7 @@ class _HeaderWishlistState extends State<HeaderWishlist> {
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.CHAT),
               icon: Icons.mail,
-              notification: 9,
+              notification: 0,
             ),
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.CART),
@@ -58,7 +58,7 @@ class _HeaderWishlistState extends State<HeaderWishlist> {
             _buildIconButton(
               onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
               icon: Icons.notifications,
-              notification: 3,
+              notification: 0,
             ),
           ],
         ),
