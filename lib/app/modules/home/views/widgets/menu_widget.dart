@@ -31,10 +31,7 @@ class Menu extends GetView<HomeController> {
                           padding: EdgeInsets.all(8),
                           color: Colors.white,
                           onPressed: () {},
-                          child: Image.network(
-                            "https://cdn.icon-icons.com/icons2/3361/PNG/512/preferences_user_interface_ux_apps_grid_options_ui_menu_categories_icon_210806.png",
-                            color: data.color!,
-                          ),
+                          child: Image.asset(data.image!),
                         ),
                       ),
                       SizedBox(

@@ -1,3 +1,5 @@
+import 'package:customer_app/app/modules/alamat/views/item_alamat_view.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,7 +19,7 @@ class AlamatView extends GetView<AlamatController> {
         ),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () => Get.toNamed(Routes.ADD_ALAMAT),
               child: Text(
                 "Tambah Alamat",
                 style: TextStyle(color: Color(0xff16A085), fontSize: 16),
@@ -25,82 +27,19 @@ class AlamatView extends GetView<AlamatController> {
         ],
         elevation: 0.5,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(16),
-                height: 200.0,
-                width: 300.0,
-                color: Colors.transparent,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffC8FEE0),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          ' jl. lohbener lama, Legok, Kabupate ...',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Name User',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '628123456789',
-                          style: TextStyle(color: Colors.black, fontSize: 12),
-                        ),
-                        Text(
-                          'Politeknik Negeri Indramayu, jl. lohbener lama,Legok, Kabupaten Indramayu, Jawa Barat',
-                          style: TextStyle(color: Colors.black, fontSize: 12),
-                        ),
-                        Center(
-                          child: OutlinedButton(
-                            onPressed: () {
-                              // Respond to button press
-                            },
-                            style: OutlinedButton.styleFrom(
-                              side: BorderSide(
-                                width: 2.0,
-                                color: Color(0xff919A92),
-                              ),
-                            ),
-                            child: Text(
-                              'Ubah Alamat',
-                              style: TextStyle(
-                                color: Color(0xff919A92),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+      body: Obx(
+        () => controller.address.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: controller.address.length,
+                itemBuilder: (context, i) {
+                  int length = controller.address.length;
+                  final data = controller.address[i];
+                  return ItemAlamatView(data);
+                },
               ),
-
-              // Container(
-              //   margin: EdgeInsets.all(16),
-              //   height: 250,
-              //   width: double.infinity,
-              //   color: Color(0xffC8FEE0),
-              // )
-            ],
-          ),
-        ),
       ),
     );
   }

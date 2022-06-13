@@ -121,7 +121,11 @@ class SayaView extends GetView<SayaController> {
                       color: Color(0xff919A92),
                     ),
                     ListTile(
-                      leading: Icon(Icons.home),
+                      leading: Image.asset(
+                        "assets/icons/home.png",
+                        width: 20,
+                        height: 20,
+                      ),
                       title: const Text('Kembali Ke Home'),
                       onTap: () {
                         homeC.changeTabIndex(0);
@@ -143,18 +147,30 @@ class SayaView extends GetView<SayaController> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.insert_chart_rounded),
+                leading: Image.asset(
+                  "assets/icons/transaksi.png",
+                  width: 20,
+                  height: 20,
+                ),
                 title: const Text('Daftar Transaksi'),
               ),
               ListTile(
-                leading: Icon(Icons.favorite),
+                leading: Image.asset(
+                  "assets/icons/wishlist.png",
+                  width: 20,
+                  height: 20,
+                ),
                 title: const Text('Wishlist'),
                 onTap: () {
                   homeC.changeTabIndex(2);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.shopping_cart),
+                leading: Image.asset(
+                  "assets/icons/keranjang.png",
+                  width: 20,
+                  height: 20,
+                ),
                 title: const Text('Keranjang'),
                 onTap: () {
                   Get.toNamed(Routes.CART);
@@ -172,17 +188,29 @@ class SayaView extends GetView<SayaController> {
               GestureDetector(
                 onTap: () => Get.toNamed(Routes.ALAMAT),
                 child: ListTile(
-                  leading: Icon(Icons.location_on),
+                  leading: Image.asset(
+                    "assets/icons/alamat.png",
+                    width: 20,
+                    height: 20,
+                  ),
                   title: const Text('Daftar Alamat'),
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.person),
+                leading: Image.asset(
+                  "assets/icons/edit-akun.png",
+                  width: 20,
+                  height: 20,
+                ),
                 title: const Text('Ubah Akun'),
                 onTap: () => Get.toNamed(Routes.EDIT_PROFILE),
               ),
               ListTile(
-                leading: Icon(Icons.vpn_key),
+                leading: Image.asset(
+                  "assets/icons/edit-password.png",
+                  width: 20,
+                  height: 20,
+                ),
                 title: const Text('Ubah Password'),
                 onTap: () => Get.toNamed(Routes.EDIT_PASSWORD),
               ),
@@ -191,7 +219,11 @@ class SayaView extends GetView<SayaController> {
                   sayaC.dialogQuestion(context);
                 },
                 child: ListTile(
-                  leading: Icon(Icons.vpn_key),
+                  leading: Image.asset(
+                    "assets/icons/logout.png",
+                    width: 20,
+                    height: 20,
+                  ),
                   title: const Text('Logout'),
                 ),
               ),

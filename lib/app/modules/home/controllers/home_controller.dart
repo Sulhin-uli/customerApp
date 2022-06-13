@@ -194,50 +194,42 @@ class HomeController extends GetxController {
   void mainMenu() {
     List<MainMenuModel> data = [
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/beras.png",
         title: "Beras",
         color: Colors.red,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/buah.png",
         title: "Buah",
         color: Colors.yellow,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/olahan-buah.png",
         title: "Olahan Buah",
         color: Colors.green,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/bibit-sayuran.png",
         title: "Bibit Sayuran",
         color: Colors.purple,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/sayuran.png",
         title: "Sayuran",
         color: Colors.cyan,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/roti.png",
         title: "Roti",
         color: Colors.lightBlue,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/jamu.png",
         title: "Jamu Herbal",
         color: Colors.pinkAccent,
       ),
       MainMenuModel(
-        image:
-            "https://cdn2.iconfinder.com/data/icons/maps-navigation-linear-black/614/3683_-_Marker_I-512.png",
+        image: "assets/icons/susu-kedelai.png",
         title: "Susu Kedelai",
         color: Colors.pinkAccent,
       ),

@@ -33,6 +33,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/icons/
     - assets/lottie/
     - assets/logo/
   uses-material-design: true

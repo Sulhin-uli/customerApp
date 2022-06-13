@@ -1,3 +1,5 @@
+import 'package:customer_app/app/modules/alamat/views/add_alamat_view.dart';
+import 'package:customer_app/app/modules/alamat/views/edit_alamat_view.dart';
 import 'package:customer_app/app/modules/saya/views/edit_password_view.dart';
 import 'package:customer_app/app/modules/saya/views/edit_profile_view.dart';
 import 'package:get/get.dart';
@@ -80,11 +82,7 @@ class AppPages {
       page: () => NotifikasiView(),
       binding: NotifikasiBinding(),
     ),
-    GetPage(
-      name: _Paths.ALAMAT,
-      page: () => AlamatView(),
-      binding: AlamatBinding(),
-    ),
+
     GetPage(
       name: _Paths.CHAT,
       page: () => ChatView(),
@@ -140,6 +138,22 @@ class AppPages {
       name: _Paths.EDIT_PASSWORD,
       page: () => EditPasswordView(),
       binding: SayaBinding(),
+    ),
+    // Alamat
+    GetPage(
+      name: _Paths.ALAMAT,
+      page: () => AlamatView(),
+      binding: AlamatBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_ALAMAT,
+      page: () => AddAlamatView(),
+      binding: AlamatBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_ALAMAT,
+      page: () => EditAlamatView(),
+      binding: AlamatBinding(),
     ),
   ];
 }

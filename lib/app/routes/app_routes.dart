@@ -12,7 +12,6 @@ abstract class Routes {
   static const CART = _Paths.CART;
   static const PRODUK = _Paths.PRODUK;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
-  static const ALAMAT = _Paths.ALAMAT;
   static const CHAT = _Paths.CHAT;
   static const DETAIL_CHAT = _Paths.DETAIL_CHAT;
   static const TOKO = _Paths.TOKO;
@@ -22,6 +21,10 @@ abstract class Routes {
   static const PRINT = _Paths.PRINT;
   static const INTRODUCTION = _Paths.INTRODUCTION;
 
+  // Alamat
+  static const ALAMAT = _Paths.ALAMAT;
+  static const ADD_ALAMAT = _Paths.ADD_ALAMAT;
+  static const EDIT_ALAMAT = _Paths.EDIT_ALAMAT;
   // Saya
   static const SAYA = _Paths.SAYA;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
@@ -39,7 +42,6 @@ abstract class _Paths {
   static const SAYA = '/saya';
   static const PRODUK = '/produk';
   static const NOTIFIKASI = '/notifikasi';
-  static const ALAMAT = '/alamat';
   static const CHAT = '/chat';
   static const DETAIL_CHAT = '/detail-chat';
   static const TOKO = '/toko';
@@ -48,6 +50,11 @@ abstract class _Paths {
   static const ERROR = '/error';
   static const PRINT = '/print';
   static const INTRODUCTION = '/introduction';
+
+  // Alamat
+  static const ALAMAT = '/alamat';
+  static const ADD_ALAMAT = '/add_alamat';
+  static const EDIT_ALAMAT = '/edit_alamat';
 
   // Saya
   static const EDIT_PROFILE = '/edit-profile';

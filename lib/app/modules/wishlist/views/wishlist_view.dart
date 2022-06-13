@@ -69,7 +69,7 @@ class WishlistView extends GetView<WishlistController> {
                             // return ItemWishlist();
                           },
                         ),
-                )
+                ),
               ],
             ),
           ),

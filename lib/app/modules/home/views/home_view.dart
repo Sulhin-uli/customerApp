@@ -141,9 +141,10 @@ class HomeView extends GetView<HomeController> {
                   margin: EdgeInsets.only(
                     bottom: 7,
                   ),
-                  child: Icon(
-                    Icons.home,
-                    size: 20.0,
+                  child: Image.asset(
+                    "assets/icons/home.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 label: 'Home',
@@ -152,9 +153,10 @@ class HomeView extends GetView<HomeController> {
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.search,
-                    size: 20.0,
+                  child: Image.asset(
+                    "assets/icons/cari.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 label: 'Cari',
@@ -163,9 +165,10 @@ class HomeView extends GetView<HomeController> {
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.favorite,
-                    size: 20.0,
+                  child: Image.asset(
+                    "assets/icons/wishlist.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 label: 'Wishlist',
@@ -174,9 +177,10 @@ class HomeView extends GetView<HomeController> {
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Icons.person,
-                    size: 20.0,
+                  child: Image.asset(
+                    "assets/icons/saya.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 label: 'Saya',
