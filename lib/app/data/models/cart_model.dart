@@ -3,6 +3,7 @@ import 'package:customer_app/app/data/models/user_model.dart';
 
 class CartModel {
   int? id;
+  bool? isMark;
   UserModel? userId;
   ProductModel? productId;
   int? productQty;
@@ -12,6 +13,7 @@ class CartModel {
 
   CartModel(
       {this.id,
+      this.isMark,
       this.userId,
       this.productId,
       this.productQty,
@@ -21,6 +23,7 @@ class CartModel {
 
   CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    isMark = json['isMark'];
     userId = json['user_id'] != null
         ? new UserModel.fromJson(json['user_id'])
         : null;
@@ -36,6 +39,7 @@ class CartModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['isMark'] = this.isMark;
     if (this.userId != null) {
       data['user_id'] = this.userId!.toJson();
     }
