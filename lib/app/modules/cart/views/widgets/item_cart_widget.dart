@@ -27,6 +27,8 @@ class ItemCart extends GetView<CartController> {
                   onChanged: (e) {
                     data.isMark = e;
                     controller.cart.refresh();
+                    controller.addLengthMark();
+                    controller.addTotal();
                     controller.checkMark();
                     controller.checkAllMark();
                   }),
@@ -105,23 +107,65 @@ class ItemCart extends GetView<CartController> {
                         ),
                       ),
                       SizedBox(
-                        width: 13,
+                        width: 20,
                       ),
-                      OutlinedButton(
-                        onPressed: () {
-                          // cartController.postData(data.productId.id, 1);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side:
-                              BorderSide(width: 2.0, color: Color(0xff16A085)),
+                      Container(
+                        height: 30,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1.0, color: Colors.black12),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0) //
+                              ),
+                        ), //
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            (data.productQty! == 1)
+                                ? InkWell(
+                                    child: Text(
+                                      "-",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                : InkWell(
+                                    onTap: () {
+                                      controller.updateQty(
+                                          data.id!, data.productQty! - 1);
+                                    },
+                                    child: Text(
+                                      "-",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                            Text(
+                              data.productQty!.toString(),
+                              style: TextStyle(
+                                  color: Color(0xff919A92),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                controller.updateQty(
+                                    data.id!, data.productQty! + 1);
+                              },
+                              child: Text(
+                                "+",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          '      + Keranjang      ',
-                          style: TextStyle(
-                            color: Color(0xff16A085),
-                          ),
-                        ),
-                      ),
+                      )
                     ],
                   )
                 ],

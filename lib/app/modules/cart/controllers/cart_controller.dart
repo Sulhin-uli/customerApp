@@ -17,9 +17,51 @@ class CartController extends GetxController {
   var isLoading = true.obs;
   var isAllMark = false.obs;
   var isMark = false.obs;
+  var lengthMark = 0.obs;
+  var total = 0.obs;
   var cart = List<CartModel>.empty().obs;
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
+
+  @override
+  void onInit() {
+    getDataPhoto();
+    getData();
+    super.onInit();
+  }
+
+  void updateQty(int id, int qty) {
+    final item = findByid(id);
+    final data = box.read("userData") as Map<String, dynamic>;
+    CartProvider().updateQty(id, qty, data["token"]).then((_) {
+      item.productQty = qty;
+      cart.refresh();
+      addLengthMark();
+      addTotal();
+    });
+  }
+
+  addLengthMark() {
+    lengthMark.value = 0;
+    for (var item in cart) {
+      if (item.isMark! == true) {
+        lengthMark.value = lengthMark.value + item.productQty!;
+      }
+    }
+  }
+
+  addTotal() {
+    total.value = 0;
+    for (var item in cart) {
+      if (item.isMark! == true) {
+        total.value = total.value +
+            (item.productId!.price! *
+                int.parse(
+                  item.productQty.toString(),
+                ));
+      }
+    }
+  }
 
   void allMark() {
     if (isAllMark == true) {
@@ -28,11 +70,15 @@ class CartController extends GetxController {
         isMark.value = true;
         cart.refresh();
       }
+      addLengthMark();
+      addTotal();
     } else if (isAllMark == false) {
       for (var item in cart) {
         item.isMark = false;
         isMark.value = false;
         cart.refresh();
+        lengthMark.value = 0;
+        total.value = 0;
       }
     }
   }
@@ -71,6 +117,8 @@ class CartController extends GetxController {
         deleteData(item.id!);
       }
     }
+    isAllMark.value = false;
+    isMark.value = false;
   }
 
   void dialogSuccess(String msg) {
@@ -88,13 +136,6 @@ class CartController extends GetxController {
         ],
       ),
     );
-  }
-
-  @override
-  void onInit() {
-    getDataPhoto();
-    getData();
-    super.onInit();
   }
 
   void getDataPhoto() async {

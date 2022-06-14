@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -92,6 +93,55 @@ class CartView extends GetView<CartController> {
                         ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 70,
+        color: Colors.white,
+        child: Obx(
+          () => Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  width: 200,
+                  height: 45,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Total Harga ",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      Text(
+                        'Rp${formatCurrency.format(controller.total())}',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )),
+              Obx(() => controller.isMark.isFalse
+                  ? ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey, // background
+                      ),
+                      child: Text(
+                        '     Beli (0)     ',
+                      ),
+                    )
+                  : ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff16A085), // background
+                      ),
+                      child: Text(
+                        '     Beli (' +
+                            controller.lengthMark.value.toString() +
+                            ')     ',
+                      ),
+                    )),
+            ],
+          ),
         ),
       ),
     );

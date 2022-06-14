@@ -18,16 +18,16 @@ class CartProvider extends GetConnect {
     return response.body;
   }
 
-  // Future<dynamic> getData(
-  //   String token,
-  // ) async {
-  //   final response = await get(url, headers: {
-  //     'Content-Type': 'application/json',
-  //     'Accept': 'application/json',
-  //     'Authorization': 'Bearer $token',
-  //   });
-  //   return response.body;
-  // }
+  Future<void> updateQty(int id, int product_qty, String? token) async {
+    final response = await put('$url' + '/qty/$id', {
+      "product_qty": product_qty,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
 
   Future<dynamic> postData(int? userId, int? productId, int? productQty,
       int? sessionId, String? token) async {
