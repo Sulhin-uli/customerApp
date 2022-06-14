@@ -159,7 +159,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                           )
                                         : InkWell(
                                             onTap: () {
-                                              wishlistC.deleteData(data.id!);
+                                              wishlistC.deleteDatabyIdProduct(
+                                                  data.id!);
                                               wishlistC.isWishlist.value =
                                                   false;
                                             },

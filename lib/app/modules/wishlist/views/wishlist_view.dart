@@ -53,22 +53,39 @@ class WishlistView extends GetView<WishlistController> {
                   ),
                 ),
                 Obx(
-                  () => wishlistC.wishlist.isEmpty
+                  () => wishlistC.isLoading.isTrue
                       ? Center(
                           child: CircularProgressIndicator(),
                         )
-                      : ListView.builder(
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: wishlistC.wishlist.length,
-                          itemBuilder: (context, i) {
-                            int length = wishlistC.wishlist.length;
-                            final data = wishlistC.wishlist[i];
-                            return ItemWishlist(data);
-                            // return ItemWishlist();
-                          },
-                        ),
+                      : controller.wishlist.isEmpty
+                          ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/icons/empty-data.png",
+                                    height: 100,
+                                    width: 100,
+                                  ),
+                                  Text(
+                                    "Data Tidak Ada",
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                            )
+                          : ListView.builder(
+                              padding: EdgeInsets.zero,
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: wishlistC.wishlist.length,
+                              itemBuilder: (context, i) {
+                                int length = wishlistC.wishlist.length;
+                                final data = wishlistC.wishlist[i];
+                                return ItemWishlist(data);
+                                // return ItemWishlist();
+                              },
+                            ),
                 ),
               ],
             ),

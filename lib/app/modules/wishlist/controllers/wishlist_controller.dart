@@ -37,55 +37,62 @@ class WishlistController extends GetxController {
   }
 
   void getData() async {
-    final data = box.read("userData") as Map<String, dynamic>;
-    var userId = data["id"];
-    WishlistProvider().getData(userId, data["token"]).then((response) {
-      try {
-        response["data"].map((e) {
-          final data = WishlistModel(
-            id: e["id"],
-            userId: UserModel(
-              id: e["user_id"]["id"],
-              name: e["user_id"]["name"],
-            ),
-            productId: ProductModel(
-              id: e["product_id"]["id"],
-              name: e["product_id"]["name"],
-              slug: e["product_id"]["slug"],
-              categoryProductId: CategoryProductModel(
-                id: e["product_id"]["category_product_id"]["id"],
-                name: e["product_id"]["category_product_id"]["name"],
-                slug: e["product_id"]["category_product_id"]["slug"],
-                createdAt: e["product_id"]["category_product_id"]["created_at"],
-                updatedAt: e["product_id"]["category_product_id"]["updated_at"],
-              ),
-              code: e["product_id"]["code"],
-              stoke: e["product_id"]["stoke"],
-              price: e["product_id"]["price"],
-              desc: e["desc"],
+    try {
+      isLoading(true);
+      final data = box.read("userData") as Map<String, dynamic>;
+      var userId = data["id"];
+      WishlistProvider().getData(userId, data["token"]).then((response) {
+        try {
+          response["data"].map((e) {
+            final data = WishlistModel(
+              id: e["id"],
               userId: UserModel(
-                id: e["product_id"]["user_id"]["id"],
-                name: e["product_id"]["user_id"]["name"],
+                id: e["user_id"]["id"],
+                name: e["user_id"]["name"],
               ),
-              isActive: e["isActive"],
-            ),
-          );
-          wishlist.add(data);
+              productId: ProductModel(
+                id: e["product_id"]["id"],
+                name: e["product_id"]["name"],
+                slug: e["product_id"]["slug"],
+                categoryProductId: CategoryProductModel(
+                  id: e["product_id"]["category_product_id"]["id"],
+                  name: e["product_id"]["category_product_id"]["name"],
+                  slug: e["product_id"]["category_product_id"]["slug"],
+                  createdAt: e["product_id"]["category_product_id"]
+                      ["created_at"],
+                  updatedAt: e["product_id"]["category_product_id"]
+                      ["updated_at"],
+                ),
+                code: e["product_id"]["code"],
+                stoke: e["product_id"]["stoke"],
+                price: e["product_id"]["price"],
+                desc: e["desc"],
+                userId: UserModel(
+                  id: e["product_id"]["user_id"]["id"],
+                  name: e["product_id"]["user_id"]["name"],
+                ),
+                isActive: e["isActive"],
+              ),
+            );
+            wishlist.add(data);
 
-          final item = findByid(e["id"]);
-          for (var itemPhoto in photoProduct) {
-            if (itemPhoto.productId!.id == item.productId!.id) {
-              item.productId!.image = itemPhoto.name;
-              wishlist.refresh();
+            final item = findByid(e["id"]);
+            for (var itemPhoto in photoProduct) {
+              if (itemPhoto.productId!.id == item.productId!.id) {
+                item.productId!.image = itemPhoto.name;
+                wishlist.refresh();
+              }
             }
-          }
-        }).toList();
-      } catch (e) {
-        Get.toNamed(Routes.ERROR, arguments: e.toString());
-      }
+          }).toList();
+        } catch (e) {
+          Get.toNamed(Routes.ERROR, arguments: e.toString());
+        }
 
-      // print(product[0].categoryProductId!.id);
-    });
+        // print(product[0].categoryProductId!.id);
+      });
+    } finally {
+      isLoading(false);
+    }
   }
 
   void getDataPhoto() async {
@@ -193,6 +200,14 @@ class WishlistController extends GetxController {
     WishlistProvider()
         .deleteData(id, data["token"])
         .then((_) => wishlist.removeWhere((element) => element.id == id));
+  }
+
+  void deleteDatabyIdProduct(int id) {
+    final data = box.read("userData") as Map<String, dynamic>;
+    WishlistModel find(int idProduct) =>
+        wishlist.firstWhere((e) => e.productId!.id == id);
+    WishlistProvider().deleteData(find(id).id, data["token"]).then(
+        (_) => wishlist.removeWhere((element) => element.productId!.id == id));
   }
 
   // cari berdasarka id

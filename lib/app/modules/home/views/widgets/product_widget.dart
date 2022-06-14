@@ -1,5 +1,4 @@
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
-import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class Product extends GetView<HomeController> {
-  ProdukController produkController = Get.put(ProdukController());
   @override
   Widget build(BuildContext context) {
     return Stack(
