@@ -161,7 +161,7 @@ class AddAlamatView extends GetView<AlamatController> {
                 controller: controller.noteForCourier,
                 cursorColor: const Color(0xff16A085),
                 decoration: const InputDecoration(
-                  helperText: 'Warna rumah, patokan, pesan khusu, dll.',
+                  helperText: 'Warna rumah, patokan, pesan khusus, dll.',
                   // fillColor: Color(0xff919A92),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -188,8 +188,8 @@ class AddAlamatView extends GetView<AlamatController> {
                       controller.recipientsName.text,
                       controller.telp.text,
                       controller.addressLabel.text,
-                      controller.city.text,
                       controller.completeAddress.text,
+                      controller.city.text,
                       controller.noteForCourier.text,
                     ),
                     child: const Text('Tambah'),

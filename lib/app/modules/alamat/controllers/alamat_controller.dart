@@ -45,7 +45,7 @@ class AlamatController extends GetxController {
         completeAddress != '' &&
         city != '') {
       AddressProvider()
-          .postData(data['id'], recipientsName, telp, addressLabel,
+          .postData(data["id"], recipientsName, telp, addressLabel,
               completeAddress, city, noteForCourier, data["token"])
           .then((response) {
         // print(response);

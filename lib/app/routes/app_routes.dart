@@ -10,7 +10,6 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
   static const CART = _Paths.CART;
-  static const PRODUK = _Paths.PRODUK;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const CHAT = _Paths.CHAT;
   static const DETAIL_CHAT = _Paths.DETAIL_CHAT;
@@ -25,10 +24,15 @@ abstract class Routes {
   static const ALAMAT = _Paths.ALAMAT;
   static const ADD_ALAMAT = _Paths.ADD_ALAMAT;
   static const EDIT_ALAMAT = _Paths.EDIT_ALAMAT;
+
   // Saya
   static const SAYA = _Paths.SAYA;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const EDIT_PASSWORD = _Paths.EDIT_PASSWORD;
+
+  // Produk
+  static const SEARCH = _Paths.SEARCH;
+  static const PRODUK = _Paths.PRODUK;
 }
 
 abstract class _Paths {
@@ -40,7 +44,6 @@ abstract class _Paths {
   static const DETAIL_PRODUK = '/detail-produk';
   static const CART = '/cart';
   static const SAYA = '/saya';
-  static const PRODUK = '/produk';
   static const NOTIFIKASI = '/notifikasi';
   static const CHAT = '/chat';
   static const DETAIL_CHAT = '/detail-chat';
@@ -59,4 +62,8 @@ abstract class _Paths {
   // Saya
   static const EDIT_PROFILE = '/edit-profile';
   static const EDIT_PASSWORD = '/edit-password';
+
+  // produk
+  static const SEARCH = '/search';
+  static const PRODUK = '/produk';
 }

@@ -100,7 +100,7 @@ class HomeView extends GetView<HomeController> {
                   )
                 ],
               ),
-              ProdukView(),
+              // ProdukView(),
               WishlistView(),
               SayaView()
             ],
@@ -130,7 +130,7 @@ class HomeView extends GetView<HomeController> {
             showSelectedLabels: true,
             onTap: landingPageController.changeTabIndex,
             currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+            backgroundColor: Colors.white,
             unselectedItemColor: Colors.grey,
             selectedItemColor: Color(0xff16A085),
             unselectedLabelStyle: unselectedLabelStyle,
@@ -150,18 +150,18 @@ class HomeView extends GetView<HomeController> {
                 label: 'Home',
                 backgroundColor: Colors.white,
               ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Image.asset(
-                    "assets/icons/cari.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-                label: 'Cari',
-                backgroundColor: Colors.white,
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Container(
+              //     margin: EdgeInsets.only(bottom: 7),
+              //     child: Image.asset(
+              //       "assets/icons/cari.png",
+              //       width: 20,
+              //       height: 20,
+              //     ),
+              //   ),
+              //   label: 'Cari',
+              //   backgroundColor: Colors.white,
+              // ),
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),

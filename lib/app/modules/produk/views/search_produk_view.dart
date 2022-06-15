@@ -1,0 +1,97 @@
+import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dart';
+import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+
+class SearchProdukView extends GetView<ProdukController> {
+  HomeController homeController = Get.put(HomeController());
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        title: Container(
+          width: double.infinity,
+          height: 47,
+          decoration: BoxDecoration(
+              color: Colors.grey[200], borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: TextField(
+              controller: controller.seacrh,
+              autofocus: true,
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 20,
+                  color: Colors.grey[200],
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    controller.runSearch(controller.seacrh.text);
+                  },
+                ),
+                hintText: 'Cari...',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ),
+        elevation: 0.5,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Text(
+                "Kategori",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+            ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: homeController.menu.length,
+              itemBuilder: (context, i) {
+                int length = homeController.menu.length;
+                final data = homeController.menu[i];
+                return Container(
+                  padding: EdgeInsets.all(10),
+                  child: ListTile(
+                    onTap: () {},
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.black26,
+                      child: Image.asset(
+                        data.image!,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    title: Text(
+                      data.title!,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

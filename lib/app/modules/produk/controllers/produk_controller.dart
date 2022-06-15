@@ -5,20 +5,58 @@ import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/photo_product_provider.dart';
 import 'package:customer_app/app/data/providers/product_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProdukController extends GetxController {
   var carouselIndex = 0.obs;
   var product = List<ProductModel>.empty().obs;
+  var productSearch = List<ProductModel>.empty().obs;
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
+  late TextEditingController seacrh;
 
   @override
   void onInit() {
     super.onInit();
     getDataPhoto();
     getData();
+    seacrh = TextEditingController();
+  }
+
+  runSearch(String enteredKeyword) {
+    if (enteredKeyword.isNotEmpty) {
+      var result = product.where((item) =>
+          item.name!.toLowerCase().contains(enteredKeyword.toLowerCase()));
+      result.map((e) {
+        final data = ProductModel(
+          id: e.id,
+          name: e.name,
+          slug: e.slug,
+          categoryProductId: CategoryProductModel(
+            id: e.categoryProductId!.id,
+            name: e.categoryProductId!.name,
+            slug: e.categoryProductId!.slug,
+          ),
+          code: e.code,
+          stoke: e.stoke,
+          price: e.price,
+          desc: e.desc,
+          image: e.image,
+          userId: UserModel(
+            id: e.userId!.id,
+            name: e.userId!.name,
+          ),
+          isActive: e.isActive,
+        );
+        productSearch.add(data);
+      }).toList();
+      Get.toNamed(Routes.PRODUK);
+    } else {
+      dialog("Peringatan", "Kolom tidak boleh kosong");
+    }
   }
 
   void getDataPhoto() async {
@@ -117,8 +155,8 @@ class ProdukController extends GetxController {
             price: e["price"],
             desc: e["desc"],
             userId: UserModel(
-              id: e["category_product_id"]["id"],
-              name: e["category_product_id"]["name"],
+              id: e["user_id"]["id"],
+              name: e["user_id"]["name"],
             ),
             isActive: e["isActive"],
           );

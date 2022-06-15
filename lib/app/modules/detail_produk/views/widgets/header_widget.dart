@@ -40,12 +40,23 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
       padding: EdgeInsets.all(8),
       child: SafeArea(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildIconButton(
-              onPressed: () => Get.back(),
-              icon: Icons.arrow_back_sharp,
+            Row(
+              children: [
+                _buildIconButton(
+                  onPressed: () => Get.back(),
+                  icon: Icons.arrow_back_sharp,
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                Text(
+                  "Detail Produk",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                )
+              ],
             ),
-            _buildInputSearch(),
             _buildIconButton(
               onPressed: () => {
                 setState(() {
@@ -58,11 +69,6 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
               },
               icon: Icons.shopping_cart,
               notification: (widget.auth == true) ? widget.countCart : 0,
-            ),
-            _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
-              icon: Icons.notifications,
-              notification: 0,
             ),
           ],
         ),
@@ -85,6 +91,8 @@ class _HeaderDetailProdukState extends State<HeaderDetailProduk> {
     return Expanded(
       child: TextField(
         cursorColor: Colors.black,
+        onTap: () => Get.toNamed(Routes.SEARCH),
+        readOnly: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(4),
           isDense: true,

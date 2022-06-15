@@ -27,7 +27,8 @@ class ItemAlamatView extends GetView<AlamatController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ' jl. lohbener lama, Legok, Kabupate ...',
+                  data.completeAddress!,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -41,11 +42,11 @@ class ItemAlamatView extends GetView<AlamatController> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '628123456789',
+                  data.telp!,
                   style: TextStyle(color: Colors.black, fontSize: 12),
                 ),
                 Text(
-                  'Politeknik Negeri Indramayu, jl. lohbener lama,Legok, Kabupaten Indramayu, Jawa Barat',
+                  data.completeAddress!,
                   style: TextStyle(color: Colors.black, fontSize: 12),
                 ),
                 Row(

@@ -27,16 +27,20 @@ class CartView extends GetView<CartController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Obx(() => Checkbox(
-                          value: controller.isAllMark.value,
-                          onChanged: (e) {
-                            controller.isAllMark.value = e!;
-                            controller.allMark();
-                          })),
-                      Text("Pilih semua")
-                    ],
+                  Obx(
+                    () => controller.cart.isEmpty
+                        ? Container()
+                        : Row(
+                            children: [
+                              Obx(() => Checkbox(
+                                  value: controller.isAllMark.value,
+                                  onChanged: (e) {
+                                    controller.isAllMark.value = e!;
+                                    controller.allMark();
+                                  })),
+                              Text("Pilih semua")
+                            ],
+                          ),
                   ),
                   Obx(
                     () => controller.isMark.isTrue
@@ -65,6 +69,7 @@ class CartView extends GetView<CartController> {
                   : controller.cart.isEmpty
                       ? Center(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(

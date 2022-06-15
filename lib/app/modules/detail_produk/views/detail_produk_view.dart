@@ -53,10 +53,6 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                 child: Container(
                                   height: 300.0,
                                   child: Center(
-                                    // child: Image.network(
-                                    //   "https://tokoterserah.com/storage/produk/thumb/604045a76c15eBERAS%20FORTUNE%205%20KG.png",
-                                    //   fit: BoxFit.cover,
-                                    // ),
                                     child: Image.network(
                                       baseUrlFile +
                                           "storage/produk/" +
@@ -92,8 +88,6 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                                   .name!),
                                           fit: BoxFit.fitHeight,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(32.0),
                                       ),
                                     ),
                                 ],
@@ -343,7 +337,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                       Container(
                         margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                         child: Text(
-                          "Detail Product",
+                          "Deskripsi Produk",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -353,77 +347,70 @@ class DetailProdukView extends GetView<DetailProdukController> {
                       Container(
                         margin: EdgeInsets.only(left: 16, right: 16),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  "Column",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
+                                const SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    "Etalase",
+                                    style: TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: 50,
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 80,
-                                ),
-                                Text(
-                                  "Value",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
+                                  width: 150,
+                                  child: Text(
+                                    data.categoryProductId!.name!,
+                                    style: const TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            Divider(
+                            const Divider(
                               color: Color(0xff919A92),
                             ),
                             Row(
                               children: [
-                                Text(
-                                  "Column",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
+                                const SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    "Stoke",
+                                    style: TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: 50,
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 80,
-                                ),
-                                Text(
-                                  "Value",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
+                                  width: 150,
+                                  child: Text(
+                                    data.stoke!.toString(),
+                                    style: const TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            Divider(
-                              color: Color(0xff919A92),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Column",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 80,
-                                ),
-                                Text(
-                                  "Value",
-                                  style: TextStyle(
-                                    color: Color(0xff919A92),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Divider(
+                            const Divider(
                               color: Color(0xff919A92),
                             ),
                             Text(

@@ -89,6 +89,8 @@ class _HeaderState extends State<Header> {
     return Expanded(
       child: TextField(
         cursorColor: Colors.black,
+        onTap: () => Get.toNamed(Routes.SEARCH),
+        readOnly: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(4),
           isDense: true,

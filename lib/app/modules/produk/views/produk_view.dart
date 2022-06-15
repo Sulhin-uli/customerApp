@@ -1,61 +1,138 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/produk/views/widgets/item_product_widget.dart';
-import 'package:customer_app/app/modules/wishlist/views/widgets/header_wishlist_widget.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
-import '../controllers/produk_controller.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProdukView extends GetView<ProdukController> {
-  final _scrollController = TrackingScrollController();
-
-  final productC = Get.find<HomeController>();
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
+    var auth = box.read('isAuth');
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 50,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        title: Container(
+          width: double.infinity,
+          height: 47,
+          decoration: BoxDecoration(
+              color: Colors.grey[200], borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: TextField(
+              readOnly: true,
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 20,
+                  color: Colors.black,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Obx(
-                    () => productC.product.isEmpty
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 1 / 1.2),
-                            itemCount: productC.product.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, i) {
-                              // final product = productList[index];
-                              int length = productC.product.length;
-                              final data = productC.product[i];
-                              return ItemProduct(data);
-                            },
-                          ),
-                  ),
-                ),
-              ],
+                hintText: 'Cari...',
+                border: InputBorder.none,
+              ),
             ),
           ),
-          HeaderWishlist(
-              _scrollController, Get.find<CartController>().cart.length),
+        ),
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 7),
+            child: _buildIconButton(
+              onPressed: () {
+                if (auth == true) {
+                  Get.toNamed(Routes.CART);
+                } else {
+                  Get.toNamed(Routes.LOGIN);
+                }
+              },
+              icon: Icons.shopping_cart,
+              notification:
+                  (auth == true) ? Get.find<CartController>().cart.length : 0,
+            ),
+          )
         ],
+        elevation: 0.5,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Obx(
+          () => controller.productSearch.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/empty-data.png",
+                        height: 100,
+                        width: 100,
+                      ),
+                      Text(
+                        "Pencarian Tidak Ada",
+                        style: TextStyle(color: Colors.grey),
+                      )
+                    ],
+                  ),
+                )
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                  itemCount: controller.productSearch.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, i) {
+                    int length = controller.productSearch.length;
+                    final data = controller.productSearch[i];
+                    return ItemProduct(data);
+                  },
+                ),
+        ),
       ),
     );
   }
 }
+
+_buildIconButton({
+  VoidCallback? onPressed,
+  IconData? icon,
+  int notification = 0,
+}) =>
+    Stack(
+      children: [
+        IconButton(
+          onPressed: onPressed,
+          icon: Icon(icon),
+          color: Colors.black,
+          iconSize: 21,
+        ),
+        notification == 0
+            ? SizedBox()
+            : Positioned(
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.red),
+                  ),
+                  constraints: BoxConstraints(minWidth: 22, minHeight: 22),
+                  child: Text(
+                    "$notification",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+      ],
+    );

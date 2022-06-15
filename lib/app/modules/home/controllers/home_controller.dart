@@ -37,7 +37,7 @@ class HomeController extends GetxController {
     if (box.read('isAuth') == true) {
       tabIndex.value = index;
     } else if (box.read('isAuth') == false) {
-      if (index != 2 && index != 3) {
+      if (index != 1 && index != 2) {
         tabIndex.value = index;
       } else {
         Get.toNamed(Routes.LOGIN);

@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/alamat/views/add_alamat_view.dart';
 import 'package:customer_app/app/modules/alamat/views/edit_alamat_view.dart';
+import 'package:customer_app/app/modules/produk/views/search_produk_view.dart';
 import 'package:customer_app/app/modules/saya/views/edit_password_view.dart';
 import 'package:customer_app/app/modules/saya/views/edit_profile_view.dart';
 import 'package:get/get.dart';
@@ -70,12 +71,6 @@ class AppPages {
       name: _Paths.CART,
       page: () => CartView(),
       binding: CartBinding(),
-    ),
-
-    GetPage(
-      name: _Paths.PRODUK,
-      page: () => ProdukView(),
-      binding: ProdukBinding(),
     ),
     GetPage(
       name: _Paths.NOTIFIKASI,
@@ -154,6 +149,18 @@ class AppPages {
       name: _Paths.EDIT_ALAMAT,
       page: () => EditAlamatView(),
       binding: AlamatBinding(),
+    ),
+
+    // Produk
+    GetPage(
+      name: _Paths.SEARCH,
+      page: () => SearchProdukView(),
+      binding: ProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUK,
+      page: () => ProdukView(),
+      binding: ProdukBinding(),
     ),
   ];
 }
