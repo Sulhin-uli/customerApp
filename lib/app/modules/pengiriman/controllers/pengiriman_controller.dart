@@ -1,20 +1,14 @@
+import 'package:customer_app/app/data/models/cart_model.dart';
+import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.dart';
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:get/get.dart';
 
 class PengirimanController extends GetxController {
-  //TODO: Implement PengirimanController
+  AlamatController alamatController = Get.find();
+  CartController cartController = Get.find();
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

@@ -20,6 +20,7 @@ class CartController extends GetxController {
   var lengthMark = 0.obs;
   var total = 0.obs;
   var cart = List<CartModel>.empty().obs;
+  var pengiriman = List<CartModel>.empty().obs;
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
 
@@ -119,6 +120,43 @@ class CartController extends GetxController {
     }
     isAllMark.value = false;
     isMark.value = false;
+  }
+
+  void runPengiriman() {
+    var result = cart.where((e) => e.isMark == true);
+    result.map((e) {
+      final data = CartModel(
+        id: e.id!,
+        userId: UserModel(
+          id: e.userId!.id,
+          name: e.userId!.name,
+        ),
+        isMark: e.isMark,
+        productId: ProductModel(
+          id: e.productId!.id,
+          name: e.productId!.name,
+          // slug: e.productId!.slug,
+          image: e.productId!.image,
+          // categoryProductId: CategoryProductModel(
+          //   id: e.productId!.categoryProductId!.id,
+          //   name: e.productId!.categoryProductId!.name,
+          //   slug: e.productId!.categoryProductId!.slug,
+          // ),
+          // code: e.productId!.code,
+          stoke: e.productId!.stoke,
+          price: e.productId!.price,
+          // desc: e.productId!.desc,
+          userId: UserModel(
+            id: e.productId!.userId!.id,
+            name: e.productId!.userId!.name,
+          ),
+          // isActive: e.productId!.isActive!,
+        ),
+        productQty: e.productQty,
+        // sessionId: e.sessionId,
+      );
+      pengiriman.add(data);
+    }).toList();
   }
 
   void dialogSuccess(String msg) {
@@ -288,14 +326,48 @@ class CartController extends GetxController {
     CartProvider()
         .postData(data["id"], productId, productQty, 1, data["token"])
         .then((response) {
+      // print(response);
       // final data = CartModel(
-      //   id: response["id"],
-      //   userId: response["user_id"],
-      //   productQty: response["product_qty"],
-      //   productId: response["product_id"],
-      //   sessionId: response["session_id"],
+      //   id: response["data"]["id"],
+      //   userId: UserModel(
+      //     id: response["data"]["user_id"]["id"],
+      //     name: response["data"]["user_id"]["name"],
+      //   ),
+      //   isMark: false,
+      //   productId: ProductModel(
+      //     id: response["data"]["product_id"]["id"],
+      //     name: response["data"]["product_id"]["name"],
+      //     slug: response["data"]["product_id"]["slug"],
+      //     categoryProductId: CategoryProductModel(
+      //       id: response["data"]["product_id"]["category_product_id"]["id"],
+      //       name: response["data"]["product_id"]["category_product_id"]["name"],
+      //       slug: response["data"]["product_id"]["category_product_id"]["slug"],
+      //       createdAt: response["data"]["product_id"]["category_product_id"]
+      //           ["created_at"],
+      //       updatedAt: response["data"]["product_id"]["category_product_id"]
+      //           ["updated_at"],
+      //     ),
+      //     code: response["data"]["product_id"]["code"],
+      //     stoke: response["data"]["product_id"]["stoke"],
+      //     price: response["data"]["product_id"]["price"],
+      //     desc: response["data"]["desc"],
+      //     userId: UserModel(
+      //       id: response["data"]["product_id"]["user_id"]["id"],
+      //       name: response["data"]["product_id"]["user_id"]["name"],
+      //     ),
+      //     isActive: response["data"]["isActive"],
+      //   ),
+      //   productQty: response["data"]["product_qty"],
+      //   sessionId: response["data"]["session_id"],
       // );
       // cart.add(data);
+      // final item = findByid(response["id"]);
+      // for (var itemPhoto in photoProduct) {
+      //   if (itemPhoto.productId!.id == item.productId!.id) {
+      //     item.productId!.image = itemPhoto.name;
+      //     cart.refresh();
+      //   }
+      // }
       photoProduct.clear();
       cart.clear();
       getDataPhoto();

@@ -124,6 +124,31 @@ class AddAlamatView extends GetView<AlamatController> {
               ),
               const SizedBox(height: 30),
               const Text(
+                "Kode Pos",
+                style: TextStyle(
+                  color: Color(0xff919A92),
+                ),
+              ),
+              TextFormField(
+                controller: controller.postalCode,
+                cursorColor: const Color(0xff16A085),
+                decoration: const InputDecoration(
+                  helperText: 'Contoh: 45216',
+                  // fillColor: Color(0xff919A92),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xff919A92),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xff16A085),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Text(
                 "Alamat Lengkap",
                 style: TextStyle(
                   color: Color(0xff919A92),
@@ -176,6 +201,27 @@ class AddAlamatView extends GetView<AlamatController> {
                 ),
               ),
               const SizedBox(height: 30),
+              Row(
+                children: [
+                  Obx(() => Checkbox(
+                      value: controller.isMain.value,
+                      onChanged: (e) {
+                        controller.isMain.value = e!;
+                        if (controller.isMain.value == true) {
+                          controller.mainAddress.text = 1.toString();
+                        } else {
+                          controller.mainAddress.text = 0.toString();
+                        }
+                      })),
+                  const Text(
+                    "Jadikan Alamat Utama",
+                    style: TextStyle(
+                      color: Color(0xff919A92),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
               Center(
                 child: SizedBox(
                   height: 46, //height of button
@@ -190,6 +236,8 @@ class AddAlamatView extends GetView<AlamatController> {
                       controller.addressLabel.text,
                       controller.completeAddress.text,
                       controller.city.text,
+                      int.parse(controller.postalCode.text),
+                      int.parse(controller.mainAddress.text),
                       controller.noteForCourier.text,
                     ),
                     child: const Text('Tambah'),

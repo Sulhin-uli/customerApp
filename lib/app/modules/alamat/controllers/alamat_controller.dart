@@ -14,7 +14,10 @@ class AlamatController extends GetxController {
   late TextEditingController addressLabel;
   late TextEditingController completeAddress;
   late TextEditingController city;
+  late TextEditingController postalCode;
+  late TextEditingController mainAddress;
   late TextEditingController noteForCourier;
+  var isMain = false.obs;
   var address = List<AddressModel>.empty().obs;
 
   @override
@@ -24,6 +27,8 @@ class AlamatController extends GetxController {
     addressLabel = TextEditingController();
     completeAddress = TextEditingController();
     city = TextEditingController();
+    postalCode = TextEditingController();
+    mainAddress = TextEditingController();
     noteForCourier = TextEditingController();
     getData();
     super.onInit();
@@ -36,6 +41,8 @@ class AlamatController extends GetxController {
     String addressLabel,
     String completeAddress,
     String city,
+    int postalCode,
+    int mainAddress,
     String noteForCourier,
   ) async {
     final data = box.read("userData") as Map<String, dynamic>;
@@ -45,8 +52,17 @@ class AlamatController extends GetxController {
         completeAddress != '' &&
         city != '') {
       AddressProvider()
-          .postData(data["id"], recipientsName, telp, addressLabel,
-              completeAddress, city, noteForCourier, data["token"])
+          .postData(
+              data["id"],
+              recipientsName,
+              telp,
+              addressLabel,
+              completeAddress,
+              city,
+              postalCode,
+              mainAddress,
+              noteForCourier,
+              data["token"])
           .then((response) {
         // print(response);
         final data = AddressModel(
@@ -60,6 +76,8 @@ class AlamatController extends GetxController {
           addressLabel: response["data"]["address_label"],
           completeAddress: response["data"]["complete_address"],
           city: response["data"]["city"],
+          postalCode: response["data"]["postal_code"],
+          mainAddress: response["data"]["main_address"],
           noteForCourier: response["data"]["note_for_courier"],
         );
         address.add(data);
@@ -88,9 +106,19 @@ class AlamatController extends GetxController {
             addressLabel: e["address_label"],
             completeAddress: e["complete_address"],
             city: e["city"],
+            postalCode: e["postal_code"],
+            mainAddress: e["main_address"],
             noteForCourier: e["note_for_courier"],
           );
           address.add(data);
+
+          for (var e in address) {
+            if (e.mainAddress == 1) {
+              var addressMain = e;
+              address.remove(e);
+              address.insert(0, addressMain);
+            }
+          }
         }).toList();
       } catch (e) {
         print("Error is : " + e.toString());
@@ -109,23 +137,55 @@ class AlamatController extends GetxController {
     String addressLabel,
     String completeAddress,
     String city,
+    int postalCode,
+    int mainAddress,
     String noteForCourier,
   ) {
     final item = findByid(id);
     final data = box.read("userData") as Map<String, dynamic>;
     AddressProvider()
         .updateData(id, recipientsName, telp, addressLabel, completeAddress,
-            city, noteForCourier, data["token"])
+            city, mainAddress, postalCode, noteForCourier, data["token"])
         .then((_) {
       item.recipientsName = recipientsName;
       item.telp = telp;
       item.addressLabel = addressLabel;
       item.completeAddress = completeAddress;
       item.city = city;
+      item.postalCode = postalCode;
+      item.mainAddress = mainAddress;
       item.noteForCourier = noteForCourier;
       address.refresh();
       Get.back();
       dialog("Berhasil !", "data berhasil diubah");
+    });
+  }
+
+  void editMainAddress(
+    int id,
+    int mainAddress,
+  ) {
+    for (var e in address) {
+      if (e.mainAddress == 1) {
+        e.mainAddress = 0;
+        address.refresh();
+      }
+    }
+    final item = findByid(id);
+    final data = box.read("userData") as Map<String, dynamic>;
+    AddressProvider()
+        .updateMainAddress(id, data["id"], mainAddress, data["token"])
+        .then((response) {
+      item.mainAddress = mainAddress;
+      address.refresh();
+      for (var e in address) {
+        if (e.mainAddress == 1) {
+          var addressMain = e;
+          address.remove(e);
+          address.insert(0, addressMain);
+        }
+      }
+      Get.back();
     });
   }
 
@@ -157,6 +217,49 @@ class AlamatController extends GetxController {
             child: const Text('Ya'),
           ),
         ],
+      ),
+    );
+  }
+
+  void moreQuestion(BuildContext context, int id) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: InkWell(
+            onTap: () => Get.back(),
+            child: Text(
+              "X",
+              style: TextStyle(color: Colors.grey),
+            )),
+        content: Container(
+          height: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextButton(
+                onPressed: () {
+                  editMainAddress(id, 1);
+                },
+                child: const Text(
+                  'Jadikan Alamat Utama & Pilih',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                  dialogQuestion(context, id);
+                },
+                child: const Text(
+                  'Hapus Alamat',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

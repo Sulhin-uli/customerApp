@@ -1,12 +1,9 @@
-import 'package:customer_app/app/modules/alamat/views/add_alamat_view.dart';
-import 'package:customer_app/app/modules/alamat/views/edit_alamat_view.dart';
-import 'package:customer_app/app/modules/produk/views/search_produk_view.dart';
-import 'package:customer_app/app/modules/saya/views/edit_password_view.dart';
-import 'package:customer_app/app/modules/saya/views/edit_profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
+import '../modules/alamat/views/add_alamat_view.dart';
 import '../modules/alamat/views/alamat_view.dart';
+import '../modules/alamat/views/edit_alamat_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
@@ -30,9 +27,12 @@ import '../modules/pengiriman/bindings/pengiriman_binding.dart';
 import '../modules/pengiriman/views/pengiriman_view.dart';
 import '../modules/produk/bindings/produk_binding.dart';
 import '../modules/produk/views/produk_view.dart';
+import '../modules/produk/views/search_produk_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/saya/bindings/saya_binding.dart';
+import '../modules/saya/views/edit_password_view.dart';
+import '../modules/saya/views/edit_profile_view.dart';
 import '../modules/saya/views/saya_view.dart';
 import '../modules/toko/bindings/toko_binding.dart';
 import '../modules/toko/views/toko_view.dart';

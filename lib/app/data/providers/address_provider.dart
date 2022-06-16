@@ -11,6 +11,8 @@ class AddressProvider extends GetConnect {
     String addressLabel,
     String completeAddress,
     String city,
+    int postalCode,
+    int mainAddress,
     String noteForCourier,
     String token,
   ) async {
@@ -21,6 +23,8 @@ class AddressProvider extends GetConnect {
       "address_label": addressLabel,
       "complete_address": completeAddress,
       "city": city,
+      "postal_code": postalCode,
+      "main_address": mainAddress,
       "note_for_courier": noteForCourier,
     }, headers: {
       'Content-Type': 'application/json',
@@ -46,6 +50,8 @@ class AddressProvider extends GetConnect {
     String addressLabel,
     String completeAddress,
     String city,
+    int postalCode,
+    int mainAddress,
     String noteForCourier,
     String token,
   ) async {
@@ -55,8 +61,27 @@ class AddressProvider extends GetConnect {
       "telp": telp,
       "address_label": addressLabel,
       "complete_address": completeAddress,
-      "city": city,
+      "postal_code": postalCode,
+      "main_address": mainAddress,
       "note_for_courier": noteForCourier,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
+
+  Future<dynamic> updateMainAddress(
+    int id,
+    int userId,
+    int mainAddress,
+    String token,
+  ) async {
+    final response = await put(url + '/main_address/$id', {
+      "id": id,
+      "user_id": userId,
+      "main_address": mainAddress,
     }, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

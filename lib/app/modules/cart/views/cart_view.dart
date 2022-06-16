@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -135,7 +136,10 @@ class CartView extends GetView<CartController> {
                       ),
                     )
                   : ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.runPengiriman();
+                        Get.toNamed(Routes.PENGIRIMAN);
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff16A085), // background
                       ),

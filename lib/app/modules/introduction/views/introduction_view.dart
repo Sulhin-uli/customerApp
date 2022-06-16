@@ -84,7 +84,7 @@ class IntroductionView extends GetView<IntroductionController> {
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
         done:
-            const Text("Login", style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text("Mulai", style: TextStyle(fontWeight: FontWeight.w600)),
         dotsDecorator: DotsDecorator(
             size: const Size.square(10.0),
             activeSize: const Size(20.0, 10.0),

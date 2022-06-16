@@ -11,8 +11,17 @@ class EditAlamatView extends GetView<AlamatController> {
     controller.telp.text = data.telp!;
     controller.addressLabel.text = data.addressLabel!;
     controller.city.text = data.city!;
+    // controller.postalCode.text = data.postalCode!.toString();
     controller.completeAddress.text = data.completeAddress!;
     controller.noteForCourier.text = data.noteForCourier!;
+
+    // print(data.recipientsName!);
+    // print(data.telp!);
+    // print(data.addressLabel!);
+    // print(data.city!);
+    // print(data.postalCode!.toString());
+    // print(data.completeAddress!);
+    // print(data.noteForCourier!);
 
     return Scaffold(
       appBar: AppBar(
@@ -132,6 +141,31 @@ class EditAlamatView extends GetView<AlamatController> {
               ),
               const SizedBox(height: 30),
               const Text(
+                "Kode Pos",
+                style: TextStyle(
+                  color: Color(0xff919A92),
+                ),
+              ),
+              TextFormField(
+                controller: controller.postalCode,
+                cursorColor: const Color(0xff16A085),
+                decoration: const InputDecoration(
+                  helperText: 'Contoh: 45216',
+                  // fillColor: Color(0xff919A92),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xff919A92),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xff16A085),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Text(
                 "Alamat Lengkap",
                 style: TextStyle(
                   color: Color(0xff919A92),
@@ -199,6 +233,8 @@ class EditAlamatView extends GetView<AlamatController> {
                       controller.addressLabel.text,
                       controller.completeAddress.text,
                       controller.city.text,
+                      int.parse(controller.postalCode.text),
+                      0,
                       controller.noteForCourier.text,
                     ),
                     child: const Text('Ubah'),

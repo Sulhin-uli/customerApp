@@ -1,3 +1,7 @@
+import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/base_url.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -33,7 +37,9 @@ class PengirimanView extends GetView<PengirimanController> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.ALAMAT);
+                          },
                           child: Text(
                             "Pilih Alamat Lain",
                             style: TextStyle(
@@ -54,12 +60,19 @@ class PengirimanView extends GetView<PengirimanController> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
-                            child: Text(
-                              "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
+                          Obx(
+                            () => controller.alamatController.address.isEmpty
+                                ? CircularProgressIndicator()
+                                : Expanded(
+                                    child: Text(
+                                      // "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
+                                      controller.alamatController.address.first
+                                          .completeAddress!,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                  ),
                           ),
                           SizedBox(
                             height: 25, //height of button
@@ -81,15 +94,33 @@ class PengirimanView extends GetView<PengirimanController> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        "Nama Pembeli (6289123456789)",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.5), fontSize: 12),
-                      ),
-                      Text(
-                        "Politeknik Negeri Indramayu, jl. lohbener lama, Legok ...",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.5), fontSize: 12),
+                      Obx(
+                        () => controller.alamatController.address.isEmpty
+                            ? CircularProgressIndicator()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    controller.alamatController.address.first
+                                            .recipientsName! +
+                                        " " +
+                                        "(" +
+                                        controller.alamatController.address
+                                            .first.telp! +
+                                        ")",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.5),
+                                        fontSize: 12),
+                                  ),
+                                  Text(
+                                    controller.alamatController.address.first
+                                        .completeAddress!,
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.5),
+                                        fontSize: 12),
+                                  ),
+                                ],
+                              ),
                       ),
                     ],
                   ),
@@ -109,50 +140,119 @@ class PengirimanView extends GetView<PengirimanController> {
                         margin: EdgeInsets.fromLTRB(24, 16, 16, 16),
                         child: Column(
                           children: [
-                            ListTile(
-                              title: Text('Nama Toko'),
-                              subtitle: Text(
-                                'Kabupaten Indramayu',
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.6)),
-                              ),
-                            ),
-                            ListTile(
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.image,
-                                    size: 100,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Name Product",
-                                        style: TextStyle(
-                                            color: Color(0xff919A92),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400),
+                            ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  controller.cartController.pengiriman.length,
+                              itemBuilder: (context, i) {
+                                int length =
+                                    controller.cartController.pengiriman.length;
+                                final data =
+                                    controller.cartController.pengiriman[i];
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                      leading: Icon(Icons.store),
+                                      title:
+                                          Text(data.productId!.userId!.name!),
+                                    ),
+                                    ListTile(
+                                      title: Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(7),
+                                            height: 100,
+                                            width: 100,
+                                            child: Image.network(
+                                              baseUrlFile +
+                                                  "storage/produk/" +
+                                                  data.productId!.image!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data.productId!.name!,
+                                                style: TextStyle(
+                                                    color: Color(0xff919A92),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              // Text(
+                                              //   "Size Kg",
+                                              //   style: TextStyle(
+                                              //       color: Color(0xff919A92),
+                                              //       fontSize: 12,
+                                              //       fontWeight:
+                                              //           FontWeight.w400),
+                                              // ),
+                                              Text(
+                                                'Rp ${formatCurrency.format(data.productId!.price!)}',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "Size Kg",
-                                        style: TextStyle(
-                                            color: Color(0xff919A92),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      Text(
-                                        "Rp. 100.000",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
+                            // ListTile(
+                            //   title: Text('Nama Toko'),
+                            //   subtitle: Text(
+                            //     'Kabupaten Indramayu',
+                            //     style: TextStyle(
+                            //         color: Colors.black.withOpacity(0.6)),
+                            //   ),
+                            // ),
+                            // ListTile(
+                            //   title: Row(
+                            //     children: [
+                            //       Icon(
+                            //         Icons.image,
+                            //         size: 100,
+                            //       ),
+                            //       Column(
+                            //         crossAxisAlignment:
+                            //             CrossAxisAlignment.start,
+                            //         children: [
+                            //           Text(
+                            //             "Name Product",
+                            //             style: TextStyle(
+                            //                 color: Color(0xff919A92),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.w400),
+                            //           ),
+                            //           Text(
+                            //             "Size Kg",
+                            //             style: TextStyle(
+                            //                 color: Color(0xff919A92),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.w400),
+                            //           ),
+                            //           Text(
+                            //             "Rp. 100.000",
+                            //             style: TextStyle(
+                            //                 color: Colors.black,
+                            //                 fontWeight: FontWeight.bold),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Card(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -329,7 +429,7 @@ class PengirimanView extends GetView<PengirimanController> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "Rp1150.000",
+                                'Rp${formatCurrency.format(controller.cartController.total.value)}',
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold),
@@ -341,7 +441,8 @@ class PengirimanView extends GetView<PengirimanController> {
                               // Respond to button press
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color(0xff16A085), // background
+                              // primary: Color(0xff16A085), // background
+                              primary: Colors.grey, // background
                             ),
                             child: Text('Pilih Pembayaran'),
                           ),
