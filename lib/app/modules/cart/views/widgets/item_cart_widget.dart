@@ -33,6 +33,7 @@ class ItemCart extends GetView<CartController> {
                     controller.checkAllMark();
                   }),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -43,40 +44,61 @@ class ItemCart extends GetView<CartController> {
                         arguments: data.productId!.slug!,
                       );
                     },
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(7),
-                          height: 100,
-                          width: 100,
-                          child: Image.network(
-                            baseUrlFile +
-                                "storage/produk/" +
-                                data.productId!.image!,
-                            fit: BoxFit.cover,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 7, 7, 0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.store,
+                                size: 12,
+                              ),
+                              SizedBox(width: 5),
+                              Text(data.productId!.userId!.name!,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ))
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Text(
-                              data.productId.name,
-                              // "Beras",
-                              style: TextStyle(
-                                  color: Color(0xff919A92),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400),
+                            Container(
+                              padding: EdgeInsets.all(7),
+                              height: 100,
+                              width: 100,
+                              child: Image.network(
+                                baseUrlFile +
+                                    "storage/produk/" +
+                                    data.productId!.image!,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            Text(
-                              // "Rp. 100.000",
-                              'Rp ${formatCurrency.format(data.productId.price!)}',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            )
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data.productId.name,
+                                  // "Beras",
+                                  style: TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  // "Rp. 100.000",
+                                  'Rp ${formatCurrency.format(data.productId.price!)}',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
                           ],
                         ),
                       ],
