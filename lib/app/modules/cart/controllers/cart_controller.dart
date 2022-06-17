@@ -122,42 +122,42 @@ class CartController extends GetxController {
     isMark.value = false;
   }
 
-  void runPengiriman() {
-    var result = cart.where((e) => e.isMark == true);
-    result.map((e) {
-      final data = CartModel(
-        id: e.id!,
-        userId: UserModel(
-          id: e.userId!.id,
-          name: e.userId!.name,
-        ),
-        isMark: e.isMark,
-        productId: ProductModel(
-          id: e.productId!.id,
-          name: e.productId!.name,
-          // slug: e.productId!.slug,
-          image: e.productId!.image,
-          // categoryProductId: CategoryProductModel(
-          //   id: e.productId!.categoryProductId!.id,
-          //   name: e.productId!.categoryProductId!.name,
-          //   slug: e.productId!.categoryProductId!.slug,
-          // ),
-          // code: e.productId!.code,
-          stoke: e.productId!.stoke,
-          price: e.productId!.price,
-          // desc: e.productId!.desc,
-          userId: UserModel(
-            id: e.productId!.userId!.id,
-            name: e.productId!.userId!.name,
-          ),
-          // isActive: e.productId!.isActive!,
-        ),
-        productQty: e.productQty,
-        // sessionId: e.sessionId,
-      );
-      pengiriman.add(data);
-    }).toList();
-  }
+  // void runPengiriman() {
+  //   var result = cart.where((e) => e.isMark == true);
+  //   result.map((e) {
+  //     final data = CartModel(
+  //       id: e.id!,
+  //       userId: UserModel(
+  //         id: e.userId!.id,
+  //         name: e.userId!.name,
+  //       ),
+  //       isMark: e.isMark,
+  //       productId: ProductModel(
+  //         id: e.productId!.id,
+  //         name: e.productId!.name,
+  //         // slug: e.productId!.slug,
+  //         image: e.productId!.image,
+  //         // categoryProductId: CategoryProductModel(
+  //         //   id: e.productId!.categoryProductId!.id,
+  //         //   name: e.productId!.categoryProductId!.name,
+  //         //   slug: e.productId!.categoryProductId!.slug,
+  //         // ),
+  //         // code: e.productId!.code,
+  //         stoke: e.productId!.stoke,
+  //         price: e.productId!.price,
+  //         // desc: e.productId!.desc,
+  //         userId: UserModel(
+  //           id: e.productId!.userId!.id,
+  //           name: e.productId!.userId!.name,
+  //         ),
+  //         // isActive: e.productId!.isActive!,
+  //       ),
+  //       productQty: e.productQty,
+  //       // sessionId: e.sessionId,
+  //     );
+  //     pengiriman.add(data);
+  //   }).toList();
+  // }
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(

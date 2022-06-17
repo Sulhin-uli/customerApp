@@ -137,7 +137,6 @@ class CartView extends GetView<CartController> {
                     )
                   : ElevatedButton(
                       onPressed: () {
-                        controller.runPengiriman();
                         Get.toNamed(Routes.PENGIRIMAN);
                       },
                       style: ElevatedButton.styleFrom(

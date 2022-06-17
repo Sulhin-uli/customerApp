@@ -29,14 +29,16 @@ class ProdukView extends GetView<ProdukController> {
               color: Colors.grey[200], borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: TextField(
+              controller: controller.seacrh,
               readOnly: true,
+              onTap: () => Get.back(),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.search,
                   size: 20,
                   color: Colors.black,
                 ),
-                hintText: 'Cari...',
+                // hintText: 'Cari...',
                 border: InputBorder.none,
               ),
             ),
@@ -64,7 +66,7 @@ class ProdukView extends GetView<ProdukController> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Obx(
-          () => controller.productSearch.isEmpty
+          () => controller.product.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +77,7 @@ class ProdukView extends GetView<ProdukController> {
                         width: 100,
                       ),
                       Text(
-                        "Pencarian Tidak Ada",
+                        "Data Produk Tidak Ada",
                         style: TextStyle(color: Colors.grey),
                       )
                     ],
@@ -84,13 +86,35 @@ class ProdukView extends GetView<ProdukController> {
               : GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                  itemCount: controller.productSearch.length,
+                  itemCount: controller.product.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, i) {
-                    int length = controller.productSearch.length;
-                    final data = controller.productSearch[i];
-                    return ItemProduct(data);
+                    int length = controller.product.length;
+                    final data = controller.product[i];
+
+                    if (data.name!
+                        .toLowerCase()
+                        .contains(controller.seacrh.text.toLowerCase())) {
+                      return ItemProduct(data);
+                    } else {
+                      return Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/icons/empty-data.png",
+                              height: 100,
+                              width: 100,
+                            ),
+                            Text(
+                              "Hasil Pencarian Tidak Ada",
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          ],
+                        ),
+                      );
+                    }
                   },
                 ),
         ),

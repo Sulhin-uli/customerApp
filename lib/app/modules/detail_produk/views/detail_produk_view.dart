@@ -491,7 +491,28 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               ElevatedButton(
                                 onPressed: () {
                                   if (box.read('isAuth') == true) {
-                                    cartC.postData(data.id, 1);
+                                    if (cartC.cart
+                                        .where(
+                                            (e) => e.productId!.id! == data.id)
+                                        .isEmpty) {
+                                      cartC.postData(data.id, 1);
+                                      // print("false");
+                                    } else {
+                                      // print("true");
+                                      int idCart = cartC.cart
+                                          .where((e) =>
+                                              e.productId!.id! == data.id)
+                                          .first
+                                          .id!;
+                                      int cartQty = cartC.cart
+                                          .where((e) =>
+                                              e.productId!.id! == data.id)
+                                          .first
+                                          .productQty!;
+                                      cartC.updateQty(idCart, cartQty + 1);
+                                      cartC.dialogSuccess(
+                                          "Berhasil ditambahkan ke-keranjang");
+                                    }
                                   } else {
                                     Get.toNamed(Routes.LOGIN);
                                   }

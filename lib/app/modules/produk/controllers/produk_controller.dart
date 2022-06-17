@@ -26,36 +26,44 @@ class ProdukController extends GetxController {
     seacrh = TextEditingController();
   }
 
-  runSearch(String enteredKeyword) {
-    if (enteredKeyword.isNotEmpty) {
-      var result = product.where((item) =>
-          item.name!.toLowerCase().contains(enteredKeyword.toLowerCase()));
-      result.map((e) {
-        final data = ProductModel(
-          id: e.id,
-          name: e.name,
-          slug: e.slug,
-          categoryProductId: CategoryProductModel(
-            id: e.categoryProductId!.id,
-            name: e.categoryProductId!.name,
-            slug: e.categoryProductId!.slug,
-          ),
-          code: e.code,
-          stoke: e.stoke,
-          price: e.price,
-          desc: e.desc,
-          image: e.image,
-          userId: UserModel(
-            id: e.userId!.id,
-            name: e.userId!.name,
-          ),
-          isActive: e.isActive,
-        );
-        productSearch.add(data);
-      }).toList();
-      Get.toNamed(Routes.PRODUK);
-    } else {
+  // runSearch(String enteredKeyword) {
+  //   if (enteredKeyword.isNotEmpty) {
+  //     var result = product.where((item) =>
+  //         item.name!.toLowerCase().contains(enteredKeyword.toLowerCase()));
+  //     result.map((e) {
+  //       final data = ProductModel(
+  //         id: e.id,
+  //         name: e.name,
+  //         slug: e.slug,
+  //         categoryProductId: CategoryProductModel(
+  //           id: e.categoryProductId!.id,
+  //           name: e.categoryProductId!.name,
+  //           slug: e.categoryProductId!.slug,
+  //         ),
+  //         code: e.code,
+  //         stoke: e.stoke,
+  //         price: e.price,
+  //         desc: e.desc,
+  //         image: e.image,
+  //         userId: UserModel(
+  //           id: e.userId!.id,
+  //           name: e.userId!.name,
+  //         ),
+  //         isActive: e.isActive,
+  //       );
+  //       productSearch.add(data);
+  //     }).toList();
+  //     Get.toNamed(Routes.PRODUK);
+  //   } else {
+  //     dialog("Peringatan", "Kolom tidak boleh kosong");
+  //   }
+  // }
+
+  void runSearch(String search) {
+    if (search == "") {
       dialog("Peringatan", "Kolom tidak boleh kosong");
+    } else {
+      Get.toNamed(Routes.PRODUK);
     }
   }
 
