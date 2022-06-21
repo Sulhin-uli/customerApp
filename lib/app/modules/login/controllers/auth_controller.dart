@@ -8,6 +8,7 @@ import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/get_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   final box = GetStorage();
@@ -17,6 +18,16 @@ class AuthController extends GetxController {
 
   HomeController _homeController = HomeController();
   CartController cartController = Get.put(CartController());
+
+  // GoogleSignIn _googleSignIn = new GoogleSignIn();
+
+  // // Future<void> googleLogin() async {
+  // //   try {
+  // //     await _googleSignIn.signIn();
+  // //   } catch (error) {
+  // //     print(error);
+  // //   }
+  // // }
 
   void dialogError(String msg) {
     Get.defaultDialog(title: "Peringatan", middleText: msg);
@@ -44,6 +55,7 @@ class AuthController extends GetxController {
               "id": response['data']['id'],
               "token": response['data']['token'],
               "email": email,
+              "name": response['data']['name'],
               "password": password
             });
             box.write('isAuth', true);
@@ -109,6 +121,7 @@ class AuthController extends GetxController {
           "token": data["token"],
           "email": data["email"],
           "password": data["password"],
+          "name": data["name"],
           "customer_id": findCustomer((data["id"])).id,
         });
       } catch (e) {

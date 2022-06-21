@@ -11,7 +11,7 @@ class EditAlamatView extends GetView<AlamatController> {
     controller.telp.text = data.telp!;
     controller.addressLabel.text = data.addressLabel!;
     controller.city.text = data.city!;
-    // controller.postalCode.text = data.postalCode!.toString();
+    controller.postalCode.text = data.postalCode!.toString();
     controller.completeAddress.text = data.completeAddress!;
     controller.noteForCourier.text = data.noteForCourier!;
 

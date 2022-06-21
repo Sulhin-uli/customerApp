@@ -26,8 +26,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    getDataPhoto();
-    getData();
+    // getDataPhoto();
+    // getData();
     mainMenu();
     bannerHome();
     super.onInit();
@@ -195,42 +195,42 @@ class HomeController extends GetxController {
     List<MainMenuModel> data = [
       MainMenuModel(
         image: "assets/icons/beras.png",
-        title: "Beras",
+        // title: "Beras",
         color: Colors.red,
       ),
       MainMenuModel(
         image: "assets/icons/buah.png",
-        title: "Buah",
+        // title: "Buah",
         color: Colors.yellow,
       ),
       MainMenuModel(
         image: "assets/icons/olahan-buah.png",
-        title: "Olahan Buah",
+        // title: "Olahan Buah",
         color: Colors.green,
       ),
       MainMenuModel(
         image: "assets/icons/bibit-sayuran.png",
-        title: "Bibit Sayuran",
+        // title: "Bibit Sayuran",
         color: Colors.purple,
       ),
       MainMenuModel(
         image: "assets/icons/sayuran.png",
-        title: "Sayuran",
+        // title: "Sayuran",
         color: Colors.cyan,
       ),
       MainMenuModel(
         image: "assets/icons/roti.png",
-        title: "Roti",
+        // title: "Roti",
         color: Colors.lightBlue,
       ),
       MainMenuModel(
         image: "assets/icons/jamu.png",
-        title: "Jamu Herbal",
+        // title: "Jamu Herbal",
         color: Colors.pinkAccent,
       ),
       MainMenuModel(
         image: "assets/icons/susu-kedelai.png",
-        title: "Susu Kedelai",
+        // title: "Susu Kedelai",
         color: Colors.pinkAccent,
       ),
     ];

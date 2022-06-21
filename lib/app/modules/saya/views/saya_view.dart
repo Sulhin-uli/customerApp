@@ -162,7 +162,7 @@ class SayaView extends GetView<SayaController> {
                 ),
                 title: const Text('Wishlist'),
                 onTap: () {
-                  homeC.changeTabIndex(2);
+                  homeC.changeTabIndex(1);
                 },
               ),
               ListTile(

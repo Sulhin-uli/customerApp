@@ -13,6 +13,12 @@ class SearchProdukView extends GetView<ProdukController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context, true);
+              controller.seacrh.clear();
+            }),
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
@@ -64,25 +70,38 @@ class SearchProdukView extends GetView<ProdukController> {
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: homeController.menu.length,
+              itemCount: controller.productCategory
+                  .where((e) => e.isActive == 1)
+                  .length,
               itemBuilder: (context, i) {
-                int length = homeController.menu.length;
                 final data = homeController.menu[i];
+                final dataCategory = controller.productCategory[i];
                 return Container(
                   padding: EdgeInsets.all(10),
                   child: ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.KATEGORI_VIEW,
+                          arguments: dataCategory.name);
+                    },
                     leading: CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.black26,
-                      child: Image.asset(
-                        data.image!,
-                        width: 20,
-                        height: 20,
-                      ),
+                      child: (data.image! != null)
+                          ? Image.asset(
+                              data.image!,
+                              width: 20,
+                              height: 20,
+                            )
+                          : Image.asset(
+                              "assets/icons/kategori.png",
+                              width: 20,
+                              height: 20,
+                            ),
                     ),
                     title: Text(
-                      data.title!,
+                      (dataCategory.name! != null)
+                          ? dataCategory.name!
+                          : "Kategori",
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),

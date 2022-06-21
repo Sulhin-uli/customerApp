@@ -18,16 +18,17 @@ import '../controllers/detail_produk_controller.dart';
 class DetailProdukView extends GetView<DetailProdukController> {
   final box = GetStorage();
   final _scrollController = TrackingScrollController();
-  final homeC = Get.find<HomeController>();
+  final produkC = Get.find<ProdukController>();
   final cartC = Get.find<CartController>();
   final wishlistC = Get.find<WishlistController>();
 
   // Part Scrroll
   @override
   Widget build(BuildContext context) {
-    final data = homeC.findBySlug(Get.arguments);
+    final data = produkC.findBySlug(Get.arguments);
     // find
     wishlistC.foundWishlist(data.id!);
+    final double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Column(
@@ -47,11 +48,11 @@ class DetailProdukView extends GetView<DetailProdukController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Obx(
-                        () => homeC.photoProductByProductId.length == 1
+                        () => produkC.photoProduct.length == 1
                             ? Hero(
                                 tag: data.slug!,
                                 child: Container(
-                                  height: 300.0,
+                                  height: 370.0,
                                   child: Center(
                                     child: Image.network(
                                       baseUrlFile +
@@ -64,32 +65,39 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               )
                             : CarouselSlider(
                                 options: CarouselOptions(
-                                    height: 300.0,
+                                    height: 370.0,
                                     autoPlay: false,
                                     enlargeCenterPage: true,
                                     viewportFraction: 0.9,
                                     aspectRatio: 2.0,
+                                    reverse: false,
                                     initialPage: 2,
                                     onPageChanged: (index, reason) {
-                                      homeC.carouselIndex.value = index;
+                                      produkC.carouselIndex.value = index;
                                     }),
                                 items: <Widget>[
                                   for (var i = 0;
-                                      i < homeC.photoProductByProductId.length;
+                                      i < produkC.photoProduct.length;
                                       i++)
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 20.0, left: 20.0),
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(baseUrlFile +
-                                              "storage/produk/" +
-                                              homeC.photoProductByProductId[i]
-                                                  .name!),
-                                          fit: BoxFit.fitHeight,
+                                    if (produkC.photoProduct[i].productId!.id ==
+                                        data.id)
+                                      InkWell(
+                                        onTap: () => Get.toNamed(
+                                            Routes.IMAGE_VIEW,
+                                            arguments:
+                                                produkC.photoProduct[i].name!),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(baseUrlFile +
+                                                  "storage/produk/" +
+                                                  produkC
+                                                      .photoProduct[i].name!),
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      )
                                 ],
                               ),
                       ),
@@ -99,29 +107,35 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: homeC.photoProductByProductId.length,
+                              itemCount: produkC.photoProduct
+                                  .where((e) => e.productId!.id == data.id)
+                                  .length,
                               itemBuilder: (context, i) {
-                                return Obx(() => homeC.carouselIndex.value == i
-                                    ? Container(
-                                        width: 8.0,
-                                        height: 8.0,
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 10.0, horizontal: 2.0),
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color(0xff16A085),
-                                        ),
-                                      )
-                                    : Container(
-                                        width: 8.0,
-                                        height: 8.0,
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 10.0, horizontal: 2.0),
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color.fromRGBO(0, 0, 0, 0.4),
-                                        ),
-                                      ));
+                                return Obx(
+                                    () => produkC.carouselIndex.value == i
+                                        ? Container(
+                                            width: 8.0,
+                                            height: 8.0,
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 10.0,
+                                                horizontal: 2.0),
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xff16A085),
+                                            ),
+                                          )
+                                        : Container(
+                                            width: 8.0,
+                                            height: 8.0,
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 10.0,
+                                                horizontal: 2.0),
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color:
+                                                  Color.fromRGBO(0, 0, 0, 0.4),
+                                            ),
+                                          ));
                               }),
                         ),
                       ),
@@ -458,7 +472,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   color: Colors.white,
                                   onPressed: () {
                                     if (box.read('isAuth') == true) {
-                                      Get.toNamed(Routes.CHAT);
+                                      Get.toNamed(Routes.DETAIL_CHAT,
+                                          arguments: data.userId!.id!);
                                     } else {
                                       Get.toNamed(Routes.LOGIN);
                                     }

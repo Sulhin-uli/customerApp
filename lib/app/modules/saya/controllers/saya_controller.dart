@@ -123,6 +123,7 @@ class SayaController extends GetxController {
               "id": data['id'],
               "token": data["token"],
               "email": data["email"],
+              "name": data["name"],
               "password": passwordNew,
               "customer_id": data["customer_id"],
             });

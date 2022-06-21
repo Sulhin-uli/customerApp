@@ -10,19 +10,18 @@ import 'package:get/get.dart';
 class ItemProduct extends GetView<ProdukController> {
   ItemProduct(this.data);
   final data;
-  final productC = Get.find<HomeController>();
 
   Widget build(BuildContext context) {
+    final dataImage = controller.photoProduct
+        .where((e) => e.productId!.id == data.id)
+        .first
+        .name;
     return GestureDetector(
       onTap: () {
         Get.toNamed(
           Routes.DETAIL_PRODUK,
           arguments: data.slug!,
         );
-        controller.photoProductByProductId.clear();
-        productC.photoProductByProductId.clear();
-        controller.getPhotoProductById(data.id!);
-        productC.getPhotoProductById(data.id!);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -33,7 +32,7 @@ class ItemProduct extends GetView<ProdukController> {
                   tag: data.slug,
                   child: Center(
                     child: Image.network(
-                      baseUrlFile + "storage/produk/" + data.image!,
+                      baseUrlFile + "storage/produk/" + dataImage!,
                       fit: BoxFit.cover,
                     ),
                   )),
@@ -47,7 +46,7 @@ class ItemProduct extends GetView<ProdukController> {
                     fontWeight: FontWeight.w400),
               ),
               subtitle: Text(
-                'Rp ${formatCurrency.format(data.price!)}',
+                'Rp${formatCurrency.format(data.price!)}',
                 style:
                     TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
               ),

@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/wishlist/controllers/wishlist_controller.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +12,8 @@ class DetailProdukBinding extends Bindings {
     Get.lazyPut<DetailProdukController>(
       () => DetailProdukController(),
     );
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
+    Get.lazyPut<ProdukController>(
+      () => ProdukController(),
     );
     Get.lazyPut<CartController>(
       () => CartController(),

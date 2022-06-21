@@ -2,11 +2,17 @@ class CategoryProductModel {
   int? id;
   String? name;
   String? slug;
+  int? isActive;
   String? createdAt;
   String? updatedAt;
 
   CategoryProductModel(
-      {this.id, this.name, this.slug, this.createdAt, this.updatedAt});
+      {this.id,
+      this.name,
+      this.slug,
+      this.isActive,
+      this.createdAt,
+      this.updatedAt});
 
   CategoryProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

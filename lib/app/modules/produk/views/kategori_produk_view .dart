@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class ProdukView extends GetView<ProdukController> {
+class KategoriView extends GetView<ProdukController> {
   final box = GetStorage();
 
   @override
@@ -63,63 +63,77 @@ class ProdukView extends GetView<ProdukController> {
         ],
         elevation: 0.5,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Obx(
-          () => controller.product.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/icons/empty-data.png",
-                        height: 100,
-                        width: 100,
-                      ),
-                      Text(
-                        "Data Produk Tidak Ada",
-                        style: TextStyle(color: Colors.grey),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Text(
+                "Kategori : " + Get.arguments,
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              child: Obx(
+                () => controller.product.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/icons/empty-data.png",
+                              height: 100,
+                              width: 100,
+                            ),
+                            Text(
+                              "Data Produk Tidak Ada",
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          ],
+                        ),
                       )
-                    ],
-                  ),
-                )
-              : GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                  itemCount:
-                      controller.product.where((e) => e.isActive == 1).length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, i) {
-                    final data = controller.product[i];
-                    if (data.isActive == 1) {
-                      if (data.name!
-                          .toLowerCase()
-                          .contains(controller.seacrh.text.toLowerCase())) {
-                        return ItemProduct(data);
-                      } else {
-                        return Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                "assets/icons/empty-data.png",
-                                height: 100,
-                                width: 100,
-                              ),
-                              Text(
-                                "Hasil Pencarian Tidak Ada",
-                                style: TextStyle(color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        );
-                      }
-                    } else {
-                      return Container();
-                    }
-                  },
-                ),
+                    : GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                        itemCount: controller.product
+                            .where((e) => e.isActive == 1)
+                            .length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, i) {
+                          final data = controller.product[i];
+                          if (data.isActive == 1) {
+                            if (data.categoryProductId!.name == Get.arguments) {
+                              return ItemProduct(data);
+                            } else {
+                              return Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/empty-data.png",
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                                    Text(
+                                      "Produk Tidak Ada",
+                                      style: TextStyle(color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+              ),
+            ),
+          ],
         ),
       ),
     );

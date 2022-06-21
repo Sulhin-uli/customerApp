@@ -1,3 +1,5 @@
+import 'package:customer_app/app/modules/detail_produk/views/widgets/image_view.dart';
+import 'package:customer_app/app/modules/produk/views/kategori_produk_view%20.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -160,6 +162,16 @@ class AppPages {
     GetPage(
       name: _Paths.PRODUK,
       page: () => ProdukView(),
+      binding: ProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.IMAGE_VIEW,
+      page: () => ImageView(),
+      // binding: ProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.KATEGORI_VIEW,
+      page: () => KategoriView(),
       binding: ProdukBinding(),
     ),
   ];

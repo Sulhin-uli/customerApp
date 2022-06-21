@@ -33,6 +33,8 @@ abstract class Routes {
   // Produk
   static const SEARCH = _Paths.SEARCH;
   static const PRODUK = _Paths.PRODUK;
+  static const IMAGE_VIEW = _Paths.IMAGE_VIEW;
+  static const KATEGORI_VIEW = _Paths.KATEGORI_VIEW;
 }
 
 abstract class _Paths {
@@ -66,4 +68,6 @@ abstract class _Paths {
   // produk
   static const SEARCH = '/search';
   static const PRODUK = '/produk';
+  static const IMAGE_VIEW = '/image-view';
+  static const KATEGORI_VIEW = '/kategori-view';
 }

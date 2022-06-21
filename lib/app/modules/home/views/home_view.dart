@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final data = box.read("userData") as Map<String, dynamic>;
     final _scrollController = TrackingScrollController();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -53,10 +54,15 @@ class HomeView extends GetView<HomeController> {
                               top: 100,
                               child: Container(
                                 padding: EdgeInsets.only(left: 15),
-                                child: Text(
-                                  "Selamat Datang, Sulhin ",
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                child: (data["name"] != null)
+                                    ? Text(
+                                        "Selamat Datang, " + data["name"],
+                                        style: TextStyle(color: Colors.white),
+                                      )
+                                    : Text(
+                                        "Selamat Datang",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                               ),
                             ),
                           ],
@@ -76,9 +82,9 @@ class HomeView extends GetView<HomeController> {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextButton(
-                                onPressed: () => Get.toNamed(Routes.PRODUK),
+                                onPressed: () => Get.toNamed(Routes.SEARCH),
                                 child: Text(
-                                  "Lihat Semua",
+                                  "Cari Kebutuhanmu",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xff16A085),

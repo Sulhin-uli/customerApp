@@ -29,26 +29,47 @@ class ChatView extends GetView<ChatController> {
         elevation: 0.5,
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (context, index) => ListTile(
-          onTap: () => Get.toNamed(Routes.DETAIL_CHAT),
-          leading: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.black26,
-            child: Image.asset("assets/logo/noimage.png"),
-          ),
-          title: Text(
-            "Status ke ${index + 1}",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-          ),
-          subtitle: Text(
-            "Status orang ke ${index + 1}",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          trailing: Chip(label: Text("5")),
-        ),
+      body: Obx(
+        () => controller.roomChat.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: controller.roomChat.length,
+                itemBuilder: (context, i) {
+                  int length = controller.roomChat.length;
+                  final data = controller.roomChat[i];
+                  return ItemChatRoom();
+                },
+              ),
       ),
+    );
+  }
+}
+
+class ItemChatRoom extends StatelessWidget {
+  const ItemChatRoom({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => Get.toNamed(Routes.DETAIL_CHAT),
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundColor: Colors.black26,
+        child: Image.asset("assets/logo/noimage.png"),
+      ),
+      title: Text(
+        "Status ke 1",
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(
+        "Status orang ke 1 ",
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+      trailing: Chip(label: Text("5")),
     );
   }
 }
