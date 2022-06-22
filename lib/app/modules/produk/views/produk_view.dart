@@ -6,6 +6,7 @@ import 'package:customer_app/app/modules/produk/views/widgets/item_product_widge
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,6 +19,12 @@ class ProdukView extends GetView<ProdukController> {
     var auth = box.read('isAuth');
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context, true);
+              controller.resultSearch(true);
+            }),
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
@@ -69,15 +76,15 @@ class ProdukView extends GetView<ProdukController> {
           () => controller.product.isEmpty
               ? Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        "assets/icons/empty-data.png",
+                      SvgPicture.asset(
+                        "assets/icons/empty-data.svg",
                         height: 100,
                         width: 100,
                       ),
                       Text(
-                        "Data Produk Tidak Ada",
+                        "Produk Tidak Ada",
                         style: TextStyle(color: Colors.grey),
                       )
                     ],
@@ -102,8 +109,8 @@ class ProdukView extends GetView<ProdukController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(
-                                "assets/icons/empty-data.png",
+                              SvgPicture.asset(
+                                "assets/icons/empty-data.svg",
                                 height: 100,
                                 width: 100,
                               ),

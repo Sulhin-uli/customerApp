@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 
 class ProdukController extends GetxController {
   var carouselIndex = 0.obs;
+  var resultSearch = false.obs;
   var product = List<ProductModel>.empty().obs;
   var productCategory = List<CategoryProductModel>.empty().obs;
   var productSearch = List<ProductModel>.empty().obs;
