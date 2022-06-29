@@ -70,63 +70,106 @@ class ProdukView extends GetView<ProdukController> {
         ],
         elevation: 0.5,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Obx(
-          () => controller.product.isEmpty
-              ? Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/empty-data.svg",
-                        height: 100,
-                        width: 100,
-                      ),
-                      Text(
-                        "Produk Tidak Ada",
-                        style: TextStyle(color: Colors.grey),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    margin: EdgeInsets.all(16),
+                    child: OutlinedButton(
+                        onPressed: () {
+                          if (controller.isHideButtonPrice.isTrue ||
+                              controller.isHideButtonPrice.isFalse) {
+                            controller.isHideButtonPrice(false);
+                            if (controller.isExpensive.isFalse) {
+                              controller.isExpensive(true);
+                              controller.productExpensive();
+                            } else {
+                              controller.isExpensive(false);
+                              controller.productCheap();
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Harga",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
+                            Obx(() => controller.isHideButtonPrice.isFalse
+                                ? controller.isExpensive.isTrue
+                                    ? Icon(Icons.arrow_drop_up_outlined)
+                                    : Icon(Icons.arrow_drop_down_outlined)
+                                : Container()),
+                          ],
+                        ))),
+                Container(),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Obx(
+                () => controller.product.isEmpty
+                    ? Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/empty-data.svg",
+                              height: 100,
+                              width: 100,
+                            ),
+                            Text(
+                              "Produk Tidak Ada",
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          ],
+                        ),
                       )
-                    ],
-                  ),
-                )
-              : GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                  itemCount:
-                      controller.product.where((e) => e.isActive == 1).length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, i) {
-                    final data = controller.product[i];
-                    if (data.isActive == 1) {
-                      if (data.name!
-                          .toLowerCase()
-                          .contains(controller.seacrh.text.toLowerCase())) {
-                        return ItemProduct(data);
-                      } else {
-                        return Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/empty-data.svg",
-                                height: 100,
-                                width: 100,
-                              ),
-                              Text(
-                                "Hasil Pencarian Tidak Ada",
-                                style: TextStyle(color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        );
-                      }
-                    } else {
-                      return Container();
-                    }
-                  },
-                ),
+                    : GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                        itemCount: controller.product
+                            .where((e) => e.isActive == 1)
+                            .length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, i) {
+                          final data = controller.product[i];
+                          if (data.isActive == 1) {
+                            if (data.name!.toLowerCase().contains(
+                                controller.seacrh.text.toLowerCase())) {
+                              return ItemProduct(data);
+                            } else {
+                              return Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/empty-data.svg",
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                                    Text(
+                                      "Hasil Pencarian Tidak Ada",
+                                      style: TextStyle(color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+              ),
+            ),
+          ],
         ),
       ),
     );

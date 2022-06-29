@@ -20,6 +20,8 @@ class ProdukController extends GetxController {
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
   late TextEditingController seacrh;
+  var isExpensive = true.obs;
+  var isHideButtonPrice = true.obs;
 
   @override
   void onInit() {
@@ -28,6 +30,14 @@ class ProdukController extends GetxController {
     getDataPhoto();
     getData();
     seacrh = TextEditingController();
+  }
+
+  void productExpensive() {
+    product.sort((a, b) => b.price!.compareTo(a.price!));
+  }
+
+  void productCheap() {
+    product.sort((a, b) => a.price!.compareTo(b.price!));
   }
 
   void runSearch(String search) {

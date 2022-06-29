@@ -150,10 +150,14 @@ class HomeView extends GetView<HomeController> {
                   margin: EdgeInsets.only(
                     bottom: 7,
                   ),
-                  child: Image.asset(
-                    "assets/icons/home.png",
-                    width: 20,
-                    height: 20,
+                  // child: Image.asset(
+                  //   "assets/icons/home.png",
+                  //   width: 20,
+                  //   height: 20,
+                  // ),
+                  child: const Icon(
+                    Icons.home,
+                    size: 20.0,
                   ),
                 ),
                 label: 'Home',
@@ -174,10 +178,14 @@ class HomeView extends GetView<HomeController> {
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
-                  child: Image.asset(
-                    "assets/icons/wishlist.png",
-                    width: 20,
-                    height: 20,
+                  // child: Image.asset(
+                  //   "assets/icons/wishlist.png",
+                  //   width: 20,
+                  //   height: 20,
+                  // ),
+                  child: const Icon(
+                    Icons.favorite,
+                    size: 20.0,
                   ),
                 ),
                 label: 'Wishlist',
@@ -186,10 +194,14 @@ class HomeView extends GetView<HomeController> {
               BottomNavigationBarItem(
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
-                  child: Image.asset(
-                    "assets/icons/saya.png",
-                    width: 20,
-                    height: 20,
+                  // child: Image.asset(
+                  //   "assets/icons/saya.png",
+                  //   width: 20,
+                  //   height: 20,
+                  // ),
+                  child: const Icon(
+                    Icons.person,
+                    size: 20.0,
                   ),
                 ),
                 label: 'Saya',

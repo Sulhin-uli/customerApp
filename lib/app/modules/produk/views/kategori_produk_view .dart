@@ -68,12 +68,47 @@ class KategoriView extends GetView<ProdukController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.all(16),
-              child: Text(
-                "Kategori : " + Get.arguments,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(16),
+                  child: Text(
+                    "Kategori : " + Get.arguments,
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.all(16),
+                    child: OutlinedButton(
+                        onPressed: () {
+                          if (controller.isHideButtonPrice.isTrue ||
+                              controller.isHideButtonPrice.isFalse) {
+                            controller.isHideButtonPrice(false);
+                            if (controller.isExpensive.isFalse) {
+                              controller.isExpensive(true);
+                              controller.productExpensive();
+                            } else {
+                              controller.isExpensive(false);
+                              controller.productCheap();
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Harga",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
+                            Obx(() => controller.isHideButtonPrice.isFalse
+                                ? controller.isExpensive.isTrue
+                                    ? Icon(Icons.arrow_drop_up_outlined)
+                                    : Icon(Icons.arrow_drop_down_outlined)
+                                : Container()),
+                          ],
+                        ))),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
