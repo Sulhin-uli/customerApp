@@ -40,7 +40,7 @@ class HomeController extends GetxController {
       if (index != 1 && index != 2) {
         tabIndex.value = index;
       } else {
-        Get.toNamed(Routes.LOGIN);
+        Get.offAllNamed(Routes.LOGIN);
       }
     }
   }

@@ -56,7 +56,7 @@ class _HeaderState extends State<Header> {
                   if (widget.auth == true) {
                     Get.toNamed(Routes.CART);
                   } else {
-                    Get.toNamed(Routes.LOGIN);
+                    Get.offAllNamed(Routes.LOGIN);
                   }
                 })
               },

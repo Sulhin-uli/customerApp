@@ -181,7 +181,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   )
                                 : InkWell(
                                     onTap: () {
-                                      Get.toNamed(Routes.LOGIN);
+                                      Get.offAllNamed(Routes.LOGIN);
                                     },
                                     child: Icon(
                                       Icons.favorite_border,
@@ -475,7 +475,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                       Get.toNamed(Routes.DETAIL_CHAT,
                                           arguments: data.userId!.id!);
                                     } else {
-                                      Get.toNamed(Routes.LOGIN);
+                                      Get.offAllNamed(Routes.LOGIN);
                                     }
                                   },
                                   child: Icon(
@@ -489,7 +489,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   if (box.read('isAuth') == true) {
                                     Get.toNamed(Routes.PENGIRIMAN);
                                   } else {
-                                    Get.toNamed(Routes.LOGIN);
+                                    Get.offAllNamed(Routes.LOGIN);
                                   }
                                 },
                                 style: OutlinedButton.styleFrom(
@@ -526,10 +526,10 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                           .productQty!;
                                       cartC.updateQty(idCart, cartQty + 1);
                                       cartC.dialogSuccess(
-                                          "Berhasil ditambahkan ke-keranjang");
+                                          "Berhasil ditambahkan keranjang");
                                     }
                                   } else {
-                                    Get.toNamed(Routes.LOGIN);
+                                    Get.offAllNamed(Routes.LOGIN);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
