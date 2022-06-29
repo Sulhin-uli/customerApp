@@ -5,6 +5,7 @@ import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/models/wishlist_model.dart';
 import 'package:customer_app/app/data/providers/photo_product_provider.dart';
 import 'package:customer_app/app/data/providers/wishlist_provider.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class WishlistController extends GetxController {
   final box = GetStorage();
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
+  final authC = Get.put(AuthController(), permanent: true);
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(
@@ -30,8 +32,10 @@ class WishlistController extends GetxController {
 
   @override
   void onInit() {
-    getDataPhoto();
-    getData();
+    if (authC.isAuth.isTrue) {
+      getDataPhoto();
+      getData();
+    }
     // print("object");\
     super.onInit();
   }

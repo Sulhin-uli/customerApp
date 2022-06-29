@@ -74,7 +74,7 @@ class IntroductionView extends GetView<IntroductionController> {
             ),
           ),
         ],
-        onDone: () => Get.offAllNamed(Routes.LOGIN),
+        onDone: () => Get.offAllNamed(Routes.HOME),
         // onSkip: () {},
         // showBackButton: false,
         showSkipButton: true,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:customer_app/app/data/models/cart_model.dart';
 import 'package:customer_app/app/data/models/category_product_model.dart';
 import 'package:customer_app/app/data/models/photo_product_model.dart';
@@ -29,14 +31,15 @@ class CartController extends GetxController {
     getDataPhoto();
     getData();
     super.onInit();
+    // Timer.periodic(Duration(seconds: 3), (Timer t) => print(t));
   }
 
   void updateQty(int id, int qty) {
     final item = findByid(id);
     final data = box.read("userData") as Map<String, dynamic>;
+    item.productQty = qty;
+    cart.refresh();
     CartProvider().updateQty(id, qty, data["token"]).then((_) {
-      item.productQty = qty;
-      cart.refresh();
       addLengthMark();
       addTotal();
     });

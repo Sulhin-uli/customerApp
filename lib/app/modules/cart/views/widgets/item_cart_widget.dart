@@ -14,6 +14,7 @@ class ItemCart extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
+    int countQty = data.productQty!;
     return Container(
       margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
       child: Card(
@@ -96,7 +97,15 @@ class ItemCart extends GetView<CartController> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
-                                )
+                                ),
+                                // Text(
+                                //   "Jumlah " + data.productQty!.toString(),
+                                //   // "Beras",
+                                //   style: TextStyle(
+                                //       color: Color(0xff919A92),
+                                //       fontSize: 12,
+                                //       fontWeight: FontWeight.w400),
+                                // ),
                               ],
                             ),
                           ],
@@ -172,19 +181,29 @@ class ItemCart extends GetView<CartController> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
-                            InkWell(
-                              onTap: () {
-                                controller.updateQty(
-                                    data.id!, data.productQty! + 1);
-                              },
-                              child: Text(
-                                "+",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                            (data.productQty! == data.productId.stoke)
+                                ? InkWell(
+                                    child: Text(
+                                      "+",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                : InkWell(
+                                    onTap: () {
+                                      controller.updateQty(
+                                          data.id!, data.productQty! + 1);
+                                    },
+                                    child: Text(
+                                      "+",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                           ],
                         ),
                       )

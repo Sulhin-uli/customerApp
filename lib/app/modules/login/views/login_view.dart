@@ -21,6 +21,10 @@ class LoginView extends GetView<LoginController> {
           'Masuk',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Get.offAllNamed(Routes.HOME),
+        ),
         actions: [
           TextButton(
               onPressed: () => Get.toNamed(Routes.REGISTER),

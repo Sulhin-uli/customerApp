@@ -17,14 +17,11 @@ class SayaView extends GetView<SayaController> {
   final box = GetStorage();
   final homeC = Get.put(HomeController());
   final cartC = Get.put(CartController());
-  final authC = Get.put(AuthController());
-  final sayaC = Get.put(SayaController());
+  // final authC = Get.put(AuthController());
+  final sayaC = Get.find<SayaController>();
 
   @override
   Widget build(BuildContext context) {
-    final user = box.read("userData") as Map<String, dynamic>;
-    authC.getDataCustomer();
-    final data = authC.findCustomer(user["id"]);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -59,21 +56,27 @@ class SayaView extends GetView<SayaController> {
                                     width: 150,
                                     fit: BoxFit.cover,
                                   )
-                                : data.image == null
+                                : sayaC.customer.isNotEmpty
                                     ? Image.asset(
                                         'assets/logo/noimage.png',
                                         height: 150,
                                         width: 150,
                                         fit: BoxFit.cover,
                                       )
-                                    : Image.network(
-                                        baseUrlFile +
-                                            "storage/profile/" +
-                                            data.image!,
-                                        height: 150,
-                                        width: 150,
-                                        fit: BoxFit.cover,
-                                      ),
+                                    // : Image.network(
+                                    //     baseUrlFile +
+                                    //         "storage/profile/" +
+                                    //         sayaC.customer.first.image!,
+                                    //     height: 150,
+                                    //     width: 150,
+                                    //     fit: BoxFit.cover,
+                                    //   ),
+                                    : Image.asset(
+                                          'assets/logo/noimage.png',
+                                          height: 150,
+                                          width: 150,
+                                          fit: BoxFit.cover,
+                                        )
                           ),
                         ),
                       ),
@@ -102,13 +105,15 @@ class SayaView extends GetView<SayaController> {
                   SizedBox(
                     width: 8,
                   ),
-                  Expanded(
-                    child: Text(
-                      data.userId!.name!,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  Obx(() => sayaC.customer.isEmpty
+                      ? CircularProgressIndicator()
+                      : Expanded(
+                          child: Text(
+                            sayaC.customer.first.userId!.name!,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        )),
                 ],
               ),
               const SizedBox(

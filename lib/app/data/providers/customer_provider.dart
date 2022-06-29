@@ -17,6 +17,18 @@ class CustomerProvider extends GetConnect {
     return response.body;
   }
 
+  Future<dynamic> showById(
+    int id,
+    String token,
+  ) async {
+    final response = await get('$url/$id', headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
+
   Future<dynamic> updateImage(
       Map<String, String> body, String filepath, String token) async {
     Map<String, String> headers = {

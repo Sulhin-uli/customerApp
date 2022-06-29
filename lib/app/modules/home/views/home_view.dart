@@ -23,7 +23,10 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final data = box.read("userData") as Map<String, dynamic>;
+    var data = {};
+    try {
+      data = box.read("userData") as Map<String, dynamic>;
+    } catch (e) {}
     final _scrollController = TrackingScrollController();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -107,8 +110,8 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
               // ProdukView(),
-              WishlistView(),
-              SayaView()
+              (box.read('isAuth') == true) ? WishlistView() : Container(),
+              (box.read('isAuth') == true) ? SayaView() : Container(),
             ],
           ),
         ),

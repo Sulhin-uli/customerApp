@@ -2,16 +2,21 @@ import 'package:customer_app/app/data/models/chat_model.dart';
 import 'package:customer_app/app/data/models/chat_room_model.dart';
 import 'package:customer_app/app/data/providers/chat_provider.dart';
 import 'package:customer_app/app/data/providers/room_chat_provider.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ChatController extends GetxController {
   var roomChat = List<RoomChatModel>.empty().obs;
+  final authC = Get.put(AuthController());
+
   final box = GetStorage();
 
   @override
   void onInit() {
-    getData();
+    if (authC.isAuth.isTrue) {
+      getData();
+    }
     super.onInit();
   }
 

@@ -1,9 +1,5 @@
-import 'dart:io';
-
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:get/get.dart';
-
-import '../models/category_product_model.dart';
 
 class CartProvider extends GetConnect {
   @override
@@ -18,9 +14,9 @@ class CartProvider extends GetConnect {
     return response.body;
   }
 
-  Future<void> updateQty(int id, int product_qty, String? token) async {
-    final response = await put('$url' + '/qty/$id', {
-      "product_qty": product_qty,
+  Future<void> updateQty(int id, int productQty, String? token) async {
+    final response = await put('$url/qty/$id', {
+      "product_qty": productQty,
     }, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -31,7 +27,7 @@ class CartProvider extends GetConnect {
 
   Future<dynamic> postData(int? userId, int? productId, int? productQty,
       int? sessionId, String? token) async {
-    final response = await post('$url', {
+    final response = await post(url, {
       "user_id": userId,
       "product_id": productId,
       "product_qty": productQty,

@@ -13,7 +13,7 @@ class EditProfileView extends GetView<SayaController> {
   @override
   Widget build(BuildContext context) {
     final user = box.read("userData") as Map<String, dynamic>;
-    final data = authC.findCustomer(user["id"]);
+    final data = controller.customer.first;
     data.gender != null
         ? controller.gender.text = data.gender!
         : controller.gender.text;

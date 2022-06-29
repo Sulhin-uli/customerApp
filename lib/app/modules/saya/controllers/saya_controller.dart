@@ -1,7 +1,11 @@
+import 'package:customer_app/app/data/models/address_model.dart';
+import 'package:customer_app/app/data/models/customer_model.dart';
+import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/customer_provider.dart';
 import 'package:customer_app/app/data/providers/user_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,9 +27,12 @@ class SayaController extends GetxController {
   var selectedImageSize = ''.obs;
   final homeC = Get.put(HomeController());
   final cartC = Get.put(CartController());
+  final authC = Get.put(AuthController());
+  // var data = CustomerModel().obs;
+  var customer = List<CustomerModel>.empty().obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     gender = TextEditingController();
     birth = TextEditingController();
     telp = TextEditingController();
@@ -33,6 +40,9 @@ class SayaController extends GetxController {
     passwordNew = TextEditingController();
     passwordConfirm = TextEditingController();
     super.onInit();
+    if (authC.isAuth.isTrue) {
+      getDataCustomer();
+    }
   }
 
   void getImage() async {
@@ -51,6 +61,28 @@ class SayaController extends GetxController {
         colorText: Colors.white,
       );
     }
+  }
+
+  getDataCustomer() {
+    final data = box.read("userData") as Map<String, dynamic>;
+    CustomerProvider().showById(data["id"], data["token"]).then((response) {
+      // print(data["customer_id"]);
+      // print(response);
+      final data = CustomerModel(
+        id: response["data"]["id"],
+        userId: UserModel(
+          id: response["data"]["user_id"]["id"],
+          name: response["data"]["user_id"]["name"],
+        ),
+        addressId: response["data"]["address_id"],
+        gender: response["data"]["gender"],
+        birth: response["data"]["birth"],
+        telp: response["data"]["telp"],
+        image: response["data"]["image"],
+      );
+      customer.add(data);
+      // print(customer.first.image == null);
+    });
   }
 
   void updateImage(

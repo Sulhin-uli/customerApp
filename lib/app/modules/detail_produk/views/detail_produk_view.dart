@@ -250,99 +250,99 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ],
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 9,
-                        color: Color(0xffD1D1D1),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: Icon(
-                                Icons.account_circle_rounded,
-                                size: 60,
-                                color: Colors.black,
-                              ),
-                              title: const Text(
-                                "Gapoktan",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                "Indramayu ",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black.withOpacity(0.5)),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 16,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          "4.2",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Rating dan Ulasan",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black.withOpacity(0.5),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  height: 60,
-                                  child: VerticalDivider(
-                                      color: Colors.black.withOpacity(0.5)),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    // Respond to button press
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                        width: 2.0, color: Color(0xff16A085)),
-                                  ),
-                                  child: Text(
-                                    '     Lihat Toko    ',
-                                    style: TextStyle(
-                                      color: Color(0xff16A085),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   width: double.infinity,
+                      //   height: 9,
+                      //   color: Color(0xffD1D1D1),
+                      // ),
+                      // Container(
+                      //   margin: EdgeInsets.all(16),
+                      //   child: Column(
+                      //     children: [
+                      //       ListTile(
+                      //         leading: Icon(
+                      //           Icons.account_circle_rounded,
+                      //           size: 60,
+                      //           color: Colors.black,
+                      //         ),
+                      //         title: const Text(
+                      //           "Gapoktan",
+                      //           style: TextStyle(
+                      //               fontSize: 16, fontWeight: FontWeight.bold),
+                      //         ),
+                      //         subtitle: Text(
+                      //           "Indramayu ",
+                      //           style: TextStyle(
+                      //               fontSize: 14,
+                      //               color: Colors.black.withOpacity(0.5)),
+                      //         ),
+                      //       ),
+                      //       const SizedBox(
+                      //         width: 20,
+                      //       ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //         children: [
+                      //           Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               Row(
+                      //                 children: [
+                      //                   Icon(
+                      //                     Icons.star,
+                      //                     color: Colors.amber,
+                      //                     size: 16,
+                      //                   ),
+                      //                   const SizedBox(
+                      //                     width: 5,
+                      //                   ),
+                      //                   Text(
+                      //                     "4.2",
+                      //                     style: TextStyle(
+                      //                       fontSize: 12,
+                      //                       color:
+                      //                           Colors.black.withOpacity(0.5),
+                      //                     ),
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               const SizedBox(
+                      //                 height: 5,
+                      //               ),
+                      //               Text(
+                      //                 "Rating dan Ulasan",
+                      //                 style: TextStyle(
+                      //                   fontSize: 12,
+                      //                   color: Colors.black.withOpacity(0.5),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           Container(
+                      //             height: 60,
+                      //             child: VerticalDivider(
+                      //                 color: Colors.black.withOpacity(0.5)),
+                      //           ),
+                      //           OutlinedButton(
+                      //             onPressed: () {
+                      //               // Respond to button press
+                      //             },
+                      //             style: OutlinedButton.styleFrom(
+                      //               side: BorderSide(
+                      //                   width: 2.0, color: Color(0xff16A085)),
+                      //             ),
+                      //             child: Text(
+                      //               '     Lihat Toko    ',
+                      //               style: TextStyle(
+                      //                 color: Color(0xff16A085),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Container(
                         width: double.infinity,
                         height: 9,
@@ -400,7 +400,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                 const SizedBox(
                                   width: 80,
                                   child: Text(
-                                    "Stoke",
+                                    "Stok",
                                     style: TextStyle(
                                       color: Color(0xff919A92),
                                       fontSize: 14,
@@ -428,12 +428,13 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               color: Color(0xff919A92),
                             ),
                             Text(
-                              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                              // "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                              data.desc!,
                               style: TextStyle(
                                 color: Color(0xff919A92),
                                 fontSize: 14,
                               ),
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.left,
                             ),
                             SizedBox(
                               height: 70,
