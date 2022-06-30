@@ -77,7 +77,7 @@ class ProdukView extends GetView<ProdukController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    margin: EdgeInsets.all(16),
+                    margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
                     child: OutlinedButton(
                         onPressed: () {
                           if (controller.isHideButtonPrice.isTrue ||
@@ -110,7 +110,7 @@ class ProdukView extends GetView<ProdukController> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
               child: Obx(
                 () => controller.product.isEmpty
                     ? Center(

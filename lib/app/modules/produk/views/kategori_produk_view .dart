@@ -72,7 +72,7 @@ class KategoriView extends GetView<ProdukController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
                   child: Text(
                     "Kategori : " + Get.arguments,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
@@ -111,7 +111,7 @@ class KategoriView extends GetView<ProdukController> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
               child: Obx(
                 () => controller.product.isEmpty
                     ? Center(

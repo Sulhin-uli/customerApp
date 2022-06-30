@@ -103,7 +103,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                   Header(
                     _scrollController,
-                    Get.find<CartController>().cart.length,
+                    controller.cartController.cart.length,
                     // authC.isAuth.value,
                     box.read('isAuth'),
                   )

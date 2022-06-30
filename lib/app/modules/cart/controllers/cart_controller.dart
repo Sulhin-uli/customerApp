@@ -164,7 +164,7 @@ class CartController extends GetxController {
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(
-      title: "Berhasil",
+      title: " ",
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -172,8 +172,7 @@ class CartController extends GetxController {
             msg,
             textAlign: TextAlign.center,
           ),
-          ElevatedButton(onPressed: () => Get.back(), child: Text("Tutup"))
-          // IconButton(onPressed: () => Get.back(), icon: Icon(Icons.close)),
+          TextButton(onPressed: () => Get.back(), child: Text("Tutup"))
         ],
       ),
     );
@@ -312,12 +311,15 @@ class CartController extends GetxController {
                 }
               }).toList();
             } catch (e) {
-              Get.toNamed(Routes.ERROR, arguments: e.toString());
+              // Get.toNamed(Routes.ERROR, arguments: e.toString());
+              print("luar load cart gagal");
+              print(e.toString());
             }
           },
         );
       } catch (e) {
-        print("load cart gagal");
+        print(e.toString());
+        print("dalama load cart gagal");
       }
     } finally {
       isLoading(false);
@@ -375,7 +377,7 @@ class CartController extends GetxController {
       cart.clear();
       getDataPhoto();
       getData();
-      dialogSuccess("Berhasil ditambahkan ke-keranjang");
+      dialogSuccess("Berhasil ditambahkan keranjang");
     });
   }
 

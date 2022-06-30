@@ -154,7 +154,7 @@ class ProdukController extends GetxController {
           product.add(data);
         }).toList();
       } catch (e) {
-        Get.toNamed(Routes.ERROR, arguments: e.toString());
+        // Get.toNamed(Routes.ERROR, arguments: e.toString());
       }
     });
   }
@@ -174,7 +174,7 @@ class ProdukController extends GetxController {
           productCategory.add(data);
         }).toList();
       } catch (e) {
-        Get.toNamed(Routes.ERROR, arguments: e.toString());
+        // Get.toNamed(Routes.ERROR, arguments: e.toString());
       }
     });
   }

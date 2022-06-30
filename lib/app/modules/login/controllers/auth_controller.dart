@@ -17,7 +17,7 @@ class AuthController extends GetxController {
   var customer = List<CustomerModel>.empty().obs;
 
   HomeController _homeController = HomeController();
-  CartController cartController = Get.put(CartController());
+  CartController cartC = Get.put(CartController());
 
   // GoogleSignIn _googleSignIn = new GoogleSignIn();
 
@@ -64,7 +64,10 @@ class AuthController extends GetxController {
             isSkipIntro.value = true;
             Get.offAllNamed(Routes.HOME);
             _homeController.changeTabIndex(0);
-            cartController.getData();
+            cartC.photoProduct.clear();
+            cartC.cart.clear();
+            cartC.getDataPhoto();
+            cartC.getData();
           } else {
             dialogError('Akun tidak ditemukan');
           }
