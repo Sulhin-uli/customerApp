@@ -1,5 +1,4 @@
 import 'package:customer_app/app/data/models/product_model.dart';
-import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart';
 
 class PhotoProduct {
   int? id;

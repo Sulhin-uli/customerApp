@@ -66,7 +66,7 @@ class AuthController extends GetxController {
             _homeController.changeTabIndex(0);
             cartC.photoProduct.clear();
             cartC.cart.clear();
-            cartC.getDataPhoto();
+            // cartC.getDataPhoto();
             cartC.getData();
           } else {
             dialogError('Akun tidak ditemukan');

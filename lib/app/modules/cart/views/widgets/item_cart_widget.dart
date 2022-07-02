@@ -14,6 +14,10 @@ class ItemCart extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
+    final dataImage = controller.produkController.photoProduct
+        .where((e) => e.productId!.id == data.productId!.id)
+        .first
+        .name;
     int countQty = data.productQty!;
     return Container(
       margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -71,9 +75,7 @@ class ItemCart extends GetView<CartController> {
                               height: 100,
                               width: 100,
                               child: Image.network(
-                                baseUrlFile +
-                                    "storage/produk/" +
-                                    data.productId!.image!,
+                                baseUrlFile + "storage/produk/" + dataImage!,
                                 fit: BoxFit.cover,
                               ),
                             ),

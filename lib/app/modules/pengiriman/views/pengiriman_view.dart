@@ -17,7 +17,7 @@ class PengirimanView extends GetView<PengirimanController> {
         leading: BackButton(color: Colors.black),
         elevation: 0.5,
         title: Text(
-          'Pengiriman',
+          'Checkout',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
@@ -140,6 +140,11 @@ class PengirimanView extends GetView<PengirimanController> {
                       itemCount: controller.cartController.cart.length,
                       itemBuilder: (context, i) {
                         final data = controller.cartController.cart[i];
+                        final dataImage = controller
+                            .cartController.produkController.photoProduct
+                            .where((e) => e.productId!.id == data.productId!.id)
+                            .first
+                            .name;
                         if (data.isMark == true) {
                           return Container(
                             padding: EdgeInsets.fromLTRB(24, 16, 16, 16),
@@ -174,7 +179,7 @@ class PengirimanView extends GetView<PengirimanController> {
                                             child: Image.network(
                                               baseUrlFile +
                                                   "storage/produk/" +
-                                                  data.productId!.image!,
+                                                  dataImage!,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -292,11 +297,12 @@ class PengirimanView extends GetView<PengirimanController> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    // Respond to button press
+                                    controller.checkout();
+                                    Get.toNamed(Routes.INVOICE);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     // primary: Color(0xff16A085), // background
-                                    primary: Colors.grey, // background
+                                    primary: Color(0xff16A085), // background
                                   ),
                                   // child: Text('Pilih Pembayaran'),
                                   child: Text('Buat Pesanan'),

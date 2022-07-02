@@ -17,6 +17,7 @@ class WishlistView extends GetView<WishlistController> {
     final _scrollController = TrackingScrollController();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           SingleChildScrollView(

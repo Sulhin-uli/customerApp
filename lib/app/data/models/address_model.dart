@@ -27,9 +27,8 @@ class AddressModel {
 
   AddressModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    userId = json['user_id'] != null
-        ? new UserModel.fromJson(json['user_id'])
-        : null;
+    userId =
+        json['user_id'] != null ? UserModel.fromJson(json['user_id']) : null;
     recipientsName = json['recipients_name'];
     telp = json['telp'];
     addressLabel = json['address_label'];
@@ -43,8 +42,8 @@ class AddressModel {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
-    if (this.userId != null) {
-      data['user_id'] = this.userId!.toJson();
+    if (userId != null) {
+      data['user_id'] = userId!.toJson();
     }
     data['recipients_name'] = recipientsName;
     data['telp'] = telp;

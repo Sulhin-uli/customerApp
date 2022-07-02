@@ -20,6 +20,7 @@ class CartView extends GetView<CartController> {
         ),
         elevation: 0.5,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -104,52 +105,59 @@ class CartView extends GetView<CartController> {
       bottomNavigationBar: Container(
         height: 70,
         color: Colors.white,
-        child: Obx(
-          () => Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                  width: 200,
-                  height: 45,
-                  child: Column(
-                    children: [
-                      Text(
-                        "Total Harga ",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        'Rp${formatCurrency.format(controller.total())}',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  )),
-              Obx(() => controller.isMark.isFalse
-                  ? ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey, // background
-                      ),
-                      child: Text(
-                        '     Beli (0)     ',
-                      ),
-                    )
-                  : ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.PENGIRIMAN);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xff16A085), // background
-                      ),
-                      child: Text(
-                        '     Beli (' +
-                            controller.lengthMark.value.toString() +
-                            ')     ',
-                      ),
-                    )),
-            ],
-          ),
+        child: Column(
+          children: [
+            Divider(
+              color: Color(0xff919A92),
+            ),
+            Obx(
+              () => Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      width: 200,
+                      height: 45,
+                      child: Column(
+                        children: [
+                          Text(
+                            "Total Harga ",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Text(
+                            'Rp${formatCurrency.format(controller.total())}',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )),
+                  Obx(() => controller.isMark.isFalse
+                      ? ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.grey, // background
+                          ),
+                          child: Text(
+                            '     Beli (0)     ',
+                          ),
+                        )
+                      : ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.PENGIRIMAN);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xff16A085), // background
+                          ),
+                          child: Text(
+                            '     Beli (' +
+                                controller.lengthMark.value.toString() +
+                                ')     ',
+                          ),
+                        )),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

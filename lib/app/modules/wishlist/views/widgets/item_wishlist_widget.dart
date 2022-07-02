@@ -15,6 +15,10 @@ class ItemWishlist extends GetView<WishlistController> {
 
   @override
   Widget build(BuildContext context) {
+    final dataImage = controller.produkController.photoProduct
+        .where((e) => e.productId!.id == data.productId!.id)
+        .first
+        .name;
     return Container(
       margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
       child: Card(
@@ -39,9 +43,7 @@ class ItemWishlist extends GetView<WishlistController> {
                       height: 100,
                       width: 100,
                       child: Image.network(
-                        baseUrlFile +
-                            "storage/produk/" +
-                            data.productId!.image!,
+                        baseUrlFile + "storage/produk/" + dataImage!,
                         fit: BoxFit.cover,
                       ),
                     ),

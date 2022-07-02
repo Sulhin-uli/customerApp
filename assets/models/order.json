@@ -1,0 +1,56 @@
+{
+  "id": 13,
+  "user_id": 5,
+  "address_id": 1,
+  "code": "INV/20220701/VII/I/00011",
+  "status": "created",
+  "order_date": "2022-07-01 14:34:52",
+  "payment_due": "2022-07-01 14:34:52",
+  "payment_status": "unpaid",
+  "payment_token": "ffac2bd2-e18e-471a-b90d-ba7dfae42933",
+  "payment_url": "https://app.sandbox.midtrans.com/snap/v3/redirection/ffac2bd2-e18e-471a-b90d-ba7dfae42933",
+  "total_price": 100000,
+  "approved_by": null,
+  "approved_at": null,
+  "cancelled_by": null,
+  "cancelled_at": null,
+  "cancellation_note": null,
+  "created_at": "2022-07-01T07:34:52.000000Z",
+  "updated_at": "2022-07-01T07:34:55.000000Z",
+  "address": {
+    "id": 1,
+    "user_id": 5,
+    "recipients_name": "Robert Davids",
+    "telp": "08345839235",
+    "address_label": "Rumah",
+    "city": "Bandung",
+    "postal_code": 45525,
+    "main_address": 1,
+    "complete_address": "Jl. Rengasdengklok blok dempet Rt 10 Rw 01, Kec Indramayu, Kab Indramayu, Jawa Barat.",
+    "note_for_courier": "Depan Masjid",
+    "created_at": null,
+    "updated_at": "2022-06-30T15:42:47.000000Z"
+  },
+  "user": {
+    "id": 5,
+    "name": "Pembeli",
+    "email": "pembeli@test.com",
+    "email_verified_at": null,
+    "token": null,
+    "token_expire": null,
+    "created_at": "2022-06-30T14:19:48.000000Z",
+    "updated_at": "2022-06-30T14:19:48.000000Z",
+    "is_email_verified": 1
+  },
+  "order_items": [
+    {
+      "id": 13,
+      "order_id": "13",
+      "product_id": "1",
+      "qty": "1",
+      "price": "100000",
+      "created_at": "2022-07-01T07:34:53.000000Z",
+      "updated_at": "2022-07-01T07:34:53.000000Z"
+    }
+  ]
+}

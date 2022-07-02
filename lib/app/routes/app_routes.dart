@@ -35,6 +35,10 @@ abstract class Routes {
   static const PRODUK = _Paths.PRODUK;
   static const IMAGE_VIEW = _Paths.IMAGE_VIEW;
   static const KATEGORI_VIEW = _Paths.KATEGORI_VIEW;
+
+  // pengiriman
+  static const PEMBAYARAN = _Paths.PEMBAYARAN;
+  static const INVOICE = _Paths.INVOICE;
 }
 
 abstract class _Paths {
@@ -70,4 +74,8 @@ abstract class _Paths {
   static const PRODUK = '/produk';
   static const IMAGE_VIEW = '/image-view';
   static const KATEGORI_VIEW = '/kategori-view';
+
+  // pengiriman
+  static const PEMBAYARAN = '/pembayaran';
+  static const INVOICE = '/invoice';
 }

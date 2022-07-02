@@ -19,10 +19,10 @@ class RoomChatModel {
   RoomChatModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     senderId = json['sender_id'] != null
-        ? new UserModel.fromJson(json['sender_id'])
+        ? UserModel.fromJson(json['sender_id'])
         : null;
     receiverId = json['receiver_id'] != null
-        ? new UserModel.fromJson(json['receiver_id'])
+        ? UserModel.fromJson(json['receiver_id'])
         : null;
     chat = json['chat_id'];
     isHide = json['is_hide'];

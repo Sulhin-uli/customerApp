@@ -1,4 +1,6 @@
 import 'package:customer_app/app/modules/detail_produk/views/widgets/image_view.dart';
+import 'package:customer_app/app/modules/pengiriman/views/invoice_view.dart';
+import 'package:customer_app/app/modules/pengiriman/views/pembayaran_view.dart';
 import 'package:customer_app/app/modules/produk/views/kategori_produk_view%20.dart';
 import 'package:get/get.dart';
 
@@ -173,6 +175,18 @@ class AppPages {
       name: _Paths.KATEGORI_VIEW,
       page: () => KategoriView(),
       binding: ProdukBinding(),
+    ),
+
+    //Pengiriman
+    GetPage(
+      name: _Paths.PEMBAYARAN,
+      page: () => PembayaranView(),
+      binding: PengirimanBinding(),
+    ),
+    GetPage(
+      name: _Paths.INVOICE,
+      page: () => InvoiceView(),
+      binding: PengirimanBinding(),
     ),
   ];
 }

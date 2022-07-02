@@ -24,12 +24,11 @@ class CartModel {
   CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     isMark = json['isMark'];
-    userId = json['user_id'] != null
-        ? new UserModel.fromJson(json['user_id'])
-        : null;
+    userId =
+        json['user_id'] != null ? UserModel.fromJson(json['user_id']) : null;
     productQty = json['product_qty'];
     productId = json['product_id'] != null
-        ? new ProductModel.fromJson(json['product_id'])
+        ? ProductModel.fromJson(json['product_id'])
         : null;
     sessionId = json['session_id'];
     createdAt = json['created_at'];
@@ -37,19 +36,19 @@ class CartModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['isMark'] = this.isMark;
-    if (this.userId != null) {
-      data['user_id'] = this.userId!.toJson();
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['isMark'] = isMark;
+    if (userId != null) {
+      data['user_id'] = userId!.toJson();
     }
-    data['product_qty'] = this.productQty;
-    if (this.productId != null) {
-      data['product_id'] = this.productId!.toJson();
+    data['product_qty'] = productQty;
+    if (productId != null) {
+      data['product_id'] = productId!.toJson();
     }
-    data['session_id'] = this.sessionId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['session_id'] = sessionId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

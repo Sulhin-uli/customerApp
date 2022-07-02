@@ -21,9 +21,8 @@ class CustomerModel {
 
   CustomerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    userId = json['user_id'] != null
-        ? new UserModel.fromJson(json['user_id'])
-        : null;
+    userId =
+        json['user_id'] != null ? UserModel.fromJson(json['user_id']) : null;
     addressId = json['address_id'];
     gender = json['gender'];
     birth = json['birth'];
@@ -32,7 +31,7 @@ class CustomerModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final data = <String, dynamic>{};
     data['id'] = id;
     if (userId != null) {
       data['user_id'] = userId!.toJson();

@@ -40,6 +40,17 @@ class CartProvider extends GetConnect {
     return response.body;
   }
 
+  Future<dynamic> postDataOrder(int? userId, String? token) async {
+    final response = await post('$url/shipment/place-order', {
+      "user_id": userId,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
+
   Future<void> deleteData(
     int? id,
     String token,

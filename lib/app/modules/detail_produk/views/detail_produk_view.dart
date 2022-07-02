@@ -362,6 +362,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                         margin: EdgeInsets.only(left: 16, right: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
