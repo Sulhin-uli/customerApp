@@ -22,6 +22,7 @@ class ProdukController extends GetxController {
   late TextEditingController seacrh;
   var isExpensive = true.obs;
   var isHideButtonPrice = true.obs;
+  var isFound = true.obs;
 
   @override
   void onInit() {
@@ -30,6 +31,18 @@ class ProdukController extends GetxController {
     getDataPhoto();
     getData();
     seacrh = TextEditingController();
+  }
+
+  void produkNotFound() async {
+    await Future.delayed(const Duration(seconds: 0), () {
+      isFound(false);
+    });
+  }
+
+  void produkFound() async {
+    await Future.delayed(const Duration(seconds: 0), () {
+      isFound(true);
+    });
   }
 
   void productExpensive() {

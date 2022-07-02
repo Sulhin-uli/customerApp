@@ -26,7 +26,7 @@ class BannerSlider extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       final data = controller.banner[index];
                       return GestureDetector(
-                        onTap: () => Get.toNamed(Routes.DETAIL_PRODUK),
+                        // onTap: () => Get.toNamed(Routes.DETAIL_PRODUK),
                         child: Container(
                           margin: EdgeInsets.fromLTRB(15, 16, 5, 5),
                           decoration: BoxDecoration(

@@ -298,7 +298,6 @@ class PengirimanView extends GetView<PengirimanController> {
                                 ElevatedButton(
                                   onPressed: () {
                                     controller.checkout();
-                                    Get.toNamed(Routes.INVOICE);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     // primary: Color(0xff16A085), // background

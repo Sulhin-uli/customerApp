@@ -32,7 +32,7 @@ class CartController extends GetxController {
   @override
   void onInit() {
     // getDataPhoto();
-    getData();
+    // getData();
     super.onInit();
     // Timer.periodic(Duration(seconds: 3), (Timer t) => print(t));
   }

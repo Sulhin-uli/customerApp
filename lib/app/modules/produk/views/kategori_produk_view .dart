@@ -64,6 +64,7 @@ class KategoriView extends GetView<ProdukController> {
         ],
         elevation: 0.5,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,24 +144,11 @@ class KategoriView extends GetView<ProdukController> {
                           final data = controller.product[i];
                           if (data.isActive == 1) {
                             if (data.categoryProductId!.name == Get.arguments) {
+                              controller.produkFound();
                               return ItemProduct(data);
                             } else {
-                              return Center(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SvgPicture.asset(
-                                      "assets/icons/empty-data.svg",
-                                      height: 100,
-                                      width: 100,
-                                    ),
-                                    Text(
-                                      "Produk Tidak Ada",
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  ],
-                                ),
-                              );
+                              controller.produkNotFound();
+                              return Container();
                             }
                           } else {
                             return Container();
@@ -169,6 +157,24 @@ class KategoriView extends GetView<ProdukController> {
                       ),
               ),
             ),
+            Obx(() => controller.isFound.isTrue
+                ? Container()
+                : Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/empty-data.svg",
+                          height: 100,
+                          width: 100,
+                        ),
+                        Text(
+                          "Produk Tidak Ada",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    ),
+                  )),
           ],
         ),
       ),

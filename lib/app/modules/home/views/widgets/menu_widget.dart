@@ -29,8 +29,8 @@ class Menu extends GetView<HomeController> {
                       children: [
                         Container(
                           // color: index % 2 == 0 ? Colors.amber : Colors.red,
-                          width: 37,
-                          height: 37,
+                          width: 40,
+                          height: 40,
                           child: FlatButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),

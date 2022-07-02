@@ -273,11 +273,12 @@ class InvoiceView extends GetView<PengirimanController> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          controller.invoice.isEmpty
-                              ? print("empty url")
-                              : Get.toNamed(Routes.PEMBAYARAN,
-                                  arguments:
-                                      controller.invoice.first.paymentUrl);
+                          // controller.invoice.isEmpty
+                          //     ? print("empty url")
+                          //     : Get.toNamed(Routes.PEMBAYARAN,
+                          //         arguments:
+                          //             controller.invoice.first.paymentUrl);
+                          Get.toNamed(Routes.PEMBAYARAN);
                         },
                         style: ElevatedButton.styleFrom(
                           // primary: Color(0xff16A085), // background

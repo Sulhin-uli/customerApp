@@ -70,6 +70,7 @@ class ProdukView extends GetView<ProdukController> {
         ],
         elevation: 0.5,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -16,11 +16,25 @@ class PembayaranView extends GetView<PengirimanController> {
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
-      body: new WebView(
-        initialUrl:
-            // "https://app.sandbox.midtrans.com/snap/v3/redirection/ffac2bd2-e18e-471a-b90d-ba7dfae42933",
-            Get.arguments,
-        javascriptMode: JavascriptMode.unrestricted,
+      body: Stack(
+        children: [
+          WebView(
+            initialUrl:
+                "https://app.sandbox.midtrans.com/snap/v3/redirection/ffac2bd2-e18e-471a-b90d-ba7dfae42933",
+            // Get.arguments,
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageFinished: (e) {
+              controller.isLoadingWeb(false);
+            },
+          ),
+          Obx(
+            () => controller.isLoadingWeb.isTrue
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(),
+          ),
+        ],
       ),
     );
   }
