@@ -152,7 +152,14 @@ class LoginView extends GetView<LoginController> {
                           : const Text('Masuk')),
                     ),
                   ),
-                )
+                ),
+                // Center(
+                //   child: ElevatedButton(
+                //       onPressed: () {
+                //         authC.googleLogin();
+                //       },
+                //       child: Text("Login w google")),
+                // )
               ],
             ),
           ),

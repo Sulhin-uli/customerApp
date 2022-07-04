@@ -19,15 +19,17 @@ class AuthController extends GetxController {
   HomeController _homeController = HomeController();
   CartController cartC = Get.put(CartController());
 
-  // GoogleSignIn _googleSignIn = new GoogleSignIn();
+  GoogleSignIn _googleSignIn = new GoogleSignIn();
+  GoogleSignInAccount? _currentUser;
 
-  // // Future<void> googleLogin() async {
-  // //   try {
-  // //     await _googleSignIn.signIn();
-  // //   } catch (error) {
-  // //     print(error);
-  // //   }
-  // // }
+  Future<void> googleLogin() async {
+    try {
+      await _googleSignIn.signIn().then((value) => _currentUser = value);
+      print(_currentUser);
+    } catch (error) {
+      print(error);
+    }
+  }
 
   void dialogError(String msg) {
     Get.defaultDialog(title: "Peringatan", middleText: msg);

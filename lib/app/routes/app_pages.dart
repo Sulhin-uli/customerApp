@@ -1,7 +1,3 @@
-import 'package:customer_app/app/modules/detail_produk/views/widgets/image_view.dart';
-import 'package:customer_app/app/modules/pengiriman/views/invoice_view.dart';
-import 'package:customer_app/app/modules/pengiriman/views/pembayaran_view.dart';
-import 'package:customer_app/app/modules/produk/views/kategori_produk_view%20.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -16,6 +12,7 @@ import '../modules/detail_chat/bindings/detail_chat_binding.dart';
 import '../modules/detail_chat/views/detail_chat_view.dart';
 import '../modules/detail_produk/bindings/detail_produk_binding.dart';
 import '../modules/detail_produk/views/detail_produk_view.dart';
+import '../modules/detail_produk/views/widgets/image_view.dart';
 import '../modules/error/bindings/error_binding.dart';
 import '../modules/error/views/error_view.dart';
 import '../modules/error/views/print_view.dart';
@@ -28,12 +25,17 @@ import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
 import '../modules/notifikasi/views/notifikasi_view.dart';
 import '../modules/pengiriman/bindings/pengiriman_binding.dart';
+import '../modules/pengiriman/views/invoice_view.dart';
+import '../modules/pengiriman/views/pembayaran_view.dart';
 import '../modules/pengiriman/views/pengiriman_view.dart';
 import '../modules/produk/bindings/produk_binding.dart';
+import '../modules/produk/views/kategori_produk_view%20.dart';
 import '../modules/produk/views/produk_view.dart';
 import '../modules/produk/views/search_produk_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/riwayat_pemesanan/bindings/riwayat_pemesanan_binding.dart';
+import '../modules/riwayat_pemesanan/views/riwayat_pemesanan_view.dart';
 import '../modules/saya/bindings/saya_binding.dart';
 import '../modules/saya/views/edit_password_view.dart';
 import '../modules/saya/views/edit_profile_view.dart';
@@ -187,6 +189,11 @@ class AppPages {
       name: _Paths.INVOICE,
       page: () => InvoiceView(),
       binding: PengirimanBinding(),
+    ),
+    GetPage(
+      name: _Paths.RIWAYAT_PEMESANAN,
+      page: () => RiwayatPemesananView(),
+      binding: RiwayatPemesananBinding(),
     ),
   ];
 }

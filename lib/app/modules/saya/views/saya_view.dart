@@ -48,36 +48,36 @@ class SayaView extends GetView<SayaController> {
                           width: 70,
                           height: 70,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(200),
-                            child: sayaC.selectedImagePath.value.isImageFileName
-                                ? Image.file(
-                                    File(sayaC.selectedImagePath.value),
-                                    height: 150,
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  )
-                                : sayaC.customer.isNotEmpty
-                                    ? Image.asset(
-                                        'assets/logo/noimage.png',
-                                        height: 150,
-                                        width: 150,
-                                        fit: BoxFit.cover,
-                                      )
-                                    // : Image.network(
-                                    //     baseUrlFile +
-                                    //         "storage/profile/" +
-                                    //         sayaC.customer.first.image!,
-                                    //     height: 150,
-                                    //     width: 150,
-                                    //     fit: BoxFit.cover,
-                                    //   ),
-                                    : Image.asset(
+                              borderRadius: BorderRadius.circular(200),
+                              child: sayaC
+                                      .selectedImagePath.value.isImageFileName
+                                  ? Image.file(
+                                      File(sayaC.selectedImagePath.value),
+                                      height: 150,
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : sayaC.customer.isNotEmpty
+                                      ? Image.asset(
                                           'assets/logo/noimage.png',
                                           height: 150,
                                           width: 150,
                                           fit: BoxFit.cover,
                                         )
-                          ),
+                                      // : Image.network(
+                                      //     baseUrlFile +
+                                      //         "storage/profile/" +
+                                      //         sayaC.customer.first.image!,
+                                      //     height: 150,
+                                      //     width: 150,
+                                      //     fit: BoxFit.cover,
+                                      //   ),
+                                      : Image.asset(
+                                          'assets/logo/noimage.png',
+                                          height: 150,
+                                          width: 150,
+                                          fit: BoxFit.cover,
+                                        )),
                         ),
                       ),
                       Positioned(
@@ -158,6 +158,7 @@ class SayaView extends GetView<SayaController> {
                   height: 20,
                 ),
                 title: const Text('Daftar Transaksi'),
+                onTap: () => Get.toNamed(Routes.RIWAYAT_PEMESANAN),
               ),
               ListTile(
                 leading: Image.asset(
