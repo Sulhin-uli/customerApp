@@ -330,40 +330,41 @@ class CartController extends GetxController {
         .postData(data["id"], productId, productQty, 1, data["token"])
         .then((response) {
       // print(response);
-      // final data = CartModel(
-      //   id: response["data"]["id"],
-      //   userId: UserModel(
-      //     id: response["data"]["user_id"]["id"],
-      //     name: response["data"]["user_id"]["name"],
-      //   ),
-      //   isMark: false,
-      //   productId: ProductModel(
-      //     id: response["data"]["product_id"]["id"],
-      //     name: response["data"]["product_id"]["name"],
-      //     slug: response["data"]["product_id"]["slug"],
-      //     categoryProductId: CategoryProductModel(
-      //       id: response["data"]["product_id"]["category_product_id"]["id"],
-      //       name: response["data"]["product_id"]["category_product_id"]["name"],
-      //       slug: response["data"]["product_id"]["category_product_id"]["slug"],
-      //       createdAt: response["data"]["product_id"]["category_product_id"]
-      //           ["created_at"],
-      //       updatedAt: response["data"]["product_id"]["category_product_id"]
-      //           ["updated_at"],
-      //     ),
-      //     code: response["data"]["product_id"]["code"],
-      //     stoke: response["data"]["product_id"]["stoke"],
-      //     price: response["data"]["product_id"]["price"],
-      //     desc: response["data"]["desc"],
-      //     userId: UserModel(
-      //       id: response["data"]["product_id"]["user_id"]["id"],
-      //       name: response["data"]["product_id"]["user_id"]["name"],
-      //     ),
-      //     isActive: response["data"]["isActive"],
-      //   ),
-      //   productQty: response["data"]["product_qty"],
-      //   sessionId: response["data"]["session_id"],
-      // );
-      // cart.add(data);
+      final data = CartModel(
+        id: response["data"]["id"] as int,
+        userId: UserModel(
+          id: response["data"]["user_id"]["id"] as int,
+          name: response["data"]["user_id"]["name"],
+        ),
+        isMark: false,
+        productId: ProductModel(
+          id: response["data"]["product_id"]["id"] as int,
+          name: response["data"]["product_id"]["name"],
+          slug: response["data"]["product_id"]["slug"],
+          categoryProductId: CategoryProductModel(
+            id: response["data"]["product_id"]["category_product_id"]["id"]
+                as int,
+            name: response["data"]["product_id"]["category_product_id"]["name"],
+            slug: response["data"]["product_id"]["category_product_id"]["slug"],
+            createdAt: response["data"]["product_id"]["category_product_id"]
+                ["created_at"],
+            updatedAt: response["data"]["product_id"]["category_product_id"]
+                ["updated_at"],
+          ),
+          code: response["data"]["product_id"]["code"],
+          stoke: response["data"]["product_id"]["stoke"] as int,
+          price: response["data"]["product_id"]["price"] as int,
+          desc: response["data"]["desc"],
+          userId: UserModel(
+            id: response["data"]["product_id"]["user_id"]["id"] as int,
+            name: response["data"]["product_id"]["user_id"]["name"],
+          ),
+          isActive: response["data"]["isActive"],
+        ),
+        productQty: response["data"]["product_qty"] as int,
+        sessionId: response["data"]["session_id"],
+      );
+      cart.add(data);
       // final item = findByid(response["id"]);
       // for (var itemPhoto in photoProduct) {
       //   if (itemPhoto.productId!.id == item.productId!.id) {
@@ -371,10 +372,10 @@ class CartController extends GetxController {
       //     cart.refresh();
       //   }
       // }
-      photoProduct.clear();
-      cart.clear();
+      // photoProduct.clear();
+      // cart.clear();
       // getDataPhoto();
-      getData();
+      // getData();
       dialogSuccess("Berhasil ditambahkan keranjang");
     });
   }

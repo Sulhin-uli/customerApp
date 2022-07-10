@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/views/widgets/header_widget.dart';
+import 'package:customer_app/app/modules/home/views/widgets/header_widget_cancel_2.dart';
 import 'package:customer_app/app/modules/home/views/widgets/menu_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/product_widget.dart';
 import 'package:customer_app/app/modules/home/views/widgets/rounded_widget.dart';
@@ -19,7 +20,6 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final box = GetStorage();
-  final authC = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {

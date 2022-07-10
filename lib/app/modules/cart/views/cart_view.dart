@@ -2,6 +2,7 @@ import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dar
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -74,8 +75,11 @@ class CartView extends GetView<CartController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                "assets/icons/empty-data.png",
+                              SizedBox(
+                                height: 25,
+                              ),
+                              SvgPicture.asset(
+                                "assets/icons/empty-data.svg",
                                 height: 100,
                                 width: 100,
                               ),

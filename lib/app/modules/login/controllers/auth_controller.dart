@@ -1,7 +1,4 @@
 import 'package:customer_app/app/data/models/customer_model.dart';
-import 'package:customer_app/app/data/models/user_model.dart';
-import 'package:customer_app/app/data/providers/customer_provider.dart';
-import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/providers/login_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
@@ -17,7 +14,6 @@ class AuthController extends GetxController {
   var customer = List<CustomerModel>.empty().obs;
 
   HomeController _homeController = HomeController();
-  CartController cartC = Get.put(CartController());
 
   GoogleSignIn _googleSignIn = new GoogleSignIn();
   GoogleSignInAccount? _currentUser;
@@ -66,10 +62,11 @@ class AuthController extends GetxController {
             isSkipIntro.value = true;
             Get.offAllNamed(Routes.HOME);
             _homeController.changeTabIndex(0);
-            cartC.photoProduct.clear();
-            cartC.cart.clear();
+            // cartC.photoProduct.clear();
+            // cartC.cart.clear();
             // cartC.getDataPhoto();
-            cartC.getData();
+            // cartC.getData();
+            // print("login berhasil");
           } else {
             dialogError('Akun tidak ditemukan');
           }

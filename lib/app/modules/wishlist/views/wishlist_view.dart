@@ -3,6 +3,7 @@ import 'package:customer_app/app/modules/login/controllers/auth_controller.dart'
 import 'package:customer_app/app/modules/wishlist/views/widgets/header_wishlist_widget.dart';
 import 'package:customer_app/app/modules/wishlist/views/widgets/item_wishlist_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -63,8 +64,8 @@ class WishlistView extends GetView<WishlistController> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                    "assets/icons/empty-data.png",
+                                  SvgPicture.asset(
+                                    "assets/icons/empty-data.svg",
                                     height: 100,
                                     width: 100,
                                   ),

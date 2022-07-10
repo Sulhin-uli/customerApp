@@ -29,6 +29,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    if (box.read('isAuth') == true) {
+      cartController.getData();
+    }
     // getDataPhoto();
     // getData();
     mainMenu();

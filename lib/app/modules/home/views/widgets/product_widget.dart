@@ -25,7 +25,8 @@ class Product extends GetView<HomeController> {
                 ? CircularProgressIndicator()
                 : ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.produkController.product.length,
+                    itemCount:
+                        controller.produkController.product.length > 4 ? 4 : 0,
                     itemBuilder: (context, index) {
                       final data = controller.produkController.product[index];
                       final dataImage = controller.produkController.photoProduct
