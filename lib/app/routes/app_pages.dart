@@ -24,6 +24,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
 import '../modules/notifikasi/views/notifikasi_view.dart';
+import '../modules/ongkir/bindings/ongkir_binding.dart';
+import '../modules/ongkir/views/ongkir_view.dart';
 import '../modules/pengiriman/bindings/pengiriman_binding.dart';
 import '../modules/pengiriman/views/invoice_view.dart';
 import '../modules/pengiriman/views/pembayaran_view.dart';
@@ -194,6 +196,11 @@ class AppPages {
       name: _Paths.RIWAYAT_PEMESANAN,
       page: () => RiwayatPemesananView(),
       binding: RiwayatPemesananBinding(),
+    ),
+    GetPage(
+      name: _Paths.ONGKIR,
+      page: () => OngkirView(),
+      binding: OngkirBinding(),
     ),
   ];
 }

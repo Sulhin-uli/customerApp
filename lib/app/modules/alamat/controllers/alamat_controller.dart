@@ -18,6 +18,7 @@ class AlamatController extends GetxController {
   late TextEditingController mainAddress;
   late TextEditingController noteForCourier;
   var isMain = false.obs;
+  var isLoading = true.obs;
   var address = List<AddressModel>.empty().obs;
 
   @override
@@ -90,40 +91,44 @@ class AlamatController extends GetxController {
   }
 
   void getData() async {
-    final data = box.read("userData") as Map<String, dynamic>;
+    try {
+      isLoading(true);
+    } finally {
+      isLoading(false);
+      final data = box.read("userData") as Map<String, dynamic>;
+      AddressProvider().getData(data['id'], data["token"]).then((response) {
+        try {
+          response["data"].map((e) {
+            final data = AddressModel(
+              id: e["id"],
+              userId: UserModel(
+                id: e["user_id"]["id"],
+                name: e["user_id"]["name"],
+              ),
+              recipientsName: e["recipients_name"],
+              telp: e["telp"],
+              addressLabel: e["address_label"],
+              completeAddress: e["complete_address"],
+              city: e["city"],
+              postalCode: e["postal_code"],
+              mainAddress: e["main_address"],
+              noteForCourier: e["note_for_courier"],
+            );
+            address.add(data);
 
-    AddressProvider().getData(data['id'], data["token"]).then((response) {
-      try {
-        response["data"].map((e) {
-          final data = AddressModel(
-            id: e["id"],
-            userId: UserModel(
-              id: e["user_id"]["id"],
-              name: e["user_id"]["name"],
-            ),
-            recipientsName: e["recipients_name"],
-            telp: e["telp"],
-            addressLabel: e["address_label"],
-            completeAddress: e["complete_address"],
-            city: e["city"],
-            postalCode: e["postal_code"],
-            mainAddress: e["main_address"],
-            noteForCourier: e["note_for_courier"],
-          );
-          address.add(data);
-
-          for (var e in address) {
-            if (e.mainAddress == 1) {
-              var addressMain = e;
-              address.remove(e);
-              address.insert(0, addressMain);
+            for (var e in address) {
+              if (e.mainAddress == 1) {
+                var addressMain = e;
+                address.remove(e);
+                address.insert(0, addressMain);
+              }
             }
-          }
-        }).toList();
-      } catch (e) {
-        print("Error is : " + e.toString());
-      }
-    });
+          }).toList();
+        } catch (e) {
+          print("Error is : " + e.toString());
+        }
+      });
+    }
   }
 
   AddressModel findByid(int id) {

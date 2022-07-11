@@ -51,7 +51,7 @@ class EditProfileView extends GetView<SayaController> {
                 // padding: EdgeInsets.all(16),
                 child: DropdownSearch<String>(
                   mode: Mode.MENU,
-                  showSelectedItems: true,
+                  // showSelectedItems: true,
                   items: ["Laki-laki", 'Perempuan'],
                   maxHeight: 120,
                   onChanged: (e) {

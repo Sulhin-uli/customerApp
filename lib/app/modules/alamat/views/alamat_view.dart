@@ -1,6 +1,7 @@
 import 'package:customer_app/app/modules/alamat/views/item_alamat_view.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -28,18 +29,35 @@ class AlamatView extends GetView<AlamatController> {
         elevation: 0.5,
       ),
       body: Obx(
-        () => controller.address.isEmpty
+        () => controller.isLoading.isTrue
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemCount: controller.address.length,
-                itemBuilder: (context, i) {
-                  int length = controller.address.length;
-                  final data = controller.address[i];
-                  return ItemAlamatView(data);
-                },
-              ),
+            : controller.address.isEmpty
+                ? Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/empty-data.svg",
+                          height: 100,
+                          width: 100,
+                        ),
+                        Text(
+                          "Produk Tidak Ada",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: controller.address.length,
+                    itemBuilder: (context, i) {
+                      int length = controller.address.length;
+                      final data = controller.address[i];
+                      return ItemAlamatView(data);
+                    },
+                  ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -50,8 +51,11 @@ class PengirimanView extends GetView<PengirimanController> {
                     ],
                   ),
                 ),
-                Divider(
-                  color: Colors.black.withOpacity(0.5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Divider(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.all(16),
@@ -62,12 +66,24 @@ class PengirimanView extends GetView<PengirimanController> {
                         children: [
                           Obx(
                             () => controller.alamatController.address.isEmpty
-                                ? CircularProgressIndicator()
+                                ? Center(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SvgPicture.asset(
+                                          "assets/icons/empty-data.svg",
+                                          height: 50,
+                                          width: 50,
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 : Expanded(
                                     child: Text(
                                       // "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
                                       controller.alamatController.address.first
-                                          .completeAddress!,
+                                          .addressLabel!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12),
@@ -96,7 +112,17 @@ class PengirimanView extends GetView<PengirimanController> {
                       ),
                       Obx(
                         () => controller.alamatController.address.isEmpty
-                            ? CircularProgressIndicator()
+                            ? Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Alamat Belum dipilih",
+                                      style: TextStyle(color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                              )
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -128,7 +154,7 @@ class PengirimanView extends GetView<PengirimanController> {
                 Container(
                   width: double.infinity,
                   height: 12,
-                  color: Color(0xffD1D1D1),
+                  color: Color.fromARGB(255, 245, 245, 245),
                 ),
                 Column(
                   children: [
@@ -147,7 +173,7 @@ class PengirimanView extends GetView<PengirimanController> {
                             .name;
                         if (data.isMark == true) {
                           return Container(
-                            padding: EdgeInsets.fromLTRB(24, 16, 16, 16),
+                            padding: EdgeInsets.fromLTRB(24, 16, 16, 0),
                             child: Column(
                               children: [
                                 ListTile(
@@ -209,35 +235,6 @@ class PengirimanView extends GetView<PengirimanController> {
                                     ],
                                   ),
                                 ),
-                                Divider(
-                                  color: Colors.black.withOpacity(0.5),
-                                ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Subtotal (" +
-                                            data.productQty.toString() +
-                                            " Barang)",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Rp ${formatCurrency.format(data.productId!.price! * data.productQty!)}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
                               ],
                             ),
                           );
@@ -248,10 +245,60 @@ class PengirimanView extends GetView<PengirimanController> {
                     ),
                   ],
                 ),
+                InkWell(
+                  onTap: () => Get.toNamed(Routes.ONGKIR),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Card(
+                      elevation: 5,
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.local_shipping,
+                          color: Color(0xff16A085),
+                        ),
+                        title: Text("Pilih Pengiriman"),
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Subtotal (0 Barang)",
+                          // "Subtotal (" + data.productQty.toString() + " Barang)",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(
+                          "Rp 100.000",
+                          // "Rp ${formatCurrency.format(data.productId!.price! * data.productQty!)}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                // Container(
+                //   width: double.infinity,
+                //   height: 12,
+                //   color: Color(0xffD1D1D1),
+                // ),
                 Container(
-                  width: double.infinity,
-                  height: 12,
-                  color: Color(0xffD1D1D1),
+                  height: 70,
                 ),
               ],
             ),
