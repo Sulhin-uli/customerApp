@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "228969466300",
-    "project_id": "gapoktan-61656",
-    "storage_bucket": "gapoktan-61656.appspot.com"
+    "project_number": "264125794973",
+    "project_id": "gapoktan-60d7d",
+    "storage_bucket": "gapoktan-60d7d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:228969466300:android:8d1b538e1f73f5dcae43b9",
+        "mobilesdk_app_id": "1:264125794973:android:4a11049401321aaa962274",
         "android_client_info": {
           "package_name": "com.gapoktan.tanikula"
         }
       },
       "oauth_client": [
         {
-          "client_id": "228969466300-u0iv0pg7gqe2a1b6hovihfvkm52o49sq.apps.googleusercontent.com",
+          "client_id": "264125794973-ojd18d6eruaadrslb426eip4rdjcbcqt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gapoktan.tanikula",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "228969466300-6bs86g9lphtm0e4a7n63c6t7kbl1vs5r.apps.googleusercontent.com",
+          "client_id": "264125794973-guiulonsd7vv0kd0l0rit1o52igh7msu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB3k9KDMZ56X3u4Lt_gvhU7XW2435jzgrk"
+          "current_key": "AIzaSyD-WavawypdsKPuUUYOORsMc4bF0mcGRTU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "228969466300-6bs86g9lphtm0e4a7n63c6t7kbl1vs5r.apps.googleusercontent.com",
+              "client_id": "264125794973-guiulonsd7vv0kd0l0rit1o52igh7msu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
