@@ -157,7 +157,7 @@ class SayaView extends GetView<SayaController> {
                   width: 20,
                   height: 20,
                 ),
-                title: const Text('Daftar Transaksi'),
+                title: const Text('Pesanan Saya'),
                 onTap: () => Get.toNamed(Routes.RIWAYAT_PEMESANAN),
               ),
               ListTile(

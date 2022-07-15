@@ -1,0 +1,22 @@
+{
+    "id": 6,
+    "user_id": 5,
+    "address_id": 1,
+    "code": "INV/20220714/VII/XIV/00006",
+    "status": "created",
+    "order_date": "2022-07-14 20:53:24",
+    "payment_due": "2022-07-15 20:53:24",
+    "payment_status": "unpaid",
+    "payment_token": "e932240b-a007-4d92-9a6d-97bb29606003",
+    "payment_url": "https://app.sandbox.midtrans.com/snap/v3/redirection/e932240b-a007-4d92-9a6d-97bb29606003",
+    "total_price": 1000000,
+    "approved_by": null,
+    "approved_at": null,
+    "cancelled_by": null,
+    "cancelled_at": null,
+    "cancellation_note": null,
+    "review": null,
+    "created_at": "2022-07-14T13:53:24.000000Z",
+    "updated_at": "2022-07-14T13:53:27.000000Z",
+    "name_billing": "Robert Davids"
+}

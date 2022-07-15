@@ -41,15 +41,25 @@ class HomeController extends GetxController {
   }
 
   void changeTabIndex(int index) {
-    if (box.read('isAuth') == true) {
+    if (index == 0) {
       tabIndex.value = index;
-    } else if (box.read('isAuth') == false) {
-      if (index != 1 && index != 2) {
-        tabIndex.value = index;
-      } else {
-        Get.offAllNamed(Routes.LOGIN);
-      }
+    } else if (box.read('isAuth') == true && index == 1) {
+      tabIndex.value = index;
+    } else if (box.read('isAuth') == true && index == 2) {
+      tabIndex.value = index;
+    } else {
+      // print("Belum login");
+      Get.offAllNamed(Routes.LOGIN);
     }
+    // if (box.read('isAuth') == true) {
+    // } else if (box.read('isAuth') == false) {
+    //   // if (index != 1 && index != 2) {
+    //   //   tabIndex.value = index;
+    //   // } else {
+    //   // }
+    //   // print(index);
+    //   print("object");
+    // }
   }
 
   void getDataPhoto() async {
