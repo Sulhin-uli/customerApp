@@ -1,6 +1,7 @@
 import 'package:customer_app/app/data/models/address_model.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/address_provider.dart';
+import 'package:customer_app/app/modules/ongkir/controllers/ongkir_controller.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,11 @@ class AlamatController extends GetxController {
   var isMain = false.obs;
   var isLoading = true.obs;
   var address = List<AddressModel>.empty().obs;
+  OngkirController ongkirController = Get.put(OngkirController());
+  var hiddenKota = true.obs;
+  var provinsiId = 0.obs;
+  var kotaId = 0.obs;
+  var hiddenButton = true.obs;
 
   @override
   void onInit() {
@@ -35,13 +41,20 @@ class AlamatController extends GetxController {
     super.onInit();
   }
 
+  void showButton() {
+    if (kotaId != 0) {
+      hiddenButton.value = false;
+    } else {
+      hiddenButton.value = true;
+    }
+  }
+
   // add data
   void postData(
     String recipientsName,
     String telp,
     String addressLabel,
     String completeAddress,
-    String city,
     int postalCode,
     int mainAddress,
     String noteForCourier,
@@ -50,8 +63,7 @@ class AlamatController extends GetxController {
     if (recipientsName != '' &&
         telp != '' &&
         addressLabel != '' &&
-        completeAddress != '' &&
-        city != '') {
+        completeAddress != '') {
       AddressProvider()
           .postData(
               data["id"],
@@ -59,7 +71,8 @@ class AlamatController extends GetxController {
               telp,
               addressLabel,
               completeAddress,
-              city,
+              provinsiId.value,
+              kotaId.value,
               postalCode,
               mainAddress,
               noteForCourier,
@@ -76,7 +89,8 @@ class AlamatController extends GetxController {
           telp: response["data"]["telp"],
           addressLabel: response["data"]["address_label"],
           completeAddress: response["data"]["complete_address"],
-          city: response["data"]["city"],
+          provinsiId: response["data"]["provinsi_id"],
+          kotaId: response["data"]["kota_id"],
           postalCode: response["data"]["postal_code"],
           mainAddress: response["data"]["main_address"],
           noteForCourier: response["data"]["note_for_courier"],
@@ -109,7 +123,8 @@ class AlamatController extends GetxController {
               telp: e["telp"],
               addressLabel: e["address_label"],
               completeAddress: e["complete_address"],
-              city: e["city"],
+              provinsiId: e["provinsi_id"],
+              kotaId: e["kota_id"],
               postalCode: e["postal_code"],
               mainAddress: e["main_address"],
               noteForCourier: e["note_for_courier"],
@@ -149,14 +164,26 @@ class AlamatController extends GetxController {
     final item = findByid(id);
     final data = box.read("userData") as Map<String, dynamic>;
     AddressProvider()
-        .updateData(id, recipientsName, telp, addressLabel, completeAddress,
-            city, mainAddress, postalCode, noteForCourier, data["token"])
+        .updateData(
+      id,
+      recipientsName,
+      telp,
+      addressLabel,
+      completeAddress,
+      provinsiId.value,
+      kotaId.value,
+      mainAddress,
+      postalCode,
+      noteForCourier,
+      data["token"],
+    )
         .then((_) {
       item.recipientsName = recipientsName;
       item.telp = telp;
       item.addressLabel = addressLabel;
       item.completeAddress = completeAddress;
-      item.city = city;
+      item.provinsiId = provinsiId.value;
+      item.kotaId = kotaId.value;
       item.postalCode = postalCode;
       item.mainAddress = mainAddress;
       item.noteForCourier = noteForCourier;

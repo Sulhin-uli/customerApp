@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final order = orderFromJson(jsonString);
+//     final checkout = checkoutFromJson(jsonString);
 
 import 'dart:convert';
 
-Order orderFromJson(String str) => Order.fromJson(json.decode(str));
+Checkout checkoutFromJson(String str) => Checkout.fromJson(json.decode(str));
 
-String orderToJson(Order data) => json.encode(data.toJson());
+String checkoutToJson(Checkout data) => json.encode(data.toJson());
 
-class Order {
-  Order({
+class Checkout {
+  Checkout({
     this.id,
     this.userId,
     this.addressId,
@@ -57,7 +57,7 @@ class Order {
   User? user;
   List<OrderItem>? orderItems;
 
-  factory Order.fromJson(Map<String, dynamic> json) => Order(
+  factory Checkout.fromJson(Map<String, dynamic> json) => Checkout(
         id: json["id"],
         userId: json["user_id"],
         addressId: json["address_id"],

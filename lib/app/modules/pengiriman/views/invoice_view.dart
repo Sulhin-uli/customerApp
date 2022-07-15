@@ -8,8 +8,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class InvoiceView extends GetView<PengirimanController> {
   @override
   Widget build(BuildContext context) {
-    // final data = controller.invoice.first;
-    // print(data.code);
+    final data = controller.findByid(Get.arguments);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -42,10 +41,10 @@ class InvoiceView extends GetView<PengirimanController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Text("Invoice"),
-                  Obx(() => controller.invoice.isEmpty
-                      ? CircularProgressIndicator()
-                      : Text(controller.invoice.first.code!)),
-                  // Text(data.code!),
+                  // Obx(() => controller.invoice.isEmpty
+                  //     ? CircularProgressIndicator()
+                  //     : Text(controller.invoice.first.code!)),
+                  Text(data.code!),
                 ],
               ),
             ),
@@ -278,7 +277,8 @@ class InvoiceView extends GetView<PengirimanController> {
                           //     : Get.toNamed(Routes.PEMBAYARAN,
                           //         arguments:
                           //             controller.invoice.first.paymentUrl);
-                          Get.toNamed(Routes.PEMBAYARAN);
+                          Get.toNamed(Routes.PEMBAYARAN,
+                              arguments: data.paymentUrl);
                         },
                         style: ElevatedButton.styleFrom(
                           // primary: Color(0xff16A085), // background

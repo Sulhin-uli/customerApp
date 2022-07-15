@@ -246,7 +246,10 @@ class PengirimanView extends GetView<PengirimanController> {
                   ],
                 ),
                 InkWell(
-                  onTap: () => Get.toNamed(Routes.ONGKIR),
+                  // onTap: () => Get.toNamed(Routes.ONGKIR),
+                  onTap: () {
+                    controller.ongkosKirim(149, 148, 25000, "jne");
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(

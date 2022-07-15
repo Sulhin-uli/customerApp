@@ -6,7 +6,8 @@ class AddressModel {
   String? recipientsName;
   String? telp;
   String? addressLabel;
-  String? city;
+  int? provinsiId;
+  int? kotaId;
   int? postalCode;
   int? mainAddress;
   String? completeAddress;
@@ -18,7 +19,8 @@ class AddressModel {
     this.recipientsName,
     this.telp,
     this.addressLabel,
-    this.city,
+    this.provinsiId,
+    this.kotaId,
     this.postalCode,
     this.mainAddress,
     this.completeAddress,
@@ -32,7 +34,7 @@ class AddressModel {
     recipientsName = json['recipients_name'];
     telp = json['telp'];
     addressLabel = json['address_label'];
-    city = json['city'];
+    // city = json['city'];
     postalCode = json['postal_code'];
     mainAddress = json['main_address'];
     completeAddress = json['complete_address'];

@@ -20,8 +20,8 @@ class PembayaranView extends GetView<PengirimanController> {
         children: [
           WebView(
             initialUrl:
-                "https://app.sandbox.midtrans.com/snap/v3/redirection/ffac2bd2-e18e-471a-b90d-ba7dfae42933",
-            // Get.arguments,
+                // "https://app.sandbox.midtrans.com/snap/v3/redirection/ffac2bd2-e18e-471a-b90d-ba7dfae42933",
+                Get.arguments,
             javascriptMode: JavascriptMode.unrestricted,
             onPageFinished: (e) {
               controller.isLoadingWeb(false);

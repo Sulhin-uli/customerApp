@@ -1,0 +1,70 @@
+{
+    "success": true,
+    "data": {
+        "id": 3,
+        "user_id": 5,
+        "address_id": 1,
+        "code": "INV\/20220715\/VII\/XV\/00001",
+        "status": "created",
+        "order_date": "2022-07-15 21:32:18",
+        "payment_due": "2022-07-16 21:32:18",
+        "payment_status": "unpaid",
+        "payment_token": "f89717b4-5de6-4039-896c-4b34f6918675",
+        "payment_url": "https:\/\/app.sandbox.midtrans.com\/snap\/v3\/redirection\/f89717b4-5de6-4039-896c-4b34f6918675",
+        "total_price": 110000,
+        "approved_by": null,
+        "approved_at": null,
+        "cancelled_by": null,
+        "cancelled_at": null,
+        "cancellation_note": null,
+        "review": null,
+        "created_at": "2022-07-15T14:32:18.000000Z",
+        "updated_at": "2022-07-15T14:32:19.000000Z",
+        "address": {
+            "id": 1,
+            "user_id": 5,
+            "recipients_name": "Robert Davids",
+            "telp": "08345839235",
+            "address_label": "Rumah",
+            "city": "Bandung",
+            "postal_code": 45525,
+            "main_address": 1,
+            "complete_address": "Jl. Rengasdengklok blok dempet Rt 10 Rw 01, Kec Indramayu, Kab Indramayu, Jawa Barat.",
+            "note_for_courier": "Depan Masjid",
+            "created_at": null,
+            "updated_at": "2022-07-15T03:40:03.000000Z"
+        },
+        "user": {
+            "id": 5,
+            "name": "Pembeli",
+            "email": "pembeli@test.com",
+            "email_verified_at": null,
+            "token": null,
+            "token_expire": null,
+            "created_at": "2022-07-15T02:46:19.000000Z",
+            "updated_at": "2022-07-15T02:46:19.000000Z",
+            "is_email_verified": 1
+        },
+        "order_items": [
+            {
+                "id": 4,
+                "order_id": "3",
+                "product_id": "3",
+                "qty": "1",
+                "price": "50000",
+                "created_at": "2022-07-15T14:32:18.000000Z",
+                "updated_at": "2022-07-15T14:32:18.000000Z"
+            },
+            {
+                "id": 5,
+                "order_id": "3",
+                "product_id": "4",
+                "qty": "1",
+                "price": "60000",
+                "created_at": "2022-07-15T14:32:18.000000Z",
+                "updated_at": "2022-07-15T14:32:18.000000Z"
+            }
+        ]
+    },
+    "message": "Data fetched"
+}

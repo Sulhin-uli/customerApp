@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:customer_app/app/data/models/courier_model.dart';
 import 'package:customer_app/app/data/models/order_model.dart';
 import 'package:customer_app/app/data/providers/cart_provider.dart';
 import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -14,6 +16,11 @@ class PengirimanController extends GetxController {
   CartController cartController = Get.find();
   var invoice = List<Order>.empty().obs;
   var isLoadingWeb = true.obs;
+  //
+  // var kotaAsalId = 0.obs;
+  // var kotaTujuanId = 0.obs;
+  // var kurir = "".obs;
+  // double berat = 0.0;
 
   final box = GetStorage();
 
@@ -25,75 +32,73 @@ class PengirimanController extends GetxController {
     );
   }
 
+  void ongkosKirim(
+      int kotaAsalId, int kotaTujuanId, int berat, String kurir) async {
+    // jawa barat 9
+    // indramayu 149
+    Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
+    try {
+      final response = await http.post(
+        url,
+        body: {
+          "origin": "$kotaAsalId",
+          "destination": "$kotaTujuanId",
+          "weight": "$berat",
+          "courier": kurir,
+        },
+        headers: {
+          "key": "b8c861f1ec74f5d14adfcda89caf5566",
+          "content-type": "application/x-www-form-urlencoded",
+        },
+      );
+
+      var data = json.decode(response.body) as Map<String, dynamic>;
+      var results = data["rajaongkir"]["results"] as List<dynamic>;
+
+      var listAllCourier = Courier.fromJsonList(results);
+      var courier = listAllCourier[0];
+
+      Get.defaultDialog(
+        title: courier.name!,
+        content: Column(
+          children: courier.costs!
+              .map(
+                (e) => ListTile(
+                  title: Text("${e.service}"),
+                  subtitle: Text("Rp ${e.cost![0].value}"),
+                  trailing: Text(
+                    courier.code == "pos"
+                        ? "${e.cost![0].etd}"
+                        : "${e.cost![0].etd} HARI",
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      );
+    } catch (err) {
+      print(err);
+      Get.defaultDialog(
+        title: "Terjadi Kesalahan",
+        middleText: err.toString(),
+      );
+    }
+  }
+
   void checkout() async {
     dialogLoading();
     await Future.delayed(const Duration(seconds: 4), () {
       Get.back();
-      Get.toNamed(Routes.INVOICE);
+      final data = box.read("userData") as Map<String, dynamic>;
+      CartProvider().postDataOrder(data["id"], data["token"]).then((response) {
+        final data = Order.fromJson(response["data"] as Map<String, dynamic>);
+        invoice.add(data);
+        Get.toNamed(Routes.INVOICE, arguments: data.id);
+      });
     });
-    // final data = box.read("userData") as Map<String, dynamic>;
-    // CartProvider().postDataOrder(data["id"], data["token"]).then((response) {
-    //   final data = Order(
-    //     id: response["data"]["id"],
-    //     code: response["data"]["code"],
-    //     // userId: response["data"]["user_id"],
-    //     // addressId: response["data"]["address_id"],
-    //     // status: response["data"]["status"],
-    //     // orderDate: response["data"]["order_date"],
-    //     // paymentDue: response["data"]["payment_due"],
-    //     // paymentStatus: response["data"]["payment_status"],
-    //     // paymentToken: response["data"]["payment_token"],
-    //     paymentUrl: response["data"]["payment_url"],
-    //     totalPrice: response["data"]["total_price"],
-    //     // approvedBy: response["data"]["approved_by"],
-    //     // approvedAt: response["data"]["approved_at"],
-    //     // cancelledBy: response["data"]["cancelled_by"],
-    //     // cancelledAt: response["data"]["cancelled_at"],
-    //     // cancellationNote: response["data"]["cancellation_note"],
-    //     // createdAt: response["data"]["created_at"],
-    //     // updatedAt: response["data"]["updated_at"],
-    //     // address: Address(
-    //     //     id: response["data"]["address"]["id"],
-    //     //     userId: response["data"]["address"]["user_id"],
-    //     //     recipientsName: response["data"]["address"]["recipients_name"],
-    //     //     telp: response["data"]["address"]["telp"],
-    //     //     addressLabel: response["data"]["address"]["address_label"],
-    //     //     city: response["data"]["address"]["city"],
-    //     //     postalCode: response["data"]["address"]["postal_code"],
-    //     //     mainAddress: response["data"]["address"]["main_address"],
-    //     //     completeAddress: response["data"]["address"]["complete_address"],
-    //     //     noteForCourier: response["data"]["address"]["note_for_courier"],
-    //     //     createdAt: response["data"]["address"]["created_at"],
-    //     //     updatedAt: response["data"]["address"]["updated_at"]),
-    //     // user: User(
-    //     //   id: response["data"]["user"]["id"],
-    //     //   name: response["data"]["user"]["name"],
-    //     //   email: response["data"]["user"]["email"],
-    //     //   token: response["data"]["user"]["token"],
-    //     //   tokenExpire: response["data"]["user"]["token_expire"],
-    //     //   createdAt: response["data"]["user"]["created_at"],
-    //     //   updatedAt: response["data"]["user"]["updated_at"],
-    //     //   isEmailVerified: response["data"]["user"]["is_email_verified"],
-    //     // ),
-    //     // orderItems: [
-    //     //   OrderItems(
-    //     //     id: response["data"]["order_items"]["id"],
-    //     //     orderId: response["data"]["order_items"]["order_id"],
-    //     //     productId: response["data"]["order_items"]["product_id"],
-    //     //     qty: response["data"]["order_items"]["qty"],
-    //     //     price: response["data"]["order_items"]["price"],
-    //     //     createdAt: response["data"]["order_items"]["created_at"],
-    //     //     updatedAt: response["data"]["order_items"]["updated_at"],
-    //     //   ),
-    //     // ],
-    //   );
-    //   invoice.add(data);
-    //   print(invoice.first.code);
-    // });
   }
 
-  @override
-  void onInit() {
-    super.onInit();
+  Order findByid(int id) {
+    return invoice.firstWhere((element) => element.id == id);
   }
 }
