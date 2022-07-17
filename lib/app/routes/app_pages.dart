@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/pengiriman/views/widgets/cek_ongkir_widget.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -201,6 +202,11 @@ class AppPages {
       name: _Paths.ONGKIR,
       page: () => OngkirView(),
       binding: OngkirBinding(),
+    ),
+    GetPage(
+      name: _Paths.CEK_ONGKIR,
+      page: () => CekOngkirView(),
+      binding: PengirimanBinding(),
     ),
   ];
 }

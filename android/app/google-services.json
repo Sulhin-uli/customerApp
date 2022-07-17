@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "264125794973",
-    "project_id": "gapoktan-60d7d",
-    "storage_bucket": "gapoktan-60d7d.appspot.com"
+    "project_number": "314161819154",
+    "project_id": "gapoktanapp",
+    "storage_bucket": "gapoktanapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:264125794973:android:4a11049401321aaa962274",
+        "mobilesdk_app_id": "1:314161819154:android:ffce977382e50d798232cb",
         "android_client_info": {
           "package_name": "com.gapoktan.tanikula"
         }
       },
       "oauth_client": [
         {
-          "client_id": "264125794973-ojd18d6eruaadrslb426eip4rdjcbcqt.apps.googleusercontent.com",
+          "client_id": "314161819154-gse6ag1f1u0gjvq2ht79si6f12o8q60e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gapoktan.tanikula",
-            "certificate_hash": "294e62b742280388188a55eec3eed10325dfab55"
+            "certificate_hash": "1b7ee8e9b88d405b201d667d8a0de3c1b334a86f"
           }
         },
         {
-          "client_id": "264125794973-guiulonsd7vv0kd0l0rit1o52igh7msu.apps.googleusercontent.com",
+          "client_id": "314161819154-l1icn90dl98k59qu4mlphkrbvvt69knb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD-WavawypdsKPuUUYOORsMc4bF0mcGRTU"
+          "current_key": "AIzaSyDYN73_OI_znIpVThAAnqJFzTBTBGDkjCk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "264125794973-guiulonsd7vv0kd0l0rit1o52igh7msu.apps.googleusercontent.com",
+              "client_id": "314161819154-l1icn90dl98k59qu4mlphkrbvvt69knb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
