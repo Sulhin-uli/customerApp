@@ -17,7 +17,10 @@ class PengirimanController extends GetxController {
   var hiddenForm = true.obs;
   CartController cartController = Get.find();
   var invoice = List<Order>.empty().obs;
+  var markProductId = List<int>.empty().obs;
   var isLoadingWeb = true.obs;
+  var isLoading = false.obs;
+  var isAllChoice = false.obs;
   var kurir = "".obs;
   var totalBarang = 0.obs;
   var totalHarga = 0.obs;
@@ -25,6 +28,7 @@ class PengirimanController extends GetxController {
     {"harga": 0}
   ].obs;
   var isChoice = false.obs;
+  // List<int> productId = [];
 
   //
   // var kotaAsalId = 0.obs;
@@ -50,76 +54,83 @@ class PengirimanController extends GetxController {
   void ongkosKirim(int kotaAsalId, int kotaTujuanId, int berat) async {
     // jawa barat 9
     // indramayu 149
-    Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
+
     try {
-      final response = await http.post(
-        url,
-        body: {
-          "origin": "$kotaAsalId",
-          "destination": "$kotaTujuanId",
-          "weight": "$berat",
-          "courier": "$kurir",
-        },
-        headers: {
-          "key": "b8c861f1ec74f5d14adfcda89caf5566",
-          "content-type": "application/x-www-form-urlencoded",
-        },
-      );
+      isLoading(true);
+      Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
+      try {
+        final response = await http.post(
+          url,
+          body: {
+            "origin": "$kotaAsalId",
+            "destination": "$kotaTujuanId",
+            "weight": "$berat",
+            "courier": "$kurir",
+          },
+          headers: {
+            "key": "b8c861f1ec74f5d14adfcda89caf5566",
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        );
 
-      var data = json.decode(response.body) as Map<String, dynamic>;
-      var results = data["rajaongkir"]["results"] as List<dynamic>;
+        var data = json.decode(response.body) as Map<String, dynamic>;
+        var results = data["rajaongkir"]["results"] as List<dynamic>;
 
-      var listAllCourier = Courier.fromJsonList(results);
-      var courier = listAllCourier[0];
+        var listAllCourier = Courier.fromJsonList(results);
+        var courier = listAllCourier[0];
 
-      Get.defaultDialog(
-        title: courier.name!,
-        content: Column(
-          children: courier.costs!
-              .map(
-                (e) => GestureDetector(
-                  onTap: () {
-                    ongkir.value = [
-                      {
-                        "code": courier.code,
-                        "name": courier.name,
-                        "service": e.service,
-                        "harga": e.cost![0].value,
-                        "hari": courier.code == "pos"
-                            ? e.cost![0].etd
-                            : "${e.cost![0].etd} HARI"
-                      }
-                    ];
-                    // print(ongkir);
-                    totalHarga.value = 0;
-                    addTotalHarga(0);
-                    addTotalHarga(ongkir.first["harga"]);
-                    isChoice.value = true;
-                    Get.back();
-                    Get.back();
-                  },
-                  child: Card(
-                    child: ListTile(
-                      title: Text("${e.service}"),
-                      subtitle: Text("Rp ${e.cost![0].value}"),
-                      trailing: Text(
-                        courier.code == "pos"
-                            ? "${e.cost![0].etd}"
-                            : "${e.cost![0].etd} HARI",
+        Get.defaultDialog(
+          title: courier.name!,
+          content: Column(
+            children: courier.costs!
+                .map(
+                  (e) => GestureDetector(
+                    onTap: () {
+                      ongkir.value = [
+                        {
+                          "code": courier.code,
+                          "name": courier.name,
+                          "service": e.service,
+                          "harga": e.cost![0].value,
+                          "hari": courier.code == "pos"
+                              ? e.cost![0].etd
+                              : "${e.cost![0].etd} HARI"
+                        }
+                      ];
+                      // print(ongkir);
+                      totalHarga.value = 0;
+                      isAllChoice.value = true;
+                      addTotalHarga(0);
+                      addTotalHarga(ongkir.first["harga"]);
+                      isChoice.value = true;
+                      Get.back();
+                      Get.back();
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text("${e.service}"),
+                        subtitle: Text("Rp ${e.cost![0].value}"),
+                        trailing: Text(
+                          courier.code == "pos"
+                              ? "${e.cost![0].etd}"
+                              : "${e.cost![0].etd} HARI",
+                        ),
                       ),
                     ),
                   ),
-                ),
-              )
-              .toList(),
-        ),
-      );
-    } catch (err) {
-      print(err);
-      Get.defaultDialog(
-        title: "Terjadi Kesalahan",
-        middleText: err.toString(),
-      );
+                )
+                .toList(),
+          ),
+        );
+      } catch (err) {
+        print(err);
+        Get.defaultDialog(
+          title: "Terjadi Kesalahan",
+          middleText: err.toString(),
+        );
+      }
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -133,10 +144,14 @@ class PengirimanController extends GetxController {
 
   void checkout() async {
     dialogLoading();
-    await Future.delayed(const Duration(seconds: 4), () {
+    await Future.delayed(const Duration(seconds: 6), () {
       Get.back();
       final data = box.read("userData") as Map<String, dynamic>;
-      CartProvider().postDataOrder(data["id"], data["token"]).then((response) {
+
+      CartProvider()
+          .postDataOrder(
+              data["id"], totalHarga.value, markProductId, data["token"])
+          .then((response) {
         final data = Order.fromJson(response["data"] as Map<String, dynamic>);
         invoice.add(data);
         Get.toNamed(Routes.INVOICE, arguments: data.id);

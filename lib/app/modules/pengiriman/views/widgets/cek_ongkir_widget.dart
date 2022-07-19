@@ -100,8 +100,12 @@ class CekOngkirView extends GetView<PengirimanController> {
                           ),
                           onPressed: () =>
                               controller.ongkosKirim(149, 148, 250),
-                          child: Text(
-                            'Cek ongkos kirim',
+                          child: Obx(
+                            () => controller.isLoading.isTrue
+                                ? const CircularProgressIndicator()
+                                : Text(
+                                    'Cek ongkos kirim',
+                                  ),
                           ),
                         ),
                       ),

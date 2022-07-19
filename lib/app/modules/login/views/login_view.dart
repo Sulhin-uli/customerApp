@@ -147,9 +147,11 @@ class LoginView extends GetView<LoginController> {
                           });
                         }
                       },
-                      child: Obx(() => controller.isLoading.isTrue
-                          ? const CircularProgressIndicator()
-                          : const Text('Masuk')),
+                      child: Obx(
+                        () => controller.isLoading.isTrue
+                            ? const CircularProgressIndicator()
+                            : const Text('Masuk'),
+                      ),
                     ),
                   ),
                 ),

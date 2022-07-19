@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
                           ? Routes.HOME
                           : Routes.LOGIN
                       : Routes.INTRODUCTION,
-                  // : Routes.ADD_ALAMAT,
+                  // : Routes.ULASAN,
                   theme: ThemeData(
                     primarySwatch: Colors.green,
                   ),

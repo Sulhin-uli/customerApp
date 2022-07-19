@@ -12,6 +12,7 @@ import '../controllers/pengiriman_controller.dart';
 class PengirimanView extends GetView<PengirimanController> {
   @override
   Widget build(BuildContext context) {
+    controller.markProductId.clear();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -172,6 +173,8 @@ class PengirimanView extends GetView<PengirimanController> {
                             .first
                             .name;
                         if (data.isMark == true) {
+                          controller.markProductId.add(data.id!);
+                          // print(data.id);
                           return Container(
                             padding: EdgeInsets.fromLTRB(24, 16, 16, 0),
                             child: Column(
@@ -215,6 +218,15 @@ class PengirimanView extends GetView<PengirimanController> {
                                             children: [
                                               Text(
                                                 data.productId!.name!,
+                                                style: TextStyle(
+                                                    color: Color(0xff919A92),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              Text(
+                                                data.productQty.toString() +
+                                                    " Barang",
                                                 style: TextStyle(
                                                     color: Color(0xff919A92),
                                                     fontSize: 12,
@@ -402,16 +414,25 @@ class PengirimanView extends GetView<PengirimanController> {
                                     )
                                   ],
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    controller.checkout();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    // primary: Color(0xff16A085), // background
-                                    primary: Color(0xff16A085), // background
-                                  ),
-                                  // child: Text('Pilih Pembayaran'),
-                                  child: Text('Buat Pesanan'),
+                                Obx(
+                                  () => controller.isAllChoice.isFalse
+                                      ? ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.grey, // background
+                                          ),
+                                          child: Text('Buat Pesanan'),
+                                        )
+                                      : ElevatedButton(
+                                          onPressed: () {
+                                            controller.checkout();
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            primary:
+                                                Color(0xff16A085), // background
+                                          ),
+                                          child: Text('Buat Pesanan'),
+                                        ),
                                 ),
                               ],
                             ),

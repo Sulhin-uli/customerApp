@@ -1,5 +1,6 @@
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class CartProvider extends GetConnect {
   @override
@@ -40,9 +41,12 @@ class CartProvider extends GetConnect {
     return response.body;
   }
 
-  Future<dynamic> postDataOrder(int? userId, String? token) async {
+  Future<dynamic> postDataOrder(
+      int? userId, int totalHarga, List<int> productId, String? token) async {
     final response = await post('$url/shipment/place-order', {
       "user_id": userId,
+      "total_hraga": totalHarga,
+      "product_id": productId,
     }, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -60,4 +64,20 @@ class CartProvider extends GetConnect {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       });
+
+  // Future<dynamic> postDataOrder(
+  //     Map<String, String> body, String filepath, String token) async {
+  //   // Map<String, String> headers = {
+  //   //   'Content-Type': 'multipart/form-data',
+  //   //   'Authorization': 'Bearer $token',
+  //   // };
+  //   // var request = http.MultipartRequest('POST', Uri.parse(url))
+  //   //   ..fields.addAll(body)
+  //   //   ..headers.addAll(headers)
+  //   //   ..files.add(await http.MultipartFile.fromPath('file', filepath));
+  //   // final response = await request.send();
+  //   // var responsed = await http.Response.fromStream(response);
+  //   // final responseData = json.decode(responsed.body);
+  //   // return responseData;
+  // }
 }
