@@ -13,9 +13,19 @@ import 'package:get_storage/get_storage.dart';
 
 class PengirimanController extends GetxController {
   AlamatController alamatController = Get.find();
+  var hiddenButton = true.obs;
+  var hiddenForm = true.obs;
   CartController cartController = Get.find();
   var invoice = List<Order>.empty().obs;
   var isLoadingWeb = true.obs;
+  var kurir = "".obs;
+  var totalBarang = 0.obs;
+  var totalHarga = 0.obs;
+  var ongkir = <Map<String, dynamic>>[
+    {"harga": 0}
+  ].obs;
+  var isChoice = false.obs;
+
   //
   // var kotaAsalId = 0.obs;
   // var kotaTujuanId = 0.obs;
@@ -32,8 +42,12 @@ class PengirimanController extends GetxController {
     );
   }
 
-  void ongkosKirim(
-      int kotaAsalId, int kotaTujuanId, int berat, String kurir) async {
+  @override
+  void onInit() {
+    addTotalHarga(0);
+  }
+
+  void ongkosKirim(int kotaAsalId, int kotaTujuanId, int berat) async {
     // jawa barat 9
     // indramayu 149
     Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
@@ -44,7 +58,7 @@ class PengirimanController extends GetxController {
           "origin": "$kotaAsalId",
           "destination": "$kotaTujuanId",
           "weight": "$berat",
-          "courier": kurir,
+          "courier": "$kurir",
         },
         headers: {
           "key": "b8c861f1ec74f5d14adfcda89caf5566",
@@ -63,13 +77,37 @@ class PengirimanController extends GetxController {
         content: Column(
           children: courier.costs!
               .map(
-                (e) => ListTile(
-                  title: Text("${e.service}"),
-                  subtitle: Text("Rp ${e.cost![0].value}"),
-                  trailing: Text(
-                    courier.code == "pos"
-                        ? "${e.cost![0].etd}"
-                        : "${e.cost![0].etd} HARI",
+                (e) => GestureDetector(
+                  onTap: () {
+                    ongkir.value = [
+                      {
+                        "code": courier.code,
+                        "name": courier.name,
+                        "service": e.service,
+                        "harga": e.cost![0].value,
+                        "hari": courier.code == "pos"
+                            ? e.cost![0].etd
+                            : "${e.cost![0].etd} HARI"
+                      }
+                    ];
+                    // print(ongkir);
+                    totalHarga.value = 0;
+                    addTotalHarga(0);
+                    addTotalHarga(ongkir.first["harga"]);
+                    isChoice.value = true;
+                    Get.back();
+                    Get.back();
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text("${e.service}"),
+                      subtitle: Text("Rp ${e.cost![0].value}"),
+                      trailing: Text(
+                        courier.code == "pos"
+                            ? "${e.cost![0].etd}"
+                            : "${e.cost![0].etd} HARI",
+                      ),
+                    ),
                   ),
                 ),
               )
@@ -82,6 +120,14 @@ class PengirimanController extends GetxController {
         title: "Terjadi Kesalahan",
         middleText: err.toString(),
       );
+    }
+  }
+
+  void showButton() {
+    if (kurir != "") {
+      hiddenButton.value = false;
+    } else {
+      hiddenButton.value = true;
     }
   }
 
@@ -100,5 +146,9 @@ class PengirimanController extends GetxController {
 
   Order findByid(int id) {
     return invoice.firstWhere((element) => element.id == id);
+  }
+
+  void addTotalHarga(int harga) {
+    totalHarga.value = cartController.total.value + harga;
   }
 }

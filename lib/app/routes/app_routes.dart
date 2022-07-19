@@ -42,6 +42,7 @@ abstract class Routes {
   static const RIWAYAT_PEMESANAN = _Paths.RIWAYAT_PEMESANAN;
   static const ONGKIR = _Paths.ONGKIR;
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
+  static const ULASAN = _Paths.ULASAN;
 }
 
 abstract class _Paths {
@@ -84,4 +85,5 @@ abstract class _Paths {
   static const RIWAYAT_PEMESANAN = '/riwayat-pemesanan';
   static const ONGKIR = '/ongkir';
   static const CEK_ONGKIR = '/cek_ongkir';
+  static const ULASAN = '/ulasan';
 }

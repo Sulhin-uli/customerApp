@@ -245,26 +245,77 @@ class PengirimanView extends GetView<PengirimanController> {
                     ),
                   ],
                 ),
-                InkWell(
-                  // onTap: () => Get.toNamed(Routes.ONGKIR),
-                  onTap: () {
-                    // controller.ongkosKirim(149, 148, 25000, "jne");
-                    Get.toNamed(Routes.CEK_ONGKIR);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Card(
-                      elevation: 5,
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.local_shipping,
-                          color: Color(0xff16A085),
-                        ),
-                        title: Text("Pilih Pengiriman"),
-                      ),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Divider(
+                    color: Colors.black.withOpacity(0.5),
                   ),
                 ),
+                Obx(
+                  () => controller.isChoice.isFalse
+                      ? Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Card(
+                            elevation: 5,
+                            child: ListTile(
+                              onTap: () {
+                                Get.toNamed(Routes.CEK_ONGKIR);
+                              },
+                              leading: Icon(
+                                Icons.local_shipping,
+                                color: Color(0xff16A085),
+                              ),
+                              title: Text("Pilih Pengiriman"),
+                              trailing: Icon(Icons.arrow_forward_ios_rounded),
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Card(
+                              elevation: 5,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      controller.ongkir.first["service"],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    trailing:
+                                        Icon(Icons.arrow_forward_ios_rounded),
+                                    onTap: () {
+                                      Get.toNamed(Routes.CEK_ONGKIR);
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Divider(
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: Text(
+                                      controller.ongkir.first["name"] +
+                                          " - (Rp ${formatCurrency.format(controller.ongkir.first['harga'])})",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    subtitle: Text("Estimasi pengiriman : " +
+                                        controller.ongkir.first["hari"]),
+                                    trailing:
+                                        Icon(Icons.arrow_forward_ios_rounded),
+                                    onTap: () {
+                                      Get.toNamed(Routes.CEK_ONGKIR);
+                                    },
+                                  )
+                                ],
+                              )),
+                        ),
+                ),
+
                 Divider(
                   color: Colors.black.withOpacity(0.5),
                 ),
@@ -275,15 +326,18 @@ class PengirimanView extends GetView<PengirimanController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Subtotal (0 Barang)",
-                          // "Subtotal (" + data.productQty.toString() + " Barang)",
+                          // "Subtotal (0 Barang)",
+                          "Subtotal (" +
+                              // data.productQty.toString()
+                              controller.cartController.lengthMark.toString() +
+                              " Barang)",
                           style: TextStyle(
                             fontSize: 12,
                           ),
                         ),
                         Text(
-                          "Rp 100.000",
-                          // "Rp ${formatCurrency.format(data.productId!.price! * data.productQty!)}",
+                          // "Rp 100.000",
+                          "Rp ${formatCurrency.format(controller.totalHarga.value)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -338,12 +392,14 @@ class PengirimanView extends GetView<PengirimanController> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      'Rp${formatCurrency.format(controller.cartController.total.value)}',
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    Obx(
+                                      () => Text(
+                                        'Rp${formatCurrency.format(controller.totalHarga.value)}',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 ElevatedButton(

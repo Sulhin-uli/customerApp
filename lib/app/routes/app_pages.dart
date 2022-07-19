@@ -1,4 +1,3 @@
-import 'package:customer_app/app/modules/pengiriman/views/widgets/cek_ongkir_widget.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -31,6 +30,7 @@ import '../modules/pengiriman/bindings/pengiriman_binding.dart';
 import '../modules/pengiriman/views/invoice_view.dart';
 import '../modules/pengiriman/views/pembayaran_view.dart';
 import '../modules/pengiriman/views/pengiriman_view.dart';
+import '../modules/pengiriman/views/widgets/cek_ongkir_widget.dart';
 import '../modules/produk/bindings/produk_binding.dart';
 import '../modules/produk/views/kategori_produk_view%20.dart';
 import '../modules/produk/views/produk_view.dart';
@@ -45,6 +45,8 @@ import '../modules/saya/views/edit_profile_view.dart';
 import '../modules/saya/views/saya_view.dart';
 import '../modules/toko/bindings/toko_binding.dart';
 import '../modules/toko/views/toko_view.dart';
+import '../modules/ulasan/bindings/ulasan_binding.dart';
+import '../modules/ulasan/views/ulasan_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
 import '../modules/wishlist/views/wishlist_view.dart';
 
@@ -207,6 +209,11 @@ class AppPages {
       name: _Paths.CEK_ONGKIR,
       page: () => CekOngkirView(),
       binding: PengirimanBinding(),
+    ),
+    GetPage(
+      name: _Paths.ULASAN,
+      page: () => const UlasanView(),
+      binding: UlasanBinding(),
     ),
   ];
 }

@@ -515,7 +515,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                       cartC.postData(data.id, 1);
                                       // print("false");
                                     } else {
-                                      // print("true");
+                                      print("true");
                                       int idCart = cartC.cart
                                           .where((e) =>
                                               e.productId!.id! == data.id)
