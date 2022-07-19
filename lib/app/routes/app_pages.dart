@@ -1,3 +1,4 @@
+import 'package:customer_app/app/modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -198,6 +199,11 @@ class AppPages {
     GetPage(
       name: _Paths.RIWAYAT_PEMESANAN,
       page: () => RiwayatPemesananView(),
+      binding: RiwayatPemesananBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_TRANSAKSI,
+      page: () => DetailRiwayatPemesananView(),
       binding: RiwayatPemesananBinding(),
     ),
     GetPage(

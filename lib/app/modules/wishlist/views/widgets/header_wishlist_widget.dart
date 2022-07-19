@@ -23,9 +23,10 @@ class _HeaderWishlistState extends State<HeaderWishlist> {
   @override
   void initState() {
     // TODO: implement initState
-    _backgroundColor = Color(0xff16A085);
-    _backgroundColorSearch = Colors.white;
-    _colorIcon = Colors.white;
+    _backgroundColor = Colors.white;
+    _backgroundColorSearch = Colors.grey[200];
+    _colorIcon = Colors.grey;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     _opacity = 0.0;
     _offset = 0.0;
 
@@ -37,29 +38,32 @@ class _HeaderWishlistState extends State<HeaderWishlist> {
   Widget build(BuildContext context) {
     // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
-    return Container(
-      color: _backgroundColor,
-      padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-      child: SafeArea(
-        child: Row(
-          children: [
-            _buildInputSearch(),
-            _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.CHAT),
-              icon: Icons.mail,
-              notification: 0,
-            ),
-            _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.CART),
-              icon: Icons.shopping_cart,
-              notification: widget.data,
-            ),
-            _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
-              icon: Icons.notifications,
-              notification: 0,
-            ),
-          ],
+    return Material(
+      elevation: 0.5,
+      child: Container(
+        color: _backgroundColor,
+        padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+        child: SafeArea(
+          child: Row(
+            children: [
+              _buildInputSearch(),
+              _buildIconButton(
+                onPressed: () => Get.toNamed(Routes.CHAT),
+                icon: Icons.mail,
+                notification: 0,
+              ),
+              _buildIconButton(
+                onPressed: () => Get.toNamed(Routes.CART),
+                icon: Icons.shopping_cart,
+                notification: widget.data,
+              ),
+              _buildIconButton(
+                onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
+                icon: Icons.notifications,
+                notification: 0,
+              ),
+            ],
+          ),
         ),
       ),
     );

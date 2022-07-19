@@ -15,4 +15,19 @@ class TransactionProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<dynamic> getDataDetail(
+    int? id,
+    int? userId,
+    String? token,
+  ) async {
+    final response = await post('$url/detail_transaction/$id', {
+      "user_id": userId,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
 }

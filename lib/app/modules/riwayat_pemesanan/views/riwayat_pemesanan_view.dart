@@ -31,9 +31,6 @@ class RiwayatPemesananView extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: TabBarView(controller: _tabx.controller, children: [
-        // Container(
-        //   child: Text("1"),
-        // ),
         SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -61,7 +58,7 @@ class RiwayatPemesananView extends StatelessWidget {
                             ),
                           )
                         : Container(
-                            margin: EdgeInsets.only(top: 5),
+                            margin: EdgeInsets.only(top: 10),
                             child: ListView.builder(
                               padding: EdgeInsets.zero,
                               physics: NeverScrollableScrollPhysics(),
@@ -73,17 +70,176 @@ class RiwayatPemesananView extends StatelessWidget {
                                 return Container(
                                   margin: EdgeInsets.symmetric(horizontal: 16),
                                   child: Card(
+                                    elevation: 5,
                                     clipBehavior: Clip.antiAlias,
                                     child: ListTile(
                                       title: Column(
                                         children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
                                           Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Text(data.code.toString(),
+                                              SizedBox(
+                                                width: 80,
+                                                child: Text(
+                                                  "ID Pesanan",
                                                   style: TextStyle(
-                                                    fontSize: 13,
-                                                  ))
+                                                    fontSize: 9,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  width: 10,
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 200,
+                                                    child: Text(
+                                                      data.code.toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 200,
+                                                    child: Text(
+                                                      data.orderDate.toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
                                             ],
+                                          ),
+                                          const Divider(
+                                            color: Color(0xff919A92),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                width: 80,
+                                                child: Text(
+                                                  "Total Bayar",
+                                                  style: TextStyle(
+                                                    fontSize: 9,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  width: 10,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 200,
+                                                child: Text(
+                                                  data.totalPrice.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: Color(0xff919A92),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                width: 80,
+                                                child: Text(
+                                                  "Status Pesanan",
+                                                  style: TextStyle(
+                                                    fontSize: 9,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  width: 10,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 200,
+                                                child: Text(
+                                                  data.status.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: Color(0xff919A92),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                width: 80,
+                                                child: Text(
+                                                  "Status Pembayaran",
+                                                  style: TextStyle(
+                                                    fontSize: 9,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  width: 10,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 200,
+                                                child: Text(
+                                                  data.paymentStatus.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Center(
+                                              child: SizedBox(
+                                                height: 46, //height of button
+                                                width: 300,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      primary: const Color(
+                                                          0xff16A085), // background
+                                                    ),
+                                                    onPressed: () {
+                                                      _tabx.getDataDetail(
+                                                          data.id!);
+                                                    },
+                                                    child: const Text(
+                                                        'Detail Pesanan')),
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),

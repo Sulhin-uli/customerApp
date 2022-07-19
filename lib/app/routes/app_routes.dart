@@ -40,6 +40,7 @@ abstract class Routes {
   static const PEMBAYARAN = _Paths.PEMBAYARAN;
   static const INVOICE = _Paths.INVOICE;
   static const RIWAYAT_PEMESANAN = _Paths.RIWAYAT_PEMESANAN;
+  static const DETAIL_TRANSAKSI = _Paths.DETAIL_TRANSAKSI;
   static const ONGKIR = _Paths.ONGKIR;
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
   static const ULASAN = _Paths.ULASAN;
@@ -83,6 +84,7 @@ abstract class _Paths {
   static const PEMBAYARAN = '/pembayaran';
   static const INVOICE = '/invoice';
   static const RIWAYAT_PEMESANAN = '/riwayat-pemesanan';
+  static const DETAIL_TRANSAKSI = '/detail_transaksi';
   static const ONGKIR = '/ongkir';
   static const CEK_ONGKIR = '/cek_ongkir';
   static const ULASAN = '/ulasan';
