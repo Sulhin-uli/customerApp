@@ -5,7 +5,9 @@ import 'package:customer_app/app/data/models/order_model.dart';
 import 'package:customer_app/app/data/providers/cart_provider.dart';
 import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -43,6 +45,28 @@ class PengirimanController extends GetxController {
       barrierDismissible: false,
       title: " ",
       content: CircularProgressIndicator(),
+    );
+  }
+
+  void dialogSuccess(String msg) {
+    Get.defaultDialog(
+      barrierDismissible: false,
+      title: " ",
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            msg,
+            textAlign: TextAlign.center,
+          ),
+          TextButton(
+              onPressed: () {
+                Get.back();
+                Get.toNamed(Routes.RIWAYAT_PEMESANAN);
+              },
+              child: Text("Ke Pesanan Saya"))
+        ],
+      ),
     );
   }
 
@@ -154,7 +178,16 @@ class PengirimanController extends GetxController {
           .then((response) {
         final data = Order.fromJson(response["data"] as Map<String, dynamic>);
         invoice.add(data);
-        Get.toNamed(Routes.INVOICE, arguments: data.id);
+        CartController cartController = Get.put(CartController());
+        cartController.cart.clear();
+        cartController.getData();
+        cartController.isAllMark.value = false;
+        cartController.isMark.value = false;
+        cartController.lengthMark.value = 0;
+        cartController.total.value = 0;
+        Get.back();
+        dialogSuccess(
+            "Pesanan Anda telah dibuat, Silahkan melanjutkan pembayaran!");
       });
     });
   }
