@@ -47,11 +47,15 @@ class RiwayatPemesananController extends GetxController
         final data =
             DetailTransaksi.fromJson(response["data"] as Map<String, dynamic>);
         detailRiwayatPemesanan.add(data);
-        Get.toNamed(Routes.DETAIL_TRANSAKSI);
+        Get.toNamed(Routes.DETAIL_TRANSAKSI, arguments: data.id);
       });
     } finally {
       isLoading(false);
     }
+  }
+
+  DetailTransaksi findByid(int id) {
+    return detailRiwayatPemesanan.firstWhere((element) => element.id == id);
   }
 
   final List<Tab> myTabs = const <Tab>[

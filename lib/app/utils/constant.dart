@@ -27,3 +27,19 @@ void dialogNoBack(String title, String msg) {
     ),
   );
 }
+
+void dialogSuccess(String msg) {
+  Get.defaultDialog(
+    title: " ",
+    content: Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          msg,
+          textAlign: TextAlign.center,
+        ),
+        TextButton(onPressed: () => Get.back(), child: Text("Tutup"))
+      ],
+    ),
+  );
+}

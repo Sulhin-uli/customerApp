@@ -346,7 +346,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                       Container(
                         width: double.infinity,
                         height: 9,
-                        color: Color(0xffD1D1D1),
+                        color: Color.fromARGB(255, 245, 245, 245),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
@@ -359,7 +359,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 16, right: 16),
+                        margin:
+                            EdgeInsets.only(left: 16, right: 16, bottom: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -437,11 +438,51 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               ),
                               textAlign: TextAlign.left,
                             ),
-                            SizedBox(
-                              height: 70,
-                            )
                           ],
                         ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 9,
+                        color: Color.fromARGB(255, 245, 245, 245),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 16, right: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Ulasan Pembeli",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Get.toNamed(Routes.ALAMAT);
+                                },
+                                child: Text(
+                                  "Lihat Semua",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff16A085),
+                                  ),
+                                ))
+                          ],
+                        ),
+                      ),
+
+                      Obx(() => controller.ulasanController.review.isEmpty
+                          ? CircularProgressIndicator()
+                          : ListTile(
+                              title: Text(controller.ulasanController.review
+                                          .last.review! ==
+                                      null
+                                  ? ""
+                                  : controller
+                                      .ulasanController.review.last.review!),
+                            )),
+
+                      SizedBox(
+                        height: 70,
                       )
                     ],
                   ),
@@ -527,7 +568,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                           .first
                                           .productQty!;
                                       cartC.updateQty(idCart, cartQty + 1);
-                                      cartC.dialogSuccess(
+                                      dialogSuccess(
                                           "Berhasil ditambahkan keranjang");
                                     }
                                   } else {

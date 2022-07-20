@@ -1,23 +1,47 @@
+import 'package:customer_app/app/data/models/review_model.dart';
+import 'package:customer_app/app/data/providers/review_provider.dart';
+import 'package:customer_app/app/modules/riwayat_pemesanan/controllers/riwayat_pemesanan_controller.dart';
+import 'package:customer_app/app/utils/constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class UlasanController extends GetxController {
-  //TODO: Implement UlasanController
+  RiwayatPemesananController riwayatPemesananController =
+      Get.put(RiwayatPemesananController());
+  late TextEditingController ulasanController;
+  var starsRated = 0.obs;
+  var review = List<Review>.empty().obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
-    super.onInit();
+    getData();
+    ulasanController = TextEditingController();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void getData() async {
+    ReviewProvider().getData().then((response) {
+      for (var e in response["data"]) {
+        final data = Review.fromJson(e as Map<String, dynamic>);
+        review.add(data);
+      }
+    });
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  final box = GetStorage();
 
-  void increment() => count.value++;
+  void addData(
+      int orderId, String productId, int starsRated, String reviewText) {
+    final data = box.read("userData") as Map<String, dynamic>;
+
+    ReviewProvider()
+        .postData(data["id"], orderId, productId, starsRated, reviewText,
+            data["token"])
+        .then((response) {
+      final data = Review.fromJson(response["data"] as Map<String, dynamic>);
+      review.add(data);
+      Get.back();
+      dialogSuccess("Produk Berhasil diberi Ulasan");
+    });
+  }
 }

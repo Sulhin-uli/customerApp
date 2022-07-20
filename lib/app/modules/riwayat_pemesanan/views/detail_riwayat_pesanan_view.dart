@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
   @override
   Widget build(BuildContext context) {
-    final dataDetail = controller.detailRiwayatPemesanan.first;
+    final dataDetail = controller.findByid(Get.arguments);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -162,7 +162,25 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
-                                        )
+                                        ),
+                                        (dataDetail.status == "completed" &&
+                                                dataDetail.paymentStatus ==
+                                                    "paid")
+                                            ? ElevatedButton(
+                                                onPressed: () {
+                                                  Get.toNamed(Routes.ULASAN,
+                                                      arguments: [
+                                                        Get.arguments,
+                                                        data.id
+                                                      ]);
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color(
+                                                      0xff16A085), // background
+                                                ),
+                                                child: Text('Beri Ulasan'),
+                                              )
+                                            : Container(),
                                       ],
                                     ),
                                   ],
@@ -423,31 +441,33 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Get.toNamed(Routes.PEMBAYARAN,
-                    //     arguments: dataDetail.paymentUrl);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red, // background
-                  ),
-                  child: Text('Batalkan Pemesanan'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed(Routes.PEMBAYARAN,
-                        arguments: dataDetail.paymentUrl);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff16A085), // background
-                  ),
-                  child: Text('Lanjutkan Pembayaran'),
-                ),
-              ],
-            )
+            (dataDetail.status != "completed")
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Get.toNamed(Routes.PEMBAYARAN,
+                          //     arguments: dataDetail.paymentUrl);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red, // background
+                        ),
+                        child: Text('Batalkan Pemesanan'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(Routes.PEMBAYARAN,
+                              arguments: dataDetail.paymentUrl);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xff16A085), // background
+                        ),
+                        child: Text('Lanjutkan Pembayaran'),
+                      ),
+                    ],
+                  )
+                : Container(),
           ],
         ),
       ),

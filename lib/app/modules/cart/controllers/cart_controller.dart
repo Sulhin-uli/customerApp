@@ -9,6 +9,7 @@ import 'package:customer_app/app/data/providers/cart_provider.dart';
 import 'package:customer_app/app/data/providers/photo_product_provider.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -164,22 +165,6 @@ class CartController extends GetxController {
   //     pengiriman.add(data);
   //   }).toList();
   // }
-
-  void dialogSuccess(String msg) {
-    Get.defaultDialog(
-      title: " ",
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            msg,
-            textAlign: TextAlign.center,
-          ),
-          TextButton(onPressed: () => Get.back(), child: Text("Tutup"))
-        ],
-      ),
-    );
-  }
 
   // void getDataPhoto() async {
   //   PhotoProductProvider().getData().then((response) {
