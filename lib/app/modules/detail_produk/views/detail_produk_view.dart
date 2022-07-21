@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:givestarreviews/givestarreviews.dart';
 
 import '../controllers/detail_produk_controller.dart';
 
@@ -26,6 +27,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
   @override
   Widget build(BuildContext context) {
     final data = produkC.findBySlug(Get.arguments);
+
     // find
     wishlistC.foundWishlist(data.id!);
     final double height = MediaQuery.of(context).size.height;
@@ -473,12 +475,53 @@ class DetailProdukView extends GetView<DetailProdukController> {
                       Obx(() => controller.ulasanController.review.isEmpty
                           ? CircularProgressIndicator()
                           : ListTile(
-                              title: Text(controller.ulasanController.review
-                                          .last.review! ==
-                                      null
-                                  ? ""
-                                  : controller
-                                      .ulasanController.review.last.review!),
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  Row(
+                                    children: [
+                                      StarRating(
+                                        value: int.parse(controller
+                                            .ulasanController.review
+                                            .firstWhere(
+                                                (e) => e.productId == data.id)
+                                            .starsRated!),
+                                        size: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        "oleh",
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        controller.ulasanController.review
+                                            .firstWhere(
+                                                (e) => e.productId == data.id)
+                                            .user!
+                                            .name!,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    controller.ulasanController.review
+                                        .firstWhere(
+                                            (e) => e.productId == data.id)
+                                        .review!,
+                                    style: TextStyle(fontSize: 13),
+                                  ),
+                                ],
+                              ),
                             )),
 
                       SizedBox(
