@@ -26,4 +26,9 @@ class ReviewProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<dynamic> starRated(int? productId) async {
+    final response = await get(baseUrl + "star_rated/$productId");
+    return response.body;
+  }
 }

@@ -156,6 +156,7 @@ class ProdukController extends GetxController {
             ),
             code: e["code"],
             stoke: e["stoke"],
+            stockOut: e["stock_out"],
             price: e["price"],
             desc: e["desc"],
             userId: UserModel(

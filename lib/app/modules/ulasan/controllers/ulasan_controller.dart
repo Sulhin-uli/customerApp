@@ -11,6 +11,9 @@ class UlasanController extends GetxController {
       Get.put(RiwayatPemesananController());
   late TextEditingController ulasanController;
   var starsRated = 0.obs;
+  var starsRatedResult = ''.obs;
+  var starsRatedLength = ''.obs;
+  // var starsRatedProduk = 0.obs;
   var review = List<Review>.empty().obs;
 
   @override
@@ -24,7 +27,29 @@ class UlasanController extends GetxController {
       for (var e in response["data"]) {
         final data = Review.fromJson(e as Map<String, dynamic>);
         review.add(data);
+        // print(review.length);
       }
+    });
+  }
+
+  void countRating(int idProduct) {
+    // var reviewLength =
+    //     review.where((e) => e.productId == idProduct).toList().length;
+
+    // review.where((e) => e.productId == idProduct).map((e) {
+    //   // starsRatedProduk.value =
+    //   print(e.starsRated);
+    //   //     starsRatedProduk.value + int.parse(e.starsRated!);
+    // });
+
+    // // double result = reviewLength.toDouble() / starsRatedProduk.value.toDouble();
+    // // starsRatedResult.value = result.toString();
+    // print(reviewLength);
+    // print(starsRatedResult.value);
+    ReviewProvider().starRated(idProduct).then((response) {
+      starsRatedResult.value = response["rate"].toString();
+      starsRatedLength.value = response["length"].toString();
+      // print(response["length"]);
     });
   }
 

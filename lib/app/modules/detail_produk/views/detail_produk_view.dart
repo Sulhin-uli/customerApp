@@ -27,10 +27,10 @@ class DetailProdukView extends GetView<DetailProdukController> {
   @override
   Widget build(BuildContext context) {
     final data = produkC.findBySlug(Get.arguments);
-
     // find
     wishlistC.foundWishlist(data.id!);
     final double height = MediaQuery.of(context).size.height;
+    controller.ulasanController.countRating(data.id!);
 
     return Scaffold(
       body: Column(
@@ -208,7 +208,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           children: [
                             Container(
                               child: Text(
-                                "Terjual 0",
+                                "Terjual " + data.stockOut.toString(),
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -237,12 +237,17 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                         Icons.star_rounded,
                                         color: Colors.amber,
                                       ),
-                                      Text(
-                                        "0.0",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text("(0)")
+                                      Obx(() => Text(
+                                            // "0.0",
+                                            controller.ulasanController
+                                                .starsRatedResult.value,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      Obx(() => Text("(" +
+                                          controller.ulasanController
+                                              .starsRatedLength.value +
+                                          ")")),
                                     ],
                                   ),
                                 ),

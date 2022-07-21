@@ -9,6 +9,7 @@ class ProductModel {
   CategoryProductModel? categoryProductId;
   String? code;
   int? stoke;
+  int? stockOut;
   int? price;
   String? desc;
   UserModel? userId;
@@ -24,6 +25,7 @@ class ProductModel {
       this.categoryProductId,
       this.code,
       this.stoke,
+      this.stockOut,
       this.price,
       this.desc,
       this.userId,
@@ -41,6 +43,7 @@ class ProductModel {
         : null;
     code = json['code'];
     stoke = json['stoke'];
+    stoke = json['stoke_out'];
     price = json['price'];
     desc = json['desc'];
     userId = json['user_id'] != null
