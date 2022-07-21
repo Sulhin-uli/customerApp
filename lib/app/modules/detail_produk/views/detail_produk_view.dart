@@ -464,7 +464,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Get.toNamed(Routes.ALAMAT);
+                                  Get.toNamed(Routes.ALL_ULASAN,
+                                      arguments: data.id);
                                 },
                                 child: Text(
                                   "Lihat Semua",

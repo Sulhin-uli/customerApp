@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
+import 'package:customer_app/app/modules/ulasan/views/all_review_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -219,6 +220,11 @@ class AppPages {
     GetPage(
       name: _Paths.ULASAN,
       page: () => const UlasanView(),
+      binding: UlasanBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_ULASAN,
+      page: () => AllReviewView(),
       binding: UlasanBinding(),
     ),
   ];

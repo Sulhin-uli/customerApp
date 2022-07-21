@@ -44,6 +44,7 @@ abstract class Routes {
   static const ONGKIR = _Paths.ONGKIR;
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
   static const ULASAN = _Paths.ULASAN;
+  static const ALL_ULASAN = _Paths.ALL_ULASAN;
 }
 
 abstract class _Paths {
@@ -88,4 +89,5 @@ abstract class _Paths {
   static const ONGKIR = '/ongkir';
   static const CEK_ONGKIR = '/cek_ongkir';
   static const ULASAN = '/ulasan';
+  static const ALL_ULASAN = '/all_ulasan';
 }
