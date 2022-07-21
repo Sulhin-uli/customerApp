@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:customer_app/app/data/models/courier_model.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PengirimanController extends GetxController {
   AlamatController alamatController = Get.find();
@@ -30,6 +32,9 @@ class PengirimanController extends GetxController {
     {"harga": 0}
   ].obs;
   var isChoice = false.obs;
+  final Completer<WebViewController> controllerWeb =
+      Completer<WebViewController>();
+
   // List<int> productId = [];
 
   //
