@@ -9,6 +9,7 @@ import 'package:customer_app/app/data/providers/product_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -38,6 +39,14 @@ class HomeController extends GetxController {
     mainMenu();
     bannerHome();
     super.onInit();
+    subscribe();
+  }
+
+  void subscribe() async {
+    print("dikalankan");
+    await FirebaseMessaging.instance.subscribeToTopic("all");
+    var token = await FirebaseMessaging.instance.getToken();
+    print("ini toktnnya = " + token!);
   }
 
   void changeTabIndex(int index) {

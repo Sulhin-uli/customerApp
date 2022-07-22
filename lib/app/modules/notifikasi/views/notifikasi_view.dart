@@ -1,5 +1,6 @@
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -20,73 +21,76 @@ class NotifikasiView extends GetView<NotifikasiController> {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.all(16),
-                child: Text(
-                  "Terbaru",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Text(
+                "Status Pesanan",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Container(
-                width: double.infinity,
-                height: 150,
-                color: Color(0xffEAFFEE),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          right: 16, left: 16, top: 10, bottom: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+            ),
+            Obx(
+              () => controller.isLoading.isTrue
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : controller.notif.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.info,
-                                color: Colors.blue,
+                              SvgPicture.asset(
+                                "assets/icons/empty-data.svg",
+                                height: 100,
+                                width: 100,
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text('Info',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6))),
-                              // title: const Text('info'),
+                              Text(
+                                "Data Tidak Ada",
+                                style: TextStyle(color: Colors.grey),
+                              )
                             ],
                           ),
-                          Container(
-                            margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Title Notification",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "ds is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type",
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.6),
+                        )
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 1,
+                          itemBuilder: (context, i) {
+                            final data = controller.notif[i];
+                            return Material(
+                              elevation: 0.5,
+                              child: Container(
+                                padding: EdgeInsets.all(16),
+                                width: double.infinity,
+                                color: Color(0xffEAFFEE),
+                                child: ListTile(
+                                  // leading: CircleAvatar(
+                                  //   backgroundImage: AssetImage(
+                                  //     "assets/icons/kategori.png",
+                                  //   ),
+                                  // ),
+                                  title: Text(
+                                    data.title!,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
+                                  ),
+                                  subtitle: Text(
+                                    data.body!,
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 14),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                              ),
+                            );
+                          },
+                        ),
+            ),
+          ],
         ),
       ),
     );
