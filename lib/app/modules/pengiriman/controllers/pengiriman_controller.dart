@@ -7,6 +7,7 @@ import 'package:customer_app/app/data/providers/cart_provider.dart';
 import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
+import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class PengirimanController extends GetxController {
   var isChoice = false.obs;
   final Completer<WebViewController> controllerWeb =
       Completer<WebViewController>();
+  NotifikasiController notifikasiController = Get.put(NotifikasiController());
 
   // List<int> productId = [];
 
@@ -190,6 +192,9 @@ class PengirimanController extends GetxController {
         cartController.isMark.value = false;
         cartController.lengthMark.value = 0;
         cartController.total.value = 0;
+        // notif
+        notifikasiController.notif.clear();
+        notifikasiController.getData();
         Get.back();
         dialogSuccess(
             "Pesanan Anda telah dibuat, Silahkan melanjutkan pembayaran!");

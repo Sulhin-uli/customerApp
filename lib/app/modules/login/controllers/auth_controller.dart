@@ -3,6 +3,7 @@ import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/providers/login_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/get_storage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,6 +61,7 @@ class AuthController extends GetxController {
             box.write('isAuth', true);
             isAuth.value = true;
             isSkipIntro.value = true;
+            // subscribe();
             Get.offAllNamed(Routes.HOME);
             _homeController.changeTabIndex(0);
             // cartC.photoProduct.clear();
@@ -75,6 +77,16 @@ class AuthController extends GetxController {
         }
       },
     );
+  }
+
+  // subscribe();
+  void subscribe() async {
+    print("dijalankan");
+    final data = box.read("dataUser") as Map<String, dynamic>;
+    var topic = "topic_user_id_" + data["id"];
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+    // var token = await FirebaseMessaging.instance.getToken();
+    // print("ini tokennya = " + token!);
   }
 
   // void logout() {

@@ -57,10 +57,10 @@ class NotifikasiView extends GetView<NotifikasiController> {
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 1,
+                          itemCount: controller.notif.length,
                           itemBuilder: (context, i) {
                             final data = controller.notif[i];
-                            return Material(
+                            return Card(
                               elevation: 0.5,
                               child: Container(
                                 padding: EdgeInsets.all(16),

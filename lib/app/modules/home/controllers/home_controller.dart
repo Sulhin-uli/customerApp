@@ -33,20 +33,23 @@ class HomeController extends GetxController {
     if (box.read('isAuth') == true) {
       cartController.cart.clear();
       cartController.getData();
+      subscribe();
     }
     // getDataPhoto();
     // getData();
     mainMenu();
     bannerHome();
     super.onInit();
-    subscribe();
   }
 
   void subscribe() async {
-    print("dikalankan");
-    await FirebaseMessaging.instance.subscribeToTopic("all");
-    var token = await FirebaseMessaging.instance.getToken();
-    print("ini toktnnya = " + token!);
+    print("dijalankan");
+    final data = box.read("userData") as Map<String, dynamic>;
+    var topic = "topic_user_id_" + data["id"].toString();
+    print(topic);
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+    // var token = await FirebaseMessaging.instance.getToken();
+    // print("ini tokennya = " + token!);
   }
 
   void changeTabIndex(int index) {
