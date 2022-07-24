@@ -33,6 +33,8 @@ dependencies:
   rename: 2.0.1
   webview_flutter: ^3.0.4
   givestarreviews: ^1.0.2
+  avatar_glow: 2.0.1
+  emoji_picker_flutter: 1.0.6
 
 dev_dependencies:
   flutter_lints: ^1.0.0

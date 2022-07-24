@@ -1,104 +1,129 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:customer_app/app/data/models/chat_model.dart';
-import 'package:customer_app/app/data/models/user_model.dart';
-import 'package:customer_app/app/data/providers/chat_provider.dart';
-import 'package:customer_app/app/utils/constant.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 class DetailChatController extends GetxController {
-  var chat = List<ChatModel>.empty().obs;
-  final box = GetStorage();
-  var storeName = ''.obs;
-  late TextEditingController chatC;
+  var isShowEmoji = false.obs;
+  int total_unread = 0;
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  late FocusNode focusNode;
+  late TextEditingController chatC;
+  late ScrollController scrollC;
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamChats(String chat_id) {
+    CollectionReference chats = firestore.collection("chats");
+
+    return chats.doc(chat_id).collection("chat").orderBy("time").snapshots();
+  }
+
+  Stream<DocumentSnapshot<Object?>> streamFriendData(String friendEmail) {
+    CollectionReference users = firestore.collection("users");
+
+    return users.doc(friendEmail).snapshots();
+  }
+
+  void addEmojiToChat(Emoji emoji) {
+    chatC.text = chatC.text + emoji.emoji;
+  }
+
+  void deleteEmoji() {
+    chatC.text = chatC.text.substring(0, chatC.text.length - 2);
+  }
+
+  void newChat(String email, Map<String, dynamic> argument, String chat) async {
+    if (chat != "") {
+      CollectionReference chats = firestore.collection("chats");
+      CollectionReference users = firestore.collection("users");
+
+      String date = DateTime.now().toIso8601String();
+
+      await chats.doc(argument["chat_id"]).collection("chat").add({
+        "pengirim": email,
+        "penerima": argument["friendEmail"],
+        "msg": chat,
+        "time": date,
+        "isRead": false,
+        "groupTime": DateFormat.yMMMMd('en_US').format(DateTime.parse(date)),
+      });
+
+      Timer(
+        Duration.zero,
+        () => scrollC.jumpTo(scrollC.position.maxScrollExtent),
+      );
+
+      chatC.clear();
+
+      await users
+          .doc(email)
+          .collection("chats")
+          .doc(argument["chat_id"])
+          .update({
+        "lastTime": date,
+      });
+
+      final checkChatsFriend = await users
+          .doc(argument["friendEmail"])
+          .collection("chats")
+          .doc(argument["chat_id"])
+          .get();
+
+      if (checkChatsFriend.exists) {
+        // exist on friend DB
+        // first check total unread
+        final checkTotalUnread = await chats
+            .doc(argument["chat_id"])
+            .collection("chat")
+            .where("isRead", isEqualTo: false)
+            .where("pengirim", isEqualTo: email)
+            .get();
+
+        // total unread for friend
+        total_unread = checkTotalUnread.docs.length;
+
+        await users
+            .doc(argument["friendEmail"])
+            .collection("chats")
+            .doc(argument["chat_id"])
+            .update({"lastTime": date, "total_unread": total_unread});
+      } else {
+        // not exist on friend DB
+        await users
+            .doc(argument["friendEmail"])
+            .collection("chats")
+            .doc(argument["chat_id"])
+            .set({
+          "connection": email,
+          "lastTime": date,
+          "total_unread": 1,
+        });
+      }
+    }
+  }
 
   @override
   void onInit() {
     chatC = TextEditingController();
-    // getData();
+    scrollC = ScrollController();
+    focusNode = FocusNode();
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        isShowEmoji.value = false;
+      }
+    });
     super.onInit();
   }
 
-  void newChat(String email, Map<String, dynamic> argument, String chat) {
-    CollectionReference chats = firestore.collection("chats");
-    chats.doc(argument["chat_id"]).collection("chat").add({
-      "pengirim": email,
-      "penerima": argument["friendEmail"],
-      "msg": chat,
-      "time": DateTime.now().toIso8601String(),
-      "isRead": false
-    });
-  }
-
-//////////////////////////////////
-
-  // add data
-  void postData(
-    int receiver,
-    String text,
-  ) async {
-    final data = box.read("userData") as Map<String, dynamic>;
-
-    if (text != '') {
-      ChatProvider()
-          .postData(data["id"], receiver, text, data["token"])
-          .then((response) {
-        final data = ChatModel(
-          id: response["data"]["id"],
-          senderId: UserModel(
-            id: response["data"]["sender_id"]["id"],
-            name: response["data"]["sender_id"]["name"],
-          ),
-          receiverId: UserModel(
-            id: response["data"]["receiver_id"]["id"],
-            name: response["data"]["receiver_id"]["name"],
-          ),
-          isHide: response["data"]["is_hide"],
-          isRead: response["data"]["is_read"],
-          text: response["data"]["text"],
-          createdAt: response["data"]["created_at"],
-        );
-        chat.insert(0, data);
-      });
-      try {} catch (e) {
-        dialog("Terjadi Kesalahan", "Gagal");
-      }
-    } else {
-      dialog("Terjadi Kesalahan", "Input Harus Diisi");
-    }
-  }
-
-  void getData() async {
-    final data = box.read("userData") as Map<String, dynamic>;
-
-    try {
-      ChatProvider().getData(data["token"]).then((response) {
-        response["data"].map((e) {
-          // print(response);
-          final data = ChatModel(
-            id: e["id"],
-            senderId: UserModel(
-              id: e["sender_id"]["id"],
-              name: e["sender_id"]["name"],
-            ),
-            receiverId: UserModel(
-              id: e["receiver_id"]["id"],
-              name: e["receiver_id"]["name"],
-            ),
-            isHide: e["is_hide"],
-            isRead: e["is_read"],
-            text: e["text"],
-            createdAt: e["created_at"],
-          );
-          chat.add(data);
-        }).toList();
-        storeName.value = chat.first.receiverId!.name!;
-      });
-    } catch (e) {
-      print("Error is : " + e.toString());
-    }
+  @override
+  void onClose() {
+    chatC.dispose();
+    scrollC.dispose();
+    focusNode.dispose();
+    super.onClose();
   }
 }
