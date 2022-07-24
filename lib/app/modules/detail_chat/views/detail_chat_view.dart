@@ -16,7 +16,8 @@ class DetailChatView extends GetView<DetailChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[900],
+        elevation: 0.5,
+        backgroundColor: Colors.white,
         leadingWidth: 100,
         leading: InkWell(
           onTap: () => Get.back(),
@@ -27,11 +28,11 @@ class DetailChatView extends GetView<DetailChatController> {
               SizedBox(width: 5),
               Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: Colors.black,
               ),
               SizedBox(width: 5),
               CircleAvatar(
-                radius: 25,
+                radius: 20,
                 backgroundColor: Colors.grey,
                 child: StreamBuilder<DocumentSnapshot<Object?>>(
                   stream: controller.streamFriendData(
@@ -88,7 +89,7 @@ class DetailChatView extends GetView<DetailChatController> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   Text(
@@ -124,6 +125,7 @@ class DetailChatView extends GetView<DetailChatController> {
         ),
         centerTitle: false,
       ),
+      backgroundColor: Color(0xffeeece4),
       body: WillPopScope(
         onWillPop: () {
           if (controller.isShowEmoji.isTrue) {
@@ -212,6 +214,7 @@ class DetailChatView extends GetView<DetailChatController> {
               ),
             ),
             Container(
+              color: Colors.white,
               margin: EdgeInsets.only(
                 bottom: controller.isShowEmoji.isTrue
                     ? 5
@@ -234,13 +237,13 @@ class DetailChatView extends GetView<DetailChatController> {
                           controller.chatC.text,
                         ),
                         decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            onPressed: () {
-                              controller.focusNode.unfocus();
-                              controller.isShowEmoji.toggle();
-                            },
-                            icon: Icon(Icons.emoji_emotions_outlined),
-                          ),
+                          // prefixIcon: IconButton(
+                          //   onPressed: () {
+                          //     controller.focusNode.unfocus();
+                          //     controller.isShowEmoji.toggle();
+                          //   },
+                          //   icon: Icon(Icons.emoji_emotions_outlined),
+                          // ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(100),
                           ),
@@ -251,7 +254,7 @@ class DetailChatView extends GetView<DetailChatController> {
                   SizedBox(width: 10),
                   Material(
                     borderRadius: BorderRadius.circular(100),
-                    color: Colors.red[900],
+                    color: Colors.white,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(100),
                       onTap: () => controller.newChat(
@@ -263,7 +266,7 @@ class DetailChatView extends GetView<DetailChatController> {
                         padding: const EdgeInsets.all(16),
                         child: Icon(
                           Icons.send,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -338,7 +341,7 @@ class ItemChat extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.red[900],
+              color: Color(0xffdafad2),
               borderRadius: isSender
                   ? BorderRadius.only(
                       topLeft: Radius.circular(15),
@@ -350,12 +353,20 @@ class ItemChat extends StatelessWidget {
                       topRight: Radius.circular(15),
                       bottomRight: Radius.circular(15),
                     ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 0.4,
+                  spreadRadius: 0.0,
+                  offset: Offset(1.0, 1.0), // shadow direction: bottom right
+                )
+              ],
             ),
             padding: EdgeInsets.all(15),
             child: Text(
               "$msg",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
