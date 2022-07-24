@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/data/models/chat_model.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/chat_provider.dart';
 import 'package:customer_app/app/utils/constant.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,14 +12,28 @@ class DetailChatController extends GetxController {
   var chat = List<ChatModel>.empty().obs;
   final box = GetStorage();
   var storeName = ''.obs;
-  late TextEditingController text;
+  late TextEditingController chatC;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
-    text = TextEditingController();
-    getData();
+    chatC = TextEditingController();
+    // getData();
     super.onInit();
   }
+
+  void newChat(String email, Map<String, dynamic> argument, String chat) {
+    CollectionReference chats = firestore.collection("chats");
+    chats.doc(argument["chat_id"]).collection("chat").add({
+      "pengirim": email,
+      "penerima": argument["friendEmail"],
+      "msg": chat,
+      "time": DateTime.now().toIso8601String(),
+      "isRead": false
+    });
+  }
+
+//////////////////////////////////
 
   // add data
   void postData(

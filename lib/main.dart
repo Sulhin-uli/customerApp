@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
                       ? authC.isAuth.isTrue
                           ? Routes.HOME
                           : Routes.LOGIN
-                      : Routes.INTRODUCTION,
+                      : Routes.LOGIN,
+                  // : Routes.INTRODUCTION,
                   // : Routes.ULASAN,
                   theme: ThemeData(
                     primarySwatch: Colors.green,
