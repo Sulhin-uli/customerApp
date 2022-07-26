@@ -29,4 +29,11 @@ class NotifikasiController extends GetxController {
       });
     }
   }
+
+  void deleteAll() async {
+    final data = box.read("userData") as Map<String, dynamic>;
+    NotificationProvider().deleteAll(data["token"]).then((response) {
+      notif.clear();
+    });
+  }
 }

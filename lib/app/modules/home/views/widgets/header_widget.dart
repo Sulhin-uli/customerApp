@@ -1,13 +1,14 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Header extends StatefulWidget {
-  Header(this.scrollController, this.countCart, this.auth);
+  Header(this.scrollController, this.countCart, this.countNotif, this.auth);
   final TrackingScrollController scrollController;
-  final countCart, auth;
+  final countCart, countNotif, auth;
 
   @override
   State<Header> createState() => _HeaderState();
@@ -46,7 +47,11 @@ class _HeaderState extends State<Header> {
           children: [
             _buildInputSearch(),
             _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.CHAT),
+              // onPressed: () => Get.toNamed(Routes.CHAT),
+              onPressed: () {
+                AuthController authController = Get.put(AuthController());
+                authController.googleLogin();
+              },
               icon: Icons.mail,
               notification: 0,
             ),
@@ -64,9 +69,17 @@ class _HeaderState extends State<Header> {
               notification: (widget.auth == true) ? widget.countCart : 0,
             ),
             _buildIconButton(
-              onPressed: () => Get.toNamed(Routes.NOTIFIKASI),
+              onPressed: () => {
+                setState(() {
+                  if (widget.auth == true) {
+                    Get.toNamed(Routes.NOTIFIKASI);
+                  } else {
+                    Get.offAllNamed(Routes.LOGIN);
+                  }
+                })
+              },
               icon: Icons.notifications,
-              notification: 0,
+              notification: (widget.auth == true) ? widget.countNotif : 0,
             ),
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/photo_product_provider.dart';
 import 'package:customer_app/app/data/providers/product_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -27,6 +28,7 @@ class HomeController extends GetxController {
   var countCart = 0.obs;
   ProdukController produkController = Get.put(ProdukController());
   CartController cartController = Get.put(CartController());
+  NotifikasiController notifikasiController = Get.put(NotifikasiController());
 
   @override
   void onInit() {

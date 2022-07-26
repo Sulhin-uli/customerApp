@@ -8,6 +8,8 @@ import 'package:customer_app/app/modules/alamat/controllers/alamat_controller.da
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
+import 'package:customer_app/app/modules/riwayat_pemesanan/controllers/riwayat_pemesanan_controller.dart';
+import 'package:customer_app/app/modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,8 @@ class PengirimanController extends GetxController {
   final Completer<WebViewController> controllerWeb =
       Completer<WebViewController>();
   NotifikasiController notifikasiController = Get.put(NotifikasiController());
+  RiwayatPemesananController riwayatPemesananController =
+      Get.put(RiwayatPemesananController());
 
   // List<int> productId = [];
 
@@ -69,6 +73,8 @@ class PengirimanController extends GetxController {
           TextButton(
               onPressed: () {
                 Get.back();
+                riwayatPemesananController.detailRiwayatPemesanan.clear();
+                riwayatPemesananController.getData();
                 Get.toNamed(Routes.RIWAYAT_PEMESANAN);
               },
               child: Text("Ke Pesanan Saya"))

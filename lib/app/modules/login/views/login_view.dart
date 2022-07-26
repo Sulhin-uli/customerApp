@@ -155,13 +155,13 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                Center(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        authC.googleLogin();
-                      },
-                      child: Text("Login w google")),
-                )
+                // Center(
+                //   child: ElevatedButton(
+                //       onPressed: () {
+                //         authC.googleLogin();
+                //       },
+                //       child: Text("Login w google")),
+                // )
               ],
             ),
           ),

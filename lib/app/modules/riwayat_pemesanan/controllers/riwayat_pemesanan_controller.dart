@@ -73,6 +73,7 @@ class RiwayatPemesananController extends GetxController
   @override
   void onInit() {
     super.onInit();
+    riwayatPemesanan.clear();
     getData();
 
     controller = TabController(vsync: this, length: myTabs.length);

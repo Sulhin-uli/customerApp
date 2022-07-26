@@ -58,6 +58,10 @@ class ChatController extends GetxController {
       },
     );
   }
+
+  /// controller
+  ///
+
   // FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   // Stream<QuerySnapshot<Map<String, dynamic>>> chatStream(String email) {

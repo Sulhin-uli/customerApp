@@ -14,4 +14,13 @@ class NotificationProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<dynamic> deleteAll(String token) async {
+    final response = await get(url + '_list/delete-all', headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
 }

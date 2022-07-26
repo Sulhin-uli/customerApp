@@ -12,7 +12,14 @@ class NotifikasiView extends GetView<NotifikasiController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        // leading: BackButton(color: Colors.black),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            controller.deleteAll();
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(
           'Notifikasi',
           style: TextStyle(color: Colors.black, fontSize: 16),
