@@ -47,8 +47,8 @@ class Review {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         nameReviewer: json["name_reviewer"],
-        user: User.fromJson(json["user"]),
-        product: Product.fromJson(json["product"]),
+        // user: User.fromJson(json["user"]),
+        // product: Product.fromJson(json["product"]),
       );
 
   Map<String, dynamic> toJson() => {

@@ -56,7 +56,7 @@ class UlasanController extends GetxController {
   final box = GetStorage();
 
   void addData(
-      int orderId, String productId, int starsRated, String reviewText) {
+      int orderId, int productId, String starsRated, String reviewText) {
     final data = box.read("userData") as Map<String, dynamic>;
 
     ReviewProvider()

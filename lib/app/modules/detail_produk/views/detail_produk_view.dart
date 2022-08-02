@@ -27,6 +27,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
   @override
   Widget build(BuildContext context) {
     final data = produkC.findBySlug(Get.arguments);
+    var stock = data.stockOut == null ? 0 : data.stockOut;
     // find
     wishlistC.foundWishlist(data.id!);
     final double height = MediaQuery.of(context).size.height;
@@ -208,7 +209,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           children: [
                             Container(
                               child: Text(
-                                "Terjual " + data.stockOut.toString(),
+                                "Terjual " + stock.toString(),
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),

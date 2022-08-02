@@ -11,8 +11,8 @@ class ReviewProvider extends GetConnect {
     return response.body;
   }
 
-  Future<dynamic> postData(int? userId, int orderId, String productId,
-      int starsRated, String review, String? token) async {
+  Future<dynamic> postData(int? userId, int orderId, int productId,
+      String starsRated, String review, String? token) async {
     final response = await post(url, {
       "user_id": userId,
       "order_id": orderId,

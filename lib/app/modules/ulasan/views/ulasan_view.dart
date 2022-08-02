@@ -164,8 +164,8 @@ class UlasanView extends GetView<UlasanController> {
                         // print(controller.ulasanController.text);
                         controller.addData(
                             Get.arguments[0],
-                            data.productId!,
-                            controller.starsRated.value,
+                            int.parse(data.productId!),
+                            controller.starsRated.value.toString(),
                             controller.ulasanController.text);
                       },
                       child: const Text('Kirim'),
