@@ -5,3 +5,12 @@ grey
 Color(0xff919A92),
 
 F0F3F8
+
+store
+final data = CartModel.fromJson(response["data"] as Map<String, dynamic>);
+cart.add(data);
+
+get
+final data = CartModel.fromJson(e as Map<String, dynamic>);
+cart.add(data);
+

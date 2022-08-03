@@ -1,54 +1,314 @@
-import 'package:customer_app/app/data/models/product_model.dart';
-import 'package:customer_app/app/data/models/user_model.dart';
+// To parse this JSON data, do
+//
+//     final cartModel = cartModelFromJson(jsonString);
+
+// import 'dart:convert';
+
+// CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
+
+// String cartModelToJson(CartModel data) => json.encode(data.toJson());
+
+// class CartModel {
+//   CartModel({
+//     this.id,
+//     this.name,
+//     this.slug,
+//     this.categoryProductId,
+//     this.code,
+//     this.stoke,
+//     this.stockOut,
+//     this.price,
+//     this.desc,
+//     this.userId,
+//     this.isActive,
+//     this.createdAt,
+//     this.updatedAt,
+//   });
+
+//   int? id;
+//   String? name;
+//   String? slug;
+//   CategoryProductId? categoryProductId;
+//   String? code;
+//   int? stoke;
+//   dynamic? stockOut;
+//   int? price;
+//   String? desc;
+//   UserId? userId;
+//   int? isActive;
+//   DateTime? createdAt;
+//   DateTime? updatedAt;
+
+//   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
+//         id: json["id"],
+//         name: json["name"],
+//         slug: json["slug"],
+//         categoryProductId:
+//             CategoryProductId.fromJson(json["category_product_id"]),
+//         code: json["code"],
+//         stoke: json["stoke"],
+//         stockOut: json["stock_out"],
+//         price: json["price"],
+//         desc: json["desc"],
+//         userId: UserId.fromJson(json["user_id"]),
+//         isActive: json["is_active"],
+//         createdAt: DateTime.parse(json["created_at"]),
+//         updatedAt: DateTime.parse(json["updated_at"]),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "slug": slug,
+//         "category_product_id": categoryProductId!.toJson(),
+//         "code": code,
+//         "stoke": stoke,
+//         "stock_out": stockOut,
+//         "price": price,
+//         "desc": desc,
+//         "user_id": userId!.toJson(),
+//         "is_active": isActive,
+//         "created_at": createdAt!.toIso8601String(),
+//         "updated_at": updatedAt!.toIso8601String(),
+//       };
+// }
+
+// class CategoryProductId {
+//   CategoryProductId({
+//     this.id,
+//     this.name,
+//     this.slug,
+//     this.isActive,
+//     this.createdAt,
+//     this.updatedAt,
+//   });
+
+//   int? id;
+//   String? name;
+//   String? slug;
+//   int? isActive;
+//   dynamic createdAt;
+//   dynamic updatedAt;
+
+//   factory CategoryProductId.fromJson(Map<String, dynamic> json) =>
+//       CategoryProductId(
+//         id: json["id"],
+//         name: json["name"],
+//         slug: json["slug"],
+//         isActive: json["is_active"],
+//         createdAt: json["created_at"],
+//         updatedAt: json["updated_at"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "slug": slug,
+//         "is_active": isActive,
+//         "created_at": createdAt,
+//         "updated_at": updatedAt,
+//       };
+// }
+
+// class UserId {
+//   UserId({
+//     this.id,
+//     this.name,
+//     this.email,
+//   });
+
+//   int? id;
+//   String? name;
+//   String? email;
+
+//   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
+//         id: json["id"],
+//         name: json["name"],
+//         email: json["email"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "email": email,
+//       };
+// }
+
+// To parse this JSON data, do
+//
+//     final cartModel = cartModelFromJson(jsonString);
+
+import 'dart:convert';
+
+CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
+
+String cartModelToJson(CartModel data) => json.encode(data.toJson());
 
 class CartModel {
+  CartModel({
+    this.id,
+    this.isMark,
+    this.userId,
+    this.productId,
+    this.productQty,
+    this.createdAt,
+    this.updatedAt,
+  });
+
   int? id;
   bool? isMark;
-  UserModel? userId;
-  ProductModel? productId;
+  UserId? userId;
+  ProductId? productId;
   int? productQty;
-  int? sessionId;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  CartModel(
-      {this.id,
-      this.isMark,
-      this.userId,
-      this.productId,
-      this.productQty,
-      this.sessionId,
-      this.createdAt,
-      this.updatedAt});
+  factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
+        id: json["id"],
+        isMark: false,
+        userId: UserId.fromJson(json["user_id"]),
+        productId: ProductId.fromJson(json["product_id"]),
+        productQty: json["product_qty"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
-  CartModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    isMark = json['isMark'];
-    userId =
-        json['user_id'] != null ? UserModel.fromJson(json['user_id']) : null;
-    productQty = json['product_qty'];
-    productId = json['product_id'] != null
-        ? ProductModel.fromJson(json['product_id'])
-        : null;
-    sessionId = json['session_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId!.toJson(),
+        "product_id": productId!.toJson(),
+        "product_qty": productQty,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+      };
+}
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['isMark'] = isMark;
-    if (userId != null) {
-      data['user_id'] = userId!.toJson();
-    }
-    data['product_qty'] = productQty;
-    if (productId != null) {
-      data['product_id'] = productId!.toJson();
-    }
-    data['session_id'] = sessionId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    return data;
-  }
+class ProductId {
+  ProductId({
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+    this.categoryProductId,
+    this.code,
+    this.stoke,
+    this.stockOut,
+    this.price,
+    this.desc,
+    this.userId,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int? id;
+  String? name;
+  String? slug;
+  dynamic image;
+  CategoryProductId? categoryProductId;
+  String? code;
+  int? stoke;
+  dynamic stockOut;
+  int? price;
+  String? desc;
+  UserId? userId;
+  int? isActive;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory ProductId.fromJson(Map<String, dynamic> json) => ProductId(
+        id: json["id"],
+        name: json["name"],
+        slug: json["slug"],
+        image: json["image"],
+        categoryProductId:
+            CategoryProductId.fromJson(json["category_product_id"]),
+        code: json["code"],
+        stoke: json["stoke"],
+        stockOut: json["stock_out"],
+        price: json["price"],
+        desc: json["desc"],
+        userId: UserId.fromJson(json["user_id"]),
+        isActive: json["is_active"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "slug": slug,
+        "image": image,
+        "category_product_id": categoryProductId!.toJson(),
+        "code": code,
+        "stoke": stoke,
+        "stock_out": stockOut,
+        "price": price,
+        "desc": desc,
+        "user_id": userId!.toJson(),
+        "is_active": isActive,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+      };
+}
+
+class CategoryProductId {
+  CategoryProductId({
+    this.id,
+    this.name,
+    this.slug,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int? id;
+  String? name;
+  String? slug;
+  int? isActive;
+  dynamic createdAt;
+  dynamic updatedAt;
+
+  factory CategoryProductId.fromJson(Map<String, dynamic> json) =>
+      CategoryProductId(
+        id: json["id"],
+        name: json["name"],
+        slug: json["slug"],
+        isActive: json["is_active"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "slug": slug,
+        "is_active": isActive,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+      };
+}
+
+class UserId {
+  UserId({
+    this.id,
+    this.name,
+    this.email,
+  });
+
+  int? id;
+  String? name;
+  String? email;
+
+  factory UserId.fromJson(Map<String, dynamic> json) => UserId(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+      };
 }

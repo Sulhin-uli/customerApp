@@ -6,14 +6,9 @@ import 'package:customer_app/app/data/models/photo_product_model.dart';
 import 'package:customer_app/app/data/models/product_model.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/cart_provider.dart';
-import 'package:customer_app/app/data/providers/photo_product_provider.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
-import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get_storage/get_storage.dart';
 
 class CartController extends GetxController {
@@ -256,40 +251,42 @@ class CartController extends GetxController {
         CartProvider().getData(data["id"], data["token"]).then(
           (response) {
             response["data"].map((e) {
-              final data = CartModel(
-                id: e["id"] as int,
-                userId: UserModel(
-                  id: e["user_id"]["id"] as int,
-                  name: e["user_id"]["name"],
-                ),
-                isMark: false,
-                productId: ProductModel(
-                  id: e["product_id"]["id"] as int,
-                  name: e["product_id"]["name"],
-                  slug: e["product_id"]["slug"],
-                  categoryProductId: CategoryProductModel(
-                    id: e["product_id"]["category_product_id"]["id"] as int,
-                    name: e["product_id"]["category_product_id"]["name"],
-                    slug: e["product_id"]["category_product_id"]["slug"],
-                    createdAt: e["product_id"]["category_product_id"]
-                        ["created_at"],
-                    updatedAt: e["product_id"]["category_product_id"]
-                        ["updated_at"],
-                  ),
-                  code: e["product_id"]["code"],
-                  stoke: e["product_id"]["stoke"] as int,
-                  price: e["product_id"]["price"] as int,
-                  desc: e["desc"],
-                  userId: UserModel(
-                    id: e["product_id"]["user_id"]["id"] as int,
-                    name: e["product_id"]["user_id"]["name"],
-                  ),
-                  isActive: e["is_active"],
-                ),
-                productQty: e["product_qty"] as int,
-                sessionId: e["session_id"],
-              );
+              final data = CartModel.fromJson(e as Map<String, dynamic>);
               cart.add(data);
+              // final data = CartModel(
+              //   id: e["id"] as int,
+              //   userId: UserModel(
+              //     id: e["user_id"]["id"] as int,
+              //     name: e["user_id"]["name"],
+              //   ),
+              //   isMark: false,
+              //   productId: ProductModel(
+              //     id: e["product_id"]["id"] as int,
+              //     name: e["product_id"]["name"],
+              //     slug: e["product_id"]["slug"],
+              //     categoryProductId: CategoryProductModel(
+              //       id: e["product_id"]["category_product_id"]["id"] as int,
+              //       name: e["product_id"]["category_product_id"]["name"],
+              //       slug: e["product_id"]["category_product_id"]["slug"],
+              //       createdAt: e["product_id"]["category_product_id"]
+              //           ["created_at"],
+              //       updatedAt: e["product_id"]["category_product_id"]
+              //           ["updated_at"],
+              //     ),
+              //     code: e["product_id"]["code"],
+              //     stoke: e["product_id"]["stoke"] as int,
+              //     price: e["product_id"]["price"] as int,
+              //     desc: e["desc"],
+              //     userId: UserModel(
+              //       id: e["product_id"]["user_id"]["id"] as int,
+              //       name: e["product_id"]["user_id"]["name"],
+              //     ),
+              //     isActive: e["is_active"],
+              //   ),
+              //   productQty: e["product_qty"] as int,
+              //   sessionId: e["session_id"],
+              // );
+              // cart.add(data);
               // final item = findByid(e["id"]);
               // for (var itemPhoto in photoProduct) {
               //   if (itemPhoto.productId!.id == item.productId!.id) {
@@ -315,40 +312,41 @@ class CartController extends GetxController {
         .postData(data["id"], productId, productQty, 1, data["token"])
         .then((response) {
       // print(response);
-      final data = CartModel(
-        id: response["data"]["id"] as int,
-        userId: UserModel(
-          id: response["data"]["user_id"]["id"] as int,
-          name: response["data"]["user_id"]["name"],
-        ),
-        isMark: false,
-        productId: ProductModel(
-          id: response["data"]["product_id"]["id"] as int,
-          name: response["data"]["product_id"]["name"],
-          slug: response["data"]["product_id"]["slug"],
-          categoryProductId: CategoryProductModel(
-            id: response["data"]["product_id"]["category_product_id"]["id"]
-                as int,
-            name: response["data"]["product_id"]["category_product_id"]["name"],
-            slug: response["data"]["product_id"]["category_product_id"]["slug"],
-            createdAt: response["data"]["product_id"]["category_product_id"]
-                ["created_at"],
-            updatedAt: response["data"]["product_id"]["category_product_id"]
-                ["updated_at"],
-          ),
-          code: response["data"]["product_id"]["code"],
-          stoke: response["data"]["product_id"]["stoke"] as int,
-          price: response["data"]["product_id"]["price"] as int,
-          desc: response["data"]["desc"],
-          userId: UserModel(
-            id: response["data"]["product_id"]["user_id"]["id"] as int,
-            name: response["data"]["product_id"]["user_id"]["name"],
-          ),
-          isActive: response["data"]["isActive"],
-        ),
-        productQty: response["data"]["product_qty"] as int,
-        sessionId: response["data"]["session_id"],
-      );
+      // final data = CartModel(
+      //   id: response["data"]["id"] as int,
+      //   userId: UserModel(
+      //     id: response["data"]["user_id"]["id"] as int,
+      //     name: response["data"]["user_id"]["name"],
+      //   ),
+      //   isMark: false,
+      //   productId: ProductModel(
+      //     id: response["data"]["product_id"]["id"] as int,
+      //     name: response["data"]["product_id"]["name"],
+      //     slug: response["data"]["product_id"]["slug"],
+      //     categoryProductId: CategoryProductModel(
+      //       id: response["data"]["product_id"]["category_product_id"]["id"]
+      //           as int,
+      //       name: response["data"]["product_id"]["category_product_id"]["name"],
+      //       slug: response["data"]["product_id"]["category_product_id"]["slug"],
+      //       createdAt: response["data"]["product_id"]["category_product_id"]
+      //           ["created_at"],
+      //       updatedAt: response["data"]["product_id"]["category_product_id"]
+      //           ["updated_at"],
+      //     ),
+      //     code: response["data"]["product_id"]["code"],
+      //     stoke: response["data"]["product_id"]["stoke"] as int,
+      //     price: response["data"]["product_id"]["price"] as int,
+      //     desc: response["data"]["desc"],
+      //     userId: UserModel(
+      //       id: response["data"]["product_id"]["user_id"]["id"] as int,
+      //       name: response["data"]["product_id"]["user_id"]["name"],
+      //     ),
+      //     isActive: response["data"]["isActive"],
+      //   ),
+      //   productQty: response["data"]["product_qty"] as int,
+      //   sessionId: response["data"]["session_id"],
+      // );
+      final data = CartModel.fromJson(response["data"] as Map<String, dynamic>);
       cart.add(data);
       // final item = findByid(response["id"]);
       // for (var itemPhoto in photoProduct) {
