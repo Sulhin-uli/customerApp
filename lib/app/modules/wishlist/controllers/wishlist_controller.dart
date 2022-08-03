@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class WishlistController extends GetxController {
   var isLoading = true.obs;
@@ -22,6 +23,17 @@ class WishlistController extends GetxController {
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
   final authC = Get.put(AuthController(), permanent: true);
   ProdukController produkController = Get.put(ProdukController());
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  void onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    isLoading(true);
+    wishlist.clear();
+    getData();
+    refreshController.refreshCompleted();
+  }
 
   void dialogSuccess(String msg) {
     Get.defaultDialog(
