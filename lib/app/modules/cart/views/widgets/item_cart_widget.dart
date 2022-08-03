@@ -42,8 +42,7 @@ class ItemCart extends GetView<CartController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      homeController.photoProductByProductId.clear();
-                      homeController.getPhotoProductById(data.productId!.id!);
+                      // homeController.photoProductByProductId.clear();
                       Get.toNamed(
                         Routes.DETAIL_PRODUK,
                         arguments: data.productId!.slug!,

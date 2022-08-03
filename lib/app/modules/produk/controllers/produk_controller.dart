@@ -65,33 +65,7 @@ class ProdukController extends GetxController {
     PhotoProductProvider().getData().then((response) {
       try {
         response["data"].map((e) {
-          final data = PhotoProduct(
-            id: e["id"],
-            productId: ProductModel(
-              id: e["product_id"]["id"],
-              name: e["product_id"]["name"],
-              slug: e["product_id"]["slug"],
-              categoryProductId: CategoryProductModel(
-                id: e["product_id"]["category_product_id"]["id"],
-                name: e["product_id"]["category_product_id"]["name"],
-                slug: e["product_id"]["category_product_id"]["slug"],
-                createdAt: e["product_id"]["category_product_id"]["created_at"],
-                updatedAt: e["product_id"]["category_product_id"]["updated_at"],
-              ),
-              code: e["product_id"]["code"],
-              stoke: e["product_id"]["stoke"],
-              price: e["product_id"]["price"],
-              desc: e["product_id"]["desc"],
-              userId: UserModel(
-                id: e["product_id"]["user_id"]["id"],
-                name: e["product_id"]["user_id"]["name"],
-              ),
-              isActive: e["product_id"]["isActive"],
-            ),
-            name: e["name"],
-            createdAt: e["created_at"],
-            updatedAt: e["updated_at"],
-          );
+          final data = PhotoProduct.fromJson(e as Map<String, dynamic>);
           photoProduct.add(data);
         }).toList();
       } catch (e) {
@@ -142,29 +116,30 @@ class ProdukController extends GetxController {
     ProductProvider().getData().then((response) {
       try {
         response["data"].map((e) {
-          final data = ProductModel(
-            id: e["id"],
-            name: e["name"],
-            slug: e["slug"],
-            categoryProductId: CategoryProductModel(
-              id: e["category_product_id"]["id"],
-              name: e["category_product_id"]["name"],
-              slug: e["category_product_id"]["slug"],
-              isActive: e["category_product_id"]["is_active"],
-              createdAt: e["category_product_id"]["created_at"],
-              updatedAt: e["category_product_id"]["updated_at"],
-            ),
-            code: e["code"],
-            stoke: e["stoke"],
-            stockOut: e["stock_out"],
-            price: e["price"],
-            desc: e["desc"],
-            userId: UserModel(
-              id: e["user_id"]["id"],
-              name: e["user_id"]["name"],
-            ),
-            isActive: e["is_active"],
-          );
+          // final data = ProductModel(
+          //   id: e["id"],
+          //   name: e["name"],
+          //   slug: e["slug"],
+          //   categoryProductId: CategoryProductModel(
+          //     id: e["category_product_id"]["id"],
+          //     name: e["category_product_id"]["name"],
+          //     slug: e["category_product_id"]["slug"],
+          //     isActive: e["category_product_id"]["is_active"],
+          //     createdAt: e["category_product_id"]["created_at"],
+          //     updatedAt: e["category_product_id"]["updated_at"],
+          //   ),
+          //   code: e["code"],
+          //   stoke: e["stoke"],
+          //   stockOut: e["stock_out"],
+          //   price: e["price"],
+          //   desc: e["desc"],
+          //   userId: UserModel(
+          //     id: e["user_id"]["id"],
+          //     name: e["user_id"]["name"],
+          //   ),
+          //   isActive: e["is_active"],
+          // );
+          final data = ProductModel.fromJson(e as Map<String, dynamic>);
           product.add(data);
         }).toList();
       } catch (e) {
