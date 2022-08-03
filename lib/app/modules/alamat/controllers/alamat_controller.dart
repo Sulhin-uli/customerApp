@@ -79,22 +79,24 @@ class AlamatController extends GetxController {
               data["token"])
           .then((response) {
         // print(response);
-        final data = AddressModel(
-          id: response["data"]["id"],
-          userId: UserModel(
-            id: response["data"]["user_id"]["id"],
-            name: response["data"]["user_id"]["name"],
-          ),
-          recipientsName: response["data"]["recipients_name"],
-          telp: response["data"]["telp"],
-          addressLabel: response["data"]["address_label"],
-          completeAddress: response["data"]["complete_address"],
-          provinsiId: response["data"]["provinsi_id"],
-          kotaId: response["data"]["kota_id"],
-          postalCode: response["data"]["postal_code"],
-          mainAddress: response["data"]["main_address"],
-          noteForCourier: response["data"]["note_for_courier"],
-        );
+        // final data = AddressModel(
+        //   id: response["data"]["id"],
+        //   userId: UserModel(
+        //     id: response["data"]["user_id"]["id"],
+        //     name: response["data"]["user_id"]["name"],
+        //   ),
+        //   recipientsName: response["data"]["recipients_name"],
+        //   telp: response["data"]["telp"],
+        //   addressLabel: response["data"]["address_label"],
+        //   completeAddress: response["data"]["complete_address"],
+        //   provinsiId: response["data"]["provinsi_id"],
+        //   kotaId: response["data"]["kota_id"],
+        //   postalCode: response["data"]["postal_code"],
+        //   mainAddress: response["data"]["main_address"],
+        //   noteForCourier: response["data"]["note_for_courier"],
+        // );
+        final data =
+            AddressModel.fromJson(response["data"] as Map<String, dynamic>);
         address.add(data);
         Get.back();
         dialog("Berhasil !", "data berhasil ditambahkan!");
@@ -113,22 +115,23 @@ class AlamatController extends GetxController {
       AddressProvider().getData(data['id'], data["token"]).then((response) {
         try {
           response["data"].map((e) {
-            final data = AddressModel(
-              id: e["id"],
-              userId: UserModel(
-                id: e["user_id"]["id"],
-                name: e["user_id"]["name"],
-              ),
-              recipientsName: e["recipients_name"],
-              telp: e["telp"],
-              addressLabel: e["address_label"],
-              completeAddress: e["complete_address"],
-              provinsiId: e["provinsi_id"],
-              kotaId: e["kota_id"],
-              postalCode: e["postal_code"],
-              mainAddress: e["main_address"],
-              noteForCourier: e["note_for_courier"],
-            );
+            // final data = AddressModel(
+            //   id: e["id"],
+            //   userId: UserModel(
+            //     id: e["user_id"]["id"],
+            //     name: e["user_id"]["name"],
+            //   ),
+            //   recipientsName: e["recipients_name"],
+            //   telp: e["telp"],
+            //   addressLabel: e["address_label"],
+            //   completeAddress: e["complete_address"],
+            //   provinsiId: e["provinsi_id"],
+            //   kotaId: e["kota_id"],
+            //   postalCode: e["postal_code"],
+            //   mainAddress: e["main_address"],
+            //   noteForCourier: e["note_for_courier"],
+            // );
+            final data = AddressModel.fromJson(e as Map<String, dynamic>);
             address.add(data);
 
             for (var e in address) {
