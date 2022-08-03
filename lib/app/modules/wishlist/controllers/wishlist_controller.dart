@@ -51,37 +51,39 @@ class WishlistController extends GetxController {
       WishlistProvider().getData(userId, data["token"]).then((response) {
         try {
           response["data"].map((e) {
-            final data = WishlistModel(
-              id: e["id"],
-              userId: UserModel(
-                id: e["user_id"]["id"],
-                name: e["user_id"]["name"],
-              ),
-              productId: ProductModel(
-                id: e["product_id"]["id"],
-                name: e["product_id"]["name"],
-                slug: e["product_id"]["slug"],
-                categoryProductId: CategoryProductModel(
-                  id: e["product_id"]["category_product_id"]["id"],
-                  name: e["product_id"]["category_product_id"]["name"],
-                  slug: e["product_id"]["category_product_id"]["slug"],
-                  createdAt: e["product_id"]["category_product_id"]
-                      ["created_at"],
-                  updatedAt: e["product_id"]["category_product_id"]
-                      ["updated_at"],
-                ),
-                code: e["product_id"]["code"],
-                stoke: e["product_id"]["stoke"],
-                price: e["product_id"]["price"],
-                desc: e["desc"],
-                userId: UserModel(
-                  id: e["product_id"]["user_id"]["id"],
-                  name: e["product_id"]["user_id"]["name"],
-                ),
-                isActive: e["isActive"],
-              ),
-            );
+            final data = WishlistModel.fromJson(e as Map<String, dynamic>);
             wishlist.add(data);
+            // final data = WishlistModel(
+            //   id: e["id"],
+            //   userId: UserModel(
+            //     id: e["user_id"]["id"],
+            //     name: e["user_id"]["name"],
+            //   ),
+            //   productId: ProductModel(
+            //     id: e["product_id"]["id"],
+            //     name: e["product_id"]["name"],
+            //     slug: e["product_id"]["slug"],
+            //     categoryProductId: CategoryProductModel(
+            //       id: e["product_id"]["category_product_id"]["id"],
+            //       name: e["product_id"]["category_product_id"]["name"],
+            //       slug: e["product_id"]["category_product_id"]["slug"],
+            //       createdAt: e["product_id"]["category_product_id"]
+            //           ["created_at"],
+            //       updatedAt: e["product_id"]["category_product_id"]
+            //           ["updated_at"],
+            //     ),
+            //     code: e["product_id"]["code"],
+            //     stoke: e["product_id"]["stoke"],
+            //     price: e["product_id"]["price"],
+            //     desc: e["desc"],
+            //     userId: UserModel(
+            //       id: e["product_id"]["user_id"]["id"],
+            //       name: e["product_id"]["user_id"]["name"],
+            //     ),
+            //     isActive: e["isActive"],
+            //   ),
+            // );
+            // wishlist.add(data);
 
             // final item = findByid(e["id"]);
             // for (var itemPhoto in photoProduct) {
@@ -102,82 +104,6 @@ class WishlistController extends GetxController {
     }
   }
 
-  void getDataPhoto() async {
-    PhotoProductProvider().getData().then((response) {
-      try {
-        response["data"].map((e) {
-          final data = PhotoProduct(
-            id: e["id"],
-            productId: ProductModel(
-              id: e["product_id"]["id"],
-              name: e["product_id"]["name"],
-              slug: e["product_id"]["slug"],
-              categoryProductId: CategoryProductModel(
-                id: e["product_id"]["category_product_id"]["id"],
-                name: e["product_id"]["category_product_id"]["name"],
-                slug: e["product_id"]["category_product_id"]["slug"],
-                createdAt: e["product_id"]["category_product_id"]["created_at"],
-                updatedAt: e["product_id"]["category_product_id"]["updated_at"],
-              ),
-              code: e["product_id"]["code"],
-              stoke: e["product_id"]["stoke"],
-              price: e["product_id"]["price"],
-              desc: e["product_id"]["desc"],
-              userId: UserModel(
-                id: e["product_id"]["user_id"]["id"],
-                name: e["product_id"]["user_id"]["name"],
-              ),
-              isActive: e["product_id"]["isActive"],
-            ),
-            name: e["name"],
-            createdAt: e["created_at"],
-            updatedAt: e["updated_at"],
-          );
-          photoProduct.add(data);
-        }).toList();
-      } catch (e) {
-        print(e.toString());
-      }
-    });
-  }
-
-  void getPhotoProductById(int productId) {
-    for (var item in photoProduct) {
-      if (item.productId!.id == productId) {
-        final data = PhotoProduct(
-          id: item.id,
-          productId: ProductModel(
-            id: item.productId!.id,
-            name: item.productId!.name,
-            slug: item.productId!.slug,
-            categoryProductId: CategoryProductModel(
-              id: item.productId!.categoryProductId!.id,
-              name: item.productId!.categoryProductId!.name,
-              slug: item.productId!.categoryProductId!.slug,
-              createdAt: item.productId!.categoryProductId!.createdAt,
-              updatedAt: item.productId!.categoryProductId!.updatedAt,
-            ),
-            code: item.productId!.code,
-            stoke: item.productId!.stoke,
-            price: item.productId!.price,
-            desc: item.productId!.desc,
-            userId: UserModel(
-              id: item.productId!.userId!.id,
-              name: item.productId!.userId!.name,
-            ),
-            isActive: item.productId!.isActive,
-          ),
-          name: item.name,
-          createdAt: item.createdAt,
-          updatedAt: item.updatedAt,
-        );
-        photoProductByProductId.insert(0, data);
-      } else {
-        print("not found");
-      }
-    }
-  }
-
   void postData(int? productId) {
     // if (name != '') {
     final data = box.read("userData") as Map<String, dynamic>;
@@ -185,6 +111,9 @@ class WishlistController extends GetxController {
     WishlistProvider()
         .postData(userId, productId, data["token"])
         .then((response) {
+      final data =
+          WishlistModel.fromJson(response["data"] as Map<String, dynamic>);
+      wishlist.add(data);
       // }).toList();
       // final data = WishlistModel(
       //   id: response["id"],
@@ -192,8 +121,8 @@ class WishlistController extends GetxController {
       //   productId: response["product_id"],
       // );
       // wishlist.add(data);
-      wishlist.clear();
-      getData();
+      // wishlist.clear();
+      // getData();
     });
   }
 
