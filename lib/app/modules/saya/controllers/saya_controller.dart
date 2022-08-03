@@ -68,18 +68,20 @@ class SayaController extends GetxController {
     CustomerProvider().showById(data["id"], data["token"]).then((response) {
       // print(data["customer_id"]);
       // print(response);
-      final data = CustomerModel(
-        id: response["data"]["id"],
-        userId: UserModel(
-          id: response["data"]["user_id"]["id"],
-          name: response["data"]["user_id"]["name"],
-        ),
-        addressId: response["data"]["address_id"],
-        gender: response["data"]["gender"],
-        birth: response["data"]["birth"],
-        telp: response["data"]["telp"],
-        image: response["data"]["image"],
-      );
+      // final data = CustomerModel(
+      //   id: response["data"]["id"],
+      //   userId: UserModel(
+      //     id: response["data"]["user_id"]["id"],
+      //     name: response["data"]["user_id"]["name"],
+      //   ),
+      //   addressId: response["data"]["address_id"],
+      //   gender: response["data"]["gender"],
+      //   birth: response["data"]["birth"],
+      //   telp: response["data"]["telp"],
+      //   image: response["data"]["image"],
+      // );
+      final data =
+          CustomerModel.fromJson(response["data"] as Map<String, dynamic>);
       customer.add(data);
       // print(customer.first.image == null);
     });

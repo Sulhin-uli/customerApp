@@ -45,6 +45,9 @@ abstract class Routes {
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
   static const ULASAN = _Paths.ULASAN;
   static const ALL_ULASAN = _Paths.ALL_ULASAN;
+
+  static const PHOTO_PROFILE = _Paths.PHOTO_PROFILE;
+  static const PHOTO_PROFILE_URL = _Paths.PHOTO_PROFILE_URL;
 }
 
 abstract class _Paths {
@@ -70,6 +73,8 @@ abstract class _Paths {
   static const ALAMAT = '/alamat';
   static const ADD_ALAMAT = '/add_alamat';
   static const EDIT_ALAMAT = '/edit_alamat';
+  static const PHOTO_PROFILE = '/PHOTO_PROFILE';
+  static const PHOTO_PROFILE_URL = '/PHOTO_PROFILE_URL';
 
   // Saya
   static const EDIT_PROFILE = '/edit-profile';

@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
+import 'package:customer_app/app/modules/saya/views/widget/photo_profile_view.dart';
 import 'package:customer_app/app/modules/ulasan/views/all_review_view.dart';
 import 'package:get/get.dart';
 
@@ -226,6 +227,17 @@ class AppPages {
       name: _Paths.ALL_ULASAN,
       page: () => AllReviewView(),
       binding: UlasanBinding(),
+    ),
+
+    GetPage(
+      name: _Paths.PHOTO_PROFILE,
+      page: () => PhotoProfileView(),
+      // binding: ProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.PHOTO_PROFILE_URL,
+      page: () => PhotoProfileUrlView(),
+      // binding: ProdukBinding(),
     ),
   ];
 }

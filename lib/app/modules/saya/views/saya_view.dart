@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
-import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
-import 'package:customer_app/app/modules/login/controllers/login_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -48,36 +45,50 @@ class SayaView extends GetView<SayaController> {
                           width: 70,
                           height: 70,
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(200),
-                              child: sayaC
-                                      .selectedImagePath.value.isImageFileName
-                                  ? Image.file(
+                            borderRadius: BorderRadius.circular(200),
+                            child: sayaC.selectedImagePath.value.isImageFileName
+                                ? GestureDetector(
+                                    onTap: () => Get.toNamed(
+                                        Routes.PHOTO_PROFILE,
+                                        arguments:
+                                            sayaC.selectedImagePath.value),
+                                    child: Image.file(
                                       File(sayaC.selectedImagePath.value),
                                       height: 150,
                                       width: 150,
                                       fit: BoxFit.cover,
-                                    )
-                                  : sayaC.customer.isNotEmpty
-                                      ? Image.asset(
-                                          'assets/logo/noimage.png',
+                                    ),
+                                  )
+                                : sayaC.customer.isNotEmpty
+                                    ?
+                                    // Image.asset(
+                                    //     'assets/logo/noimage.png',
+                                    //     height: 150,
+                                    //     width: 150,
+                                    //     fit: BoxFit.cover,
+                                    //   )
+                                    // :
+                                    GestureDetector(
+                                        onTap: () => Get.toNamed(
+                                            Routes.PHOTO_PROFILE_URL,
+                                            arguments:
+                                                sayaC.customer.first.image!),
+                                        child: Image.network(
+                                          baseUrlFile +
+                                              "storage/profile/" +
+                                              sayaC.customer.first.image!,
                                           height: 150,
                                           width: 150,
                                           fit: BoxFit.cover,
-                                        )
-                                      // : Image.network(
-                                      //     baseUrlFile +
-                                      //         "storage/profile/" +
-                                      //         sayaC.customer.first.image!,
-                                      //     height: 150,
-                                      //     width: 150,
-                                      //     fit: BoxFit.cover,
-                                      //   ),
-                                      : Image.asset(
-                                          'assets/logo/noimage.png',
-                                          height: 150,
-                                          width: 150,
-                                          fit: BoxFit.cover,
-                                        )),
+                                        ),
+                                      )
+                                    : Image.asset(
+                                        'assets/logo/noimage.png',
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      ),
+                          ),
                         ),
                       ),
                       Positioned(
