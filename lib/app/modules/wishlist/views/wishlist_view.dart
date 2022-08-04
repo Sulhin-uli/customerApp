@@ -25,8 +25,9 @@ class WishlistView extends GetView<WishlistController> {
           SmartRefresher(
             controller: wishlistC.refreshController,
             onRefresh: wishlistC.onRefresh,
+            onLoading: wishlistC.onLoading,
             enablePullDown: true,
-            enablePullUp: false,
+            enablePullUp: true,
             child: SingleChildScrollView(
               controller: _scrollController,
               child: Column(

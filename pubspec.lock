@@ -148,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  easy_infinite_scroll:
+    dependency: "direct main"
+    description:
+      name: easy_infinite_scroll
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   emoji_picker_flutter:
     dependency: "direct main"
     description:

@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   dropdown_search: 0.6.3
+  easy_infinite_scroll: ^1.0.0
   emoji_picker_flutter: 1.0.6
   firebase_auth: 3.3.19
   firebase_core: ^1.19.2

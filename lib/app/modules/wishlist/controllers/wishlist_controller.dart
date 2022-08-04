@@ -35,6 +35,11 @@ class WishlistController extends GetxController {
     refreshController.refreshCompleted();
   }
 
+  void onLoading() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    print("tes");
+  }
+
   void dialogSuccess(String msg) {
     Get.defaultDialog(
       title: "Peringatan",
