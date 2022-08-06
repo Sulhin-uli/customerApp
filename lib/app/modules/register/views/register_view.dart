@@ -182,26 +182,16 @@ class RegisterView extends GetView<RegisterController> {
                       style: ElevatedButton.styleFrom(
                         primary: const Color(0xff16A085), // background
                       ),
-                      // onPressed: () => controller.register(
-                      //   controller.name.text,
-                      //   controller.email.text,
-                      //   controller.password.text,
-                      //   controller.cPassword.text,
-                      // ),
                       onPressed: () {
                         if (controller.formGlobalKey.currentState!.validate()) {
                           controller.isLoading(true);
                           Timer(const Duration(seconds: 3), () {
-                            try {
-                              controller.register(
-                                controller.name.text,
-                                controller.email.text,
-                                controller.password.text,
-                                controller.cPassword.text,
-                              );
-                            } finally {
-                              controller.isLoading(false);
-                            }
+                            controller.register(
+                              controller.name.text,
+                              controller.email.text,
+                              controller.password.text,
+                              controller.cPassword.text,
+                            );
                           });
                         }
                       },

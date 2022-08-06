@@ -6,6 +6,7 @@ import 'package:customer_app/app/data/models/users_model.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/providers/login_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -270,19 +271,6 @@ class AuthController extends GetxController {
     Get.toNamed(Routes.DETAIL_CHAT);
   }
 
-  void dialogError(String msg) {
-    // Get.defaultDialog(title: "Peringatan", middleText: msg);
-    Get.defaultDialog(
-      title: "Peringatan",
-      titleStyle: TextStyle(fontSize: 12),
-      content: Text(
-        msg,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 12),
-      ),
-    );
-  }
-
   @override
   void onInit() {
     autoLogin();
@@ -302,7 +290,9 @@ class AuthController extends GetxController {
         (response) {
           if (response["status"] != 200) {
             dialogError(response['messages']);
-          } else {}
+          } else {
+            dialogError(response['messages']);
+          }
           // if (email != '' && password != '') {
           //   if (response['success'] == true) {
           //     box.write('userData', {

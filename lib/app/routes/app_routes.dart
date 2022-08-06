@@ -3,11 +3,12 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-  // Register
+  // auth
   static const REGISTER = _Paths.REGISTER;
+  static const LOGIN = _Paths.LOGIN;
+  static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
 
   static const HOME = _Paths.HOME;
-  static const LOGIN = _Paths.LOGIN;
   static const DETAIL_PRODUK = _Paths.DETAIL_PRODUK;
   static const CART = _Paths.CART;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
@@ -52,10 +53,12 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  //auth
   static const REGISTER = '/register';
-
   static const HOME = '/home';
   static const LOGIN = '/login';
+  static const FORGET_PASSWORD = '/forget-password';
+
   static const DETAIL_PRODUK = '/detail-produk';
   static const CART = '/cart';
   static const SAYA = '/saya';

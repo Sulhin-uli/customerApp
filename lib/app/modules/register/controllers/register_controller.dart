@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:customer_app/app/data/models/validator_register.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/register/providers/register_provider.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
@@ -59,33 +62,29 @@ class RegisterController extends GetxController {
 
   void register(String name, String email, String password, String cPassword) {
     try {
-      RegisterProvider()
-          .register(name, email, password, cPassword)
-          .then((response) {
-        if (response["status"] == 400) {
+      isLoading(true);
+      try {
+        RegisterProvider()
+            .register(name, email, password, cPassword)
+            .then((response) {
+          // print(response);
           try {
-            dialog("Peringatan", response["messages"]["email"][0]);
+            if (response["status"] == 400) {
+              dialog("Peringatan", response["messages"]["email"][0]);
+            }
           } catch (e) {
-            dialog("Peringatan", "Daftar Gagal!");
+            Get.back();
+            dialog("Berhasil!",
+                "Akun anda berhasil terdaftar, Silahkan cek email untuk verifikasi email anda!");
           }
-        } else if (response["status"] == 200) {
-          Get.back();
-          dialog("Berhasil",
-              "Akun Anda Berhasil Terdaftar, Silahkan cek email untuk verifikasi email anda!");
-        }
+        });
+      } catch (e) {
+        dialog("Peringatan", "Daftar Gagal!");
+      }
+    } finally {
+      Timer(const Duration(seconds: 5), () {
+        isLoading(false);
       });
-    } catch (e) {
-      dialog("Peringatan", "Daftar Gagal!");
     }
-    // if (name != '') {
-    //   RegisterProvider()
-    //       .register(name, email, password, cPassword)
-    //       .then((response) {
-    //     // dialog("Daftar Berhasil!", "Silahkan Login");
-    //     print(response);
-    //   });
-    //   // authController.login(email, password);
-    //   // Get.back();
-    // } else {}
   }
 }

@@ -8,9 +8,11 @@ final formatCurrency = NumberFormat("#,##0", "eu");
 void dialog(String title, String msg) {
   Get.defaultDialog(
     title: title,
+    titleStyle: TextStyle(fontSize: 12),
     content: Text(
       msg,
       textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 12),
     ),
   );
   Future.delayed(const Duration(seconds: 3), () {
@@ -40,6 +42,19 @@ void dialogSuccess(String msg) {
         ),
         TextButton(onPressed: () => Get.back(), child: Text("Tutup"))
       ],
+    ),
+  );
+}
+
+void dialogError(String msg) {
+  // Get.defaultDialog(title: "Peringatan", middleText: msg);
+  Get.defaultDialog(
+    title: "Peringatan",
+    titleStyle: TextStyle(fontSize: 12),
+    content: Text(
+      msg,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 12),
     ),
   );
 }

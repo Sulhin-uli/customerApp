@@ -1,6 +1,5 @@
-import 'package:customer_app/app/modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
-import 'package:customer_app/app/modules/saya/views/widget/photo_profile_view.dart';
-import 'package:customer_app/app/modules/ulasan/views/all_review_view.dart';
+import 'package:customer_app/app/modules/forget_password/bindings/forget_password_binding.dart';
+import 'package:customer_app/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -41,14 +40,17 @@ import '../modules/produk/views/search_produk_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/riwayat_pemesanan/bindings/riwayat_pemesanan_binding.dart';
+import '../modules/riwayat_pemesanan/views/detail_riwayat_pesanan_view.dart';
 import '../modules/riwayat_pemesanan/views/riwayat_pemesanan_view.dart';
 import '../modules/saya/bindings/saya_binding.dart';
 import '../modules/saya/views/edit_password_view.dart';
 import '../modules/saya/views/edit_profile_view.dart';
 import '../modules/saya/views/saya_view.dart';
+import '../modules/saya/views/widget/photo_profile_view.dart';
 import '../modules/toko/bindings/toko_binding.dart';
 import '../modules/toko/views/toko_view.dart';
 import '../modules/ulasan/bindings/ulasan_binding.dart';
+import '../modules/ulasan/views/all_review_view.dart';
 import '../modules/ulasan/views/ulasan_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
 import '../modules/wishlist/views/wishlist_view.dart';
@@ -59,22 +61,26 @@ class AppPages {
   AppPages._();
 
   static final routes = [
-    // Register
+    // AUTH
     GetPage(
       name: _Paths.REGISTER,
       page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
-
-    GetPage(
-      name: _Paths.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-    ),
     GetPage(
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_PRODUK,
