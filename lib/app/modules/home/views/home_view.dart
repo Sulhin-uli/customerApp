@@ -23,10 +23,10 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var data = {};
-    try {
-      data = box.read("userData") as Map<String, dynamic>;
-    } catch (e) {}
+    // var data = {};
+    // try {
+    //   data = box.read("userData") as Map<String, dynamic>;
+    // } catch (e) {}
     final _scrollController = TrackingScrollController();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -57,15 +57,20 @@ class HomeView extends GetView<HomeController> {
                               top: 100,
                               child: Container(
                                 padding: EdgeInsets.only(left: 15),
-                                child: (data["name"] != null)
-                                    ? Text(
-                                        "Selamat Datang, " + data["name"],
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    : Text(
-                                        "Selamat Datang",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
+                                child:
+                                    // (data["name"] != null)
+                                    //     ? Text(
+                                    //         "Selamat Datang, " + data["name"],
+                                    //         style: TextStyle(color: Colors.white),
+                                    //       )
+                                    //     : Text(
+                                    //         "Selamat Datang",
+                                    //         style: TextStyle(color: Colors.white),
+                                    //       ),
+                                    Text(
+                                  "Selamat Datang",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
@@ -101,13 +106,21 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  Header(
-                    _scrollController,
-                    controller.cartController.cart.length,
-                    controller.notifikasiController.notif.length,
-                    // authC.isAuth.value,
-                    box.read('isAuth'),
-                  )
+                  (box.read('isAuth') == true)
+                      ? Header(
+                          _scrollController,
+                          controller.cartController.cart.length,
+                          controller.notifikasiController.notif.length,
+                          // authC.isAuth.value,
+                          box.read('isAuth'),
+                        )
+                      : Header(
+                          _scrollController,
+                          0,
+                          0,
+                          // authC.isAuth.value,
+                          box.read('isAuth'),
+                        ),
                 ],
               ),
               // ProdukView(),

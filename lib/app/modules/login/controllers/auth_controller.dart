@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/data/models/checkout_model.dart';
 import 'package:customer_app/app/data/models/customer_model.dart';
+import 'package:customer_app/app/data/models/user_customer_model.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/models/users_model.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
@@ -20,6 +21,7 @@ class AuthController extends GetxController {
   var isAuth = false.obs;
   var customer = List<CustomerModel>.empty().obs;
   var user = UsersModel().obs;
+  var userCustomer = List<UserCustomer>.empty().obs;
 
   HomeController _homeController = HomeController();
 
@@ -291,6 +293,21 @@ class AuthController extends GetxController {
           if (response["status"] != 200) {
             dialogError(response['messages']);
           } else {
+            final data =
+                UserCustomer.fromJson(response["data"] as Map<String, dynamic>);
+            userCustomer.add(data);
+            box.write('userData', {
+              "id": response['data']['users']['id'],
+              "token": response['data']['token'],
+              "email": email,
+              "name": response['data']['users']['name'],
+              "password": password,
+              "customer_id": response['data']['customers']['id'],
+            });
+            box.write('isAuth', true);
+            isAuth.value = true;
+            isSkipIntro.value = true;
+            Get.back();
             dialogError(response['messages']);
           }
           // if (email != '' && password != '') {

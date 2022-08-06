@@ -14,6 +14,8 @@ class UlasanController extends GetxController {
   var starsRatedResult = ''.obs;
   var starsRatedLength = ''.obs;
   // var starsRatedProduk = 0.obs;
+  var isLoading = false.obs;
+
   var review = List<Review>.empty().obs;
 
   @override
@@ -23,13 +25,18 @@ class UlasanController extends GetxController {
   }
 
   void getData() async {
-    ReviewProvider().getData().then((response) {
-      for (var e in response["data"]) {
-        final data = Review.fromJson(e as Map<String, dynamic>);
-        review.add(data);
-        // print(review.length);
-      }
-    });
+    try {
+      isLoading(true);
+      ReviewProvider().getData().then((response) {
+        for (var e in response["data"]) {
+          final data = Review.fromJson(e as Map<String, dynamic>);
+          review.add(data);
+          // print(review.length);
+        }
+      });
+    } finally {
+      isLoading(false);
+    }
   }
 
   void countRating(int idProduct) {

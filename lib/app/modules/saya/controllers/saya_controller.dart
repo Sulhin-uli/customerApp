@@ -128,7 +128,6 @@ class SayaController extends GetxController {
               box.erase();
               box.write('isAuth', false);
               homeC.changeTabIndex(0);
-              cartC.cart.clear();
             },
             child: const Text('Ya'),
           ),

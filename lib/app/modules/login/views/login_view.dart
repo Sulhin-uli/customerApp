@@ -16,15 +16,15 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        // leading: BackButton(color: Colors.black),
+        leading: BackButton(color: Colors.black),
         title: const Text(
           'Masuk',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Get.offAllNamed(Routes.HOME),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () => Get.offAllNamed(Routes.HOME),
+        // ),
         actions: [
           TextButton(
               onPressed: () => Get.toNamed(Routes.REGISTER),

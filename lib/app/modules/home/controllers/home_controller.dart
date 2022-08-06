@@ -37,8 +37,6 @@ class HomeController extends GetxController {
       cartController.getData();
       subscribe();
     }
-    // getDataPhoto();
-    // getData();
     mainMenu();
     bannerHome();
     super.onInit();
@@ -50,8 +48,6 @@ class HomeController extends GetxController {
     var topic = "topic_user_id_" + data["id"].toString();
     print(topic);
     await FirebaseMessaging.instance.subscribeToTopic(topic);
-    // var token = await FirebaseMessaging.instance.getToken();
-    // print("ini tokennya = " + token!);
   }
 
   void changeTabIndex(int index) {
@@ -62,18 +58,8 @@ class HomeController extends GetxController {
     } else if (box.read('isAuth') == true && index == 2) {
       tabIndex.value = index;
     } else {
-      // print("Belum login");
-      Get.offAllNamed(Routes.LOGIN);
+      Get.toNamed(Routes.LOGIN);
     }
-    // if (box.read('isAuth') == true) {
-    // } else if (box.read('isAuth') == false) {
-    //   // if (index != 1 && index != 2) {
-    //   //   tabIndex.value = index;
-    //   // } else {
-    //   // }
-    //   // print(index);
-    //   print("object");
-    // }
   }
 
 // cari berdasarka id

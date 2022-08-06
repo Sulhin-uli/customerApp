@@ -52,11 +52,10 @@ class WishlistController extends GetxController {
 
   @override
   void onInit() {
-    if (authC.isAuth.isTrue) {
-      // getDataPhoto();
-      getData();
-    }
-    // print("object");\
+    // if (authC.isAuth.isTrue) {
+    //   // getDataPhoto();
+    // }
+    getData();
     super.onInit();
   }
 

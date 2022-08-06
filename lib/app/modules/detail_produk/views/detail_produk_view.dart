@@ -184,7 +184,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   )
                                 : InkWell(
                                     onTap: () {
-                                      Get.offAllNamed(Routes.LOGIN);
+                                      Get.toNamed(Routes.LOGIN);
                                     },
                                     child: Icon(
                                       Icons.favorite_border,
@@ -480,7 +480,10 @@ class DetailProdukView extends GetView<DetailProdukController> {
                       ),
 
                       Obx(() => controller.ulasanController.review.isEmpty
-                          ? CircularProgressIndicator()
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Text("Belum Ada Ulasan"),
+                            )
                           : ListTile(
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -568,7 +571,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                       Get.toNamed(Routes.DETAIL_CHAT,
                                           arguments: data.userId!.id!);
                                     } else {
-                                      Get.offAllNamed(Routes.LOGIN);
+                                      Get.toNamed(Routes.LOGIN);
                                     }
                                   },
                                   child: Icon(
@@ -582,7 +585,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   if (box.read('isAuth') == true) {
                                     Get.toNamed(Routes.PENGIRIMAN);
                                   } else {
-                                    Get.offAllNamed(Routes.LOGIN);
+                                    Get.toNamed(Routes.LOGIN);
                                   }
                                 },
                                 style: OutlinedButton.styleFrom(
@@ -622,7 +625,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                           "Berhasil ditambahkan keranjang");
                                     }
                                   } else {
-                                    Get.offAllNamed(Routes.LOGIN);
+                                    Get.toNamed(Routes.LOGIN);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
