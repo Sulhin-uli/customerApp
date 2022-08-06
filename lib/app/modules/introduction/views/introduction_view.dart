@@ -14,62 +14,43 @@ class IntroductionView extends GetView<IntroductionController> {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            title: "Title of first page",
-            body:
-                "Here you can write the description of the page, to explain someting...",
+            // title: "Title of first page",
+            title: "Hasil Tani Organik",
+            body: "Menyediakan Produk Hasil Tani Organik",
             image: Container(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
-                child: Lottie.asset("assets/lottie/main-laptop-duduk.json"),
+                child: Lottie.asset("assets/lottie/phone.json"),
+                // child: Lottie.network("assets/lottie/phone.json"),
               ),
             ),
           ),
           PageViewModel(
-            title: "Title of first page",
-            body:
-                "Here you can write the description of the page, to explain someting...",
+            title: "Produk Petani",
+            body: "Produk Dari Petani Langsung Tanpa Tengkulak Dan Perantara",
             image: Container(
-              width: Get.width * 0.6,
-              height: Get.width * 0.6,
-              child: Center(
-                child: Lottie.asset("assets/lottie/main-laptop-duduk.json"),
+              // width: Get.width * 0.3,
+              // height: Get.width * 0.3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(),
+                  Center(
+                    child: Lottie.asset("assets/lottie/farmer.json"),
+                  ),
+                ],
               ),
             ),
           ),
           PageViewModel(
-            title: "Title of first page",
-            body:
-                "Here you can write the description of the page, to explain someting...",
+            title: "Beragam Produk Tani",
+            body: "Beragam Produk Hasil Tani Berkualitas",
             image: Container(
               width: Get.width * 0.6,
               height: Get.width * 0.6,
               child: Center(
-                child: Lottie.asset("assets/lottie/main-laptop-duduk.json"),
-              ),
-            ),
-          ),
-          PageViewModel(
-            title: "Title of first page",
-            body:
-                "Here you can write the description of the page, to explain someting...",
-            image: Container(
-              width: Get.width * 0.6,
-              height: Get.width * 0.6,
-              child: Center(
-                child: Lottie.asset("assets/lottie/main-laptop-duduk.json"),
-              ),
-            ),
-          ),
-          PageViewModel(
-            title: "Title of first page",
-            body:
-                "Here you can write the description of the page, to explain someting...",
-            image: Container(
-              width: Get.width * 0.6,
-              height: Get.width * 0.6,
-              child: Center(
-                child: Lottie.asset("assets/lottie/main-laptop-duduk.json"),
+                child: Lottie.asset("assets/lottie/beragam.json"),
               ),
             ),
           ),
