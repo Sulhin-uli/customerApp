@@ -8,6 +8,7 @@ import 'package:customer_app/app/modules/login/providers/login_provider.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -120,157 +121,166 @@ class AuthController extends GetxController {
     }
   }
 
-  // void addNewConnection(String friendEmail) async {
-  //   bool flagNewConnection = false;
-  //   var chat_id;
-  //   String date = DateTime.now().toIso8601String();
-  //   CollectionReference chats = firestore.collection("chats");
-  //   CollectionReference users = firestore.collection("users");
+  void addNewConnection2(String friendEmail) async {
+    bool flagNewConnection = false;
+    var chat_id;
+    String date = DateTime.now().toIso8601String();
+    CollectionReference chats = firestore.collection("chats");
+    CollectionReference users = firestore.collection("users");
 
-  //   final docChats =
-  //       await users.doc(_currentUser!.email).collection("chats").get();
+    final docChats =
+        await users.doc(_currentUser!.email).collection("chats").get();
 
-  //   // if (docChats) {}
-  //   if (docChats.docs.isNotEmpty) {
-  //     // user sudah pernah chat dgn siapapun
-  //     final checkConnection = await users
-  //         .doc(_currentUser!.email)
-  //         .collection("chats")
-  //         .where("connection", isEqualTo: friendEmail)
-  //         .get();
+    // if (docChats) {}
+    if (docChats.docs.isNotEmpty) {
+      // user sudah pernah chat dgn siapapun
+      final checkConnection = await users
+          .doc(_currentUser!.email)
+          .collection("chats")
+          .where("connection", isEqualTo: friendEmail)
+          .get();
 
-  //     if (checkConnection.docs.isNotEmpty) {
-  //       // Sudah pernah buat koneksi dengan friendsemail
-  //       flagNewConnection = false;
+      if (checkConnection.docs.isNotEmpty) {
+        // Sudah pernah buat koneksi dengan friendsemail
+        flagNewConnection = false;
 
-  //       chat_id = checkConnection.docs[0].id; // chat_id from chat collection
-  //     } else {
-  //       // Belum pernah chat dengan siapapun
+        chat_id = checkConnection.docs[0].id; // chat_id from chat collection
+      } else {
+        // Belum pernah chat dengan siapapun
 
-  //       // buat koneksi
-  //       flagNewConnection = true;
-  //     }
-  //   } else {
-  //     // Belum pernah chat dengan siapapun
+        // buat koneksi
+        flagNewConnection = true;
+      }
+    } else {
+      // Belum pernah chat dengan siapapun
 
-  //     // buat koneksi
-  //     flagNewConnection = true;
-  //   }
-  //   if (flagNewConnection) {
-  //     // cek dari collection => connection => dari mereka berdua
+      // buat koneksi
+      flagNewConnection = true;
+    }
+    if (flagNewConnection) {
+      // cek dari collection => connection => dari mereka berdua
 
-  //     final chatDocs = await chats.where(
-  //       "connections",
-  //       whereIn: [
-  //         [
-  //           _currentUser!.email,
-  //           friendEmail,
-  //         ],
-  //         [
-  //           friendEmail,
-  //           _currentUser!.email,
-  //         ],
-  //       ],
-  //     ).get();
+      final chatDocs = await chats.where(
+        "connections",
+        whereIn: [
+          [
+            _currentUser!.email,
+            friendEmail,
+          ],
+          [
+            friendEmail,
+            _currentUser!.email,
+          ],
+        ],
+      ).get();
 
-  //     if (chatDocs.docs.isNotEmpty) {
-  //       // terdapat data chats (sudah ada koneksi antara mereka berdua)
-  //       final chatDataId = chatDocs.docs[0].id;
-  //       final chatsData = chatDocs.docs[0].data() as Map<String, dynamic>;
+      if (chatDocs.docs.isNotEmpty) {
+        // terdapat data chats (sudah ada koneksi antara mereka berdua)
+        final chatDataId = chatDocs.docs[0].id;
+        final chatsData = chatDocs.docs[0].data() as Map<String, dynamic>;
 
-  //       await users
-  //           .doc(_currentUser!.email)
-  //           .collection("chats")
-  //           .doc(chatDataId)
-  //           .set({
-  //         "connection": friendEmail,
-  //         "lastTime": chatsData["lastTime"],
-  //         "total_unread": 0,
-  //       });
+        await users
+            .doc(_currentUser!.email)
+            .collection("chats")
+            .doc(chatDataId)
+            .set({
+          "connection": friendEmail,
+          "lastTime": chatsData["lastTime"],
+          "total_unread": 0,
+        });
 
-  //       final listChat =
-  //           await users.doc(_currentUser!.email).collection("chats").get();
+        final listChat =
+            await users.doc(_currentUser!.email).collection("chats").get();
 
-  //       if (listChat.docs.isNotEmpty) {
-  //         List<ChatUser> dataListChats = List<ChatUser>.empty();
-  //         listChat.docs.forEach((element) {
-  //           var dataDoChat = element.data();
-  //           var dataDoChatId = element.id;
-  //           dataListChats.add(ChatUser(
-  //             chatId: dataDoChatId,
-  //             connection: dataDoChat["connection"],
-  //             lastTime: dataDoChat["lastTime"],
-  //             total_unread: dataDoChat["total_unread"],
-  //           ));
-  //         });
+        if (listChat.docs.isNotEmpty) {
+          List<ChatUser> dataListChats = List<ChatUser>.empty();
+          listChat.docs.forEach((element) {
+            var dataDoChat = element.data();
+            var dataDoChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDoChatId,
+              connection: dataDoChat["connection"],
+              lastTime: dataDoChat["lastTime"],
+              total_unread: dataDoChat["total_unread"],
+            ));
+          });
 
-  //         user.update((user) {
-  //           user!.chats = dataListChats;
-  //         });
-  //       } else {
-  //         user.update((user) {
-  //           user!.chats = [];
-  //         });
-  //       }
+          user.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          user.update((user) {
+            user!.chats = [];
+          });
+        }
 
-  //       user.update((user) {
-  //         user!.chats = docChats as List<ChatUser>;
-  //       });
+        user.update((user) {
+          user!.chats = docChats as List<ChatUser>;
+        });
 
-  //       chat_id = chatsData;
-  //       user.refresh();
-  //     } else {
-  //       // buat baru, mereka berdua benar2 belum ada konneksi
-  //       final newChatDoc = await chats.add({
-  //         "connection": [_currentUser!.email, friendEmail],
-  //       });
+        chat_id = chatsData;
+        user.refresh();
+      } else {
+        // buat baru, mereka berdua benar2 belum ada konneksi
+        final newChatDoc = await chats.add({
+          "connection": [_currentUser!.email, friendEmail],
+        });
 
-  //       await chats.doc(newChatDoc.id).collection("chat");
+        await chats.doc(newChatDoc.id).collection("chat");
 
-  //       await users
-  //           .doc(_currentUser!.email)
-  //           .collection("chats")
-  //           .doc(newChatDoc.id)
-  //           .set({
-  //         "connection": friendEmail,
-  //         "lastTime": date,
-  //         "total_unread": 0,
-  //       });
+        await users
+            .doc(_currentUser!.email)
+            .collection("chats")
+            .doc(newChatDoc.id)
+            .set({
+          "connection": friendEmail,
+          "lastTime": date,
+          "total_unread": 0,
+        });
 
-  //       final listChat =
-  //           await users.doc(_currentUser!.email).collection("chats").get();
+        final listChat =
+            await users.doc(_currentUser!.email).collection("chats").get();
 
-  //       if (listChat.docs.isNotEmpty) {
-  //         List<ChatUser> dataListChats = List<ChatUser>.empty();
-  //         listChat.docs.forEach((element) {
-  //           var dataDoChat = element.data();
-  //           var dataDoChatId = element.id;
-  //           dataListChats.add(ChatUser(
-  //             chatId: dataDoChatId,
-  //             connection: dataDoChat["connection"],
-  //             lastTime: dataDoChat["lastTime"],
-  //             total_unread: dataDoChat["total_unread"],
-  //           ));
-  //         });
-  //         user.update((user) {
-  //           user!.chats = dataListChats;
-  //         });
-  //       } else {
-  //         user.update((user) {
-  //           user!.chats = [];
-  //         });
-  //       }
+        if (listChat.docs.isNotEmpty) {
+          List<ChatUser> dataListChats = List<ChatUser>.empty();
+          listChat.docs.forEach((element) {
+            var dataDoChat = element.data();
+            var dataDoChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDoChatId,
+              connection: dataDoChat["connection"],
+              lastTime: dataDoChat["lastTime"],
+              total_unread: dataDoChat["total_unread"],
+            ));
+          });
+          user.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          user.update((user) {
+            user!.chats = [];
+          });
+        }
 
-  //       chat_id = newChatDoc.id;
-  //       user.refresh();
-  //     }
-  //   }
+        chat_id = newChatDoc.id;
+        user.refresh();
+      }
+    }
 
-  //   Get.toNamed(Routes.DETAIL_CHAT);
-  // }
+    Get.toNamed(Routes.DETAIL_CHAT);
+  }
 
   void dialogError(String msg) {
-    Get.defaultDialog(title: "Peringatan", middleText: msg);
+    // Get.defaultDialog(title: "Peringatan", middleText: msg);
+    Get.defaultDialog(
+      title: "Peringatan",
+      titleStyle: TextStyle(fontSize: 12),
+      content: Text(
+        msg,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 12),
+      ),
+    );
   }
 
   @override
@@ -287,37 +297,44 @@ class AuthController extends GetxController {
   }
 
   void login(String email, String password) async {
-    LoginProvider().login(email, password).then(
-      (response) {
-        if (email != '' && password != '') {
-          if (response['success'] == true) {
-            box.write('userData', {
-              "id": response['data']['id'],
-              "token": response['data']['token'],
-              "email": email,
-              "name": response['data']['name'],
-              "password": password,
-              "customer_id": response['data']['customer_id'],
-            });
-            box.write('isAuth', true);
-            isAuth.value = true;
-            isSkipIntro.value = true;
-            // subscribe();
-            Get.offAllNamed(Routes.HOME);
-            _homeController.changeTabIndex(0);
-            // cartC.photoProduct.clear();
-            // cartC.cart.clear();
-            // cartC.getDataPhoto();
-            // cartC.getData();
-            // print("login berhasil");
-          } else {
-            dialogError('Akun tidak ditemukan');
-          }
-        } else {
-          dialogError('Semua data input harus di isi');
-        }
-      },
-    );
+    try {
+      LoginProvider().login(email, password).then(
+        (response) {
+          if (response["status"] != 200) {
+            dialogError(response['messages']);
+          } else {}
+          // if (email != '' && password != '') {
+          //   if (response['success'] == true) {
+          //     box.write('userData', {
+          //       "id": response['data']['id'],
+          //       "token": response['data']['token'],
+          //       "email": email,
+          //       "name": response['data']['name'],
+          //       "password": password,
+          //       "customer_id": response['data']['customer_id'],
+          //     });
+          //     box.write('isAuth', true);
+          //     isAuth.value = true;
+          //     isSkipIntro.value = true;
+          //     // subscribe();
+          //     Get.offAllNamed(Routes.HOME);
+          //     _homeController.changeTabIndex(0);
+          //     // cartC.photoProduct.clear();
+          //     // cartC.cart.clear();
+          //     // cartC.getDataPhoto();
+          //     // cartC.getData();
+          //     // print("login berhasil");
+          //   } else {
+          //     dialogError('Akun tidak ditemukan');
+          //   }
+          // } else {
+          // dialogError('Semua data input harus di isi');
+          // }
+        },
+      );
+    } catch (e) {
+      dialogError("Login gagal");
+    }
   }
 
   // subscribe();

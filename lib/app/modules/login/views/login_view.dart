@@ -79,7 +79,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 Obx(
                   () => TextFormField(
-                    validator: controller.requiredValidator,
+                    validator: controller.passwordValidator,
                     controller: controller.password,
                     cursorColor: const Color(0xff16A085),
                     obscureText: controller.hiddenTextPassword.value,

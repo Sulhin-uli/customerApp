@@ -60,29 +60,29 @@ class SayaView extends GetView<SayaController> {
                                     ),
                                   )
                                 : sayaC.customer.isNotEmpty
-                                    ?
-                                    // Image.asset(
-                                    //     'assets/logo/noimage.png',
-                                    //     height: 150,
-                                    //     width: 150,
-                                    //     fit: BoxFit.cover,
+                                    ? Image.asset(
+                                        'assets/logo/noimage.png',
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      )
+                                    :
+                                    // GestureDetector(
+                                    //     onTap: () => Get.toNamed(
+                                    //         Routes.PHOTO_PROFILE_URL,
+                                    //         arguments:
+                                    //             sayaC.customer.first.image!),
+                                    //     child: Image.network(
+                                    //       baseUrlFile +
+                                    //           "storage/profile/" +
+                                    //           sayaC.customer.first.image!,
+                                    //       height: 150,
+                                    //       width: 150,
+                                    //       fit: BoxFit.cover,
+                                    //     ),
                                     //   )
                                     // :
-                                    GestureDetector(
-                                        onTap: () => Get.toNamed(
-                                            Routes.PHOTO_PROFILE_URL,
-                                            arguments:
-                                                sayaC.customer.first.image!),
-                                        child: Image.network(
-                                          baseUrlFile +
-                                              "storage/profile/" +
-                                              sayaC.customer.first.image!,
-                                          height: 150,
-                                          width: 150,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : Image.asset(
+                                    Image.asset(
                                         'assets/logo/noimage.png',
                                         height: 150,
                                         width: 150,

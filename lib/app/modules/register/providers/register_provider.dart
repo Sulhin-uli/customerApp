@@ -14,8 +14,9 @@ class RegisterProvider extends GetConnect {
         "name": name,
         "email": email,
         "password": password,
-        "c_password": cPassword,
+        "cpassword": cPassword,
       },
     );
+    return response.body;
   }
 }
