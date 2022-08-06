@@ -11,7 +11,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../controllers/wishlist_controller.dart';
 
 class WishlistView extends GetView<WishlistController> {
-  final wishlistC = Get.find<WishlistController>();
+  WishlistController wishlistC = Get.put(WishlistController());
   final authC = Get.put(AuthController());
 
   @override

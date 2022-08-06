@@ -4,8 +4,10 @@ import 'package:customer_app/app/data/models/customer_model.dart';
 import 'package:customer_app/app/data/models/user_customer_model.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/models/users_model.dart';
+import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/providers/login_provider.dart';
+import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +25,9 @@ class AuthController extends GetxController {
   var user = UsersModel().obs;
   var userCustomer = List<UserCustomer>.empty().obs;
 
-  HomeController _homeController = HomeController();
+  // HomeController _homeController = HomeController();
+  CartController cartController = Get.put(CartController());
+  NotifikasiController notifikasiController = Get.put(NotifikasiController());
 
   GoogleSignIn _googleSignIn = new GoogleSignIn();
   GoogleSignInAccount? _currentUser;
@@ -307,6 +311,8 @@ class AuthController extends GetxController {
             box.write('isAuth', true);
             isAuth.value = true;
             isSkipIntro.value = true;
+            cartController.getData();
+            notifikasiController.getData();
             Get.back();
             dialogError(response['messages']);
           }

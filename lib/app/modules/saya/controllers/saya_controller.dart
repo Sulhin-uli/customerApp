@@ -6,6 +6,7 @@ import 'package:customer_app/app/data/providers/user_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
+import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,7 @@ class SayaController extends GetxController {
   final homeC = Get.put(HomeController());
   final cartC = Get.put(CartController());
   final authC = Get.put(AuthController());
+  final notifC = Get.put(NotifikasiController());
   // var data = CustomerModel().obs;
   var customer = List<CustomerModel>.empty().obs;
 
@@ -128,6 +130,8 @@ class SayaController extends GetxController {
               box.erase();
               box.write('isAuth', false);
               homeC.changeTabIndex(0);
+              cartC.cart.clear();
+              notifC.notif.clear();
             },
             child: const Text('Ya'),
           ),
