@@ -132,6 +132,7 @@ class SayaController extends GetxController {
               homeC.changeTabIndex(0);
               cartC.cart.clear();
               notifC.notif.clear();
+              customer.clear();
             },
             child: const Text('Ya'),
           ),
