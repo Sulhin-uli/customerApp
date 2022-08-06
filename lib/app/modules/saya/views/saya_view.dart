@@ -202,6 +202,23 @@ class SayaView extends GetView<SayaController> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.blue,
+                ),
+                title: const Text('Informasi Akun'),
+                onTap: () => Get.toNamed(Routes.INFORMATION_ACCOUNT),
+              ),
+              ListTile(
+                leading: Image.asset(
+                  "assets/icons/edit-akun.png",
+                  width: 20,
+                  height: 20,
+                ),
+                title: const Text('Ubah Akun'),
+                onTap: () => Get.toNamed(Routes.EDIT_PROFILE),
+              ),
               GestureDetector(
                 onTap: () => Get.toNamed(Routes.ALAMAT),
                 child: ListTile(
@@ -212,15 +229,6 @@ class SayaView extends GetView<SayaController> {
                   ),
                   title: const Text('Daftar Alamat'),
                 ),
-              ),
-              ListTile(
-                leading: Image.asset(
-                  "assets/icons/edit-akun.png",
-                  width: 20,
-                  height: 20,
-                ),
-                title: const Text('Ubah Akun'),
-                onTap: () => Get.toNamed(Routes.EDIT_PROFILE),
               ),
               ListTile(
                 leading: Image.asset(

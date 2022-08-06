@@ -314,7 +314,18 @@ class AuthController extends GetxController {
             cartController.getData();
             notifikasiController.getData();
             Get.back();
-            dialogError(response['messages']);
+            void dialogError(String msg) {
+              // Get.defaultDialog(title: "Peringatan", middleText: msg);
+              Get.defaultDialog(
+                title: "Info",
+                titleStyle: TextStyle(fontSize: 12),
+                content: Text(
+                  response['messages'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12),
+                ),
+              );
+            }
           }
           // if (email != '' && password != '') {
           //   if (response['success'] == true) {

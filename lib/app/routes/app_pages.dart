@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/forget_password/bindings/forget_password_binding.dart';
 import 'package:customer_app/app/modules/forget_password/views/forget_password_view.dart';
+import 'package:customer_app/app/modules/saya/views/information_account.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -76,6 +77,11 @@ class AppPages {
       name: _Paths.FORGET_PASSWORD,
       page: () => ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFORMATION_ACCOUNT,
+      page: () => InformationAccountView(),
+      binding: SayaBinding(),
     ),
     GetPage(
       name: _Paths.HOME,

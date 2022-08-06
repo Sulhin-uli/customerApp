@@ -30,6 +30,7 @@ abstract class Routes {
   static const SAYA = _Paths.SAYA;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const EDIT_PASSWORD = _Paths.EDIT_PASSWORD;
+  static const INFORMATION_ACCOUNT = _Paths.INFORMATION_ACCOUNT;
 
   // Produk
   static const SEARCH = _Paths.SEARCH;
@@ -62,6 +63,7 @@ abstract class _Paths {
   static const DETAIL_PRODUK = '/detail-produk';
   static const CART = '/cart';
   static const SAYA = '/saya';
+  static const INFORMATION_ACCOUNT = '/INFORMATION_ACCOUNT';
   static const NOTIFIKASI = '/notifikasi';
   static const CHAT = '/chat';
   static const DETAIL_CHAT = '/detail-chat';
