@@ -27,11 +27,11 @@ class DetailProdukView extends GetView<DetailProdukController> {
   @override
   Widget build(BuildContext context) {
     final data = produkC.findBySlug(Get.arguments);
-    var stock = data.stockOut == null ? 0 : data.stockOut;
-    // find
-    wishlistC.foundWishlist(data.id!);
-    final double height = MediaQuery.of(context).size.height;
-    controller.ulasanController.countRating(data.id!);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      // // find
+      wishlistC.foundWishlist(data.id!);
+      controller.ulasanController.countRating(data.id!);
+    });
 
     return Scaffold(
       body: Column(
@@ -207,14 +207,25 @@ class DetailProdukView extends GetView<DetailProdukController> {
                         margin: EdgeInsets.fromLTRB(16, 0, 16, 20),
                         child: Row(
                           children: [
-                            Container(
-                              child: Text(
-                                "Terjual " + stock.toString(),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
+                            (data.stockOut == null)
+                                ? Container(
+                                    child: Text(
+                                      "Terjual 0",
+                                      // "Terjual " + stock.toString(),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    child: Text(
+                                      "Terjual " + data.stockOut.toString(),
+                                      // "Terjual " + stock.toString(),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
                             SizedBox(
                               width: 6,
                             ),
