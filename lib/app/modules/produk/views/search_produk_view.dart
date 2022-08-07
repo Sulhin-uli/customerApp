@@ -14,11 +14,12 @@ class SearchProdukView extends GetView<ProdukController> {
     return Scaffold(
       appBar: AppBar(
         leading: new IconButton(
-            icon: new Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context, true);
-              controller.seacrh.clear();
-            }),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context, true);
+            controller.seacrh.clear();
+          },
+        ),
         iconTheme: IconThemeData(
           color: Colors.black,
         ),

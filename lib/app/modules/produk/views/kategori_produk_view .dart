@@ -30,7 +30,7 @@ class KategoriView extends GetView<ProdukController> {
               color: Colors.grey[200], borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: TextField(
-              controller: controller.seacrh,
+              // controller: controller.seacrh,
               readOnly: true,
               onTap: () => Get.back(),
               decoration: InputDecoration(
@@ -39,7 +39,7 @@ class KategoriView extends GetView<ProdukController> {
                   size: 20,
                   color: Colors.black,
                 ),
-                // hintText: 'Cari...',
+                hintText: 'Cari...',
                 border: InputBorder.none,
               ),
             ),

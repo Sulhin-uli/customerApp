@@ -45,6 +45,17 @@ class ProdukView extends GetView<ProdukController> {
                   size: 20,
                   color: Colors.black,
                 ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.cancel_rounded,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    controller.seacrh.clear();
+                    Get.back();
+                  },
+                ),
                 // hintText: 'Cari...',
                 border: InputBorder.none,
               ),
@@ -135,7 +146,9 @@ class ProdukView extends GetView<ProdukController> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2, childAspectRatio: 1 / 1.2),
                         itemCount: controller.product
-                            .where((e) => e.isActive == 1)
+                            .where((e) => e.name!
+                                .toLowerCase()
+                                .contains(controller.seacrh.text.toLowerCase()))
                             .length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -164,12 +177,45 @@ class ProdukView extends GetView<ProdukController> {
                               );
                             }
                           } else {
-                            return Container();
+                            return Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/icons/empty-data.svg",
+                                    height: 100,
+                                    width: 100,
+                                  ),
+                                  Text(
+                                    "Hasil Pencarian Tidak Ada",
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                            );
                           }
                         },
                       ),
               ),
             ),
+            Obx(() => controller.isFound.isTrue
+                ? Container()
+                : Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/empty-data.svg",
+                          height: 100,
+                          width: 100,
+                        ),
+                        Text(
+                          "Pencarian Tidak Ada",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    ),
+                  )),
           ],
         ),
       ),
