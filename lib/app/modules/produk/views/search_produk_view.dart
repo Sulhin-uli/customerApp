@@ -17,7 +17,6 @@ class SearchProdukView extends GetView<ProdukController> {
           icon: new Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context, true);
-            controller.seacrh.clear();
           },
         ),
         iconTheme: IconThemeData(
