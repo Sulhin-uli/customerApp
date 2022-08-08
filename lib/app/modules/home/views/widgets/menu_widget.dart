@@ -38,8 +38,11 @@ class Menu extends GetView<HomeController> {
                             padding: EdgeInsets.all(8),
                             color: Colors.white,
                             onPressed: () {
-                              Get.toNamed(Routes.KATEGORI_VIEW,
-                                  arguments: dataCategory.name);
+                              // Get.toNamed(Routes.KATEGORI_VIEW,
+                              //     arguments: dataCategory.name);
+
+                              controller.produkController.runCategory(
+                                  dataCategory.id!, dataCategory.name!);
                             },
                             child: (data.image! != null)
                                 ? Image.asset(data.image!)

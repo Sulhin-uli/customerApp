@@ -80,8 +80,8 @@ class SearchProdukView extends GetView<ProdukController> {
                   padding: EdgeInsets.all(10),
                   child: ListTile(
                     onTap: () {
-                      Get.toNamed(Routes.KATEGORI_VIEW,
-                          arguments: dataCategory.name);
+                      controller.runCategory(
+                          dataCategory.id!, dataCategory.name!);
                     },
                     leading: CircleAvatar(
                       radius: 30,

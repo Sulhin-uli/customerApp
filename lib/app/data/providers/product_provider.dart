@@ -14,6 +14,16 @@ class ProductProvider extends GetConnect {
     return response.body;
   }
 
+  Future<dynamic> getDataSearch(int page, String name) async {
+    final response = await get('$url/search/$name?page=$page');
+    return response.body;
+  }
+
+  Future<dynamic> getDataCategory(int page, int id) async {
+    final response = await get('$url/category/$id?page=$page');
+    return response.body;
+  }
+
   Future<dynamic> search() async {
     final response = await get('$url');
     return response.body;

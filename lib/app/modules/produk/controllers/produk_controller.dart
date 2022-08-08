@@ -17,10 +17,8 @@ class ProdukController extends GetxController {
   var resultSearch = false.obs;
   var product = List<ProductModel>.empty().obs;
   var productCategory = List<CategoryProductModel>.empty().obs;
-  var productSearch = List<ProductModel>.empty().obs;
   var photoProduct = List<PhotoProduct>.empty().obs;
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
-  late TextEditingController seacrh;
   var isExpensive = true.obs;
   var isHideButtonPrice = true.obs;
   var isFound = true.obs;
@@ -30,46 +28,15 @@ class ProdukController extends GetxController {
       RefreshController(initialRefresh: false);
   ScrollController controller = ScrollController();
 
-  void onRefresh() async {
-    // monitor network fetch
-    product.clear();
-    await Future.delayed(Duration(milliseconds: 1000));
-    // isLoading(true);
-    // wishlist.clear();
-    // getData();
-    page.value = 1;
-    // product.clear;
-    // print("tes scroll");
-    getData();
-    refreshController.refreshCompleted();
-  }
-
-  void onLoading() async {
-    // await Future.delayed(Duration(milliseconds: 3000));
-    // page.value = page.value + 1;
-    // getData();
-
-    // // print("scroll bawah");
-    // // dialog("title", "msg");
-    // refreshController.refreshCompleted();
-  }
+  void onLoading() async {}
 
   @override
   void onInit() {
     super.onInit();
     getDataCategory();
     getDataPhoto();
-    getData();
+    // getData();
     seacrh = TextEditingController();
-  }
-
-  void addItems() {
-    print(page);
-    if (isAddLengthProduct.value == true) {
-      page.value = page.value + 1;
-      getData();
-      isAddLengthProduct(false);
-    }
   }
 
   void produkNotFound() async {
@@ -92,14 +59,6 @@ class ProdukController extends GetxController {
     product.sort((a, b) => a.price!.compareTo(b.price!));
   }
 
-  void runSearch(String search) {
-    if (search == "") {
-      dialog("Peringatan", "Kolom tidak boleh kosong");
-    } else {
-      Get.toNamed(Routes.PRODUK);
-    }
-  }
-
   void getDataPhoto() async {
     PhotoProductProvider().getData().then((response) {
       try {
@@ -109,60 +68,6 @@ class ProdukController extends GetxController {
         }).toList();
       } catch (e) {
         print(e.toString());
-      }
-    });
-  }
-
-  // void getPhotoProductById(int productId) {
-  //   for (var item in photoProduct) {
-  //     print(photoProduct);
-  //     // if (item.productId!.id == productId) {
-  //     //   final data = PhotoProduct(
-  //     //     id: item.id,
-  //     //     productId: ProductModel(
-  //     //       id: item.productId!.id,
-  //     //       name: item.productId!.name,
-  //     //       slug: item.productId!.slug,
-  //     //       categoryProductId: CategoryProductModel(
-  //     //         id: item.productId!.categoryProductId!.id,
-  //     //         name: item.productId!.categoryProductId!.name,
-  //     //         slug: item.productId!.categoryProductId!.slug,
-  //     //         createdAt: item.productId!.categoryProductId!.createdAt,
-  //     //         updatedAt: item.productId!.categoryProductId!.updatedAt,
-  //     //       ),
-  //     //       code: item.productId!.code,
-  //     //       stoke: item.productId!.stoke,
-  //     //       price: item.productId!.price,
-  //     //       desc: item.productId!.desc,
-  //     //       userId: UserModel(
-  //     //         id: item.productId!.userId!.id,
-  //     //         name: item.productId!.userId!.name,
-  //     //       ),
-  //     //       isActive: item.productId!.isActive,
-  //     //     ),
-  //     //     name: item.name,
-  //     //     createdAt: item.createdAt,
-  //     //     updatedAt: item.updatedAt,
-  //     //   );
-  //     //   photoProductByProductId.insert(0, data);
-  //     // } else {
-  //     //   print("not found");
-  //     // }
-  //   }
-  // }
-
-  void getData() async {
-    ProductProvider().getData(page.value).then((response) {
-      try {
-        if (response["data"].length != 0) {
-          response["data"].map((e) {
-            final data = ProductModel.fromJson(e as Map<String, dynamic>);
-            product.add(data);
-          }).toList();
-          isAddLengthProduct(true);
-        }
-      } catch (e) {
-        // Get.toNamed(Routes.ERROR, arguments: e.toString());
       }
     });
   }
@@ -194,5 +99,98 @@ class ProdukController extends GetxController {
 
   ProductModel findBySlug(String slug) {
     return product.firstWhere((element) => element.slug == slug);
+  }
+
+// searching
+  late TextEditingController seacrh;
+  var searchText = "".obs;
+  var pageSearch = 1.obs;
+  var productSearch = List<ProductModel>.empty().obs;
+
+  void runSearch(String searchType) {
+    if (searchType == "") {
+      dialog("Peringatan", "Kolom tidak boleh kosong");
+    } else {
+      productSearch.clear();
+      // print(productSearch.length);
+      pageSearch.value = 1;
+      searchText.value = searchType;
+      Get.toNamed(Routes.PRODUK);
+      getDataSearch();
+    }
+  }
+
+  void getDataSearch() async {
+    try {
+      ProductProvider()
+          .getDataSearch(pageSearch.value, searchText.value)
+          .then((response) {
+        if (response["data"].length != 0) {
+          response["data"].map((e) {
+            final data = ProductModel.fromJson(e as Map<String, dynamic>);
+            productSearch.add(data);
+          }).toList();
+          pageSearch.value = pageSearch.value + 1;
+        } else {}
+      });
+    } catch (e) {
+      dialogError(e.toString());
+    }
+  }
+
+  void onRefreshSearch() async {
+    productSearch.clear();
+    await Future.delayed(Duration(milliseconds: 1000));
+    pageSearch.value = 1;
+    getDataSearch();
+    refreshController.refreshCompleted();
+  }
+
+  void addItemsSearch() {
+    getDataSearch();
+  }
+
+// Category
+  var idCategory = 0.obs;
+  var pageCategory = 1.obs;
+  var productByCategory = List<ProductModel>.empty().obs;
+
+  void runCategory(int idCategoryText, String nameCategory) {
+    productByCategory.clear();
+    // print(idCategoryText);
+    pageCategory.value = 1;
+    idCategory.value = idCategoryText;
+    Get.toNamed(Routes.KATEGORI_VIEW, arguments: nameCategory);
+    getDataByCategory();
+  }
+
+  void getDataByCategory() async {
+    try {
+      ProductProvider()
+          .getDataCategory(pageCategory.value, idCategory.value)
+          .then((response) {
+        if (response["data"].length != 0) {
+          response["data"].map((e) {
+            final data = ProductModel.fromJson(e as Map<String, dynamic>);
+            productByCategory.add(data);
+          }).toList();
+          pageCategory.value = pageCategory.value + 1;
+        } else {}
+      });
+    } catch (e) {
+      dialogError(e.toString());
+    }
+  }
+
+  void onRefreshCategory() async {
+    productByCategory.clear();
+    await Future.delayed(Duration(milliseconds: 1000));
+    pageCategory.value = 1;
+    getDataByCategory();
+    refreshController.refreshCompleted();
+  }
+
+  void addItemsCategory() {
+    getDataByCategory();
   }
 }

@@ -76,14 +76,14 @@ class KategoriView extends GetView<ProdukController> {
               // print('At the top');
             } else {
               // print('At the bottom');
-              controller.addItems();
+              controller.addItemsCategory();
             }
           }
           return true;
         },
         child: SmartRefresher(
           controller: controller.refreshController,
-          onRefresh: controller.onRefresh,
+          onRefresh: controller.onRefreshCategory,
           onLoading: controller.onLoading,
           header: WaterDropMaterialHeader(),
           enablePullDown: true,
@@ -97,50 +97,53 @@ class KategoriView extends GetView<ProdukController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
+                      margin: EdgeInsets.fromLTRB(16, 6, 16, 0),
                       child: Text(
                         "Kategori : " + Get.arguments,
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                          fontSize: 12,
+                        ),
                       ),
                     ),
-                    Container(
-                        margin: EdgeInsets.all(16),
-                        child: OutlinedButton(
-                            onPressed: () {
-                              if (controller.isHideButtonPrice.isTrue ||
-                                  controller.isHideButtonPrice.isFalse) {
-                                controller.isHideButtonPrice(false);
-                                if (controller.isExpensive.isFalse) {
-                                  controller.isExpensive(true);
-                                  controller.productExpensive();
-                                } else {
-                                  controller.isExpensive(false);
-                                  controller.productCheap();
-                                }
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Harga",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Obx(() => controller.isHideButtonPrice.isFalse
-                                    ? controller.isExpensive.isTrue
-                                        ? Icon(Icons.arrow_drop_up_outlined)
-                                        : Icon(Icons.arrow_drop_down_outlined)
-                                    : Container()),
-                              ],
-                            ))),
+                    Container(),
+                    // Container(
+                    //   margin: EdgeInsets.all(16),
+                    //   child: OutlinedButton(
+                    //     onPressed: () {
+                    //       if (controller.isHideButtonPrice.isTrue ||
+                    //           controller.isHideButtonPrice.isFalse) {
+                    //         controller.isHideButtonPrice(false);
+                    //         if (controller.isExpensive.isFalse) {
+                    //           controller.isExpensive(true);
+                    //           controller.productExpensive();
+                    //         } else {
+                    //           controller.isExpensive(false);
+                    //           controller.productCheap();
+                    //         }
+                    //       }
+                    //     },
+                    //     child: Row(
+                    //       children: [
+                    //         Text(
+                    //           "Harga",
+                    //           style: TextStyle(
+                    //               fontSize: 15, fontWeight: FontWeight.w600),
+                    //         ),
+                    //         Obx(() => controller.isHideButtonPrice.isFalse
+                    //             ? controller.isExpensive.isTrue
+                    //                 ? Icon(Icons.arrow_drop_up_outlined)
+                    //                 : Icon(Icons.arrow_drop_down_outlined)
+                    //             : Container()),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
                   child: Obx(
-                    () => controller.product.isEmpty
+                    () => controller.productByCategory.isEmpty
                         ? Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -162,18 +165,11 @@ class KategoriView extends GetView<ProdukController> {
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     childAspectRatio: 1 / 1.2),
-                            itemCount: controller.product
-                                .where((e) =>
-                                    e.categoryProductId!.name == Get.arguments)
-                                .length,
+                            itemCount: controller.productByCategory.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, i) {
-                              final data = controller.product
-                                  .where((e) =>
-                                      e.categoryProductId!.name ==
-                                      Get.arguments)
-                                  .toList()[i];
+                              final data = controller.productByCategory[i];
                               return ItemProduct(data);
                             },
                           ),
