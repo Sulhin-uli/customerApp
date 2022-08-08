@@ -38,6 +38,7 @@ class WishlistController extends GetxController {
   void onLoading() async {
     await Future.delayed(Duration(milliseconds: 1000));
     print("tes");
+    refreshController.refreshCompleted();
   }
 
   void dialogSuccess(String msg) {

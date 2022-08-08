@@ -10,6 +10,7 @@ import 'package:customer_app/app/utils/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ProdukController extends GetxController {
   var carouselIndex = 0.obs;
@@ -23,6 +24,35 @@ class ProdukController extends GetxController {
   var isExpensive = true.obs;
   var isHideButtonPrice = true.obs;
   var isFound = true.obs;
+  var isAddLengthProduct = false.obs;
+  var page = 1.obs;
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+  ScrollController controller = ScrollController();
+
+  void onRefresh() async {
+    // monitor network fetch
+    product.clear();
+    await Future.delayed(Duration(milliseconds: 1000));
+    // isLoading(true);
+    // wishlist.clear();
+    // getData();
+    page.value = 1;
+    // product.clear;
+    // print("tes scroll");
+    getData();
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async {
+    // await Future.delayed(Duration(milliseconds: 3000));
+    // page.value = page.value + 1;
+    // getData();
+
+    // // print("scroll bawah");
+    // // dialog("title", "msg");
+    // refreshController.refreshCompleted();
+  }
 
   @override
   void onInit() {
@@ -31,6 +61,15 @@ class ProdukController extends GetxController {
     getDataPhoto();
     getData();
     seacrh = TextEditingController();
+  }
+
+  void addItems() {
+    print(page);
+    if (isAddLengthProduct.value == true) {
+      page.value = page.value + 1;
+      getData();
+      isAddLengthProduct(false);
+    }
   }
 
   void produkNotFound() async {
@@ -113,35 +152,15 @@ class ProdukController extends GetxController {
   // }
 
   void getData() async {
-    ProductProvider().getData().then((response) {
+    ProductProvider().getData(page.value).then((response) {
       try {
-        response["data"].map((e) {
-          // final data = ProductModel(
-          //   id: e["id"],
-          //   name: e["name"],
-          //   slug: e["slug"],
-          //   categoryProductId: CategoryProductModel(
-          //     id: e["category_product_id"]["id"],
-          //     name: e["category_product_id"]["name"],
-          //     slug: e["category_product_id"]["slug"],
-          //     isActive: e["category_product_id"]["is_active"],
-          //     createdAt: e["category_product_id"]["created_at"],
-          //     updatedAt: e["category_product_id"]["updated_at"],
-          //   ),
-          //   code: e["code"],
-          //   stoke: e["stoke"],
-          //   stockOut: e["stock_out"],
-          //   price: e["price"],
-          //   desc: e["desc"],
-          //   userId: UserModel(
-          //     id: e["user_id"]["id"],
-          //     name: e["user_id"]["name"],
-          //   ),
-          //   isActive: e["is_active"],
-          // );
-          final data = ProductModel.fromJson(e as Map<String, dynamic>);
-          product.add(data);
-        }).toList();
+        if (response["data"].length != 0) {
+          response["data"].map((e) {
+            final data = ProductModel.fromJson(e as Map<String, dynamic>);
+            product.add(data);
+          }).toList();
+          isAddLengthProduct(true);
+        }
       } catch (e) {
         // Get.toNamed(Routes.ERROR, arguments: e.toString());
       }

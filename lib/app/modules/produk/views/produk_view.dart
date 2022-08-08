@@ -153,47 +153,11 @@ class ProdukView extends GetView<ProdukController> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, i) {
-                          final data = controller.product[i];
-                          if (data.isActive == 1) {
-                            if (data.name!.toLowerCase().contains(
-                                controller.seacrh.text.toLowerCase())) {
-                              return ItemProduct(data);
-                            } else {
-                              return Center(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SvgPicture.asset(
-                                      "assets/icons/empty-data.svg",
-                                      height: 100,
-                                      width: 100,
-                                    ),
-                                    Text(
-                                      "Hasil Pencarian Tidak Ada",
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  ],
-                                ),
-                              );
-                            }
-                          } else {
-                            return Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/empty-data.svg",
-                                    height: 100,
-                                    width: 100,
-                                  ),
-                                  Text(
-                                    "Hasil Pencarian Tidak Ada",
-                                    style: TextStyle(color: Colors.grey),
-                                  )
-                                ],
-                              ),
-                            );
-                          }
+                          final data = controller.product
+                              .where((e) => e.name!.toLowerCase().contains(
+                                  controller.seacrh.text.toLowerCase()))
+                              .toList();
+                          return ItemProduct(data);
                         },
                       ),
               ),

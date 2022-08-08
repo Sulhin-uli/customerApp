@@ -9,8 +9,8 @@ class ProductProvider extends GetConnect {
   String url = baseUrl + "product-customer";
   String errorText = "";
 
-  Future<dynamic> getData() async {
-    final response = await get('$url');
+  Future<dynamic> getData(int page) async {
+    final response = await get('$url?page=$page');
     return response.body;
   }
 

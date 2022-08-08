@@ -10,9 +10,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class KategoriView extends GetView<ProdukController> {
   final box = GetStorage();
+  final _scrollController = TrackingScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,59 +67,123 @@ class KategoriView extends GetView<ProdukController> {
         elevation: 0.5,
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: NotificationListener<ScrollEndNotification>(
+        onNotification: (scrollEnd) {
+          final metrics = scrollEnd.metrics;
+          if (metrics.atEdge) {
+            bool isTop = metrics.pixels == 0;
+            if (isTop) {
+              // print('At the top');
+            } else {
+              // print('At the bottom');
+              controller.addItems();
+            }
+          }
+          return true;
+        },
+        child: SmartRefresher(
+          controller: controller.refreshController,
+          onRefresh: controller.onRefresh,
+          onLoading: controller.onLoading,
+          header: WaterDropMaterialHeader(),
+          enablePullDown: true,
+          enablePullUp: false,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
-                  child: Text(
-                    "Kategori : " + Get.arguments,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
+                      child: Text(
+                        "Kategori : " + Get.arguments,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.all(16),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              if (controller.isHideButtonPrice.isTrue ||
+                                  controller.isHideButtonPrice.isFalse) {
+                                controller.isHideButtonPrice(false);
+                                if (controller.isExpensive.isFalse) {
+                                  controller.isExpensive(true);
+                                  controller.productExpensive();
+                                } else {
+                                  controller.isExpensive(false);
+                                  controller.productCheap();
+                                }
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Harga",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Obx(() => controller.isHideButtonPrice.isFalse
+                                    ? controller.isExpensive.isTrue
+                                        ? Icon(Icons.arrow_drop_up_outlined)
+                                        : Icon(Icons.arrow_drop_down_outlined)
+                                    : Container()),
+                              ],
+                            ))),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                  child: Obx(
+                    () => controller.product.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/empty-data.svg",
+                                  height: 100,
+                                  width: 100,
+                                ),
+                                Text(
+                                  "Data Produk Tidak Ada",
+                                  style: TextStyle(color: Colors.grey),
+                                )
+                              ],
+                            ),
+                          )
+                        : GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1 / 1.2),
+                            itemCount: controller.product
+                                .where((e) =>
+                                    e.categoryProductId!.name == Get.arguments)
+                                .length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, i) {
+                              final data = controller.product
+                                  .where((e) =>
+                                      e.categoryProductId!.name ==
+                                      Get.arguments)
+                                  .toList()[i];
+                              return ItemProduct(data);
+                            },
+                          ),
                   ),
                 ),
-                Container(
-                    margin: EdgeInsets.all(16),
-                    child: OutlinedButton(
-                        onPressed: () {
-                          if (controller.isHideButtonPrice.isTrue ||
-                              controller.isHideButtonPrice.isFalse) {
-                            controller.isHideButtonPrice(false);
-                            if (controller.isExpensive.isFalse) {
-                              controller.isExpensive(true);
-                              controller.productExpensive();
-                            } else {
-                              controller.isExpensive(false);
-                              controller.productCheap();
-                            }
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "Harga",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            Obx(() => controller.isHideButtonPrice.isFalse
-                                ? controller.isExpensive.isTrue
-                                    ? Icon(Icons.arrow_drop_up_outlined)
-                                    : Icon(Icons.arrow_drop_down_outlined)
-                                : Container()),
-                          ],
-                        ))),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-              child: Obx(
-                () => controller.product.isEmpty
-                    ? Center(
+                Obx(() => controller.isFound.isTrue
+                    ? Container()
+                    : Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset(
                               "assets/icons/empty-data.svg",
@@ -125,57 +191,15 @@ class KategoriView extends GetView<ProdukController> {
                               width: 100,
                             ),
                             Text(
-                              "Data Produk Tidak Ada",
+                              "Produk Tidak Ada",
                               style: TextStyle(color: Colors.grey),
                             )
                           ],
                         ),
-                      )
-                    : GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                        itemCount: controller.product
-                            .where((e) => e.isActive == 1)
-                            .length,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, i) {
-                          final data = controller.product[i];
-                          if (data.isActive == 1) {
-                            if (data.categoryProductId!.name == Get.arguments) {
-                              controller.produkFound();
-                              return ItemProduct(data);
-                            } else {
-                              controller.produkNotFound();
-                              return Container();
-                            }
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-              ),
+                      )),
+              ],
             ),
-            Obx(() => controller.isFound.isTrue
-                ? Container()
-                : Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          "assets/icons/empty-data.svg",
-                          height: 100,
-                          width: 100,
-                        ),
-                        Text(
-                          "Produk Tidak Ada",
-                          style: TextStyle(color: Colors.grey),
-                        )
-                      ],
-                    ),
-                  )),
-          ],
+          ),
         ),
       ),
     );
