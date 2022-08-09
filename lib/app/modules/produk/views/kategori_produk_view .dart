@@ -170,7 +170,7 @@ class KategoriView extends GetView<ProdukController> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, i) {
                               final data = controller.productByCategory[i];
-                              return ItemProduct(data);
+                              return ItemProduct(data, isData: "category");
                             },
                           ),
                   ),

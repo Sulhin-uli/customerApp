@@ -174,7 +174,7 @@ class ProdukView extends GetView<ProdukController> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, i) {
                               final data = controller.productSearch[i];
-                              return ItemProduct(data);
+                              return ItemProduct(data, isData: "search");
                             },
                           ),
                   ),

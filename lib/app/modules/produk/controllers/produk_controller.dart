@@ -93,12 +93,18 @@ class ProdukController extends GetxController {
   }
 
 // cari berdasarka id
-  ProductModel findByid(int id) {
-    return product.firstWhere((element) => element.id == id);
-  }
+  // ProductModel findByid(int id) {
+  //   return product.firstWhere((element) => element.id == id);
+  // }
 
-  ProductModel findBySlug(String slug) {
-    return product.firstWhere((element) => element.slug == slug);
+  ProductModel findBySlug(String slug, String isData) {
+    if (isData == "search") {
+      return productSearch.firstWhere((element) => element.slug == slug);
+    } else if (isData == "category") {
+      return productByCategory.firstWhere((element) => element.slug == slug);
+    } else {
+      return productDetail.firstWhere((element) => element.slug == slug);
+    }
   }
 
 // searching
@@ -192,5 +198,31 @@ class ProdukController extends GetxController {
 
   void addItemsCategory() {
     getDataByCategory();
+  }
+
+  // detail produk
+  var productDetail = List<ProductModel>.empty().obs;
+
+  void runDetail(String slug) async {
+    productDetail.clear();
+    getDataDetail(slug);
+    await Future.delayed(Duration(milliseconds: 1000));
+
+    Get.toNamed(
+      Routes.DETAIL_PRODUK,
+      arguments: [slug, "detail"],
+    );
+  }
+
+  void getDataDetail(String slug) async {
+    try {
+      ProductProvider().findBySlug(slug).then((response) {
+        final data =
+            ProductModel.fromJson(response["data"] as Map<String, dynamic>);
+        productDetail.add(data);
+      });
+    } catch (e) {
+      dialogError(e.toString());
+    }
   }
 }

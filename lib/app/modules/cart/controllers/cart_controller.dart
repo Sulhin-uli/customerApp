@@ -10,6 +10,7 @@ import 'package:customer_app/app/modules/produk/controllers/produk_controller.da
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CartController extends GetxController {
   final box = GetStorage();
@@ -24,6 +25,26 @@ class CartController extends GetxController {
   var photoProductByProductId = List<PhotoProduct>.empty().obs;
 
   ProdukController produkController = Get.put(ProdukController());
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  void onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    isAllMark.value = false;
+    total.value = 0;
+    isMark(false);
+    isLoading(true);
+    cart.clear();
+    getData();
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    print("tes");
+    refreshController.refreshCompleted();
+  }
 
   @override
   void onInit() {

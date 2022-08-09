@@ -26,7 +26,7 @@ class DetailProdukView extends GetView<DetailProdukController> {
   // Part Scrroll
   @override
   Widget build(BuildContext context) {
-    final data = produkC.findBySlug(Get.arguments);
+    final data = produkC.findBySlug(Get.arguments[0], Get.arguments[1]);
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       // // find
       wishlistC.foundWishlist(data.id!);

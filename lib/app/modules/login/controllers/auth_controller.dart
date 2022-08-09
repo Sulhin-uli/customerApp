@@ -297,34 +297,39 @@ class AuthController extends GetxController {
           if (response["status"] != 200) {
             dialogError(response['messages']);
           } else {
-            final data =
-                UserCustomer.fromJson(response["data"] as Map<String, dynamic>);
-            userCustomer.add(data);
-            box.write('userData', {
-              "id": response['data']['users']['id'],
-              "token": response['data']['token'],
-              "email": email,
-              "name": response['data']['users']['name'],
-              "password": password,
-              "customer_id": response['data']['customers']['id'],
-            });
-            box.write('isAuth', true);
-            isAuth.value = true;
-            isSkipIntro.value = true;
-            cartController.getData();
-            notifikasiController.getData();
-            Get.back();
-            void dialogError(String msg) {
-              // Get.defaultDialog(title: "Peringatan", middleText: msg);
-              Get.defaultDialog(
-                title: "Info",
-                titleStyle: TextStyle(fontSize: 12),
-                content: Text(
-                  response['messages'],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12),
-                ),
-              );
+            try {
+              final data = UserCustomer.fromJson(
+                  response["data"] as Map<String, dynamic>);
+              userCustomer.add(data);
+              box.write('userData', {
+                "id": response['data']['users']['id'],
+                "token": response['data']['token'],
+                "email": email,
+                "name": response['data']['users']['name'],
+                "password": password,
+                "customer_id": response['data']['customers']['id'],
+              });
+              box.write('isAuth', true);
+              isAuth.value = true;
+              isSkipIntro.value = true;
+              cartController.getData();
+              notifikasiController.getData();
+              Get.back();
+              void dialogError(String msg) {
+                // Get.defaultDialog(title: "Peringatan", middleText: msg);
+                Get.defaultDialog(
+                  title: "Info",
+                  titleStyle: TextStyle(fontSize: 12),
+                  content: Text(
+                    response['messages'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                );
+              }
+            } catch (e) {
+              // dialogError("Login Gagal" + e.toString());
+              dialogError("Login Gagal");
             }
           }
           // if (email != '' && password != '') {

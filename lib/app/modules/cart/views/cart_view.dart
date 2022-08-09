@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../controllers/cart_controller.dart';
 
@@ -31,88 +32,97 @@ class CartView extends GetView<CartController> {
         elevation: 0.5,
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: 18, right: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Obx(
-                    () => controller.cart.isEmpty
-                        ? Container()
-                        : Row(
-                            children: [
-                              Obx(() => Checkbox(
-                                  value: controller.isAllMark.value,
-                                  onChanged: (e) {
-                                    controller.isAllMark.value = e!;
-                                    controller.allMark();
-                                  })),
-                              Text("Pilih semua")
-                            ],
-                          ),
-                  ),
-                  Obx(
-                    () => controller.isMark.isTrue
-                        ? TextButton(
-                            onPressed: () {
-                              controller.deleteMultiple();
-                            },
-                            child: Text(
-                              "Hapus",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff16A085),
+      body: SmartRefresher(
+        controller: controller.refreshController,
+        onRefresh: controller.onRefresh,
+        onLoading: controller.onLoading,
+        enablePullDown: true,
+        enablePullUp: false,
+        header: WaterDropMaterialHeader(),
+        footer: ClassicFooter(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 18, right: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Obx(
+                      () => controller.cart.isEmpty
+                          ? Container()
+                          : Row(
+                              children: [
+                                Obx(() => Checkbox(
+                                    value: controller.isAllMark.value,
+                                    onChanged: (e) {
+                                      controller.isAllMark.value = e!;
+                                      controller.allMark();
+                                    })),
+                                Text("Pilih semua")
+                              ],
+                            ),
+                    ),
+                    Obx(
+                      () => controller.isMark.isTrue
+                          ? TextButton(
+                              onPressed: () {
+                                controller.deleteMultiple();
+                              },
+                              child: Text(
+                                "Hapus",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff16A085),
+                                ),
                               ),
+                            )
+                          : Container(),
+                    ),
+                  ],
+                ),
+              ),
+              Obx(
+                () => controller.isLoading.isTrue
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : controller.cart.isEmpty
+                        ? Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                SvgPicture.asset(
+                                  "assets/icons/empty-data.svg",
+                                  height: 100,
+                                  width: 100,
+                                ),
+                                Text(
+                                  "Data Tidak Ada",
+                                  style: TextStyle(color: Colors.grey),
+                                )
+                              ],
                             ),
                           )
-                        : Container(),
-                  ),
-                ],
-              ),
-            ),
-            Obx(
-              () => controller.isLoading.isTrue
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : controller.cart.isEmpty
-                      ? Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 25,
-                              ),
-                              SvgPicture.asset(
-                                "assets/icons/empty-data.svg",
-                                height: 100,
-                                width: 100,
-                              ),
-                              Text(
-                                "Data Tidak Ada",
-                                style: TextStyle(color: Colors.grey),
-                              )
-                            ],
+                        : ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controller.cart.length,
+                            itemBuilder: (context, i) {
+                              int length = controller.cart.length;
+                              final data = controller.cart[i];
+                              return ItemCart(data);
+                            },
                           ),
-                        )
-                      : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: controller.cart.length,
-                          itemBuilder: (context, i) {
-                            int length = controller.cart.length;
-                            final data = controller.cart[i];
-                            return ItemCart(data);
-                          },
-                        ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(

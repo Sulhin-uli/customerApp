@@ -30,7 +30,7 @@ class ProductProvider extends GetConnect {
   }
 
   Future<dynamic> findBySlug(String slug) async {
-    final response = await get('$url' + '/$slug');
+    final response = await get('$url' + '/detail/$slug');
     return response.body;
   }
 }

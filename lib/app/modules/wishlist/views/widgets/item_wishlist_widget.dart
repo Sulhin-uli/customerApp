@@ -1,5 +1,7 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/bindings/produk_binding.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/wishlist/controllers/wishlist_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/base_url.dart';
@@ -10,8 +12,10 @@ import 'package:get/get.dart';
 class ItemWishlist extends GetView<WishlistController> {
   ItemWishlist(this.data);
   final data;
+
   CartController cartController = Get.put(CartController());
   HomeController homeController = Get.put(HomeController());
+  ProdukController produkController = Get.put(ProdukController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +33,7 @@ class ItemWishlist extends GetView<WishlistController> {
             children: [
               GestureDetector(
                 onTap: () {
-                  // homeController.photoProductByProductId.clear();
-                  Get.toNamed(
-                    Routes.DETAIL_PRODUK,
-                    arguments: data.productId!.slug!,
-                  );
+                  produkController.runDetail(data.productId!.slug!);
                 },
                 child: Row(
                   children: [

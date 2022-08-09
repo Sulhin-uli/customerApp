@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemProduct extends GetView<ProdukController> {
-  ItemProduct(this.data);
+  ItemProduct(this.data, {required this.isData});
   final data;
+  String isData;
 
   Widget build(BuildContext context) {
     final dataImage = controller.photoProduct
@@ -18,10 +19,7 @@ class ItemProduct extends GetView<ProdukController> {
         .name;
     return GestureDetector(
       onTap: () {
-        Get.toNamed(
-          Routes.DETAIL_PRODUK,
-          arguments: data.slug!,
-        );
+        Get.toNamed(Routes.DETAIL_PRODUK, arguments: [data.slug!, isData]);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,

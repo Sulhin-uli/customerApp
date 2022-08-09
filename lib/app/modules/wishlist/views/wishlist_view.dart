@@ -26,8 +26,8 @@ class WishlistView extends GetView<WishlistController> {
             controller: wishlistC.refreshController,
             onRefresh: wishlistC.onRefresh,
             onLoading: wishlistC.onLoading,
-            enablePullDown: false,
-            enablePullUp: true,
+            enablePullDown: true,
+            enablePullUp: false,
             header: WaterDropMaterialHeader(),
             footer: ClassicFooter(),
             child: SingleChildScrollView(

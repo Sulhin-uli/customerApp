@@ -40,56 +40,72 @@ class SayaView extends GetView<SayaController> {
                   Stack(
                     children: <Widget>[
                       Obx(
-                        () => Container(
-                          margin: EdgeInsets.all(15),
-                          width: 70,
-                          height: 70,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(200),
-                            child: sayaC.selectedImagePath.value.isImageFileName
-                                ? GestureDetector(
-                                    onTap: () => Get.toNamed(
-                                        Routes.PHOTO_PROFILE,
-                                        arguments:
-                                            sayaC.selectedImagePath.value),
-                                    child: Image.file(
-                                      File(sayaC.selectedImagePath.value),
-                                      height: 150,
-                                      width: 150,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : sayaC.customer.first.image != null
-                                    ?
-                                    // Image.asset(
-                                    //     'assets/logo/noimage.png',
-                                    //     height: 150,
-                                    //     width: 150,
-                                    //     fit: BoxFit.cover,
-                                    //   )
-                                    // :
-                                    GestureDetector(
-                                        onTap: () => Get.toNamed(
-                                            Routes.PHOTO_PROFILE_URL,
-                                            arguments:
-                                                sayaC.customer.first.image!),
-                                        child: Image.network(
-                                          baseUrlFile +
-                                              "storage/profile/" +
-                                              sayaC.customer.first.image!,
-                                          height: 150,
-                                          width: 150,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : Image.asset(
-                                        'assets/logo/noimage.png',
-                                        height: 150,
-                                        width: 150,
-                                        fit: BoxFit.cover,
-                                      ),
-                          ),
-                        ),
+                        () => sayaC.customer.first.image != null
+                            ? Container(
+                                margin: EdgeInsets.all(15),
+                                width: 70,
+                                height: 70,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: sayaC.selectedImagePath.value
+                                          .isImageFileName
+                                      ? GestureDetector(
+                                          onTap: () => Get.toNamed(
+                                              Routes.PHOTO_PROFILE,
+                                              arguments: sayaC
+                                                  .selectedImagePath.value),
+                                          child: Image.file(
+                                            File(sayaC.selectedImagePath.value),
+                                            height: 150,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : sayaC.customer.first.image != null
+                                          ?
+                                          // Image.asset(
+                                          //     'assets/logo/noimage.png',
+                                          //     height: 150,
+                                          //     width: 150,
+                                          //     fit: BoxFit.cover,
+                                          //   )
+                                          // :
+                                          GestureDetector(
+                                              onTap: () => Get.toNamed(
+                                                  Routes.PHOTO_PROFILE_URL,
+                                                  arguments: sayaC
+                                                      .customer.first.image!),
+                                              child: Image.network(
+                                                baseUrlFile +
+                                                    "storage/profile/" +
+                                                    sayaC.customer.first.image!,
+                                                height: 150,
+                                                width: 150,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
+                                          : Image.asset(
+                                              'assets/logo/noimage.png',
+                                              height: 150,
+                                              width: 150,
+                                              fit: BoxFit.cover,
+                                            ),
+                                ),
+                              )
+                            : Container(
+                                margin: EdgeInsets.all(15),
+                                width: 70,
+                                height: 70,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.asset(
+                                    'assets/logo/noimage.png',
+                                    height: 150,
+                                    width: 150,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                       ),
                       Positioned(
                         bottom: 1,

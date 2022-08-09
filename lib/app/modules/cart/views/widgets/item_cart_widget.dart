@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
@@ -11,6 +12,7 @@ class ItemCart extends GetView<CartController> {
   ItemCart(this.data);
   final data;
   HomeController homeController = Get.put(HomeController());
+  ProdukController produkController = Get.put(ProdukController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +45,11 @@ class ItemCart extends GetView<CartController> {
                   GestureDetector(
                     onTap: () {
                       // homeController.photoProductByProductId.clear();
-                      Get.toNamed(
-                        Routes.DETAIL_PRODUK,
-                        arguments: data.productId!.slug!,
-                      );
+                      produkController.runDetail(data.productId!.slug!);
+                      // Get.toNamed(
+                      //   Routes.DETAIL_PRODUK,
+                      //   arguments: data.productId!.slug!,
+                      // );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
