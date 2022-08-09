@@ -15,10 +15,12 @@ class SayaView extends GetView<SayaController> {
   final homeC = Get.put(HomeController());
   final cartC = Get.put(CartController());
   // final authC = Get.put(AuthController());
-  final sayaC = Get.find<SayaController>();
+  // final sayaC = Get.find<SayaController>();
+  SayaController sayaC = Get.put(SayaController());
 
   @override
   Widget build(BuildContext context) {
+    controller.getDataCustomer();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -40,7 +42,7 @@ class SayaView extends GetView<SayaController> {
                   Stack(
                     children: <Widget>[
                       Obx(
-                        () => sayaC.customer.first.image != null
+                        () => sayaC.customer.isNotEmpty
                             ? Container(
                                 margin: EdgeInsets.all(15),
                                 width: 70,

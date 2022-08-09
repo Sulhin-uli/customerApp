@@ -42,9 +42,9 @@ class SayaController extends GetxController {
     passwordNew = TextEditingController();
     passwordConfirm = TextEditingController();
     super.onInit();
-    if (authC.isAuth.isTrue) {
-      getDataCustomer();
-    }
+    // if (authC.isAuth.isTrue) {
+    //   getDataCustomer();
+    // }
   }
 
   void getImage() async {
