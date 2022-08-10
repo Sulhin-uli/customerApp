@@ -269,99 +269,111 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ],
                         ),
                       ),
-                      // Container(
-                      //   width: double.infinity,
-                      //   height: 9,
-                      //   color: Color(0xffD1D1D1),
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.all(16),
-                      //   child: Column(
-                      //     children: [
-                      //       ListTile(
-                      //         leading: Icon(
-                      //           Icons.account_circle_rounded,
-                      //           size: 60,
-                      //           color: Colors.black,
-                      //         ),
-                      //         title: const Text(
-                      //           "Gapoktan",
-                      //           style: TextStyle(
-                      //               fontSize: 16, fontWeight: FontWeight.bold),
-                      //         ),
-                      //         subtitle: Text(
-                      //           "Indramayu ",
-                      //           style: TextStyle(
-                      //               fontSize: 14,
-                      //               color: Colors.black.withOpacity(0.5)),
-                      //         ),
-                      //       ),
-                      //       const SizedBox(
-                      //         width: 20,
-                      //       ),
-                      //       Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //         children: [
-                      //           Column(
-                      //             crossAxisAlignment: CrossAxisAlignment.start,
-                      //             children: [
-                      //               Row(
-                      //                 children: [
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: Colors.amber,
-                      //                     size: 16,
-                      //                   ),
-                      //                   const SizedBox(
-                      //                     width: 5,
-                      //                   ),
-                      //                   Text(
-                      //                     "4.2",
-                      //                     style: TextStyle(
-                      //                       fontSize: 12,
-                      //                       color:
-                      //                           Colors.black.withOpacity(0.5),
-                      //                     ),
-                      //                   )
-                      //                 ],
-                      //               ),
-                      //               const SizedBox(
-                      //                 height: 5,
-                      //               ),
-                      //               Text(
-                      //                 "Rating dan Ulasan",
-                      //                 style: TextStyle(
-                      //                   fontSize: 12,
-                      //                   color: Colors.black.withOpacity(0.5),
-                      //                 ),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //           Container(
-                      //             height: 60,
-                      //             child: VerticalDivider(
-                      //                 color: Colors.black.withOpacity(0.5)),
-                      //           ),
-                      //           OutlinedButton(
-                      //             onPressed: () {
-                      //               // Respond to button press
-                      //             },
-                      //             style: OutlinedButton.styleFrom(
-                      //               side: BorderSide(
-                      //                   width: 2.0, color: Color(0xff16A085)),
-                      //             ),
-                      //             child: Text(
-                      //               '     Lihat Toko    ',
-                      //               style: TextStyle(
-                      //                 color: Color(0xff16A085),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      Container(
+                        width: double.infinity,
+                        height: 9,
+                        color: Color.fromARGB(255, 245, 245, 245),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            // ListTile(
+                            //   leading: Icon(
+                            //     Icons.store,
+                            //     size: 60,
+                            //     color: Colors.green,
+                            //   ),
+                            //   title: Text(
+                            //     data.userId!.name!,
+                            //     style: TextStyle(
+                            //         fontSize: 16, fontWeight: FontWeight.bold),
+                            //   ),
+                            //   // subtitle: Text(
+                            //   //   ,
+                            //   //   style: TextStyle(
+                            //   //       fontSize: 14,
+                            //   //       color: Colors.black.withOpacity(0.5)),
+                            //   // ),
+                            // ),
+                            // const SizedBox(
+                            //   width: 20,
+                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.store,
+                                          color: Colors.green,
+                                          size: 16,
+                                        ),
+                                        // Icon(
+                                        //   Icons.star,
+                                        //   color: Colors.amber,
+                                        //   size: 16,
+                                        // ),
+                                        // const SizedBox(
+                                        //   width: 5,
+                                        // ),
+                                        // Text(
+                                        //   "4.2",
+                                        //   style: TextStyle(
+                                        //     fontSize: 12,
+                                        //     color:
+                                        //         Colors.black.withOpacity(0.5),
+                                        //   ),
+                                        // )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    // Text(
+                                    //   "Rating dan Ulasan",
+                                    //   style: TextStyle(
+                                    //     fontSize: 12,
+                                    //     color: Colors.black.withOpacity(0.5),
+                                    //   ),
+                                    // ),
+                                    Text(
+                                      data.userId!.name!,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black.withOpacity(0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 60,
+                                  child: VerticalDivider(
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    // Respond to button press
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(
+                                        width: 2.0, color: Color(0xff16A085)),
+                                  ),
+                                  child: Text(
+                                    '     Detail Toko    ',
+                                    style: TextStyle(
+                                      color: Color(0xff16A085),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         width: double.infinity,
                         height: 9,
@@ -489,7 +501,6 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ],
                         ),
                       ),
-
                       Obx(() => controller.ulasanController.review.isEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(left: 16),
@@ -544,7 +555,6 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                 ],
                               ),
                             )),
-
                       SizedBox(
                         height: 70,
                       )

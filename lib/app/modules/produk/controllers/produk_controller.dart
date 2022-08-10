@@ -35,7 +35,7 @@ class ProdukController extends GetxController {
     super.onInit();
     getDataCategory();
     getDataPhoto();
-    // getData();
+    getDataForHome();
     seacrh = TextEditingController();
   }
 
@@ -102,6 +102,8 @@ class ProdukController extends GetxController {
       return productSearch.firstWhere((element) => element.slug == slug);
     } else if (isData == "category") {
       return productByCategory.firstWhere((element) => element.slug == slug);
+    } else if (isData == "home") {
+      return productHome.firstWhere((element) => element.slug == slug);
     } else {
       return productDetail.firstWhere((element) => element.slug == slug);
     }
@@ -220,6 +222,24 @@ class ProdukController extends GetxController {
         final data =
             ProductModel.fromJson(response["data"] as Map<String, dynamic>);
         productDetail.add(data);
+      });
+    } catch (e) {
+      dialogError(e.toString());
+    }
+  }
+
+// get data for home
+  var productHome = List<ProductModel>.empty().obs;
+
+  void getDataForHome() {
+    try {
+      ProductProvider().getData(1).then((response) {
+        if (response["data"].length != 0) {
+          response["data"].map((e) {
+            final data = ProductModel.fromJson(e as Map<String, dynamic>);
+            productHome.add(data);
+          }).toList();
+        } else {}
       });
     } catch (e) {
       dialogError(e.toString());
