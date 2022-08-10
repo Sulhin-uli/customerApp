@@ -33,4 +33,9 @@ class ProductProvider extends GetConnect {
     final response = await get('$url' + '/detail/$slug');
     return response.body;
   }
+
+  Future<dynamic> tokoById(int id) async {
+    final response = await get('$url' + '/toko/$id');
+    return response.body;
+  }
 }

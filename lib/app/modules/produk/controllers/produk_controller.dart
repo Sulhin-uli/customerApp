@@ -1,6 +1,7 @@
 import 'package:customer_app/app/data/models/category_product_model.dart';
 import 'package:customer_app/app/data/models/photo_product_model.dart';
 import 'package:customer_app/app/data/models/product_model.dart';
+import 'package:customer_app/app/data/models/toko_modal.dart';
 import 'package:customer_app/app/data/models/user_model.dart';
 import 'package:customer_app/app/data/providers/category_product_provider.dart';
 import 'package:customer_app/app/data/providers/photo_product_provider.dart';
@@ -240,6 +241,28 @@ class ProdukController extends GetxController {
             productHome.add(data);
           }).toList();
         } else {}
+      });
+    } catch (e) {
+      dialogError(e.toString());
+    }
+  }
+
+  // get data toko
+  runDetailToko(int id, String name) async {
+    toko.clear();
+    getDataTokoById(id);
+    await Future.delayed(Duration(milliseconds: 1000));
+
+    Get.toNamed(Routes.DETAIL_TOKO, arguments: name);
+  }
+
+  var toko = List<Toko>.empty().obs;
+
+  void getDataTokoById(int id) {
+    try {
+      ProductProvider().tokoById(id).then((response) {
+        final data = Toko.fromJson(response["data"] as Map<String, dynamic>);
+        toko.add(data);
       });
     } catch (e) {
       dialogError(e.toString());

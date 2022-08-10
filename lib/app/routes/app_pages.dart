@@ -1,5 +1,6 @@
 import 'package:customer_app/app/modules/forget_password/bindings/forget_password_binding.dart';
 import 'package:customer_app/app/modules/forget_password/views/forget_password_view.dart';
+import 'package:customer_app/app/modules/produk/views/detail_toko_view.dart';
 import 'package:customer_app/app/modules/saya/views/information_account.dart';
 import 'package:get/get.dart';
 
@@ -196,6 +197,11 @@ class AppPages {
     GetPage(
       name: _Paths.KATEGORI_VIEW,
       page: () => KategoriView(),
+      binding: ProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_TOKO,
+      page: () => DetailTokoView(),
       binding: ProdukBinding(),
     ),
 

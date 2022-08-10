@@ -357,6 +357,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                 OutlinedButton(
                                   onPressed: () {
                                     // Respond to button press
+                                    produkC.runDetailToko(
+                                        data.userId!.id!, data.userId!.name!);
                                   },
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(

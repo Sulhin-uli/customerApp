@@ -37,6 +37,7 @@ abstract class Routes {
   static const PRODUK = _Paths.PRODUK;
   static const IMAGE_VIEW = _Paths.IMAGE_VIEW;
   static const KATEGORI_VIEW = _Paths.KATEGORI_VIEW;
+  static const DETAIL_TOKO = _Paths.DETAIL_TOKO;
 
   // pengiriman
   static const PEMBAYARAN = _Paths.PEMBAYARAN;
@@ -90,6 +91,7 @@ abstract class _Paths {
   static const PRODUK = '/produk';
   static const IMAGE_VIEW = '/image-view';
   static const KATEGORI_VIEW = '/kategori-view';
+  static const DETAIL_TOKO = '/detail_toko';
 
   // pengiriman
   static const PEMBAYARAN = '/pembayaran';
