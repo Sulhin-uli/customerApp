@@ -139,6 +139,7 @@ class CartController extends GetxController {
     for (var item in cart) {
       if (item.isMark == true) {
         deleteData(item.id!);
+        total.value = total.value - (item.productId!.price! * item.productQty!);
       }
     }
     isAllMark.value = false;
@@ -385,6 +386,11 @@ class CartController extends GetxController {
   }
 
   void deleteData(int id) {
+    final item = findByid(id);
+    if (item.isMark == true) {
+      total.value = total.value - (item.productId!.price! * item.productQty!);
+    }
+
     final data = box.read("userData") as Map<String, dynamic>;
 
     CartProvider()
