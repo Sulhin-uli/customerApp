@@ -1,6 +1,7 @@
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/cart/views/widgets/item_cart_widget.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/produk/views/widgets/item_product_widget.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
@@ -15,6 +16,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class KategoriView extends GetView<ProdukController> {
   final box = GetStorage();
   final _scrollController = TrackingScrollController();
+  AuthController authController = Get.put(AuthController());
+  CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,19 +51,22 @@ class KategoriView extends GetView<ProdukController> {
           ),
         ),
         actions: [
-          Container(
-            margin: EdgeInsets.only(right: 7),
-            child: _buildIconButton(
-              onPressed: () {
-                if (auth == true) {
-                  Get.toNamed(Routes.CART);
-                } else {
-                  Get.toNamed(Routes.LOGIN);
-                }
-              },
-              icon: Icons.shopping_cart,
-              notification:
-                  (auth == true) ? Get.find<CartController>().cart.length : 0,
+          Obx(
+            () => Container(
+              margin: EdgeInsets.only(right: 7),
+              child: _buildIconButton(
+                onPressed: () {
+                  if (auth == true) {
+                    Get.toNamed(Routes.CART);
+                  } else {
+                    Get.toNamed(Routes.LOGIN);
+                  }
+                },
+                icon: Icons.shopping_cart,
+                notification: authController.isAuth.isTrue
+                    ? cartController.cart.length
+                    : 0,
+              ),
             ),
           )
         ],

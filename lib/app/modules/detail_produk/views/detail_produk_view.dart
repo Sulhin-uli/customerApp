@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/detail_produk/views/widgets/header_widget.dart';
 import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
+import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/modules/wishlist/controllers/wishlist_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
@@ -20,8 +21,9 @@ class DetailProdukView extends GetView<DetailProdukController> {
   final box = GetStorage();
   final _scrollController = TrackingScrollController();
   final produkC = Get.find<ProdukController>();
-  final cartC = Get.find<CartController>();
   final wishlistC = Get.find<WishlistController>();
+  AuthController authController = Get.put(AuthController());
+  CartController cartC = Get.put(CartController());
 
   // Part Scrroll
   @override
@@ -37,11 +39,17 @@ class DetailProdukView extends GetView<DetailProdukController> {
       body: Column(
         children: [
           Obx(
-            () => HeaderDetailProduk(
-              _scrollController,
-              cartC.cart.length,
-              box.read('isAuth'),
-            ),
+            () => authController.isAuth.isTrue
+                ? HeaderDetailProduk(
+                    _scrollController,
+                    cartC.cart.length,
+                    box.read('isAuth'),
+                  )
+                : HeaderDetailProduk(
+                    _scrollController,
+                    0,
+                    box.read('isAuth'),
+                  ),
           ),
           Expanded(
             child: Stack(
