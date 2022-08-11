@@ -10,7 +10,6 @@ class NotifikasiController extends GetxController {
 
   @override
   void onInit() {
-    getData();
     super.onInit();
   }
 
@@ -30,10 +29,17 @@ class NotifikasiController extends GetxController {
     }
   }
 
-  void deleteAll() async {
+  Notification findByid(int id) {
+    return notif.firstWhere((element) => element.id == id);
+  }
+
+  void readAll() async {
     final data = box.read("userData") as Map<String, dynamic>;
-    NotificationProvider().deleteAll(data["token"]).then((response) {
+    NotificationProvider()
+        .deleteAll(data["token"], data["id"])
+        .then((response) {
       notif.clear();
+      getData();
     });
   }
 }

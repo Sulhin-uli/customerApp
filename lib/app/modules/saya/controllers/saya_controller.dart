@@ -8,6 +8,7 @@ import 'package:customer_app/app/modules/home/controllers/home_controller.dart';
 import 'package:customer_app/app/modules/login/controllers/auth_controller.dart';
 import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/utils/constant.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -127,6 +128,7 @@ class SayaController extends GetxController {
           TextButton(
             onPressed: () {
               Navigator.pop(context, 'Ya');
+              unSubscribe();
               box.erase();
               box.write('isAuth', false);
               homeC.changeTabIndex(0);
@@ -139,6 +141,14 @@ class SayaController extends GetxController {
         ],
       ),
     );
+  }
+
+  void unSubscribe() async {
+    print("dijalankan");
+    final data = box.read("userData") as Map<String, dynamic>;
+    var topic = "topic_user_id_" + data["id"].toString();
+    print(topic);
+    await FirebaseMessaging.instance.unsubscribeFromTopic(topic);
   }
 
   void editPassword(

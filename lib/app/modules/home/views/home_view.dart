@@ -20,6 +20,7 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final box = GetStorage();
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -106,11 +107,13 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  (box.read('isAuth') == true)
+                  authController.isAuth.isTrue
                       ? Header(
                           _scrollController,
                           controller.cartController.cart.length,
-                          controller.notifikasiController.notif.length,
+                          controller.notifikasiController.notif
+                              .where((e) => e.isRead == 0)
+                              .length,
                           // authC.isAuth.value,
                           box.read('isAuth'),
                         )

@@ -16,7 +16,7 @@ class NotifikasiView extends GetView<NotifikasiController> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            controller.deleteAll();
+            controller.readAll();
             Navigator.of(context).pop();
           },
         ),
@@ -72,7 +72,9 @@ class NotifikasiView extends GetView<NotifikasiController> {
                               child: Container(
                                 padding: EdgeInsets.all(16),
                                 width: double.infinity,
-                                color: Color(0xffEAFFEE),
+                                color: data.isRead == 1
+                                    ? Colors.white
+                                    : Color(0xffEAFFEE),
                                 child: ListTile(
                                   // leading: CircleAvatar(
                                   //   backgroundImage: AssetImage(

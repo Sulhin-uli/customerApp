@@ -4,11 +4,10 @@
 
 import 'dart:convert';
 
-List<Notification> notificationFromJson(String str) => List<Notification>.from(
-    json.decode(str).map((x) => Notification.fromJson(x)));
+Notification notificationFromJson(String str) =>
+    Notification.fromJson(json.decode(str));
 
-String notificationToJson(List<Notification> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String notificationToJson(Notification data) => json.encode(data.toJson());
 
 class Notification {
   Notification({
@@ -18,6 +17,7 @@ class Notification {
     this.body,
     this.img,
     this.route,
+    this.isRead,
     this.createdAt,
     this.updatedAt,
   });
@@ -26,8 +26,9 @@ class Notification {
   int? userId;
   String? title;
   String? body;
-  String? img;
-  String? route;
+  dynamic img;
+  dynamic route;
+  int? isRead;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -38,6 +39,7 @@ class Notification {
         body: json["body"],
         img: json["img"],
         route: json["route"],
+        isRead: json["is_read"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -49,6 +51,7 @@ class Notification {
         "body": body,
         "img": img,
         "route": route,
+        "is_read": isRead,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
       };

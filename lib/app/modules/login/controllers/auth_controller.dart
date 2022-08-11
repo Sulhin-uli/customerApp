@@ -314,6 +314,7 @@ class AuthController extends GetxController {
               isSkipIntro.value = true;
               cartController.getData();
               notifikasiController.getData();
+              subscribe();
               Get.back();
               Get.defaultDialog(
                 title: "Info",
@@ -364,14 +365,14 @@ class AuthController extends GetxController {
   }
 
   // subscribe();
-  void subscribe() async {
-    print("dijalankan");
-    final data = box.read("dataUser") as Map<String, dynamic>;
-    var topic = "topic_user_id_" + data["id"];
-    await FirebaseMessaging.instance.subscribeToTopic(topic);
-    // var token = await FirebaseMessaging.instance.getToken();
-    // print("ini tokennya = " + token!);
-  }
+  // void subscribe() async {
+  //   print("dijalankan");
+  //   final data = box.read("dataUser") as Map<String, dynamic>;
+  //   var topic = "topic_user_id_" + data["id"];
+  //   await FirebaseMessaging.instance.subscribeToTopic(topic);
+  //   // var token = await FirebaseMessaging.instance.getToken();
+  //   // print("ini tokennya = " + token!);
+  // }
 
   // void logout() {
   //   final box = GetStorage();
@@ -608,5 +609,13 @@ class AuthController extends GetxController {
         "friendEmail": friendEmail,
       },
     );
+  }
+
+  void subscribe() async {
+    print("dijalankan");
+    final data = box.read("userData") as Map<String, dynamic>;
+    var topic = "topic_user_id_" + data["id"].toString();
+    print(topic);
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
   }
 }

@@ -15,8 +15,8 @@ class NotificationProvider extends GetConnect {
     return response.body;
   }
 
-  Future<dynamic> deleteAll(String token) async {
-    final response = await get(url + '_list/delete-all', headers: {
+  Future<dynamic> deleteAll(String token, int id) async {
+    final response = await get(url + '_list/delete-all/$id', headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',

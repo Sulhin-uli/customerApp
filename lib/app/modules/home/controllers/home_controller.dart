@@ -35,19 +35,10 @@ class HomeController extends GetxController {
     if (box.read('isAuth') == true) {
       cartController.cart.clear();
       cartController.getData();
-      subscribe();
     }
     mainMenu();
     bannerHome();
     super.onInit();
-  }
-
-  void subscribe() async {
-    print("dijalankan");
-    final data = box.read("userData") as Map<String, dynamic>;
-    var topic = "topic_user_id_" + data["id"].toString();
-    print(topic);
-    await FirebaseMessaging.instance.subscribeToTopic(topic);
   }
 
   void changeTabIndex(int index) {
