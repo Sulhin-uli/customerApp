@@ -91,20 +91,25 @@ class PengirimanView extends GetView<PengirimanController> {
                                     ),
                                   ),
                           ),
-                          SizedBox(
-                            height: 25, //height of button
-                            width: 70,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xffE3BAC1), // background
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'Utama',
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.red),
-                              ),
-                            ),
+                          Obx(
+                            () => controller.alamatController.address.isEmpty
+                                ? Container()
+                                : SizedBox(
+                                    height: 25, //height of button
+                                    width: 70,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color(0xffE3BAC1), // background
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Utama',
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.red),
+                                      ),
+                                    ),
+                                  ),
                           ),
                         ],
                       ),
