@@ -261,6 +261,7 @@ class ProdukController extends GetxController {
   void getDataTokoById(int id) {
     try {
       ProductProvider().tokoById(id).then((response) {
+        print(response);
         final data = Toko.fromJson(response["data"] as Map<String, dynamic>);
         toko.add(data);
       });

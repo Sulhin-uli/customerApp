@@ -470,6 +470,38 @@ class DetailProdukView extends GetView<DetailProdukController> {
                             const Divider(
                               color: Color(0xff919A92),
                             ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    "Berat",
+                                    style: TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: 50,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    data.weight!.toString() + " gram",
+                                    style: const TextStyle(
+                                      color: Color(0xff919A92),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(
+                              color: Color(0xff919A92),
+                            ),
                             Text(
                               // "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                               data.desc!,
@@ -633,27 +665,37 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               ElevatedButton(
                                 onPressed: () {
                                   if (box.read('isAuth') == true) {
-                                    if (cartC.cart
-                                        .where(
-                                            (e) => e.productId!.id! == data.id)
-                                        .isEmpty) {
-                                      cartC.postData(data.id, 1);
-                                      // print("false");
-                                    } else {
-                                      print("true");
-                                      int idCart = cartC.cart
-                                          .where((e) =>
-                                              e.productId!.id! == data.id)
-                                          .first
-                                          .id!;
-                                      int cartQty = cartC.cart
-                                          .where((e) =>
-                                              e.productId!.id! == data.id)
-                                          .first
-                                          .productQty!;
-                                      cartC.updateQty(idCart, cartQty + 1);
+                                    int cartLength = cartC.cart.length;
+                                    if (cartLength == 20) {
                                       dialogSuccess(
-                                          "Berhasil ditambahkan keranjang");
+                                          "Keranjang maksimal 20 produk");
+                                    } else {
+                                      if (cartC.cart
+                                          .where((e) =>
+                                              e.productId!.id! == data.id)
+                                          .isEmpty) {
+                                        cartC.postData(data.id, 1);
+                                        // print("false");
+                                      } else {
+                                        int idCart = cartC.cart
+                                            .where((e) =>
+                                                e.productId!.id! == data.id)
+                                            .first
+                                            .id!;
+                                        int cartQty = cartC.cart
+                                            .where((e) =>
+                                                e.productId!.id! == data.id)
+                                            .first
+                                            .productQty!;
+                                        if (data.stoke == cartQty) {
+                                          dialogSuccess(
+                                              "Stok produk sudah masuk keranjang semua");
+                                        } else {
+                                          cartC.updateQty(idCart, cartQty + 1);
+                                          dialogSuccess(
+                                              "Berhasil ditambahkan keranjang");
+                                        }
+                                      }
                                     }
                                   } else {
                                     Get.toNamed(Routes.LOGIN);

@@ -38,13 +38,16 @@ class AlamatView extends GetView<AlamatController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 5,
+                        ),
                         SvgPicture.asset(
                           "assets/icons/empty-data.svg",
                           height: 100,
                           width: 100,
                         ),
                         Text(
-                          "Produk Tidak Ada",
+                          "Alamat Tidak Ada",
                           style: TextStyle(color: Colors.grey),
                         )
                       ],

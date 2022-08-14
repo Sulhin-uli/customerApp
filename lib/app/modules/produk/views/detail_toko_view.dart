@@ -33,16 +33,16 @@ class DetailTokoView extends GetView<ProdukController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Nama Gabungan Kelompok Tani",
-                    style: TextStyle(color: Color(0xff919A92), fontSize: 12),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    Get.arguments,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(height: 30),
+                  // const Text(
+                  //   "Nama Gabungan Kelompok Tani",
+                  //   style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                  // ),
+                  // const SizedBox(height: 5),
+                  // Text(
+                  //   Get.arguments,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // const SizedBox(height: 30),
                   const Text(
                     "Ketua",
                     style: TextStyle(color: Color(0xff919A92), fontSize: 12),
@@ -52,37 +52,37 @@ class DetailTokoView extends GetView<ProdukController> {
                     data.chairman!,
                     style: TextStyle(fontSize: 15),
                   ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    "Kabupaten/Kota",
-                    style: TextStyle(color: Color(0xff919A92), fontSize: 12),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    data.city!,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    "Alamat",
-                    style: TextStyle(color: Color(0xff919A92), fontSize: 12),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    data.address!,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    "Telepon",
-                    style: TextStyle(color: Color(0xff919A92), fontSize: 12),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    data.telp!.toString(),
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(height: 30),
+                  // const SizedBox(height: 30),
+                  // const Text(
+                  //   "Kabupaten/Kota",
+                  //   style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                  // ),
+                  // const SizedBox(height: 5),
+                  // Text(
+                  //   data.city!,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // const SizedBox(height: 30),
+                  // const Text(
+                  //   "Alamat",
+                  //   style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                  // ),
+                  // const SizedBox(height: 5),
+                  // Text(
+                  //   data.address!,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // const SizedBox(height: 30),
+                  // const Text(
+                  //   "Telepon",
+                  //   style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                  // ),
+                  // const SizedBox(height: 5),
+                  // Text(
+                  //   data.telp!.toString(),
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // const SizedBox(height: 30),
                 ],
               ),
             ),

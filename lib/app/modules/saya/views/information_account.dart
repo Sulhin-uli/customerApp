@@ -14,18 +14,11 @@ class InformationAccountView extends GetView<SayaController> {
   Widget build(BuildContext context) {
     final user = box.read("userData") as Map<String, dynamic>;
     final data = controller.customer.first;
-    DateTime datetime = DateTime.parse(data.birth.toString());
+    DateTime? datetime;
+    if (data.birth != null) {
+      datetime = DateTime.parse(data.birth.toString());
+    }
 
-    data.gender != null
-        ? controller.gender.text = data.gender!
-        : controller.gender.text;
-    data.birth != null
-        ? controller.birth.text = DateFormat('yyyy-MM-dd')
-            .format(DateTime.tryParse(data.birth!.toString())!)
-        : controller.birth.text;
-    data.telp != null
-        ? controller.telp.text = data.telp!.toString()
-        : controller.telp.text;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -54,7 +47,7 @@ class InformationAccountView extends GetView<SayaController> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    data.gender,
+                    data.gender != null ? data.gender : "-",
                     style: TextStyle(fontSize: 15),
                   ),
                   const SizedBox(height: 30),
@@ -64,7 +57,10 @@ class InformationAccountView extends GetView<SayaController> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    DateFormat("EEEE, d MMMM yyyy", "id_ID").format(datetime),
+                    data.birth != null
+                        ? DateFormat("EEEE, d MMMM yyyy", "id_ID")
+                            .format(datetime!)
+                        : "-",
                     style: TextStyle(fontSize: 15),
                   ),
                   const SizedBox(height: 30),
@@ -74,7 +70,7 @@ class InformationAccountView extends GetView<SayaController> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    data.telp.toString(),
+                    data.telp != null ? data.telp.toString() : "-",
                     style: TextStyle(fontSize: 15),
                   ),
                   const SizedBox(height: 30),
