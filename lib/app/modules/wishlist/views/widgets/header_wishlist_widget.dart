@@ -47,11 +47,11 @@ class _HeaderWishlistState extends State<HeaderWishlist> {
           child: Row(
             children: [
               _buildInputSearch(),
-              _buildIconButton(
-                onPressed: () => Get.toNamed(Routes.CHAT),
-                icon: Icons.mail,
-                notification: 0,
-              ),
+              // _buildIconButton(
+              //   onPressed: () => Get.toNamed(Routes.CHAT),
+              //   icon: Icons.mail,
+              //   notification: 0,
+              // ),
               _buildIconButton(
                 onPressed: () => Get.toNamed(Routes.CART),
                 icon: Icons.shopping_cart,

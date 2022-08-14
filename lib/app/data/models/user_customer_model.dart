@@ -41,6 +41,7 @@ class Customers {
     this.birth,
     this.telp,
     this.image,
+    this.isEmailVerified,
     this.createdAt,
     this.updatedAt,
   });
@@ -51,8 +52,9 @@ class Customers {
   dynamic birth;
   dynamic telp;
   dynamic image;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  int? isEmailVerified;
+  dynamic createdAt;
+  dynamic updatedAt;
 
   factory Customers.fromJson(Map<String, dynamic> json) => Customers(
         id: json["id"],
@@ -61,8 +63,9 @@ class Customers {
         birth: json["birth"],
         telp: json["telp"],
         image: json["image"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        isEmailVerified: json["is_email_verified"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,8 +75,9 @@ class Customers {
         "birth": birth,
         "telp": telp,
         "image": image,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "is_email_verified": isEmailVerified,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }
 
@@ -88,7 +92,6 @@ class Users {
     this.fcmToken,
     this.createdAt,
     this.updatedAt,
-    this.isEmailVerified,
     this.roles,
   });
 
@@ -96,12 +99,11 @@ class Users {
   String? name;
   String? email;
   dynamic emailVerifiedAt;
-  String? token;
-  DateTime? tokenExpire;
+  dynamic token;
+  dynamic tokenExpire;
   dynamic fcmToken;
   DateTime? createdAt;
   DateTime? updatedAt;
-  int? isEmailVerified;
   List<Role>? roles;
 
   factory Users.fromJson(Map<String, dynamic> json) => Users(
@@ -110,11 +112,10 @@ class Users {
         email: json["email"],
         emailVerifiedAt: json["email_verified_at"],
         token: json["token"],
-        tokenExpire: DateTime.parse(json["token_expire"]),
+        tokenExpire: json["token_expire"],
         fcmToken: json["fcm_token"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        isEmailVerified: json["is_email_verified"],
         roles: List<Role>.from(json["roles"].map((x) => Role.fromJson(x))),
       );
 
@@ -124,11 +125,10 @@ class Users {
         "email": email,
         "email_verified_at": emailVerifiedAt,
         "token": token,
-        "token_expire": tokenExpire!.toIso8601String(),
+        "token_expire": tokenExpire,
         "fcm_token": fcmToken,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
-        "is_email_verified": isEmailVerified,
         "roles": List<dynamic>.from(roles!.map((x) => x.toJson())),
       };
 }

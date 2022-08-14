@@ -46,15 +46,15 @@ class _HeaderState extends State<Header> {
         child: Row(
           children: [
             _buildInputSearch(),
-            _buildIconButton(
-              // onPressed: () => Get.toNamed(Routes.CHAT),
-              onPressed: () {
-                AuthController authController = Get.put(AuthController());
-                authController.googleLogin();
-              },
-              icon: Icons.mail,
-              notification: 0,
-            ),
+            // _buildIconButton(
+            //   // onPressed: () => Get.toNamed(Routes.CHAT),
+            //   onPressed: () {
+            //     AuthController authController = Get.put(AuthController());
+            //     authController.googleLogin();
+            //   },
+            //   icon: Icons.mail,
+            //   notification: 0,
+            // ),
             _buildIconButton(
               onPressed: () => {
                 setState(() {
