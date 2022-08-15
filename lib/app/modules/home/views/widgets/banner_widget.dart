@@ -16,15 +16,15 @@ class BannerSlider extends GetView<HomeController> {
             maxHeight: 160,
           ),
           child: Obx(
-            () => controller.banner.isEmpty
+            () => controller.hero.isEmpty
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.banner.length,
+                    itemCount: controller.hero.length,
                     itemBuilder: (context, index) {
-                      final data = controller.banner[index];
+                      final data = controller.hero[index];
                       return GestureDetector(
                         // onTap: () => Get.toNamed(Routes.DETAIL_PRODUK),
                         child: Container(

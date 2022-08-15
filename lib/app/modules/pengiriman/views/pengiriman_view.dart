@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../controllers/pengiriman_controller.dart';
 
 class PengirimanView extends GetView<PengirimanController> {
+  var weightTotal = 0;
   @override
   Widget build(BuildContext context) {
     controller.markProductId.clear();
@@ -178,6 +179,8 @@ class PengirimanView extends GetView<PengirimanController> {
                             .first
                             .name;
                         if (data.isMark == true) {
+                          weightTotal = weightTotal +
+                              (data.productId!.weight! * data.productQty!);
                           controller.markProductId.add(data.id!);
                           // print(data.id);
                           return Container(
@@ -229,6 +232,9 @@ class PengirimanView extends GetView<PengirimanController> {
                                                     fontWeight:
                                                         FontWeight.w400),
                                               ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
                                               Text(
                                                 data.productQty.toString() +
                                                     " Barang",
@@ -237,6 +243,24 @@ class PengirimanView extends GetView<PengirimanController> {
                                                     fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.w400),
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                "Berat " +
+                                                    (data.productId!.weight! *
+                                                            data.productQty!)
+                                                        .toString() +
+                                                    " gram",
+                                                style: TextStyle(
+                                                    color: Color(0xff919A92),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              SizedBox(
+                                                height: 3,
                                               ),
                                               Text(
                                                 'Rp ${formatCurrency.format(data.productId!.price!)}',
@@ -276,7 +300,9 @@ class PengirimanView extends GetView<PengirimanController> {
                             elevation: 5,
                             child: ListTile(
                               onTap: () {
-                                Get.toNamed(Routes.CEK_ONGKIR);
+                                print(weightTotal);
+
+                                Get.toNamed(Routes.CEK_ONGKIR, arguments: []);
                               },
                               leading: Icon(
                                 Icons.local_shipping,

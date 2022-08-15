@@ -192,6 +192,7 @@ class ProductId {
     this.categoryProductId,
     this.code,
     this.stoke,
+    this.weight,
     this.stockOut,
     this.price,
     this.desc,
@@ -208,6 +209,7 @@ class ProductId {
   CategoryProductId? categoryProductId;
   String? code;
   int? stoke;
+  int? weight;
   dynamic stockOut;
   int? price;
   String? desc;
@@ -225,6 +227,7 @@ class ProductId {
             CategoryProductId.fromJson(json["category_product_id"]),
         code: json["code"],
         stoke: json["stoke"],
+        weight: json["weight"],
         stockOut: json["stock_out"],
         price: json["price"],
         desc: json["desc"],
@@ -242,6 +245,7 @@ class ProductId {
         "category_product_id": categoryProductId!.toJson(),
         "code": code,
         "stoke": stoke,
+        "weight": weight,
         "stock_out": stockOut,
         "price": price,
         "desc": desc,

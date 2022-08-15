@@ -1,16 +1,13 @@
 import 'package:customer_app/app/data/models/banner_main_menu_model.dart';
-import 'package:customer_app/app/data/models/category_product_model.dart';
+import 'package:customer_app/app/data/models/hero_model.dart';
 import 'package:customer_app/app/data/models/main_menu_model.dart';
 import 'package:customer_app/app/data/models/photo_product_model.dart';
 import 'package:customer_app/app/data/models/product_model.dart';
-import 'package:customer_app/app/data/models/user_model.dart';
-import 'package:customer_app/app/data/providers/photo_product_provider.dart';
-import 'package:customer_app/app/data/providers/product_provider.dart';
+import 'package:customer_app/app/data/providers/hero_provider.dart';
 import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -20,6 +17,7 @@ class HomeController extends GetxController {
   var product = List<ProductModel>.empty().obs;
   var menu = List<MainMenuModel>.empty().obs;
   var banner = List<BannerMainMenuModel>.empty().obs;
+  var hero = List<HeroModel>.empty().obs;
   var carouselIndex = 0.obs;
   // var product = List<ProductModel>.empty().obs;
   var photoProduct = List<PhotoProduct>.empty().obs;
@@ -37,7 +35,8 @@ class HomeController extends GetxController {
       cartController.getData();
     }
     mainMenu();
-    bannerHome();
+    // bannerHome();
+    getDataHero();
     super.onInit();
   }
 
@@ -128,5 +127,17 @@ class HomeController extends GetxController {
     for (var i = 0; i < data.length; i++) {
       menu.add(data[i]);
     }
+  }
+
+  void getDataHero() async {
+    HeroProvider().getData().then(
+      (response) {
+        // print(response);
+        response["data"].map((e) {
+          final data = HeroModel.fromJson(e as Map<String, dynamic>);
+          hero.add(data);
+        }).toList();
+      },
+    );
   }
 }
