@@ -7,8 +7,8 @@ class TransactionProvider extends GetConnect {
   @override
   String url = baseUrl + "transaction_list";
 
-  Future<dynamic> getData(int id, String token) async {
-    final response = await get("$url/$id", headers: {
+  Future<dynamic> getData(int id, int page, String token) async {
+    final response = await get("$url/$id?page=$page", headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',

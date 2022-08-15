@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RiwayatPemesananController extends GetxController
     with SingleGetTickerProviderMixin {
@@ -18,16 +19,45 @@ class RiwayatPemesananController extends GetxController
   var detailRiwayatPemesanan = List<DetailTransaksi>.empty().obs;
   ProdukController produkController = Get.put(ProdukController());
 
+// infinity
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+  var page = 1.obs;
+
+  void onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    isLoading(true);
+    riwayatPemesanan.clear();
+    page.value = 1;
+    getData();
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async {}
+
+  void addItems() {
+    getData();
+  }
+
   void getData() async {
     final data = box.read("userData") as Map<String, dynamic>;
     var userId = data["id"];
     try {
       isLoading(true);
-      TransactionProvider().getData(userId, data['token']).then((response) {
-        for (var e in response["data"]) {
-          final data = TransactionList.fromJson(e as Map<String, dynamic>);
-          riwayatPemesanan.add(data);
-        }
+      TransactionProvider()
+          .getData(userId, page.value, data['token'])
+          .then((response) {
+        // print(response);
+        if (response["data"].length != 0) {
+          response["data"].map((e) {
+            for (var e in response["data"]) {
+              final data = TransactionList.fromJson(e as Map<String, dynamic>);
+              riwayatPemesanan.add(data);
+            }
+          }).toList();
+          page.value = page.value + 1;
+        } else {}
       });
     } finally {
       isLoading(false);
