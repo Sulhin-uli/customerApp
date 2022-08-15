@@ -474,24 +474,40 @@ class PengirimanView extends GetView<PengirimanController> {
                                   ],
                                 ),
                                 Obx(
-                                  () => controller.isAllChoice.isFalse
-                                      ? ElevatedButton(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Colors.grey, // background
-                                          ),
-                                          child: Text('Buat Pesanan'),
-                                        )
-                                      : ElevatedButton(
-                                          onPressed: () {
-                                            controller.checkout();
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Color(0xff16A085), // background
-                                          ),
-                                          child: Text('Buat Pesanan'),
-                                        ),
+                                  () =>
+                                      // controller.isAllChoice.isFalse
+                                      (controller.alamatController.address
+                                              .where((e) =>
+                                                  e.mainAddress == 1)).isEmpty
+                                          ? ElevatedButton(
+                                              onPressed: () {},
+                                              style: ElevatedButton.styleFrom(
+                                                primary:
+                                                    Colors.grey, // background
+                                              ),
+                                              child: Text('Buat Pesanan'),
+                                            )
+                                          : controller.isAllChoice.isFalse
+                                              ? ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Colors
+                                                        .grey, // background
+                                                  ),
+                                                  child: Text('Buat Pesanan'),
+                                                )
+                                              : ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.checkout();
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Color(
+                                                        0xff16A085), // background
+                                                  ),
+                                                  child: Text('Buat Pesanan'),
+                                                ),
                                 ),
                               ],
                             ),
