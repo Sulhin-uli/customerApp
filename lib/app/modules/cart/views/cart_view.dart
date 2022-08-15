@@ -13,6 +13,7 @@ class CartView extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     controller.isAllMark.value = false;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

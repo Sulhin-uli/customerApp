@@ -51,6 +51,7 @@ class CartController extends GetxController {
     // getDataPhoto();
     // getData();
     super.onInit();
+
     // Timer.periodic(Duration(seconds: 3), (Timer t) => print(t));
   }
 

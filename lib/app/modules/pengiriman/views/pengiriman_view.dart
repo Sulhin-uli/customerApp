@@ -81,19 +81,35 @@ class PengirimanView extends GetView<PengirimanController> {
                                       ],
                                     ),
                                   )
-                                : Expanded(
-                                    child: Text(
-                                      // "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
-                                      controller.alamatController.address.first
-                                          .addressLabel!,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
-                                    ),
-                                  ),
+                                : (controller.alamatController.address
+                                        .where((e) => e.mainAddress == 1)
+                                        .isNotEmpty)
+                                    ? Expanded(
+                                        child: Text(
+                                          // "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
+                                          (controller.alamatController.address
+                                                  .where((e) =>
+                                                      e.mainAddress == 1))
+                                              .first
+                                              .addressLabel!,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
+                                      )
+                                    : Expanded(
+                                        child: Text(
+                                          // "Politeknik Negeri Indramayu, jl. lohbener lama, Legok, Kabupaten Indramayu, Jawa Barat",
+                                          "Alamat belum dipilih",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
+                                      ),
                           ),
                           Obx(
-                            () => controller.alamatController.address.isEmpty
+                            () => (controller.alamatController.address
+                                    .where((e) => e.mainAddress == 1)).isEmpty
                                 ? Container()
                                 : SizedBox(
                                     height: 25, //height of button
@@ -118,16 +134,12 @@ class PengirimanView extends GetView<PengirimanController> {
                         height: 5,
                       ),
                       Obx(
-                        () => controller.alamatController.address.isEmpty
+                        () => (controller.alamatController.address
+                                .where((e) => e.mainAddress == 1)).isEmpty
                             ? Center(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Alamat Belum dipilih",
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  ],
+                                  children: [Container()],
                                 ),
                               )
                             : Column(
