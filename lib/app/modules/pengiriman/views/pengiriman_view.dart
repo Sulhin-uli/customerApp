@@ -39,7 +39,7 @@ class PengirimanView extends GetView<PengirimanController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Alamat Pengirim",
+                        "Alamat Pengiriman",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextButton(

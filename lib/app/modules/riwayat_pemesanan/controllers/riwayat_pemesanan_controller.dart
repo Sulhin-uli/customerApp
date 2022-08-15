@@ -6,6 +6,7 @@ import 'package:customer_app/app/data/providers/transaction_list_provider.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
@@ -107,6 +108,8 @@ class RiwayatPemesananController extends GetxController
     getData();
 
     controller = TabController(vsync: this, length: myTabs.length);
+    controllerCountdownTimer =
+        CountdownTimerController(endTime: endTime, onEnd: onEnd);
   }
 
   @override
@@ -114,5 +117,11 @@ class RiwayatPemesananController extends GetxController
     controller.dispose();
 
     super.onClose();
+  }
+
+  late CountdownTimerController controllerCountdownTimer;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 40;
+  void onEnd() {
+    print('onEnd');
   }
 }
