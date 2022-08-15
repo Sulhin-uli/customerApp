@@ -12,33 +12,48 @@ class Toko {
   Toko({
     this.id,
     this.userId,
+    this.provinceId,
+    this.cityId,
+    this.districtId,
+    this.villageId,
     this.chairman,
-    this.city,
-    this.address,
-    this.telp,
+    this.street,
+    this.number,
+    this.phone,
     this.image,
+    this.isVerified,
     this.createdAt,
     this.updatedAt,
   });
 
   int? id;
   int? userId;
+  dynamic provinceId;
+  dynamic cityId;
+  dynamic districtId;
+  dynamic villageId;
   String? chairman;
-  String? city;
-  String? address;
-  int? telp;
+  dynamic street;
+  dynamic number;
+  dynamic phone;
   dynamic image;
+  int? isVerified;
   dynamic createdAt;
   dynamic updatedAt;
 
   factory Toko.fromJson(Map<String, dynamic> json) => Toko(
         id: json["id"],
         userId: json["user_id"],
+        provinceId: json["province_id"],
+        cityId: json["city_id"],
+        districtId: json["district_id"],
+        villageId: json["village_id"],
         chairman: json["chairman"],
-        city: json["city"],
-        address: json["address"],
-        telp: json["telp"],
+        street: json["street"],
+        number: json["number"],
+        phone: json["phone"],
         image: json["image"],
+        isVerified: json["is_verified"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );
@@ -46,11 +61,16 @@ class Toko {
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
+        "province_id": provinceId,
+        "city_id": cityId,
+        "district_id": districtId,
+        "village_id": villageId,
         "chairman": chairman,
-        "city": city,
-        "address": address,
-        "telp": telp,
+        "street": street,
+        "number": number,
+        "phone": phone,
         "image": image,
+        "is_verified": isVerified,
         "created_at": createdAt,
         "updated_at": updatedAt,
       };

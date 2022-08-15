@@ -146,7 +146,8 @@ class PengirimanController extends GetxController {
                     child: Card(
                       child: ListTile(
                         title: Text("${e.service}"),
-                        subtitle: Text("Rp ${e.cost![0].value}"),
+                        subtitle: Text(
+                            "Rp ${formatCurrency.format(e.cost![0].value)}"),
                         trailing: Text(
                           courier.code == "pos"
                               ? "${e.cost![0].etd}"

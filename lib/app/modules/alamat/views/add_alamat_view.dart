@@ -263,6 +263,7 @@ class AddAlamatView extends GetView<AlamatController> {
                               if (cityValue != null) {
                                 controller.kotaId.value =
                                     int.parse(cityValue.cityId!);
+                                // print(controller.kotaId.value);
                               } else {
                                 print(
                                     "Tidak memilih kota / kabupaten asal apapun");

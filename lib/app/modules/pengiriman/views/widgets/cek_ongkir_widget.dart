@@ -98,8 +98,10 @@ class CekOngkirView extends GetView<PengirimanController> {
                           style: ElevatedButton.styleFrom(
                             primary: const Color(0xff16A085), // background
                           ),
-                          onPressed: () =>
-                              controller.ongkosKirim(149, 148, 250),
+                          onPressed: () => controller.ongkosKirim(
+                              Get.arguments[0],
+                              Get.arguments[1],
+                              Get.arguments[2]),
                           child: Obx(
                             () => controller.isLoading.isTrue
                                 ? const CircularProgressIndicator()

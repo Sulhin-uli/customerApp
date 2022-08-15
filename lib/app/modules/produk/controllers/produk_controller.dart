@@ -256,12 +256,16 @@ class ProdukController extends GetxController {
     Get.toNamed(Routes.DETAIL_TOKO, arguments: name);
   }
 
+  runGetIdCityToko(int id) async {
+    toko.clear();
+    getDataTokoById(id);
+  }
+
   var toko = List<Toko>.empty().obs;
 
   void getDataTokoById(int id) {
     try {
       ProductProvider().tokoById(id).then((response) {
-        print(response);
         final data = Toko.fromJson(response["data"] as Map<String, dynamic>);
         toko.add(data);
       });

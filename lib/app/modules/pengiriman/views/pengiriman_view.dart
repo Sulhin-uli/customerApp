@@ -11,6 +11,9 @@ import '../controllers/pengiriman_controller.dart';
 
 class PengirimanView extends GetView<PengirimanController> {
   var weightTotal = 0;
+  var cityIdStore = 149;
+  var cityIdCustomer = 149;
+  // indramayu 149
   @override
   Widget build(BuildContext context) {
     controller.markProductId.clear();
@@ -312,9 +315,11 @@ class PengirimanView extends GetView<PengirimanController> {
                             elevation: 5,
                             child: ListTile(
                               onTap: () {
-                                print(weightTotal);
-
-                                Get.toNamed(Routes.CEK_ONGKIR, arguments: []);
+                                Get.toNamed(Routes.CEK_ONGKIR, arguments: [
+                                  cityIdStore,
+                                  cityIdCustomer,
+                                  weightTotal
+                                ]);
                               },
                               leading: Icon(
                                 Icons.local_shipping,
@@ -340,7 +345,12 @@ class PengirimanView extends GetView<PengirimanController> {
                                     trailing:
                                         Icon(Icons.arrow_forward_ios_rounded),
                                     onTap: () {
-                                      Get.toNamed(Routes.CEK_ONGKIR);
+                                      Get.toNamed(Routes.CEK_ONGKIR,
+                                          arguments: [
+                                            cityIdStore,
+                                            cityIdCustomer,
+                                            weightTotal
+                                          ]);
                                     },
                                   ),
                                   Padding(
@@ -363,7 +373,13 @@ class PengirimanView extends GetView<PengirimanController> {
                                     trailing:
                                         Icon(Icons.arrow_forward_ios_rounded),
                                     onTap: () {
-                                      Get.toNamed(Routes.CEK_ONGKIR);
+                                      // Get.toNamed(Routes.CEK_ONGKIR);
+                                      Get.toNamed(Routes.CEK_ONGKIR,
+                                          arguments: [
+                                            cityIdStore,
+                                            cityIdCustomer,
+                                            weightTotal
+                                          ]);
                                     },
                                   )
                                 ],

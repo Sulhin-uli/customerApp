@@ -388,15 +388,15 @@ class AuthController extends GetxController {
               notifikasiController.getData();
               subscribe();
               Get.back();
-              Get.defaultDialog(
-                title: "Info",
-                titleStyle: TextStyle(fontSize: 12),
-                content: Text(
-                  response['messages'],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12),
-                ),
-              );
+              // Get.defaultDialog(
+              //   title: "Info",
+              //   titleStyle: TextStyle(fontSize: 12),
+              //   content: Text(
+              //     response['messages'],
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(fontSize: 12),
+              //   ),
+              // );
             } catch (e) {
               // dialogError("Login Gagal" + e.toString());
               dialogError("Login Gagal");
