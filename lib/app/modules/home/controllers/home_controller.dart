@@ -8,6 +8,7 @@ import 'package:customer_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:customer_app/app/modules/notifikasi/controllers/notifikasi_controller.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -130,14 +131,18 @@ class HomeController extends GetxController {
   }
 
   void getDataHero() async {
-    HeroProvider().getData().then(
-      (response) {
-        // print(response);
-        response["data"].map((e) {
-          final data = HeroModel.fromJson(e as Map<String, dynamic>);
-          hero.add(data);
-        }).toList();
-      },
-    );
+    try {
+      HeroProvider().getData().then(
+        (response) {
+          // print(response);
+          response["data"].map((e) {
+            final data = HeroModel.fromJson(e as Map<String, dynamic>);
+            hero.add(data);
+          }).toList();
+        },
+      );
+    } catch (e) {
+      dialogError("hero error :  $e");
+    }
   }
 }

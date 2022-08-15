@@ -139,11 +139,9 @@ class CartController extends GetxController {
     for (var item in cart) {
       if (item.isMark == true) {
         deleteData(item.id!);
-        total.value = total.value - (item.productId!.price! * item.productQty!);
+        // total.value = total.value - (item.productId!.price! * item.productQty!);
       }
     }
-    isAllMark.value = false;
-    isMark.value = false;
   }
 
   // void runPengiriman() {
@@ -396,5 +394,7 @@ class CartController extends GetxController {
     CartProvider()
         .deleteData(id, data["token"])
         .then((_) => cart.removeWhere((element) => element.id == id));
+    isAllMark.value = false;
+    isMark.value = false;
   }
 }
