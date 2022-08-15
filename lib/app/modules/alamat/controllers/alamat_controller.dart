@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AlamatController extends GetxController {
   final box = GetStorage();
@@ -106,13 +107,33 @@ class AlamatController extends GetxController {
     }
   }
 
+  /// infinnity scroll
+  var page = 1.obs;
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+  void onRefresh() async {
+    address.clear();
+    await Future.delayed(Duration(milliseconds: 1000));
+    page.value = 1;
+    getData();
+    refreshController.refreshCompleted();
+  }
+
+  void addItems() {
+    getData();
+  }
+
+  void onLoading() {}
+
   void getData() async {
     try {
       isLoading(true);
     } finally {
       isLoading(false);
       final data = box.read("userData") as Map<String, dynamic>;
-      AddressProvider().getData(data['id'], data["token"]).then((response) {
+      AddressProvider()
+          .getData(data['id'], page.value, data["token"])
+          .then((response) {
         try {
           response["data"].map((e) {
             // final data = AddressModel(
@@ -131,16 +152,19 @@ class AlamatController extends GetxController {
             //   mainAddress: e["main_address"],
             //   noteForCourier: e["note_for_courier"],
             // );
-            final data = AddressModel.fromJson(e as Map<String, dynamic>);
-            address.add(data);
+            if (response["data"].length != 0) {
+              final data = AddressModel.fromJson(e as Map<String, dynamic>);
+              address.add(data);
 
-            for (var e in address) {
-              if (e.mainAddress == 1) {
-                var addressMain = e;
-                address.remove(e);
-                address.insert(0, addressMain);
+              for (var e in address) {
+                if (e.mainAddress == 1) {
+                  var addressMain = e;
+                  address.remove(e);
+                  address.insert(0, addressMain);
+                }
               }
-            }
+              page.value = page.value + 1;
+            } else {}
           }).toList();
         } catch (e) {
           print("Error is : " + e.toString());

@@ -36,8 +36,8 @@ class AddressProvider extends GetConnect {
     return response.body;
   }
 
-  Future<dynamic> getData(int userId, String token) async {
-    final response = await get('$url/user_id/$userId', headers: {
+  Future<dynamic> getData(int userId, int page, String token) async {
+    final response = await get('$url/user_id/$userId?page=$page', headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',

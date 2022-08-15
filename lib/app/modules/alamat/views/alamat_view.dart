@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../controllers/alamat_controller.dart';
 
@@ -53,13 +54,35 @@ class AlamatView extends GetView<AlamatController> {
                       ],
                     ),
                   )
-                : ListView.builder(
-                    itemCount: controller.address.length,
-                    itemBuilder: (context, i) {
-                      int length = controller.address.length;
-                      final data = controller.address[i];
-                      return ItemAlamatView(data);
+                : NotificationListener<ScrollEndNotification>(
+                    onNotification: (scrollEnd) {
+                      final metrics = scrollEnd.metrics;
+                      if (metrics.atEdge) {
+                        bool isTop = metrics.pixels == 0;
+                        if (isTop) {
+                          // print('At the top');
+                        } else {
+                          // print('At the bottom');
+                          controller.addItems();
+                        }
+                      }
+                      return true;
                     },
+                    child: SmartRefresher(
+                      controller: controller.refreshController,
+                      onRefresh: controller.onRefresh,
+                      header: WaterDropMaterialHeader(),
+                      enablePullDown: true,
+                      enablePullUp: false,
+                      child: ListView.builder(
+                        itemCount: controller.address.length,
+                        itemBuilder: (context, i) {
+                          int length = controller.address.length;
+                          final data = controller.address[i];
+                          return ItemAlamatView(data);
+                        },
+                      ),
+                    ),
                   ),
       ),
     );
