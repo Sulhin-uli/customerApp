@@ -18,7 +18,7 @@ class UlasanView extends GetView<UlasanController> {
 
     final dataImage = controller
         .riwayatPemesananController.produkController.photoProduct
-        .where((e) => e.productId!.id == int.parse(data.productId!))
+        .where((e) => e.productId!.id == data.productId!.id)
         .first
         .name;
 
@@ -57,8 +57,8 @@ class UlasanView extends GetView<UlasanController> {
                                   Text(
                                     controller.riwayatPemesananController
                                         .produkController.product
-                                        .firstWhere((e) =>
-                                            e.id == int.parse(data.productId!))
+                                        .firstWhere(
+                                            (e) => e.id == data.productId!.id!)
                                         .userId!
                                         .name!,
                                     style: TextStyle(
@@ -88,8 +88,7 @@ class UlasanView extends GetView<UlasanController> {
                                       controller.riwayatPemesananController
                                           .produkController.product
                                           .firstWhere((e) =>
-                                              e.id ==
-                                              int.parse(data.productId!))
+                                              e.id == data.productId!.id!)
                                           .name!,
                                       style: TextStyle(
                                           color: Color(0xff919A92),
@@ -164,7 +163,7 @@ class UlasanView extends GetView<UlasanController> {
                         // print(controller.ulasanController.text);
                         controller.addData(
                             Get.arguments[0],
-                            int.parse(data.productId!),
+                            data.productId!.id!,
                             controller.starsRated.value.toString(),
                             controller.ulasanController.text);
                       },

@@ -10,10 +10,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 30;
   @override
   Widget build(BuildContext context) {
     final dataDetail = controller.findByid(Get.arguments);
+    controller.runCountDown(dataDetail.paymentDue!.millisecondsSinceEpoch);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -96,125 +96,153 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
               ),
             ),
 
-            // Column(
-            //   children: [
-            //     ListView.builder(
-            //       scrollDirection: Axis.vertical,
-            //       padding: EdgeInsets.zero,
-            //       shrinkWrap: true,
-            //       physics: NeverScrollableScrollPhysics(),
-            //       itemCount: dataDetail.orderItems!.length,
-            //       itemBuilder: (context, i) {
-            //         final data = dataDetail.orderItems![i];
-            //         final dataImage = controller.produkController.photoProduct
-            //             .where((e) =>
-            //                 e.productId!.id == int.parse(data.productId!))
-            //             .first
-            //             .name;
-            //         return Container(
-            //           padding: EdgeInsets.fromLTRB(24, 16, 16, 0),
-            //           child: Column(
-            //             children: [
-            //               ListTile(
-            //                 title: Column(
-            //                   children: [
-            //                     Padding(
-            //                       padding:
-            //                           const EdgeInsets.fromLTRB(7, 0, 7, 0),
-            //                       child: Row(
-            //                         children: [
-            //                           Icon(
-            //                             Icons.store,
-            //                             size: 12,
-            //                           ),
-            //                           SizedBox(width: 5),
-            //                           Text(
-            //                             controller.produkController.product
-            //                                 .firstWhere((e) =>
-            //                                     e.id ==
-            //                                     int.parse(data.productId!))
-            //                                 .userId!
-            //                                 .name!,
-            //                             style: TextStyle(
-            //                               fontSize: 12,
-            //                             ),
-            //                           ),
-            //                         ],
-            //                       ),
-            //                     ),
-            //                     Row(
-            //                       children: [
-            //                         Container(
-            //                           padding: EdgeInsets.all(7),
-            //                           height: 100,
-            //                           width: 100,
-            //                           child: Image.network(
-            //                             baseUrlFile +
-            //                                 "storage/produk/" +
-            //                                 dataImage!,
-            //                             fit: BoxFit.cover,
-            //                           ),
-            //                         ),
-            //                         Column(
-            //                           crossAxisAlignment:
-            //                               CrossAxisAlignment.start,
-            //                           children: [
-            //                             Text(
-            //                               controller.produkController.product
-            //                                   .firstWhere((e) =>
-            //                                       e.id ==
-            //                                       int.parse(data.productId!))
-            //                                   .name!,
-            //                               style: TextStyle(
-            //                                   color: Color(0xff919A92),
-            //                                   fontSize: 12,
-            //                                   fontWeight: FontWeight.w400),
-            //                             ),
-            //                             Text(
-            //                               data.qty.toString() + " Barang",
-            //                               style: TextStyle(
-            //                                   color: Color(0xff919A92),
-            //                                   fontSize: 12,
-            //                                   fontWeight: FontWeight.w400),
-            //                             ),
-            //                             Text(
-            //                               'Rp ${formatCurrency.format(controller.produkController.product.firstWhere((e) => e.id == int.parse(data.productId!)).price!)}',
-            //                               style: TextStyle(
-            //                                   color: Colors.black,
-            //                                   fontWeight: FontWeight.bold),
-            //                             ),
-            //                             (dataDetail.status == "completed" &&
-            //                                     dataDetail.paymentStatus ==
-            //                                         "paid")
-            //                                 ? ElevatedButton(
-            //                                     onPressed: () {
-            //                                       Get.toNamed(Routes.ULASAN,
-            //                                           arguments: [
-            //                                             Get.arguments,
-            //                                             data.id
-            //                                           ]);
-            //                                     },
-            //                                     style: ElevatedButton.styleFrom(
-            //                                       primary: Color(
-            //                                           0xff16A085), // background
-            //                                     ),
-            //                                     child: Text('Beri Ulasan'),
-            //                                   )
-            //                                 : Container(),
-            //                           ],
-            //                         ),
-            //                       ],
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         );
-            //       },
-            //     ),
-            //   ],
-            // ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Produk",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Container()
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: dataDetail.orderItems!.length,
+                  itemBuilder: (context, i) {
+                    final data = dataDetail.orderItems![i];
+                    final dataImage = controller.produkController.photoProduct
+                        .where((e) => e.productId!.id == data.productId!.id!)
+                        .first
+                        .name;
+                    return Card(
+                      elevation: 3,
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(7, 0, 7, 0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.store,
+                                          size: 12,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          data.productId!.userId!.name!,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(7),
+                                        height: 100,
+                                        width: 100,
+                                        child: Image.network(
+                                          baseUrlFile +
+                                              "storage/produk/" +
+                                              dataImage!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            data.productId!.name!,
+                                            style: TextStyle(
+                                                color: Color(0xff919A92),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
+                                            data.qty.toString() + " Barang",
+                                            style: TextStyle(
+                                                color: Color(0xff919A92),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
+                                            "Berat " +
+                                                (data.productId!.weight! *
+                                                        int.parse(data.qty!))
+                                                    .toString() +
+                                                " gram",
+                                            style: TextStyle(
+                                                color: Color(0xff919A92),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
+                                            'Rp ${formatCurrency.format(data.productId!.price!)}',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          (dataDetail.status == "completed" &&
+                                                  dataDetail.paymentStatus ==
+                                                      "paid")
+                                              ? ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.toNamed(Routes.ULASAN,
+                                                        arguments: [
+                                                          Get.arguments,
+                                                          data.id
+                                                        ]);
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Color(
+                                                        0xff16A085), // background
+                                                  ),
+                                                  child: Text('Beri Ulasan'),
+                                                )
+                                              : Container(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
 
             // Divider(
             //   color: Colors.black.withOpacity(0.5),
@@ -326,11 +354,14 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                 height: 5,
                               ),
                               CountdownTimer(
-                                controller: controller.controllerCountdownTimer,
-                                // onEnd: controller.onEnd,
-                                // endTime: controller.endTime,
-                                textStyle: TextStyle(fontSize: 12),
-                              ),
+                                  controller:
+                                      controller.controllerCountdownTimer,
+                                  // onEnd: controller.onEnd,
+                                  // endTime: controller.endTime,
+                                  textStyle: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  )),
                               // Text(
                               //   "",
                               //   style: TextStyle(
@@ -342,57 +373,52 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                         ],
                       ),
                     ),
-                    (dataDetail.status != "completed")
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: 46, //height of button
-                                    width: 300,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Get.toNamed(Routes.PEMBAYARAN,
-                                        //     arguments: dataDetail.paymentUrl);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.red, // background
-                                      ),
-                                      child: Text('Batalkan Pemesanan'),
-                                    ),
-                                  ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Center(
+                            child: SizedBox(
+                              height: 46, //height of button
+                              width: 300,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Get.toNamed(Routes.PEMBAYARAN,
+                                  //     arguments: dataDetail.paymentUrl);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red, // background
                                 ),
+                                child: Text('Batalkan Pemesanan'),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: 46, //height of button
-                                    width: 300,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Get.toNamed(Routes.PEMBAYARAN,
-                                            arguments: dataDetail.paymentUrl);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary:
-                                            Color(0xff16A085), // background
-                                      ),
-                                      child: Text('Lanjutkan Pembayaran'),
-                                    ),
-                                  ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Center(
+                            child: SizedBox(
+                              height: 46, //height of button
+                              width: 300,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Get.toNamed(Routes.PEMBAYARAN,
+                                      arguments: dataDetail.paymentUrl);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff16A085), // background
                                 ),
+                                child: Text('Lanjutkan Pembayaran'),
                               ),
-                            ],
-                          )
-                        : Container(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

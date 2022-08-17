@@ -108,8 +108,6 @@ class RiwayatPemesananController extends GetxController
     getData();
 
     controller = TabController(vsync: this, length: myTabs.length);
-    controllerCountdownTimer =
-        CountdownTimerController(endTime: endTime, onEnd: onEnd);
   }
 
   @override
@@ -119,8 +117,13 @@ class RiwayatPemesananController extends GetxController
     super.onClose();
   }
 
+  runCountDown(int endTime) {
+    controllerCountdownTimer =
+        CountdownTimerController(endTime: endTime, onEnd: onEnd);
+  }
+
   late CountdownTimerController controllerCountdownTimer;
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 40;
+  // int endTime = DateTime.parse('2022-08-18 02:15:31').millisecondsSinceEpoch;
   void onEnd() {
     print('onEnd');
   }
