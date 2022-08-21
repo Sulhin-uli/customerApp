@@ -18,8 +18,39 @@ class BannerSlider extends GetView<HomeController> {
           ),
           child: Obx(
             () => controller.hero.isEmpty
-                ? Center(
-                    child: CircularProgressIndicator(),
+                ?
+                // Center(
+                //     child: CircularProgressIndicator(),
+                //   )
+                ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(15, 16, 5, 5),
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8))),
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  width: 300,
+                                  height: 170,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                ),
+                                flex: 75,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   )
                 : ListView.builder(
                     scrollDirection: Axis.horizontal,

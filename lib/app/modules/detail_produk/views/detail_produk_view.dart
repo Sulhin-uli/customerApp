@@ -555,45 +555,44 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   SizedBox(
                                     height: 7,
                                   ),
-                                  Row(
-                                    children: [
-                                      StarRating(
-                                        value: int.parse(controller
-                                            .ulasanController.review
-                                            .firstWhere(
-                                                (e) => e.productId == data.id)
-                                            .starsRated!),
-                                        size: 16,
-                                      ),
-                                      SizedBox(
-                                        width: 7,
-                                      ),
-                                      Text(
-                                        "oleh",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        controller.ulasanController.review
-                                            .firstWhere(
-                                                (e) => e.productId == data.id)
-                                            .user!
-                                            .name!,
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    controller.ulasanController.review
-                                        .firstWhere(
-                                            (e) => e.productId == data.id)
-                                        .review!,
-                                    style: TextStyle(fontSize: 13),
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     StarRating(
+                                  //       value: int.parse(controller
+                                  //           .ulasanController.review
+                                  //           .firstWhere(
+                                  //               (e) => e.productId == data.id)
+                                  //           .starsRated!),
+                                  //       size: 16,
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 7,
+                                  //     ),
+                                  //     Text(
+                                  //       "oleh",
+                                  //       style: TextStyle(fontSize: 13),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 10,
+                                  //     ),
+                                  //     Text(
+                                  //       controller.ulasanController.review
+                                  //           .firstWhere(
+                                  //               (e) => e.productId == 10)
+                                  //           .user!
+                                  //           .name!,
+                                  //       style: TextStyle(
+                                  //           fontSize: 13,
+                                  //           fontWeight: FontWeight.bold),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                  // Text(
+                                  //   controller.ulasanController.review
+                                  //       .firstWhere((e) => e.productId == 10)
+                                  //       .review!,
+                                  //   style: TextStyle(fontSize: 13),
+                                  // ),
                                 ],
                               ),
                             )),
@@ -630,12 +629,12 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   padding: EdgeInsets.all(8),
                                   color: Colors.white,
                                   onPressed: () {
-                                    if (box.read('isAuth') == true) {
-                                      Get.toNamed(Routes.DETAIL_CHAT,
-                                          arguments: data.userId!.id!);
-                                    } else {
-                                      Get.toNamed(Routes.LOGIN);
-                                    }
+                                    // if (box.read('isAuth') == true) {
+                                    //   Get.toNamed(Routes.DETAIL_CHAT,
+                                    //       arguments: data.userId!.id!);
+                                    // } else {
+                                    //   Get.toNamed(Routes.LOGIN);
+                                    // }
                                   },
                                   child: Icon(
                                     Icons.message,
@@ -645,11 +644,11 @@ class DetailProdukView extends GetView<DetailProdukController> {
                               ),
                               OutlinedButton(
                                 onPressed: () {
-                                  if (box.read('isAuth') == true) {
-                                    Get.toNamed(Routes.PENGIRIMAN);
-                                  } else {
-                                    Get.toNamed(Routes.LOGIN);
-                                  }
+                                  // if (box.read('isAuth') == true) {
+                                  //   Get.toNamed(Routes.PENGIRIMAN);
+                                  // } else {
+                                  //   Get.toNamed(Routes.LOGIN);
+                                  // }
                                 },
                                 style: OutlinedButton.styleFrom(
                                   side: BorderSide(

@@ -94,6 +94,7 @@ class ItemCart extends GetView<CartController> {
                                       color: Color(0xff919A92),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   // "Rp. 100.000",

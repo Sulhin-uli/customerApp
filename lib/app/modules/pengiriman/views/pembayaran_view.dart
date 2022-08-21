@@ -98,9 +98,10 @@ class PembayaranViewState extends State<PembayaranView> {
                 try {
                   String resultUrl = url.substring(0, url.indexOf('?'));
                   String successUrl =
-                      "https://8a15-140-213-0-90.ap.ngrok.io/payments/completed";
+                      "https://b5a8-140-213-13-202.ap.ngrok.io/payments/completed";
                   if (resultUrl == successUrl) {
                     print("Pembayaran Sukses");
+                    Navigator.pop(context);
                     Navigator.pop(context);
                     dialogSuccess("Pembayaran Sukses");
                   } else {

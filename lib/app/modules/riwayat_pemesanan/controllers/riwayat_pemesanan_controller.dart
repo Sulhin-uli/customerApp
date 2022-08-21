@@ -127,4 +127,77 @@ class RiwayatPemesananController extends GetxController
   void onEnd() {
     print('onEnd');
   }
+
+  void dialogQuestion(BuildContext context, int id) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Info"),
+        content: Text("Pesanan Diterima?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Batal'),
+            child: const Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, 'Ya');
+              orderCompleted(id);
+              Get.back();
+            },
+            child: const Text('Ya'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void orderCompleted(int id) {
+    final data = box.read("userData") as Map<String, dynamic>;
+    var userId = data["id"];
+    try {
+      isLoading(true);
+      TransactionProvider().orderCompleted(id, data['token']).then((response) {
+        print("Berhasil");
+      });
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void dialogQuestionCancelOrder(BuildContext context, int id) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Info"),
+        content: Text("Batalkan Pesanan?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Batal'),
+            child: const Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, 'Ya');
+              orderCompleted(id);
+            },
+            child: const Text('Ya'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void orderCancel(int id) {
+    final data = box.read("userData") as Map<String, dynamic>;
+    var userId = data["id"];
+    try {
+      isLoading(true);
+      TransactionProvider().cancelOrder(id, data['token']).then((response) {
+        print("Berhasil");
+      });
+    } finally {
+      isLoading(false);
+    }
+  }
 }

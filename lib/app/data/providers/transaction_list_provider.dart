@@ -30,4 +30,32 @@ class TransactionProvider extends GetConnect {
     });
     return response.body;
   }
+
+  Future<dynamic> orderCompleted(
+    int? id,
+    String? token,
+  ) async {
+    final response = await post('$url/order_completed', {
+      "id": id,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
+
+  Future<dynamic> cancelOrder(
+    int? id,
+    String? token,
+  ) async {
+    final response = await post('$url/order_cancel', {
+      "id": id,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return response.body;
+  }
 }

@@ -22,14 +22,14 @@ class CartView extends GetView<CartController> {
           'Keranjang',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
-        actions: [
-          TextButton(
-              onPressed: () => Get.toNamed(Routes.RIWAYAT_PEMESANAN),
-              child: Text(
-                "Pesanan Saya",
-                style: TextStyle(color: Color(0xff16A085), fontSize: 16),
-              ))
-        ],
+        // actions: [
+        //   TextButton(
+        //       onPressed: () => Get.toNamed(Routes.RIWAYAT_PEMESANAN),
+        //       child: Text(
+        //         "Pesanan Saya",
+        //         style: TextStyle(color: Color(0xff16A085), fontSize: 16),
+        //       ))
+        // ],
         elevation: 0.5,
       ),
       backgroundColor: Colors.white,

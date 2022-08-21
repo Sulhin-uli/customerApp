@@ -216,7 +216,7 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                                   onPressed: () {
                                                     Get.toNamed(Routes.ULASAN,
                                                         arguments: [
-                                                          Get.arguments,
+                                                          dataDetail.id,
                                                           data.id
                                                         ]);
                                                   },
@@ -303,126 +303,173 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                       style: TextStyle(fontSize: 13),
                     ),
                     const SizedBox(height: 30),
+                    const Text(
+                      "Total Tagihan",
+                      style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Rp${formatCurrency.format(dataDetail.totalPrice)}',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),
             ),
-
-            Card(
-              elevation: 3,
-              child: Container(
-                width: double.infinity,
-                margin: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            (dataDetail.status! == "created")
+                ? Card(
+                    elevation: 3,
+                    child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Total Tagihan",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Rp${formatCurrency.format(dataDetail.totalPrice)}',
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Total Tagihan",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Rp${formatCurrency.format(dataDetail.totalPrice)}',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Waktu Pembayaran",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    CountdownTimer(
+                                        controller:
+                                            controller.controllerCountdownTimer,
+                                        // onEnd: controller.onEnd,
+                                        // endTime: controller.endTime,
+                                        textStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    // Text(
+                                    //   "",
+                                    //   style: TextStyle(
+                                    //       color: Colors.red,
+                                    //       fontWeight: FontWeight.bold),
+                                    // ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text(
-                                "Waktu Pembayaran",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Center(
+                                  child: SizedBox(
+                                    height: 46, //height of button
+                                    width: 300,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Get.toNamed(Routes.PEMBAYARAN,
+                                        //     arguments: dataDetail.paymentUrl);
+                                        controller.dialogQuestionCancelOrder(
+                                            context, dataDetail.id!);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red, // background
+                                      ),
+                                      child: Text('Batalkan Pemesanan'),
+                                    ),
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 5,
                               ),
-                              CountdownTimer(
-                                  controller:
-                                      controller.controllerCountdownTimer,
-                                  // onEnd: controller.onEnd,
-                                  // endTime: controller.endTime,
-                                  textStyle: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              // Text(
-                              //   "",
-                              //   style: TextStyle(
-                              //       color: Colors.red,
-                              //       fontWeight: FontWeight.bold),
-                              // ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Center(
+                                  child: SizedBox(
+                                    height: 46, //height of button
+                                    width: 300,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Get.toNamed(Routes.PEMBAYARAN,
+                                            arguments: dataDetail.paymentUrl);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color(0xff16A085), // background
+                                      ),
+                                      child: Text('Lanjutkan Pembayaran'),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Center(
-                            child: SizedBox(
-                              height: 46, //height of button
-                              width: 300,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Get.toNamed(Routes.PEMBAYARAN,
-                                  //     arguments: dataDetail.paymentUrl);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.red, // background
-                                ),
-                                child: Text('Batalkan Pemesanan'),
+                  )
+                : Container(),
+
+            (dataDetail.status! == "delivered")
+                ? Card(
+                    elevation: 3,
+                    child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(16),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Center(
+                          child: SizedBox(
+                            height: 46, //height of button
+                            width: 300,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Get.toNamed(Routes.PEMBAYARAN,
+                                //     arguments: dataDetail.paymentUrl);
+                                controller.dialogQuestion(
+                                    context, dataDetail.id!);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xff16A085), // background
                               ),
+                              child: Text('Pesanan Diterima'),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Center(
-                            child: SizedBox(
-                              height: 46, //height of button
-                              width: 300,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Get.toNamed(Routes.PEMBAYARAN,
-                                      arguments: dataDetail.paymentUrl);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff16A085), // background
-                                ),
-                                child: Text('Lanjutkan Pembayaran'),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : Container()
           ],
         ),
       ),

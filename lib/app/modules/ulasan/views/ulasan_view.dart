@@ -45,29 +45,28 @@ class UlasanView extends GetView<UlasanController> {
                       ListTile(
                         title: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(7, 0, 7, 0),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.store,
-                                    size: 12,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    controller.riwayatPemesananController
-                                        .produkController.product
-                                        .firstWhere(
-                                            (e) => e.id == data.productId!.id!)
-                                        .userId!
-                                        .name!,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.fromLTRB(7, 0, 7, 0),
+                            //   child: Row(
+                            //     children: [
+                            //       Icon(
+                            //         Icons.store,
+                            //         size: 12,
+                            //       ),
+                            //       SizedBox(width: 5),
+                            //       Text(
+                            //         controller.riwayatPemesananController
+                            //             .detailRiwayatPemesanan
+                            //             .firstWhere(
+                            //                 (e) => e.id == data.productId!.id!)
+                            //             .userId!,
+                            //         style: TextStyle(
+                            //           fontSize: 12,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Row(
                               children: [
                                 Container(
@@ -81,29 +80,29 @@ class UlasanView extends GetView<UlasanController> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      controller.riwayatPemesananController
-                                          .produkController.product
-                                          .firstWhere((e) =>
-                                              e.id == data.productId!.id!)
-                                          .name!,
-                                      style: TextStyle(
-                                          color: Color(0xff919A92),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    Text(
-                                      data.qty.toString() + " Barang",
-                                      style: TextStyle(
-                                          color: Color(0xff919A92),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                ),
+                                // Column(
+                                //   crossAxisAlignment: CrossAxisAlignment.start,
+                                //   children: [
+                                //     Text(
+                                //       controller.riwayatPemesananController
+                                //           .detailRiwayatPemesanan
+                                //           .firstWhere((e) =>
+                                //               e.id == data.productId!.id!)
+                                //           .orderItems!.productId!.name!,
+                                //       style: TextStyle(
+                                //           color: Color(0xff919A92),
+                                //           fontSize: 12,
+                                //           fontWeight: FontWeight.w400),
+                                //     ),
+                                //     Text(
+                                //       data.qty.toString() + " Barang",
+                                //       style: TextStyle(
+                                //           color: Color(0xff919A92),
+                                //           fontSize: 12,
+                                //           fontWeight: FontWeight.w400),
+                                //     ),
+                                //   ],
+                                // ),
                               ],
                             ),
                           ],

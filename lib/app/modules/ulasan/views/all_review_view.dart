@@ -88,7 +88,8 @@ class AllReviewView extends GetView<UlasanController> {
                                               width: 10,
                                             ),
                                             Text(
-                                              data.user!.name!,
+                                              // data.user!.name!,
+                                              "Pengguna",
                                               style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.bold),
