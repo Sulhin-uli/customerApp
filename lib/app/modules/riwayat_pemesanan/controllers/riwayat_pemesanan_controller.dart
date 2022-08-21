@@ -52,10 +52,8 @@ class RiwayatPemesananController extends GetxController
         // print(response);
         if (response["data"].length != 0) {
           response["data"].map((e) {
-            for (var e in response["data"]) {
-              final data = TransactionList.fromJson(e as Map<String, dynamic>);
-              riwayatPemesanan.add(data);
-            }
+            final data = TransactionList.fromJson(e as Map<String, dynamic>);
+            riwayatPemesanan.add(data);
           }).toList();
           page.value = page.value + 1;
         } else {}

@@ -44,7 +44,6 @@ SingleChildScrollView fecthAllData(RiwayatPemesananController _tabx) {
                         shrinkWrap: true,
                         itemCount: _tabx.riwayatPemesanan.length,
                         itemBuilder: (context, i) {
-                          int length = _tabx.riwayatPemesanan.length;
                           final data = _tabx.riwayatPemesanan[i];
                           return Container(
                             margin: EdgeInsets.symmetric(horizontal: 16),
