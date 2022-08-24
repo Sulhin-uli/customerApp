@@ -2,6 +2,7 @@
 // import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:get/get.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
@@ -97,8 +98,7 @@ class PembayaranViewState extends State<PembayaranView> {
                 // print('Page finished loading: $url');
                 try {
                   String resultUrl = url.substring(0, url.indexOf('?'));
-                  String successUrl =
-                      "https://ca56-140-213-13-156.ap.ngrok.io/payments/completed";
+                  String successUrl = baseUrlPembayaran + "payments/completed";
                   if (resultUrl == successUrl) {
                     print("Pembayaran Sukses");
                     Navigator.pop(context);
