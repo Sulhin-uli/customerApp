@@ -215,11 +215,13 @@ class DetailProdukView extends GetView<DetailProdukController> {
                         margin: EdgeInsets.fromLTRB(16, 0, 16, 20),
                         child: Row(
                           children: [
-                            (data.stockOut == null)
+                            (data.stockOut != null)
                                 ? Container(
                                     child: Text(
-                                      "Terjual 0",
+                                      // "Terjual 0",
                                       // "Terjual " + stock.toString(),
+                                      "Terjual " + data.stockOut.toString(),
+
                                       style: TextStyle(
                                         fontSize: 14,
                                       ),
@@ -227,7 +229,8 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   )
                                 : Container(
                                     child: Text(
-                                      "Terjual " + data.stockOut.toString(),
+                                      "Terjual 0",
+                                      // "Terjual b" + data.stockOut.toString(),
                                       // "Terjual " + stock.toString(),
                                       style: TextStyle(
                                         fontSize: 14,
@@ -555,44 +558,52 @@ class DetailProdukView extends GetView<DetailProdukController> {
                                   SizedBox(
                                     height: 7,
                                   ),
-                                  // Row(
-                                  //   children: [
-                                  //     StarRating(
-                                  //       value: int.parse(controller
-                                  //           .ulasanController.review
-                                  //           .firstWhere(
-                                  //               (e) => e.productId == data.id)
-                                  //           .starsRated!),
-                                  //       size: 16,
-                                  //     ),
-                                  //     SizedBox(
-                                  //       width: 7,
-                                  //     ),
-                                  //     Text(
-                                  //       "oleh",
-                                  //       style: TextStyle(fontSize: 13),
-                                  //     ),
-                                  //     SizedBox(
-                                  //       width: 10,
-                                  //     ),
-                                  //     Text(
-                                  //       controller.ulasanController.review
-                                  //           .firstWhere(
-                                  //               (e) => e.productId == 10)
-                                  //           .user!
-                                  //           .name!,
-                                  //       style: TextStyle(
-                                  //           fontSize: 13,
-                                  //           fontWeight: FontWeight.bold),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                  // Text(
-                                  //   controller.ulasanController.review
-                                  //       .firstWhere((e) => e.productId == 10)
-                                  //       .review!,
-                                  //   style: TextStyle(fontSize: 13),
-                                  // ),
+                                  Row(
+                                    children: [
+                                      StarRating(
+                                        value: int.parse(controller
+                                            .ulasanController.review
+                                            .firstWhere(
+                                                (e) => e.productId == data.id)
+                                            .starsRated!),
+                                        size: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        "oleh",
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      // Text(
+                                      //   controller.ulasanController.review
+                                      //       .firstWhere(
+                                      //           (e) => e.productId == 10)
+                                      //       .user!
+                                      //       .name!,
+                                      //   style: TextStyle(
+                                      //       fontSize: 13,
+                                      //       fontWeight: FontWeight.bold),
+                                      // ),
+                                      Text(
+                                        // data.user!.name!,
+                                        "Pengguna",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    controller.ulasanController.review
+                                        .firstWhere(
+                                            (e) => e.productId == data.id)
+                                        .review!,
+                                    style: TextStyle(fontSize: 13),
+                                  ),
                                 ],
                               ),
                             )),

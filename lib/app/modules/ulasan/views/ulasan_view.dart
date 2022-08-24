@@ -1,4 +1,5 @@
 import 'package:customer_app/app/utils/base_url.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -21,7 +22,9 @@ class UlasanView extends GetView<UlasanController> {
         .where((e) => e.productId!.id == data.productId!.id)
         .first
         .name;
-
+    // print(
+    //   data.productId!.userId!.name!,
+    // );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -80,29 +83,37 @@ class UlasanView extends GetView<UlasanController> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                // Column(
-                                //   crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //     Text(
-                                //       controller.riwayatPemesananController
-                                //           .detailRiwayatPemesanan
-                                //           .firstWhere((e) =>
-                                //               e.id == data.productId!.id!)
-                                //           .orderItems!.productId!.name!,
-                                //       style: TextStyle(
-                                //           color: Color(0xff919A92),
-                                //           fontSize: 12,
-                                //           fontWeight: FontWeight.w400),
-                                //     ),
-                                //     Text(
-                                //       data.qty.toString() + " Barang",
-                                //       style: TextStyle(
-                                //           color: Color(0xff919A92),
-                                //           fontSize: 12,
-                                //           fontWeight: FontWeight.w400),
-                                //     ),
-                                //   ],
-                                // ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data.productId!.name!,
+                                      style: TextStyle(
+                                          color: Color(0xff919A92),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                      data.qty.toString() + " Barang",
+                                      style: TextStyle(
+                                          color: Color(0xff919A92),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                      'Rp ${formatCurrency.format(data.productId!.price!)}',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ],

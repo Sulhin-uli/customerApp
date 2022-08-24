@@ -115,7 +115,7 @@ class ProductModel {
   String? code;
   int? stoke;
   int? weight;
-  dynamic stockOut;
+  int? stockOut;
   int? price;
   String? desc;
   UserId? userId;
