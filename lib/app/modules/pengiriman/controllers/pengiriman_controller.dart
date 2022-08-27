@@ -70,14 +70,19 @@ class PengirimanController extends GetxController {
             msg,
             textAlign: TextAlign.center,
           ),
+          // TextButton(
+          //     onPressed: () {
+          //       Get.back();
+          //       riwayatPemesananController.detailRiwayatPemesanan.clear();
+          //       riwayatPemesananController.getData();
+          //       Get.toNamed(Routes.RIWAYAT_PEMESANAN);
+          //     },
+          //     child: Text("Ke Pesanan Saya"))
           TextButton(
               onPressed: () {
                 Get.back();
-                riwayatPemesananController.detailRiwayatPemesanan.clear();
-                riwayatPemesananController.getData();
-                Get.toNamed(Routes.RIWAYAT_PEMESANAN);
               },
-              child: Text("Ke Pesanan Saya"))
+              child: Text("Tutup"))
         ],
       ),
     );
@@ -190,6 +195,7 @@ class PengirimanController extends GetxController {
           .postDataOrder(
               data["id"], totalHarga.value, markProductId, data["token"])
           .then((response) {
+        print(response);
         final data = Order.fromJson(response["data"] as Map<String, dynamic>);
         invoice.add(data);
         CartController cartController = Get.put(CartController());

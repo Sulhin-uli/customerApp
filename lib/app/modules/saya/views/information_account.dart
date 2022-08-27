@@ -74,6 +74,10 @@ class InformationAccountView extends GetView<SayaController> {
                     style: TextStyle(fontSize: 15),
                   ),
                   const SizedBox(height: 30),
+                  const Text(
+                    "*Untuk mmengubah data kunjungi TaniKula.com",
+                    style: TextStyle(color: Color(0xff919A92), fontSize: 12),
+                  ),
                 ],
               ),
             ),

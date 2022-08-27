@@ -13,10 +13,17 @@ class ItemProduct extends GetView<ProdukController> {
   String isData;
 
   Widget build(BuildContext context) {
-    final dataImage = controller.photoProduct
-        .where((e) => e.productId!.id == data.id)
-        .first
-        .name;
+    var dataImage;
+
+    try {
+      dataImage = controller.photoProduct
+          .where((e) => e.productId!.id == data.id)
+          .first
+          .name;
+    } catch (e) {
+      // print(e);
+      dataImage = false;
+    }
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.DETAIL_PRODUK, arguments: [data.slug!, isData]);
@@ -25,16 +32,32 @@ class ItemProduct extends GetView<ProdukController> {
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
-            Expanded(
-              child: Hero(
-                  tag: data.slug,
-                  child: Center(
-                    child: Image.network(
-                      baseUrlFile + "storage/produk/" + dataImage!,
-                      fit: BoxFit.cover,
+            (dataImage == false)
+                ? Expanded(
+                    child: Container(
+                      width: 130,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
+                      ),
+                      child: Center(child: Text("No Image")),
                     ),
-                  )),
-            ),
+                    flex: 75,
+                  )
+                : Expanded(
+                    child: Hero(
+                        tag: data.slug,
+                        child: Center(
+                          child: Image.network(
+                            baseUrlFile + "storage/produk/" + dataImage!,
+                            fit: BoxFit.cover,
+                          ),
+                        )),
+                  ),
             ListTile(
               title: Text(
                 data.name,

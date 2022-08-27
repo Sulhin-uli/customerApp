@@ -16,10 +16,17 @@ class ItemCart extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
-    final dataImage = controller.produkController.photoProduct
-        .where((e) => e.productId!.id == data.productId!.id)
-        .first
-        .name;
+    var dataImage;
+
+    try {
+      dataImage = controller.produkController.photoProduct
+          .where((e) => e.productId!.id == data.productId!.id)
+          .first
+          .name;
+    } catch (e) {
+      // print(e);
+      dataImage = false;
+    }
     int countQty = data.productQty!;
     return Container(
       margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -72,15 +79,25 @@ class ItemCart extends GetView<CartController> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              padding: EdgeInsets.all(7),
-                              height: 100,
-                              width: 100,
-                              child: Image.network(
-                                baseUrlFile + "storage/produk/" + dataImage!,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                            (dataImage == false)
+                                ? Container(
+                                    padding: EdgeInsets.all(7),
+                                    height: 100,
+                                    width: 100,
+                                    color: Colors.grey,
+                                    child: Center(child: Text("No Image")),
+                                  )
+                                : Container(
+                                    padding: EdgeInsets.all(7),
+                                    height: 100,
+                                    width: 100,
+                                    child: Image.network(
+                                      baseUrlFile +
+                                          "storage/produk/" +
+                                          dataImage!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                             SizedBox(
                               width: 6,
                             ),

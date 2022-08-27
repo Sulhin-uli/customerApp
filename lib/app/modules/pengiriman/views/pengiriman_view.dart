@@ -188,11 +188,20 @@ class PengirimanView extends GetView<PengirimanController> {
                       itemCount: controller.cartController.cart.length,
                       itemBuilder: (context, i) {
                         final data = controller.cartController.cart[i];
-                        final dataImage = controller
-                            .cartController.produkController.photoProduct
-                            .where((e) => e.productId!.id == data.productId!.id)
-                            .first
-                            .name;
+
+                        var dataImage;
+
+                        try {
+                          dataImage = controller
+                              .cartController.produkController.photoProduct
+                              .where(
+                                  (e) => e.productId!.id == data.productId!.id)
+                              .first
+                              .name;
+                        } catch (e) {
+                          // print(e);
+                          dataImage = false;
+                        }
                         if (data.isMark == true) {
                           weightTotal = weightTotal +
                               (data.productId!.weight! * data.productQty!);
@@ -224,17 +233,25 @@ class PengirimanView extends GetView<PengirimanController> {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            padding: EdgeInsets.all(7),
-                                            height: 100,
-                                            width: 100,
-                                            child: Image.network(
-                                              baseUrlFile +
-                                                  "storage/produk/" +
-                                                  dataImage!,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
+                                          (dataImage == false)
+                                              ? Container(
+                                                  padding: EdgeInsets.all(7),
+                                                  height: 100,
+                                                  width: 100,
+                                                  color: Colors.grey,
+                                                  child: Center(
+                                                      child: Text("No Image")))
+                                              : Container(
+                                                  padding: EdgeInsets.all(7),
+                                                  height: 100,
+                                                  width: 100,
+                                                  child: Image.network(
+                                                    baseUrlFile +
+                                                        "storage/produk/" +
+                                                        dataImage!,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,

@@ -29,10 +29,16 @@ class Product extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       final data =
                           controller.produkController.productHome[index];
-                      final dataImage = controller.produkController.photoProduct
-                          .where((e) => e.productId!.id == data.id)
-                          .first
-                          .name;
+                      var dataImage;
+                      try {
+                        dataImage = controller.produkController.photoProduct
+                            .where((e) => e.productId!.id == data.id)
+                            .first
+                            .name;
+                      } catch (e) {
+                        // print(e);
+                        dataImage = false;
+                      }
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(Routes.DETAIL_PRODUK,
@@ -50,26 +56,42 @@ class Product extends GetView<HomeController> {
                                   BorderRadius.all(Radius.circular(8))),
                           child: Column(
                             children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  width: 130,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                          baseUrlFile +
-                                              "storage/produk/" +
-                                              dataImage!,
+                              (dataImage == false)
+                                  ? Expanded(
+                                      child: Container(
+                                        width: 130,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8),
+                                            topRight: Radius.circular(8),
+                                          ),
                                         ),
-                                        // fit: BoxFit.fitHeight,
+                                        child: Center(child: Text("No Image")),
                                       ),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8))),
-                                ),
-                                flex: 75,
-                              ),
+                                      flex: 75,
+                                    )
+                                  : Expanded(
+                                      child: Container(
+                                        width: 130,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                baseUrlFile +
+                                                    "storage/produk/" +
+                                                    dataImage!,
+                                              ),
+                                              // fit: BoxFit.fitHeight,
+                                            ),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8))),
+                                      ),
+                                      flex: 75,
+                                    ),
                               Expanded(
                                 flex: 25,
                                 child: Container(
