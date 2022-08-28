@@ -25,6 +25,14 @@ class RiwayatPemesananController extends GetxController
       RefreshController(initialRefresh: false);
   var page = 1.obs;
 
+  void upRefresh() async {
+    // monitor network fetch
+
+    riwayatPemesanan.clear();
+    page.value = 1;
+    getData();
+  }
+
   void onRefresh() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));

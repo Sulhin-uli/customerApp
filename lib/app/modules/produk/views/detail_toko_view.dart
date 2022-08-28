@@ -44,7 +44,7 @@ class DetailTokoView extends GetView<ProdukController> {
                   // ),
                   // const SizedBox(height: 30),
                   const Text(
-                    "Ketua",
+                    "Pemilik",
                     style: TextStyle(color: Color(0xff919A92), fontSize: 12),
                   ),
                   const SizedBox(height: 5),

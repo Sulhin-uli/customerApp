@@ -21,6 +21,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final box = GetStorage();
   AuthController authController = Get.put(AuthController());
+  ProdukController produkC = Get.put(ProdukController());
 
   @override
   Widget build(BuildContext context) {
@@ -90,16 +91,25 @@ class HomeView extends GetView<HomeController> {
                                 "Produk Terbaru",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              TextButton(
-                                onPressed: () => Get.toNamed(Routes.SEARCH),
-                                child: Text(
-                                  "Cari Kebutuhanmu",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                              // TextButton(
+                              //   onPressed: () => Get.toNamed(Routes.SEARCH),
+                              //   child: Text(
+                              //     "Cari Kebutuhanmu",
+                              //     style: TextStyle(
+                              //       fontWeight: FontWeight.bold,
+                              //       color: Color(0xff16A085),
+                              //     ),
+                              //   ),
+                              // )
+                              IconButton(
+                                  onPressed: () {
+                                    produkC.productHome.clear();
+                                    produkC.getDataForHome();
+                                  },
+                                  icon: Icon(
+                                    Icons.refresh,
                                     color: Color(0xff16A085),
-                                  ),
-                                ),
-                              )
+                                  ))
                             ],
                           ),
                         ),

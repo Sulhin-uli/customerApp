@@ -29,6 +29,18 @@ class RiwayatPemesananView extends StatelessWidget {
           'Pesanan Saya',
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _tabx.riwayatPemesanan.clear();
+              _tabx.upRefresh();
+            },
+            icon: Icon(
+              Icons.refresh,
+              color: Color(0xff16A085),
+            ),
+          )
+        ],
         elevation: 0.5,
         bottom: TabBar(
           labelColor: Colors.black,
@@ -38,36 +50,13 @@ class RiwayatPemesananView extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      body: NotificationListener<ScrollEndNotification>(
-        onNotification: (scrollEnd) {
-          final metrics = scrollEnd.metrics;
-          if (metrics.atEdge) {
-            bool isTop = metrics.pixels == 0;
-            if (isTop) {
-              // print('At the top');
-            } else {
-              // print('At the bottom');
-              _tabx.addItems();
-            }
-          }
-          return true;
-        },
-        child: SmartRefresher(
-          controller: _tabx.refreshController,
-          onRefresh: _tabx.onRefresh,
-          onLoading: _tabx.onLoading,
-          header: WaterDropMaterialHeader(),
-          enablePullDown: true,
-          enablePullUp: false,
-          child: TabBarView(controller: _tabx.controller, children: [
-            fecthAllData(_tabx),
-            fecthDikemasData(_tabx),
-            fecthDikirimData(_tabx),
-            fecthSelesaiData(_tabx),
-            fecthDibatalkanData(_tabx),
-          ]),
-        ),
-      ),
+      body: TabBarView(controller: _tabx.controller, children: [
+        fecthAllData(_tabx),
+        fecthDikemasData(_tabx),
+        fecthDikirimData(_tabx),
+        fecthSelesaiData(_tabx),
+        fecthDibatalkanData(_tabx),
+      ]),
     );
   }
 }
