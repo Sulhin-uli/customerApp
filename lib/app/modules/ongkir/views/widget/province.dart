@@ -24,51 +24,51 @@ class Provinsi extends GetView<OngkirController> {
         onFind: (String filter) async {
           Uri url = Uri.parse("https://api.rajaongkir.com/starter/province");
 
-          try {
-            final response = await http.get(
-              url,
-              headers: {
-                "key": "0ae702200724a396a933fa0ca4171a7e",
-              },
-            );
+          // try {
+          //   final response = await http.get(
+          //     url,
+          //     headers: {
+          //       "key": "0ae702200724a396a933fa0ca4171a7e",
+          //     },
+          //   );
 
-            var data = json.decode(response.body) as Map<String, dynamic>;
+          //   var data = json.decode(response.body) as Map<String, dynamic>;
 
-            var statusCode = data["rajaongkir"]["status"]["code"];
+          //   var statusCode = data["rajaongkir"]["status"]["code"];
 
-            if (statusCode != 200) {
-              throw data["rajaongkir"]["status"]["description"];
-            }
+          //   if (statusCode != 200) {
+          //     throw data["rajaongkir"]["status"]["description"];
+          //   }
 
-            var listAllProvince =
-                data["rajaongkir"]["results"] as List<dynamic>;
+          //   var listAllProvince =
+          //       data["rajaongkir"]["results"] as List<dynamic>;
 
-            var models = Province.fromJsonList(listAllProvince);
-            return models;
-          } catch (err) {
-            print(err);
-            return List<Province>.empty();
-          }
+          //   var models = Province.fromJsonList(listAllProvince);
+          //   return models;
+          // } catch (err) {
+          //   print(err);
+          return List<Province>.empty();
+          // }
         },
         onChanged: (prov) {
-          if (prov != null) {
-            if (tipe == "asal") {
-              controller.hiddenKotaAsal.value = false;
-              controller.provAsalId.value = int.parse(prov.provinceId!);
-            } else {
-              controller.hiddenKotaTujuan.value = false;
-              controller.provTujuanId.value = int.parse(prov.provinceId!);
-            }
-          } else {
-            if (tipe == "asal") {
-              controller.hiddenKotaAsal.value = true;
-              controller.provAsalId.value = 0;
-            } else {
-              controller.hiddenKotaTujuan.value = true;
-              controller.provTujuanId.value = 0;
-            }
-          }
-          controller.showButton();
+          // if (prov != null) {
+          //   if (tipe == "asal") {
+          //     controller.hiddenKotaAsal.value = false;
+          //     controller.provAsalId.value = int.parse(prov.provinceId!);
+          //   } else {
+          //     controller.hiddenKotaTujuan.value = false;
+          //     controller.provTujuanId.value = int.parse(prov.provinceId!);
+          //   }
+          // } else {
+          //   if (tipe == "asal") {
+          //     controller.hiddenKotaAsal.value = true;
+          //     controller.provAsalId.value = 0;
+          //   } else {
+          //     controller.hiddenKotaTujuan.value = true;
+          //     controller.provTujuanId.value = 0;
+          //   }
+          // }
+          // controller.showButton();
         },
         showSearchBox: true,
         searchBoxDecoration: InputDecoration(
@@ -81,18 +81,18 @@ class Provinsi extends GetView<OngkirController> {
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        popupItemBuilder: (context, item, isSelected) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(
-              "${item.province}",
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          );
-        },
-        itemAsString: (item) => item.province!,
+        // popupItemBuilder: (context, item, isSelected) {
+        //   return Container(
+        //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //     child: Text(
+        //       "${item.province}",
+        //       style: TextStyle(
+        //         fontSize: 18,
+        //       ),
+        //     ),
+        //   );
+        // },
+        // itemAsString: (item) => item.province!,
       ),
     );
   }

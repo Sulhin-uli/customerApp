@@ -51,12 +51,12 @@
 
 import 'dart:convert';
 
-City cityFromJson(String str) => City.fromJson(json.decode(str));
+District districtFromJson(String str) => District.fromJson(json.decode(str));
 
-String cityToJson(City data) => json.encode(data.toJson());
+String districtToJson(District data) => json.encode(data.toJson());
 
-class City {
-  City({
+class District {
+  District({
     this.id,
     this.code,
     this.provinceCode,
@@ -74,7 +74,7 @@ class City {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory City.fromJson(Map<String, dynamic> json) => City(
+  factory District.fromJson(Map<String, dynamic> json) => District(
         id: json["id"],
         code: json["code"],
         provinceCode: json["province_code"],
@@ -94,9 +94,9 @@ class City {
         "updated_at": updatedAt!.toIso8601String(),
       };
 
-  static List<City> fromJsonList(List list) {
-    if (list.length == 0) return List<City>.empty();
-    return list.map((item) => City.fromJson(item)).toList();
+  static List<District> fromJsonList(List list) {
+    if (list.length == 0) return List<District>.empty();
+    return list.map((item) => District.fromJson(item)).toList();
   }
 }
 

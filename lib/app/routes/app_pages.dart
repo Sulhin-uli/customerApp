@@ -226,11 +226,11 @@ class AppPages {
       page: () => DetailRiwayatPemesananView(),
       binding: RiwayatPemesananBinding(),
     ),
-    GetPage(
-      name: _Paths.ONGKIR,
-      page: () => OngkirView(),
-      binding: OngkirBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.ONGKIR,
+    //   page: () => OngkirView(),
+    //   binding: OngkirBinding(),
+    // ),
     GetPage(
       name: _Paths.CEK_ONGKIR,
       page: () => CekOngkirView(),

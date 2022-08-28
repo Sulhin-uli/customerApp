@@ -16,6 +16,7 @@ class AlamatController extends GetxController {
   late TextEditingController addressLabel;
   late TextEditingController completeAddress;
   late TextEditingController city;
+
   late TextEditingController postalCode;
   late TextEditingController mainAddress;
   late TextEditingController noteForCourier;
@@ -27,6 +28,14 @@ class AlamatController extends GetxController {
   var provinsiId = 0.obs;
   var kotaId = 0.obs;
   var hiddenButton = true.obs;
+  // new
+  var provinceId = 0.obs;
+  var cityId = 0.obs;
+  var districtId = 0.obs;
+  var villageId = 0.obs;
+  var hiddenCity = true.obs;
+  var hiddenDistrict = true.obs;
+  var hiddenVillage = true.obs;
 
   @override
   void onInit() {
@@ -35,6 +44,7 @@ class AlamatController extends GetxController {
     addressLabel = TextEditingController();
     completeAddress = TextEditingController();
     city = TextEditingController();
+
     postalCode = TextEditingController();
     mainAddress = TextEditingController();
     noteForCourier = TextEditingController();
@@ -43,7 +53,12 @@ class AlamatController extends GetxController {
   }
 
   void showButton() {
-    if (kotaId != 0) {
+    // if (kotaId != 0) {
+    //   hiddenButton.value = false;
+    // } else {
+    //   hiddenButton.value = true;
+    // }
+    if (cityId != 0) {
       hiddenButton.value = false;
     } else {
       hiddenButton.value = true;
@@ -56,6 +71,10 @@ class AlamatController extends GetxController {
     String telp,
     String addressLabel,
     String completeAddress,
+    int provinceId,
+    int cityId,
+    int districtId,
+    int villageId,
     int postalCode,
     int mainAddress,
     String noteForCourier,
@@ -72,8 +91,10 @@ class AlamatController extends GetxController {
               telp,
               addressLabel,
               completeAddress,
-              provinsiId.value,
-              kotaId.value,
+              provinceId,
+              cityId,
+              districtId,
+              villageId,
               postalCode,
               mainAddress,
               noteForCourier,
@@ -183,7 +204,10 @@ class AlamatController extends GetxController {
     String telp,
     String addressLabel,
     String completeAddress,
-    String city,
+    int provinceId,
+    int cityId,
+    int districtId,
+    int villageId,
     int postalCode,
     int mainAddress,
     String noteForCourier,
@@ -197,10 +221,12 @@ class AlamatController extends GetxController {
       telp,
       addressLabel,
       completeAddress,
-      provinsiId.value,
-      kotaId.value,
-      mainAddress,
+      provinceId,
+      cityId,
+      districtId,
+      villageId,
       postalCode,
+      mainAddress,
       noteForCourier,
       data["token"],
     )
