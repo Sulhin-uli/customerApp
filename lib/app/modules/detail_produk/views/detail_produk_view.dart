@@ -546,7 +546,10 @@ class DetailProdukView extends GetView<DetailProdukController> {
                           ],
                         ),
                       ),
-                      Obx(() => controller.ulasanController.review.isEmpty
+                      Obx(() => controller.ulasanController.review
+                                  .where((e) => e.productId == data.id)
+                                  .length ==
+                              0
                           ? Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: Text("Belum Ada Ulasan"),
@@ -627,94 +630,99 @@ class DetailProdukView extends GetView<DetailProdukController> {
                             color: Color(0xff919A92),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 // color: index % 2 == 0 ? Colors.amber : Colors.red,
                                 width: 45,
                                 height: 45,
-                                child: FlatButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                      side: BorderSide(color: Colors.black12)),
-                                  padding: EdgeInsets.all(8),
-                                  color: Colors.white,
+                                // child: FlatButton(
+                                //   shape: RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.circular(14),
+                                //       side: BorderSide(color: Colors.black12)),
+                                //   padding: EdgeInsets.all(8),
+                                //   color: Colors.white,
+                                //   onPressed: () {
+                                //     // if (box.read('isAuth') == true) {
+                                //     //   Get.toNamed(Routes.DETAIL_CHAT,
+                                //     //       arguments: data.userId!.id!);
+                                //     // } else {
+                                //     //   Get.toNamed(Routes.LOGIN);
+                                //     // }
+                                //   },
+                                //   child: Icon(
+                                //     Icons.message,
+                                //     color: Colors.grey,
+                                //   ),
+                                // ),
+                              ),
+
+                              // OutlinedButton(
+                              //   onPressed: () {
+                              //     // if (box.read('isAuth') == true) {
+                              //     //   Get.toNamed(Routes.PENGIRIMAN);
+                              //     // } else {
+                              //     //   Get.toNamed(Routes.LOGIN);
+                              //     // }
+                              //   },
+                              //   style: OutlinedButton.styleFrom(
+                              //     side: BorderSide(
+                              //         width: 2.0, color: Color(0xff16A085)),
+                              //   ),
+                              //   child: Text(
+                              //     'Beli Langsung',
+                              //     style: TextStyle(
+                              //       color: Color(0xff16A085),
+                              //     ),
+                              //   ),
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: ElevatedButton(
                                   onPressed: () {
-                                    // if (box.read('isAuth') == true) {
-                                    //   Get.toNamed(Routes.DETAIL_CHAT,
-                                    //       arguments: data.userId!.id!);
-                                    // } else {
-                                    //   Get.toNamed(Routes.LOGIN);
-                                    // }
-                                  },
-                                  child: Icon(
-                                    Icons.message,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              OutlinedButton(
-                                onPressed: () {
-                                  // if (box.read('isAuth') == true) {
-                                  //   Get.toNamed(Routes.PENGIRIMAN);
-                                  // } else {
-                                  //   Get.toNamed(Routes.LOGIN);
-                                  // }
-                                },
-                                style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      width: 2.0, color: Color(0xff16A085)),
-                                ),
-                                child: Text(
-                                  'Beli Langsung',
-                                  style: TextStyle(
-                                    color: Color(0xff16A085),
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (box.read('isAuth') == true) {
-                                    int cartLength = cartC.cart.length;
-                                    if (cartLength == 20) {
-                                      dialogSuccess(
-                                          "Keranjang maksimal 20 produk");
-                                    } else {
-                                      if (cartC.cart
-                                          .where((e) =>
-                                              e.productId!.id! == data.id)
-                                          .isEmpty) {
-                                        cartC.postData(data.id, 1);
-                                        // print("false");
+                                    if (box.read('isAuth') == true) {
+                                      int cartLength = cartC.cart.length;
+                                      if (cartLength == 20) {
+                                        dialogSuccess(
+                                            "Keranjang maksimal 20 produk");
                                       } else {
-                                        int idCart = cartC.cart
+                                        if (cartC.cart
                                             .where((e) =>
                                                 e.productId!.id! == data.id)
-                                            .first
-                                            .id!;
-                                        int cartQty = cartC.cart
-                                            .where((e) =>
-                                                e.productId!.id! == data.id)
-                                            .first
-                                            .productQty!;
-                                        if (data.stoke == cartQty) {
-                                          dialogSuccess(
-                                              "Stok produk sudah masuk keranjang semua");
+                                            .isEmpty) {
+                                          cartC.postData(data.id, 1);
+                                          // print("false");
                                         } else {
-                                          cartC.updateQty(idCart, cartQty + 1);
-                                          dialogSuccess(
-                                              "Berhasil ditambahkan keranjang");
+                                          int idCart = cartC.cart
+                                              .where((e) =>
+                                                  e.productId!.id! == data.id)
+                                              .first
+                                              .id!;
+                                          int cartQty = cartC.cart
+                                              .where((e) =>
+                                                  e.productId!.id! == data.id)
+                                              .first
+                                              .productQty!;
+                                          if (data.stoke == cartQty) {
+                                            dialogSuccess(
+                                                "Stok produk sudah masuk keranjang semua");
+                                          } else {
+                                            cartC.updateQty(
+                                                idCart, cartQty + 1);
+                                            dialogSuccess(
+                                                "Berhasil ditambahkan keranjang");
+                                          }
                                         }
                                       }
+                                    } else {
+                                      Get.toNamed(Routes.LOGIN);
                                     }
-                                  } else {
-                                    Get.toNamed(Routes.LOGIN);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff16A085), // background
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff16A085), // background
+                                  ),
+                                  child: Text('+ Keranjang'),
                                 ),
-                                child: Text('+ Keranjang'),
                               ),
                             ],
                           ),

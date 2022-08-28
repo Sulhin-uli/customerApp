@@ -17,11 +17,19 @@ class UlasanView extends GetView<UlasanController> {
         .orderItems!
         .firstWhere((e) => e.id == arg[1]);
 
-    final dataImage = controller
-        .riwayatPemesananController.produkController.photoProduct
-        .where((e) => e.productId!.id == data.productId!.id)
-        .first
-        .name;
+    var dataImage;
+
+    try {
+      dataImage = controller
+          .riwayatPemesananController.produkController.photoProduct
+          .where((e) => e.productId!.id == data.productId!.id)
+          .first
+          .name;
+    } catch (e) {
+      // print(e);
+      dataImage = false;
+    }
+
     // print(
     //   data.productId!.userId!.name!,
     // );
@@ -72,17 +80,26 @@ class UlasanView extends GetView<UlasanController> {
                             // ),
                             Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(7),
-                                  height: 100,
-                                  width: 100,
-                                  child: Image.network(
-                                    baseUrlFile +
-                                        "storage/produk/" +
-                                        dataImage!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                (dataImage == false)
+                                    ? Container(
+                                        padding: EdgeInsets.all(7),
+                                        height: 100,
+                                        width: 100,
+                                        color: Colors.grey,
+                                        child: Center(
+                                          child: Text("No Image"),
+                                        ))
+                                    : Container(
+                                        padding: EdgeInsets.all(7),
+                                        height: 100,
+                                        width: 100,
+                                        child: Image.network(
+                                          baseUrlFile +
+                                              "storage/produk/" +
+                                              dataImage!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

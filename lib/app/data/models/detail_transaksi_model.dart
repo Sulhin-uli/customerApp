@@ -28,6 +28,7 @@ class DetailTransaksi {
     this.cancelledBy,
     this.cancelledAt,
     this.cancellationNote,
+    this.review,
     this.createdAt,
     this.updatedAt,
     this.nameBilling,
@@ -52,6 +53,7 @@ class DetailTransaksi {
   dynamic cancelledBy;
   dynamic cancelledAt;
   dynamic cancellationNote;
+  String? review;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? nameBilling;
@@ -77,6 +79,7 @@ class DetailTransaksi {
         cancelledBy: json["cancelled_by"],
         cancelledAt: json["cancelled_at"],
         cancellationNote: json["cancellation_note"],
+        review: json["review"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         nameBilling: json["name_billing"],
@@ -103,6 +106,7 @@ class DetailTransaksi {
         "cancelled_by": cancelledBy,
         "cancelled_at": cancelledAt,
         "cancellation_note": cancellationNote,
+        "review": review,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "name_billing": nameBilling,
