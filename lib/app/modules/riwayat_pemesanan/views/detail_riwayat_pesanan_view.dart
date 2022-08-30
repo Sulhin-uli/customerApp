@@ -416,10 +416,12 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                             width: 300,
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Get.toNamed(Routes.PEMBATALAN,
-                                                    arguments: dataDetail.id);
+                                                // Get.toNamed(Routes.PEMBATALAN,
+                                                //     arguments: dataDetail.id);
                                                 // controller.dialogQuestionCancelOrder(
                                                 //     context, dataDetail.id!);
+                                                Get.toNamed(Routes.PEMBATALAN,
+                                                    arguments: dataDetail.id);
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 primary:
@@ -432,29 +434,6 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                       ),
                                       SizedBox(
                                         height: 5,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Center(
-                                          child: SizedBox(
-                                            height: 46, //height of button
-                                            width: 300,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Get.toNamed(Routes.PEMBAYARAN,
-                                                    arguments:
-                                                        dataDetail.paymentUrl);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color(
-                                                    0xff16A085), // background
-                                              ),
-                                              child:
-                                                  Text('Lanjutkan Pembayaran'),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   )

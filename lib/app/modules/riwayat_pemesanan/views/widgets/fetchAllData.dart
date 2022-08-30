@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/riwayat_pemesanan/controllers/riwayat_pemesanan_controller.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -236,19 +237,45 @@ SingleChildScrollView fecthAllData(RiwayatPemesananController _tabx) {
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Center(
-                                        child: SizedBox(
-                                          height: 46, //height of button
-                                          width: 300,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary: const Color(
-                                                    0xff16A085), // background
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 46, //height of button
+                                              width: 300,
+                                              child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: const Color(
+                                                        0xff16A085), // background
+                                                  ),
+                                                  onPressed: () {
+                                                    _tabx.getDataDetail(
+                                                        data.id!);
+                                                  },
+                                                  child: const Text(
+                                                      'Detail Pesanan')),
+                                            ),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            SizedBox(
+                                              height: 46, //height of button
+                                              width: 300,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Get.toNamed(Routes.PEMBAYARAN,
+                                                      arguments:
+                                                          data.paymentUrl);
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color(
+                                                      0xff16A085), // background
+                                                ),
+                                                child: Text(
+                                                    'Lanjutkan Pembayaran'),
                                               ),
-                                              onPressed: () {
-                                                _tabx.getDataDetail(data.id!);
-                                              },
-                                              child:
-                                                  const Text('Detail Pesanan')),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),

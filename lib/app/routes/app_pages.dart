@@ -211,7 +211,12 @@ class AppPages {
     GetPage(
       name: _Paths.PEMBAYARAN,
       page: () => PembayaranView(),
-      binding: PengirimanBinding(),
+      binding: RiwayatPemesananBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEMBATALAN,
+      page: () => PembatalanView(),
+      binding: RiwayatPemesananBinding(),
     ),
     GetPage(
       name: _Paths.RINCIAN_PEMBATALAN,

@@ -2,6 +2,7 @@
 // import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:customer_app/app/modules/riwayat_pemesanan/controllers/riwayat_pemesanan_controller.dart';
 import 'package:customer_app/app/utils/base_url.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:get/get.dart';
@@ -72,7 +73,17 @@ class PembayaranViewState extends State<PembayaranView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        // leading: BackButton(color: Colors.black),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+            RiwayatPemesananController riwayatPemesananController =
+                Get.put(RiwayatPemesananController());
+            riwayatPemesananController.upRefresh();
+          },
+          // color: red,
+        ),
         elevation: 0.5,
         title: Text(
           'Pembayaran',
