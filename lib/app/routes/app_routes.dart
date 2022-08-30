@@ -41,6 +41,7 @@ abstract class Routes {
 
   // pengiriman
   static const PEMBAYARAN = _Paths.PEMBAYARAN;
+  static const PEMBATALAN = _Paths.PEMBATALAN;
   static const INVOICE = _Paths.INVOICE;
   static const RIWAYAT_PEMESANAN = _Paths.RIWAYAT_PEMESANAN;
   static const DETAIL_TRANSAKSI = _Paths.DETAIL_TRANSAKSI;
@@ -48,6 +49,7 @@ abstract class Routes {
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
   static const ULASAN = _Paths.ULASAN;
   static const ALL_ULASAN = _Paths.ALL_ULASAN;
+  static const RINCIAN_PEMBATALAN = _Paths.RINCIAN_PEMBATALAN;
 
   static const PHOTO_PROFILE = _Paths.PHOTO_PROFILE;
   static const PHOTO_PROFILE_URL = _Paths.PHOTO_PROFILE_URL;
@@ -95,6 +97,7 @@ abstract class _Paths {
 
   // pengiriman
   static const PEMBAYARAN = '/pembayaran';
+  static const PEMBATALAN = '/PEMBATALAN';
   static const INVOICE = '/invoice';
   static const RIWAYAT_PEMESANAN = '/riwayat-pemesanan';
   static const DETAIL_TRANSAKSI = '/detail_transaksi';
@@ -102,4 +105,5 @@ abstract class _Paths {
   static const CEK_ONGKIR = '/cek_ongkir';
   static const ULASAN = '/ulasan';
   static const ALL_ULASAN = '/all_ulasan';
+  static const RINCIAN_PEMBATALAN = '/RINCIAN_PEMBATALAN';
 }

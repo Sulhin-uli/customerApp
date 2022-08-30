@@ -413,10 +413,10 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                     width: 300,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        // Get.toNamed(Routes.PEMBAYARAN,
-                                        //     arguments: dataDetail.paymentUrl);
-                                        controller.dialogQuestionCancelOrder(
-                                            context, dataDetail.id!);
+                                        Get.toNamed(Routes.PEMBATALAN,
+                                            arguments: dataDetail.id);
+                                        // controller.dialogQuestionCancelOrder(
+                                        //     context, dataDetail.id!);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: Colors.red, // background
@@ -484,6 +484,61 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                             ),
                           ),
                         ),
+                      ),
+                    ),
+                  )
+                : Container(),
+
+            (dataDetail.status! == "cancelled")
+                ? Card(
+                    elevation: 3,
+                    child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Rincian Pembatalan",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          const SizedBox(height: 15),
+                          const Text(
+                            "Dibatalkan Oleh",
+                            style: TextStyle(
+                                color: Color(0xff919A92), fontSize: 12),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            dataDetail.nameBilling!,
+                            style: TextStyle(fontSize: 13),
+                          ),
+                          const SizedBox(height: 30),
+                          const Text(
+                            "Dibatalkan Pada",
+                            style: TextStyle(
+                                color: Color(0xff919A92), fontSize: 12),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            DateFormat("EEEE, d MMMM yyyy", "id_ID").format(
+                                DateTime.fromMillisecondsSinceEpoch(
+                                    dataDetail.cancelledBy! * 1000)),
+                            style: TextStyle(fontSize: 13),
+                          ),
+                          const SizedBox(height: 30),
+                          const Text(
+                            "Alasan Pembatalan",
+                            style: TextStyle(
+                                color: Color(0xff919A92), fontSize: 12),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            dataDetail.cancellationNote!,
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ],
                       ),
                     ),
                   )

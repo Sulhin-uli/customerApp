@@ -1,6 +1,8 @@
 import 'package:customer_app/app/modules/forget_password/bindings/forget_password_binding.dart';
 import 'package:customer_app/app/modules/forget_password/views/forget_password_view.dart';
+import 'package:customer_app/app/modules/riwayat_pemesanan/views/pembatalan_view.dart';
 import 'package:customer_app/app/modules/produk/views/detail_toko_view.dart';
+import 'package:customer_app/app/modules/riwayat_pemesanan/views/rincian_pembatalan_view.dart';
 import 'package:customer_app/app/modules/saya/views/information_account.dart';
 import 'package:get/get.dart';
 
@@ -210,6 +212,11 @@ class AppPages {
       name: _Paths.PEMBAYARAN,
       page: () => PembayaranView(),
       binding: PengirimanBinding(),
+    ),
+    GetPage(
+      name: _Paths.RINCIAN_PEMBATALAN,
+      page: () => RincianPembatalanView(),
+      binding: RiwayatPemesananBinding(),
     ),
     GetPage(
       name: _Paths.INVOICE,

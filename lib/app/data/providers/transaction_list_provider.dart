@@ -47,10 +47,14 @@ class TransactionProvider extends GetConnect {
 
   Future<dynamic> cancelOrder(
     int? id,
+    int? userId,
+    String? cancellationNote,
     String? token,
   ) async {
     final response = await post('$url/order_cancel', {
       "id": id,
+      "user_id": userId,
+      "cancellation_note": cancellationNote,
     }, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

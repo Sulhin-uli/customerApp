@@ -5,6 +5,7 @@ import 'package:customer_app/app/data/models/transaction_list.dart';
 import 'package:customer_app/app/data/providers/transaction_list_provider.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
+import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:get/get.dart';
@@ -194,13 +195,40 @@ class RiwayatPemesananController extends GetxController
     );
   }
 
-  void orderCancel(int id) {
+  // Pembatalan
+  var selectRadio = 1.obs;
+  var cancellationNote = "".obs;
+  void orderCancel(int id, int select) {
+    switch (select) {
+      case 1:
+        {
+          cancellationNote.value = "Ingin mengubah alamat pengiriman";
+        }
+        break;
+
+      case 2:
+        {
+          cancellationNote.value = "Ingin membuat pesanan baru";
+        }
+        break;
+      default:
+        {
+          cancellationNote.value = "Lainnya/berubah pikiran";
+        }
+        break;
+    }
+
     final data = box.read("userData") as Map<String, dynamic>;
     var userId = data["id"];
     try {
       isLoading(true);
-      TransactionProvider().cancelOrder(id, data['token']).then((response) {
-        print("Berhasil");
+      TransactionProvider()
+          .cancelOrder(id, userId, cancellationNote.value, data['token'])
+          .then((response) {
+        Get.back();
+        Get.back();
+        upRefresh();
+        dialogSuccess("Pesanan Berhasil Dibatalkan");
       });
     } finally {
       isLoading(false);
