@@ -151,7 +151,6 @@ class RiwayatPemesananController extends GetxController
             onPressed: () {
               Navigator.pop(context, 'Ya');
               orderCompleted(id);
-              Get.back();
             },
             child: const Text('Ya'),
           ),
@@ -167,6 +166,9 @@ class RiwayatPemesananController extends GetxController
       isLoading(true);
       TransactionProvider().orderCompleted(id, data['token']).then((response) {
         print("Berhasil");
+        upRefresh();
+        Get.back();
+        dialogSuccess("Pesanan Diterima");
       });
     } finally {
       isLoading(false);
