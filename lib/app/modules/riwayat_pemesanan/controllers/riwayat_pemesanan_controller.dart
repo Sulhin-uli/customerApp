@@ -124,6 +124,7 @@ class RiwayatPemesananController extends GetxController
     super.onClose();
   }
 
+  var isExpired = false.obs;
   runCountDown(int endTime) {
     controllerCountdownTimer =
         CountdownTimerController(endTime: endTime, onEnd: onEnd);
@@ -132,7 +133,7 @@ class RiwayatPemesananController extends GetxController
   late CountdownTimerController controllerCountdownTimer;
   // int endTime = DateTime.parse('2022-08-18 02:15:31').millisecondsSinceEpoch;
   void onEnd() {
-    print('onEnd');
+    isExpired(true);
   }
 
   void dialogQuestion(BuildContext context, int id) {

@@ -401,56 +401,64 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                               ],
                             ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: 46, //height of button
-                                    width: 300,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Get.toNamed(Routes.PEMBATALAN,
-                                            arguments: dataDetail.id);
-                                        // controller.dialogQuestionCancelOrder(
-                                        //     context, dataDetail.id!);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.red, // background
+                          Obx(
+                            () => controller.isExpired.isFalse
+                                ? Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Center(
+                                          child: SizedBox(
+                                            height: 46, //height of button
+                                            width: 300,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Get.toNamed(Routes.PEMBATALAN,
+                                                    arguments: dataDetail.id);
+                                                // controller.dialogQuestionCancelOrder(
+                                                //     context, dataDetail.id!);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                primary:
+                                                    Colors.red, // background
+                                              ),
+                                              child: Text('Batalkan Pemesanan'),
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      child: Text('Batalkan Pemesanan'),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: 46, //height of button
-                                    width: 300,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Get.toNamed(Routes.PEMBAYARAN,
-                                            arguments: dataDetail.paymentUrl);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary:
-                                            Color(0xff16A085), // background
+                                      SizedBox(
+                                        height: 5,
                                       ),
-                                      child: Text('Lanjutkan Pembayaran'),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Center(
+                                          child: SizedBox(
+                                            height: 46, //height of button
+                                            width: 300,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Get.toNamed(Routes.PEMBAYARAN,
+                                                    arguments:
+                                                        dataDetail.paymentUrl);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color(
+                                                    0xff16A085), // background
+                                              ),
+                                              child:
+                                                  Text('Lanjutkan Pembayaran'),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container(),
                           ),
                         ],
                       ),
