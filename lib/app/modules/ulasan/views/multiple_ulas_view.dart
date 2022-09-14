@@ -17,6 +17,7 @@ class MultipleUlas extends GetView<RiwayatPemesananController> {
     controller.orderIdUlas.clear();
     controller.starRatedUlas.clear();
     controller.reviewUlas.clear();
+    controller.runTextEditingController();
     // print(
     //   data.productId!.userId!.name!,
     // );
@@ -167,9 +168,7 @@ class MultipleUlas extends GetView<RiwayatPemesananController> {
                         TextFormField(
                           maxLines: 5,
                           // controller: ulasanController.ulasanController,
-                          onChanged: (text) {
-                            print(text.reactive);
-                          },
+                          controller: controller.ulasanController[i],
                           cursorColor: const Color(0xff16A085),
                           decoration: InputDecoration(
                             helperText: 'Contoh: Produk sangat recomended!.',
@@ -206,14 +205,16 @@ class MultipleUlas extends GetView<RiwayatPemesananController> {
                   onPressed: () {
                     // print(controller.ulasanController.text);
                     // controller.multipleUlas(id)
-                    for (var item in controller.starRatedUlas) {
-                      print(item);
-                    }
+                    // for (var item in controller.ulasanController) {
+                    //   print(item.text);
+                    // }
+                    controller.multipleUlasPost();
                   },
                   child: const Text('Kirim'),
                 ),
               ),
             ),
+            const SizedBox(height: 30),
           ],
         ),
       ),

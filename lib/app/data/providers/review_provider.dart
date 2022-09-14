@@ -32,9 +32,15 @@ class ReviewProvider extends GetConnect {
     return response.body;
   }
 
-  Future<dynamic> postDataMultipleReview(List<int> productId, List<int> orderId,
-      List<int> starRated, List<String> review, String? token) async {
+  Future<dynamic> postDataMultipleReview(
+      int userId,
+      List<int> productId,
+      List<int> orderId,
+      List<int> starRated,
+      List<String> review,
+      String? token) async {
     final response = await post(url + '_multiple', {
+      "user_id": userId,
       "product_id": productId,
       "order_id": orderId,
       "stars_rated": starRated,

@@ -244,37 +244,47 @@ SingleChildScrollView fecthSelesaiData(RiwayatPemesananController _tabx) {
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Center(
-                                        child: SizedBox(
-                                          height: 46, //height of button
-                                          width: 300,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary: const Color(
-                                                    0xff16A085), // background
-                                              ),
-                                              onPressed: () {
-                                                _tabx.getDataDetail(data.id!);
-                                              },
-                                              child:
-                                                  const Text('Detail Pesanan')),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Center(
-                                        child: SizedBox(
-                                          height: 46, //height of button
-                                          width: 300,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary: const Color(
-                                                    0xff16A085), // background
-                                              ),
-                                              onPressed: () {
-                                                _tabx.multipleUlas(data.id!);
-                                              },
-                                              child: const Text('Beri Ulasan')),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 46, //height of button
+                                              width: 300,
+                                              child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: const Color(
+                                                        0xff16A085), // background
+                                                  ),
+                                                  onPressed: () {
+                                                    _tabx.getDataDetail(
+                                                        data.id!);
+                                                  },
+                                                  child: const Text(
+                                                      'Detail Pesanan')),
+                                            ),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            (data.review == "reviewed")
+                                                ? Container()
+                                                : SizedBox(
+                                                    height:
+                                                        46, //height of button
+                                                    width: 300,
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          primary: const Color(
+                                                              0xff16A085), // background
+                                                        ),
+                                                        onPressed: () {
+                                                          _tabx.multipleUlas(
+                                                              data.id!);
+                                                        },
+                                                        child: const Text(
+                                                            'Beri Ulasan')),
+                                                  )
+                                          ],
                                         ),
                                       ),
                                     ),

@@ -105,6 +105,8 @@ class RiwayatPemesananController extends GetxController
         final data =
             DetailTransaksi.fromJson(response["data"] as Map<String, dynamic>);
         detailRiwayatPemesanan.add(data);
+        lengthProdukOrder.value =
+            detailRiwayatPemesanan.first.orderItems!.length;
         Get.toNamed(Routes.MULTIPLE_ULASAN, arguments: data.id);
       });
     } finally {
@@ -133,7 +135,6 @@ class RiwayatPemesananController extends GetxController
     super.onInit();
     riwayatPemesanan.clear();
     getData();
-
     controller = TabController(vsync: this, length: myTabs.length);
   }
 
@@ -259,13 +260,39 @@ class RiwayatPemesananController extends GetxController
   }
 
   // multiple ulas
-  var productIdUlas = List<int>.empty().obs;
-  var orderIdUlas = List<int>.empty().obs;
-  var starRatedUlas = List<int>.empty().obs;
-  var reviewUlas = List<String>.empty().obs;
-// controller.markProductId.add(data.id!);
+  var productIdUlas = List<int>.empty().obs; // v
+  var orderIdUlas = List<int>.empty().obs; // v
+  var starRatedUlas = List<int>.empty().obs; //
+  var reviewUlas = List<String>.empty().obs; //
+  late List<TextEditingController> ulasanController;
+  var lengthProdukOrder = 0.obs;
+
+  void runTextEditingController() {
+    ulasanController = List.generate(
+        lengthProdukOrder.value, (index) => TextEditingController());
+  }
+
+  // controller.markProductId.add(data.id!);
 
   void multipleUlasPost() {
-    // ReviewProvider().postDataMultipleReview().then((response) {});
+    final data = box.read("userData") as Map<String, dynamic>;
+    var userId = data["id"];
+    reviewUlas.clear();
+    for (var item in ulasanController) {
+      reviewUlas.add(item.text);
+    }
+    // print("jumlah produk " + productIdUlas.length.toString());
+    // print("jmlh ulas " + orderIdUlas.length.toString());
+    // print("jmlh bintang " + starRatedUlas.length.toString());
+    // print("jmlh review " + reviewUlas.length.toString());
+
+    ReviewProvider()
+        .postDataMultipleReview(userId, productIdUlas, orderIdUlas,
+            starRatedUlas, reviewUlas, data['token'])
+        .then((response) {
+      // print(response);
+      Get.back();
+      dialogSuccess("Produk Berhasil Diulas");
+    });
   }
 }
