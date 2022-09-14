@@ -17,7 +17,9 @@ SingleChildScrollView fecthAllData(RiwayatPemesananController _tabx) {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : _tabx.riwayatPemesanan.isEmpty
+              : _tabx.riwayatPemesanan
+                      .where((e) => e.status == "created")
+                      .isEmpty
                   ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,9 +45,13 @@ SingleChildScrollView fecthAllData(RiwayatPemesananController _tabx) {
                         padding: EdgeInsets.zero,
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: _tabx.riwayatPemesanan.length,
+                        itemCount: _tabx.riwayatPemesanan
+                            .where((e) => e.status == "created")
+                            .length,
                         itemBuilder: (context, i) {
-                          final data = _tabx.riwayatPemesanan[i];
+                          final data = _tabx.riwayatPemesanan
+                              .where((e) => e.status == "created")
+                              .toList()[i];
                           return Container(
                             margin: EdgeInsets.symmetric(horizontal: 16),
                             child: Card(

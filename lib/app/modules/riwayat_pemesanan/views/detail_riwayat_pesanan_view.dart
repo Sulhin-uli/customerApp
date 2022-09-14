@@ -382,14 +382,19 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                       height: 5,
                                     ),
                                     CountdownTimer(
-                                        controller:
-                                            controller.controllerCountdownTimer,
-                                        // onEnd: controller.onEnd,
-                                        // endTime: controller.endTime,
-                                        textStyle: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        )),
+                                      endWidget: const Center(
+                                          child: Text(
+                                              'Pembayaran Sudah Kadaluarsa')),
+                                      controller:
+                                          controller.controllerCountdownTimer,
+                                      // onEnd: controller.onEnd,
+                                      // endTime: controller.endTime,
+
+                                      textStyle: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     // Text(
                                     //   "",
                                     //   style: TextStyle(
@@ -510,8 +515,7 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                           const SizedBox(height: 5),
                           Text(
                             DateFormat("EEEE, d MMMM yyyy", "id_ID").format(
-                                DateTime.fromMillisecondsSinceEpoch(
-                                    dataDetail.cancelledBy! * 1000)),
+                                DateTime.tryParse(dataDetail.cancelledAt!)!),
                             style: TextStyle(fontSize: 13),
                           ),
                           const SizedBox(height: 30),

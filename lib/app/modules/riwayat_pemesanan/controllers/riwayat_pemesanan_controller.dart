@@ -28,7 +28,6 @@ class RiwayatPemesananController extends GetxController
 
   void upRefresh() async {
     // monitor network fetch
-
     riwayatPemesanan.clear();
     page.value = 1;
     getData();
@@ -98,7 +97,7 @@ class RiwayatPemesananController extends GetxController
 
   final List<Tab> myTabs = const <Tab>[
     Tab(
-      text: 'Semua',
+      text: 'Belum Bayar',
     ),
     Tab(text: 'Dikemas'),
     Tab(text: 'Dikirim'),
