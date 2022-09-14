@@ -1,4 +1,5 @@
 import 'package:customer_app/app/modules/riwayat_pemesanan/controllers/riwayat_pemesanan_controller.dart';
+import 'package:customer_app/app/routes/app_pages.dart';
 import 'package:customer_app/app/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -256,6 +257,24 @@ SingleChildScrollView fecthSelesaiData(RiwayatPemesananController _tabx) {
                                               },
                                               child:
                                                   const Text('Detail Pesanan')),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Center(
+                                        child: SizedBox(
+                                          height: 46, //height of button
+                                          width: 300,
+                                          child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color(
+                                                    0xff16A085), // background
+                                              ),
+                                              onPressed: () {
+                                                _tabx.multipleUlas(data.id!);
+                                              },
+                                              child: const Text('Beri Ulasan')),
                                         ),
                                       ),
                                     ),

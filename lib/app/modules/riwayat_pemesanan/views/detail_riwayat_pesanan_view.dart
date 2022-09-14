@@ -227,25 +227,25 @@ class DetailRiwayatPemesananView extends GetView<RiwayatPemesananController> {
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          (dataDetail.status == "completed" &&
-                                                  dataDetail.paymentStatus ==
-                                                      "paid")
-                                              ? ElevatedButton(
-                                                  onPressed: () {
-                                                    Get.toNamed(Routes.ULASAN,
-                                                        arguments: [
-                                                          dataDetail.id,
-                                                          data.id
-                                                        ]);
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    primary: Color(
-                                                        0xff16A085), // background
-                                                  ),
-                                                  child: Text('Beri Ulasan'),
-                                                )
-                                              : Container(),
+                                          // (dataDetail.status == "completed" &&
+                                          //         dataDetail.paymentStatus ==
+                                          //             "paid")
+                                          //     ? ElevatedButton(
+                                          //         onPressed: () {
+                                          //           Get.toNamed(Routes.ULASAN,
+                                          //               arguments: [
+                                          //                 dataDetail.id,
+                                          //                 data.id
+                                          //               ]);
+                                          //         },
+                                          //         style:
+                                          //             ElevatedButton.styleFrom(
+                                          //           primary: Color(
+                                          //               0xff16A085), // background
+                                          //         ),
+                                          //         child: Text('Beri Ulasan'),
+                                          //       )
+                                          //     : Container(),
                                         ],
                                       ),
                                     ],

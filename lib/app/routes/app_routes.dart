@@ -49,6 +49,7 @@ abstract class Routes {
   static const CEK_ONGKIR = _Paths.CEK_ONGKIR;
   static const ULASAN = _Paths.ULASAN;
   static const ALL_ULASAN = _Paths.ALL_ULASAN;
+  static const MULTIPLE_ULASAN = _Paths.MULTIPLE_ULASAN;
   static const RINCIAN_PEMBATALAN = _Paths.RINCIAN_PEMBATALAN;
 
   static const PHOTO_PROFILE = _Paths.PHOTO_PROFILE;
@@ -105,5 +106,6 @@ abstract class _Paths {
   static const CEK_ONGKIR = '/cek_ongkir';
   static const ULASAN = '/ulasan';
   static const ALL_ULASAN = '/all_ulasan';
+  static const MULTIPLE_ULASAN = '/multiple_ulasan';
   static const RINCIAN_PEMBATALAN = '/RINCIAN_PEMBATALAN';
 }

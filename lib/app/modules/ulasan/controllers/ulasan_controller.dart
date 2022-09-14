@@ -28,7 +28,7 @@ class UlasanController extends GetxController {
     try {
       isLoading(true);
       ReviewProvider().getData().then((response) {
-        print(response);
+        // print(response);
         for (var e in response["data"]) {
           final data = Review.fromJson(e as Map<String, dynamic>);
           review.add(data);

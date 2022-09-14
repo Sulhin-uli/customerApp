@@ -16,7 +16,7 @@ class ReviewProvider extends GetConnect {
     final response = await post(url, {
       "user_id": userId,
       "order_id": orderId,
-      "product_id": productId,
+      "order_id": productId,
       "stars_rated": starsRated,
       "review": review,
     }, headers: {
@@ -29,6 +29,22 @@ class ReviewProvider extends GetConnect {
 
   Future<dynamic> starRated(int? productId) async {
     final response = await get(baseUrl + "star_rated/$productId");
+    return response.body;
+  }
+
+  Future<dynamic> postDataMultipleReview(List<int> productId, List<int> orderId,
+      List<int> starRated, List<String> review, String? token) async {
+    final response = await post(url + '_multiple', {
+      "product_id": productId,
+      "order_id": orderId,
+      "stars_rated": starRated,
+      "review": review,
+      "hide": 0,
+    }, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
     return response.body;
   }
 }

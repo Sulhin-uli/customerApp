@@ -4,6 +4,7 @@ import 'package:customer_app/app/modules/riwayat_pemesanan/views/pembatalan_view
 import 'package:customer_app/app/modules/produk/views/detail_toko_view.dart';
 import 'package:customer_app/app/modules/riwayat_pemesanan/views/rincian_pembatalan_view.dart';
 import 'package:customer_app/app/modules/saya/views/information_account.dart';
+import 'package:customer_app/app/modules/ulasan/views/multiple_ulas_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/alamat/bindings/alamat_binding.dart';
@@ -257,6 +258,11 @@ class AppPages {
       name: _Paths.ALL_ULASAN,
       page: () => AllReviewView(),
       binding: UlasanBinding(),
+    ),
+    GetPage(
+      name: _Paths.MULTIPLE_ULASAN,
+      page: () => MultipleUlas(),
+      binding: RiwayatPemesananBinding(),
     ),
 
     GetPage(

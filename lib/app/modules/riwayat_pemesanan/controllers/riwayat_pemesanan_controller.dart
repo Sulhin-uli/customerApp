@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:customer_app/app/data/models/detail_transaksi_model.dart';
 import 'package:customer_app/app/data/models/transaction_list.dart';
+import 'package:customer_app/app/data/providers/review_provider.dart';
 import 'package:customer_app/app/data/providers/transaction_list_provider.dart';
 import 'package:customer_app/app/modules/produk/controllers/produk_controller.dart';
 import 'package:customer_app/app/routes/app_pages.dart';
@@ -85,6 +86,26 @@ class RiwayatPemesananController extends GetxController
             DetailTransaksi.fromJson(response["data"] as Map<String, dynamic>);
         detailRiwayatPemesanan.add(data);
         Get.toNamed(Routes.DETAIL_TRANSAKSI, arguments: data.id);
+      });
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void multipleUlas(int id) async {
+    final data = box.read("userData") as Map<String, dynamic>;
+    var userId = data["id"];
+    try {
+      isLoading(true);
+      TransactionProvider()
+          .getDataDetail(id, userId, data['token'])
+          .then((response) {
+        // print(response);
+        detailRiwayatPemesanan.clear();
+        final data =
+            DetailTransaksi.fromJson(response["data"] as Map<String, dynamic>);
+        detailRiwayatPemesanan.add(data);
+        Get.toNamed(Routes.MULTIPLE_ULASAN, arguments: data.id);
       });
     } finally {
       isLoading(false);
@@ -235,5 +256,16 @@ class RiwayatPemesananController extends GetxController
     } finally {
       isLoading(false);
     }
+  }
+
+  // multiple ulas
+  var productIdUlas = List<int>.empty().obs;
+  var orderIdUlas = List<int>.empty().obs;
+  var starRatedUlas = List<int>.empty().obs;
+  var reviewUlas = List<String>.empty().obs;
+// controller.markProductId.add(data.id!);
+
+  void multipleUlasPost() {
+    // ReviewProvider().postDataMultipleReview().then((response) {});
   }
 }
