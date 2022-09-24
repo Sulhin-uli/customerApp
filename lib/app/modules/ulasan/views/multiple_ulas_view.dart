@@ -150,10 +150,17 @@ class MultipleUlas extends GetView<RiwayatPemesananController> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        StarRating(onChanged: (rate) {
+                        StarRating(
+                            // value: controller.starRatedUlas[i],
+                            onChanged: (rate) {
                           // print(rate);
                           // ulasanController.starsRated.value = rate;
-                          controller.starRatedUlas.add(rate);
+                          // controller.starRatedUlas[i] = rate;
+                          try {
+                            controller.starRatedUlas.removeAt(i);
+                          } catch (e) {}
+                          controller.starRatedUlas.insert(i, rate);
+                          // print(controller.starRatedUlas);
                         }),
                         const SizedBox(height: 30),
                         const Text(
@@ -205,8 +212,9 @@ class MultipleUlas extends GetView<RiwayatPemesananController> {
                   onPressed: () {
                     // print(controller.ulasanController.text);
                     // controller.multipleUlas(id)
-                    // for (var item in controller.ulasanController) {
-                    //   print(item.text);
+                    // print("mulai");
+                    // for (var item in controller.starRatedUlas) {
+                    //   print(item);
                     // }
                     controller.multipleUlasPost();
                   },

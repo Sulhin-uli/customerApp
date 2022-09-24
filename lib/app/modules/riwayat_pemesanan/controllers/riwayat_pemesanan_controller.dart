@@ -290,8 +290,9 @@ class RiwayatPemesananController extends GetxController
         .postDataMultipleReview(userId, productIdUlas, orderIdUlas,
             starRatedUlas, reviewUlas, data['token'])
         .then((response) {
-      // print(response);
+      print(response);
       Get.back();
+      upRefresh();
       dialogSuccess("Produk Berhasil Diulas");
     });
   }
